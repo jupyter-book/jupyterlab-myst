@@ -1,2 +1,2 @@
-import { blocks } from './blocks';
-export default [blocks];
+import { plugin } from './plugin';
+export default [plugin];

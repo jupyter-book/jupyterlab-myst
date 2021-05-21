@@ -2722,6 +2722,13 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+katex@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.12.0.tgz#2fb1c665dbd2b043edcf8a1f5c555f46beaa0cb9"
+  integrity sha512-y+8btoc/CK70XqcHqjxiGWBOeIL8upbS0peTPXTvgrh21n1RiWWcIpSWM+4uXq+IAgNh9YYQWdc7LVDPDAEEAg==
+  dependencies:
+    commander "^2.19.0"
+
 keyv@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
@@ -2896,10 +2903,10 @@ markdown-it-footnote@^3.0.2:
   resolved "https://registry.yarnpkg.com/markdown-it-footnote/-/markdown-it-footnote-3.0.3.tgz#e0e4c0d67390a4c5f0c75f73be605c7c190ca4d8"
   integrity sha512-YZMSuCGVZAjzKMn+xqIco9d1cLGxbELHZ9do/TSYVzraooV8ypsppKNmUJ0fVH5ljkCInQAtFpm8Rb3eXSrt5w==
 
-markdown-it-myst@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/markdown-it-myst/-/markdown-it-myst-0.0.7.tgz#fba51a29ba4c3e4a8341a6bf61f43390213de6ad"
-  integrity sha512-aVsRH/u/PJmGgfzM2fCQtTAq+rcNQsLovcMwGrnQNFxtR0haiulzZlFbZWY8C1JsONywXfqvuGV/6WODCBx2Fg==
+markdown-it-myst@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/markdown-it-myst/-/markdown-it-myst-0.0.8.tgz#a38173affae67c2a8b867f3a09fb4b4a085b0f69"
+  integrity sha512-vWEeDQSMG9LU+BGk6/Z1UMhPCk75Ojl2h0ZStHiB+YzxIED6gTs0XTv5JCu6/vuBtBy4uvGyI+MTvWeUraS49Q==
   dependencies:
     markdown-it "^12.0.2"
     markdown-it-container "^3.0.0"

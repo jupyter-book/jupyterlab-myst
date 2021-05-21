@@ -2,15 +2,18 @@ import { simpleMarkdownItPlugin } from '@agoose77/jupyterlab-markup';
 import { JupyterFrontEndPlugin } from '@jupyterlab/application';
 import { PACKAGE_NS } from './tokens';
 import MarkdownIt from 'markdown-it';
+import { plugins, directives, roles } from 'markdown-it-myst';
 
-function blocksPlugin(md: MarkdownIt, options: any) {
-  // TODO
+function mystPlugin(md: MarkdownIt, options: any) {
+  md.use(plugins.blocks);
+  md.use(plugins.directives(directives));
+  md.use(plugins.roles(roles));
 }
 
 /**
- * Provides text-based diagrams in code blocks
+ * Provides text-based diagrams in code plugin
  */
-export const blocks: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
+export const plugin: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
   PACKAGE_NS,
   {
     id: 'markdown-it-myst',
@@ -24,7 +27,7 @@ export const blocks: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
         '```{directive}\n' + ':option: value\n' + '\n' + 'content\n' + '```'
     },
     plugin: async () => {
-      return [blocksPlugin];
+      return [mystPlugin];
     }
   }
 );
