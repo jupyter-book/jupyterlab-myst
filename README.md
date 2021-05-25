@@ -2,9 +2,9 @@
 
 ![Github Actions Status](https://github.com/agoose77/jupyterlab-myst/workflows/Build/badge.svg)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/agoose77/jupyterlab-myst/main?urlpath=lab)
 
-A Myst renderer for JupyterLab
+A Myst renderer for JupyterLab.
 
-
+This is a repository to track to-do items and potentially infrastructure around integrating the MyST language with JupyterLab (or potentially other Jupyter interfaces).
 
 ## Requirements
 
