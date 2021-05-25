@@ -9,7 +9,7 @@ import setuptools
 HERE = Path(__file__).parent.resolve()
 
 # The name of the project
-name = "jupyterlab-myst"
+name = "jupyterlab_myst"
 
 lab_path = (HERE / name / "labextension")
 
