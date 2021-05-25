@@ -6,6 +6,8 @@ A Myst renderer for JupyterLab.
 
 This is a repository to track to-do items and potentially infrastructure around integrating the MyST language with JupyterLab (or potentially other Jupyter interfaces).
 
+🛑🛑EXPERIMENTAL🛑🛑 - this repository is in the early stages and may evolve rapidly. Please do try it out, and provide feedback if you like, but it is not production ready.
+
 ## Requirements
 
 * JupyterLab >= 3.0
