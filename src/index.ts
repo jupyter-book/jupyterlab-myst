@@ -1,2 +1,3 @@
-import { plugin } from './plugin';
-export default [plugin];
+import { BUILTINS } from './builtins';
+
+export default BUILTINS;
