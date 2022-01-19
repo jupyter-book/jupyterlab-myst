@@ -49,7 +49,7 @@
     "@agoose77/jupyterlab-markup": "^1.0.0",
     "@types/markdown-it": "^12.0.1",
     "markdown-it": "^12.0.6",
-    "markdown-it-myst": "^0.0.9",
+    "markdown-it-myst": "^0.0.8",
     "katex": "^0.12.0"
   },
   "devDependencies": {
@@ -88,6 +88,11 @@
         ]
       }
     },
-    "outputDir": "jupyterlab_myst/labextension"
+    "outputDir": "jupyterlab_myst/labextension",
+    "_build": {
+      "load": "static/remoteEntry.b8d26570a492a9079358.js",
+      "extension": "./extension",
+      "style": "./style"
+    }
   }
 }

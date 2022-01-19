@@ -8,10 +8,7 @@ import setuptools
 
 HERE = Path(__file__).parent.resolve()
 
-# The name of the project
-name = "jupyterlab-myst"
-
-lab_path = (HERE / name / "labextension")
+lab_path = (HERE /  "jupyterlab_myst" / "labextension")
 
 # Representative files that should exist after a successful build
 ensured_targets = [
@@ -32,7 +29,7 @@ long_description = (HERE / "README.md").read_text()
 pkg_json = json.loads((HERE / "package.json").read_bytes())
 
 setup_args = dict(
-    name=name,
+    name= "jupyterlab-myst",
     version=pkg_json["version"],
     url=pkg_json["homepage"],
     author=pkg_json["author"]["name"],
