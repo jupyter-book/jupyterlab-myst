@@ -27,7 +27,7 @@ export const plugin: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
         '```{directive}\n' + ':option: value\n' + '\n' + 'content\n' + '```'
     },
     plugin: async () => {
-      console.log("MyST loaded");
+      console.log('jupyterlab-myst loaded');
       return [mystPlugin];
     }
   }
