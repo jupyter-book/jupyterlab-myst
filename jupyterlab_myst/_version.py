@@ -16,4 +16,3 @@ def _fetchVersion():
     raise FileNotFoundError(f"Could not find package.json under dir {HERE!s}")
 
 __version__ = _fetchVersion()
-

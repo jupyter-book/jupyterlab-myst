@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-myst",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A Myst renderer for JupyterLab",
   "keywords": [
     "jupyter",
@@ -35,7 +35,7 @@
     "build:lib": "tsc",
     "clean": "jlpm run clean:lib",
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
-    "clean:labextension": "rimraf jupyterlab-myst/labextension",
+    "clean:labextension": "rimraf jupyterlab_myst/labextension",
     "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "eslint:check": "eslint . --ext .ts,.tsx",
@@ -49,7 +49,7 @@
     "@agoose77/jupyterlab-markup": "^1.0.0",
     "@types/markdown-it": "^12.0.1",
     "markdown-it": "^12.0.6",
-    "markdown-it-myst": "^0.0.8",
+    "markdown-it-myst": "^0.0.9",
     "katex": "^0.12.0"
   },
   "devDependencies": {
@@ -81,13 +81,13 @@
     "discovery": {
       "server": {
         "base": {
-          "name": "jupyterlab-myst"
+          "name": "jupyterlab_myst"
         },
         "managers": [
           "pip"
         ]
       }
     },
-    "outputDir": "jupyterlab-myst/labextension"
+    "outputDir": "jupyterlab_myst/labextension"
   }
 }

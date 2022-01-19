@@ -1,14 +1,15 @@
 include LICENSE
 include README.md
 include pyproject.toml
-include jupyter-config/jupyterlab-myst.json
+include jupyter-config/jupyterlab_myst.json
 
 include package.json
 include install.json
 include ts*.json
 include yarn.lock
 
-graft jupyterlab-myst/labextension
+graft jupyterlab_myst/labextension
+graft binder
 
 # Javascript files
 graft src
