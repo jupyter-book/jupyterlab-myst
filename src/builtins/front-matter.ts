@@ -5,7 +5,7 @@ import { PACKAGE_NS } from '../tokens';
 
 
 /**
- * Provides text-based diagrams in code plugin
+ * Provides front-matter support
  */
 export const frontMatter: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
   PACKAGE_NS,

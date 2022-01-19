@@ -5,7 +5,7 @@ import { PACKAGE_NS } from '../tokens';
 
 
 /**
- * Provides text-based diagrams in code plugin
+ * Provides docutils roles and directives
  */
 export const docutils: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
   PACKAGE_NS,

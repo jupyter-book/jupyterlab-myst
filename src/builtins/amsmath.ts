@@ -5,7 +5,7 @@ import { PACKAGE_NS } from '../tokens';
 
 
 /**
- * Provides text-based diagrams in code plugin
+ * Provides amsmath support
  */
 export const amsmath: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
   PACKAGE_NS,
