@@ -1,6 +1,6 @@
 # jupyterlab-myst
 
-![Github Actions Status](https://github.com/agoose77/jupyterlab-myst/workflows/Build/badge.svg)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/agoose77/jupyterlab-myst/main?urlpath=lab)
+![Github Actions Status](https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-myst/main?urlpath=lab)
 
 A Myst renderer for JupyterLab.
 

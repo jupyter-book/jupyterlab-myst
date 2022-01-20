@@ -13,9 +13,11 @@ dependencies:
   # runtime dependencies
   - python >=3.8,<3.9.0a0
   - jupyterlab >=3,<4.0.0a0
+  - jupyterlab-markup >=1,<2.0.0a0
   # labextension build dependencies
   - nodejs >=14,<15
   - pip
   - wheel
+  - build
   # additional packages for demos
   # - ipywidgets
