@@ -1,7 +1,10 @@
 import { simpleMarkdownItPlugin } from '@agoose77/jupyterlab-markup';
 import { JupyterFrontEndPlugin } from '@jupyterlab/application';
+import MarkdownIt from 'markdown-it';
 
 import { PACKAGE_NS } from '../tokens';
+
+
 
 /**
  * Provides front-matter support
@@ -23,7 +26,12 @@ export const frontMatter: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
       const frontMatterPlugin = await import(
         /* webpackChunkName: "markdown-it-front-matter" */ 'markdown-it-front-matter'
       );
-      return [frontMatterPlugin.default];
+      
+      function plugin(md: MarkdownIt, options: any) {
+        frontMatterPlugin.default(md, () => {});
+      }
+      
+      return [plugin];
     }
   }
 );
