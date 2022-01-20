@@ -1,26 +1,22 @@
 @import url("~markdown-it-docutils/dist/css/style.min.css");
 
 /* Use theme colours */
+:root {
+     --color-foreground-primary: var(--jp-content-font-color0);
+     --color-background-primary: var(--jp-layout-color0);
+     --color-foreground-secondary: var(--jp-content-font-color1);
+     --color-background-secondary: var(--jp-layout-color2);
+     --color-foreground-border: var(--jp-inverse-layout-color3);
+     --color-background-border: var(--jp-layout-color3);
+     --color-directive-unhandled-background: var(--jp-layout-color2);
+}
+
 body[data-jp-theme-light="true"] {
-     --color-foreground-primary: black;
-     --color-foreground-secondary: #5a5c63;
-     --color-foreground-border: #878787;
-     --color-background-primary: white;
-     --color-background-secondary: #f8f9fb;
-     --color-background-border: #eeebee;
-     --color-directive-unhandled-background: rgba(255, 255, 255, 0.3);
-     --color-directive-error-background: rgba(255, 0, 0, 0.4);
-     --color-admonition-background: rgba(255, 255, 255, 0.3);
+     --color-directive-error-background: var(--jp-error-color2);
+     --color-admonition-background: rgba(--jp-layout-color2);
 }
 body[data-jp-theme-light="false"] {
-     --color-foreground-primary: #ffffffd9;
-     --color-foreground-secondary: #9ca0a5;
-     --color-foreground-border: #666666;
-     --color-background-primary: #131416;
-     --color-background-secondary: #1a1c1e;
-     --color-background-border: #303335;
-     --color-directive-unhandled-background: #333338;
-     --color-directive-error-background: rgba(180, 6, 6, 0.8);
-     --color-admonition-background: #18181a;
+     --color-directive-error-background: var(--jp-error-color1);
+     --color-admonition-background: var(--jp-layout-color1);
 }
  
