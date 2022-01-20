@@ -11,12 +11,13 @@ export const mystExtras: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
   {
     id: 'markdown-it-myst-extras',
     title: 'MyST Extras',
-    description: 'Additional markdown-it plugins required for the MyST specification',
+    description:
+      'Additional markdown-it plugins required for the MyST specification',
     documentationUrls: {
       Plugin: 'https://github.com/executablebooks/markdown-it-myst-extras'
     },
     examples: {
-      'Blockquotes': '% comment',
+      Blockquotes: '% comment',
       'Block Breaks': '+++',
       'MyST Targets': '(name)='
     },
