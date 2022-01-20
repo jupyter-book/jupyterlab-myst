@@ -1,1 +1,26 @@
+@import url("~markdown-it-docutils/dist/css/style.min.css");
 
+/* Use theme colours */
+body[data-jp-theme-light="true"] {
+     --color-foreground-primary: black;
+     --color-foreground-secondary: #5a5c63;
+     --color-foreground-border: #878787;
+     --color-background-primary: white;
+     --color-background-secondary: #f8f9fb;
+     --color-background-border: #eeebee;
+     --color-directive-unhandled-background: rgba(255, 255, 255, 0.3);
+     --color-directive-error-background: rgba(255, 0, 0, 0.4);
+     --color-admonition-background: rgba(255, 255, 255, 0.3);
+}
+body[data-jp-theme-light="false"] {
+     --color-foreground-primary: #ffffffd9;
+     --color-foreground-secondary: #9ca0a5;
+     --color-foreground-border: #666666;
+     --color-background-primary: #131416;
+     --color-background-secondary: #1a1c1e;
+     --color-background-border: #303335;
+     --color-directive-unhandled-background: #333338;
+     --color-directive-error-background: rgba(180, 6, 6, 0.8);
+     --color-admonition-background: #18181a;
+}
+ 
