@@ -1,5 +1,6 @@
 import { simpleMarkdownItPlugin } from '@agoose77/jupyterlab-markup';
 import { JupyterFrontEndPlugin } from '@jupyterlab/application';
+import MarkdownIt from 'markdown-it';
 
 import { PACKAGE_NS } from '../tokens';
 
@@ -19,13 +20,18 @@ export const mystExtras: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
     examples: {
       Blockquotes: '% comment',
       'Block Breaks': '+++',
-      'MyST Targets': '(name)='
+      'MyST Targets': '(name)=',
+      'Colon Fence': ':::name\ncontained text\n :::'
     },
     plugin: async () => {
-      const mystExtrasPlugin = await import(
+      const mystExtrasPlugins = await import(
         /* webpackChunkName: "markdown-it-myst-extras" */ 'markdown-it-myst-extras'
       );
-      return [mystExtrasPlugin.mystBlockPlugin];
+      function plugin(md: MarkdownIt, options: any) {
+        mystExtrasPlugins.mystBlockPlugin(md);
+        mystExtrasPlugins.colonFencePlugin(md);
+      }
+      return [plugin];
     }
   }
 );
