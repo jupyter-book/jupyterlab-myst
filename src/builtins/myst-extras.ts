@@ -18,7 +18,7 @@ export const mystExtras: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
       Plugin: 'https://github.com/executablebooks/markdown-it-myst-extras'
     },
     examples: {
-      'Blockquotes': '% comment',
+      Blockquotes: '% comment',
       'Block Breaks': '+++',
       'MyST Targets': '(name)=',
       'Colon Fence': ':::name\ncontained text\n :::'
@@ -27,8 +27,7 @@ export const mystExtras: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
       const mystExtrasPlugins = await import(
         /* webpackChunkName: "markdown-it-myst-extras" */ 'markdown-it-myst-extras'
       );
-      function plugin(md: MarkdownIt, options: any)
-      {
+      function plugin(md: MarkdownIt, options: any) {
         mystExtrasPlugins.mystBlockPlugin(md);
         mystExtrasPlugins.colonFencePlugin(md);
       }
