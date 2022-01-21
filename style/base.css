@@ -1,1 +1,22 @@
+@import "markdown-it-docutils";
 
+/* Use theme colours */
+:root {
+     --color-foreground-primary: var(--jp-content-font-color0);
+     --color-background-primary: var(--jp-layout-color0);
+     --color-foreground-secondary: var(--jp-content-font-color1);
+     --color-background-secondary: var(--jp-layout-color2);
+     --color-foreground-border: var(--jp-inverse-layout-color3);
+     --color-background-border: var(--jp-layout-color3);
+     --color-directive-unhandled-background: var(--jp-layout-color2);
+}
+
+body[data-jp-theme-light="true"] {
+     --color-directive-error-background: var(--jp-error-color2);
+     --color-admonition-background: rgba(--jp-layout-color2);
+}
+body[data-jp-theme-light="false"] {
+     --color-directive-error-background: var(--jp-error-color1);
+     --color-admonition-background: var(--jp-layout-color1);
+}
+ 
