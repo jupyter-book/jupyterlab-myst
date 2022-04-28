@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-myst",
-  "version": "0.1.7",
+  "version": "0.1.7a0",
   "description": "A Myst renderer for JupyterLab",
   "keywords": [
     "jupyter",
