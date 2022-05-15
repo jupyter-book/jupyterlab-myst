@@ -2,7 +2,7 @@ import { simpleMarkdownItPlugin } from '@agoose77/jupyterlab-markup';
 import { JupyterFrontEndPlugin } from '@jupyterlab/application';
 import MarkdownIt from 'markdown-it';
 
-import { PACKAGE_NS } from '../tokens';
+import { PACKAGE_NS } from './tokens';
 
 /**
  * Provides front-matter support
