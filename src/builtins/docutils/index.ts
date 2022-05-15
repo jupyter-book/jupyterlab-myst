@@ -5,7 +5,7 @@ import katex from 'katex';
 
 import { PACKAGE_NS } from '../tokens';
 import { EvalRole } from './roles';
-import { EvalDirectiveAny, EvalFigureDirective } from "./directives";
+import { EvalDirectiveAny, EvalFigureDirective } from './directives';
 
 import {
   directivesDefault,
