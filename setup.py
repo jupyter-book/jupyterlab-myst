@@ -42,7 +42,7 @@ setup_args = dict(
     packages=setuptools.find_packages(),
     install_requires=[
         "jupyter_server>=1.6,<2",
-        "jupyterlab-markup~=1.0"
+        "jupyterlab-markup~=2.0"
     ],
     zip_safe=False,
     include_package_data=True,
