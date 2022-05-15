@@ -2,7 +2,7 @@
 set -eu
 
 # Install the labextension
-python -m pip install -e . --ignore-installed --no-deps -vv
+python -m pip install -e .  -vv
 jupyter labextension develop . --overwrite
 
 # List extensions
