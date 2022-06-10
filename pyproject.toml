@@ -9,7 +9,7 @@ name = "jupyterlab-myst"
 description = "A Myst renderer for JupyterLab"
 readme = "README.md"
 license = "BSD-3-Clause"
-requires-python = ">=3.6"
+requires-python = ">=3.7"
 authors = [
     { name = "Executable Book team", email = "executablebooks@gmail.com" },
 ]
@@ -35,6 +35,7 @@ classifiers = [
 dependencies = [
     "jupyter_server>=1.6,<2",
     "jupyterlab-markup~=2.0",
+    "importlib_metadata"
 ]
 dynamic = [
     "version",
