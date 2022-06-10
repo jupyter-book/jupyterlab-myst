@@ -9,13 +9,10 @@ import setuptools
 
 HERE = Path(__file__).parent.resolve()
 
-lab_path = (HERE /  "jupyterlab_myst" / "labextension")
+lab_path = HERE / "jupyterlab_myst" / "labextension"
 
 # Representative files that should exist after a successful build
-ensured_targets = [
-    str(lab_path / "package.json"),
-    str(lab_path / "static/style.js")
-]
+ensured_targets = [str(lab_path / "package.json"), str(lab_path / "static/style.js")]
 
 labext_name = "jupyterlab-myst"
 
@@ -30,7 +27,7 @@ long_description = (HERE / "README.md").read_text()
 pkg_json = json.loads((HERE / "package.json").read_bytes())
 
 setup_args = dict(
-    name= "jupyterlab-myst",
+    name="jupyterlab-myst",
     version=pkg_json["version"],
     url=pkg_json["homepage"],
     author=pkg_json["author"]["name"],
@@ -40,10 +37,7 @@ setup_args = dict(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    install_requires=[
-        "jupyter_server>=1.6,<2",
-        "jupyterlab-markup~=2.0"
-    ],
+    install_requires=["jupyter_server>=1.6,<2", "jupyterlab-markup~=2.0"],
     zip_safe=False,
     include_package_data=True,
     python_requires=">=3.6",
@@ -66,20 +60,22 @@ setup_args = dict(
 )
 
 try:
-    from jupyter_packaging import (
-        wrap_installers,
-        npm_builder,
-        get_data_files
-    )
+    from jupyter_packaging import wrap_installers, npm_builder, get_data_files
+
     post_develop = npm_builder(
         build_cmd="install:extension", source_dir="src", build_dir=lab_path
     )
-    setup_args["cmdclass"] = wrap_installers(post_develop=post_develop, ensured_targets=ensured_targets)
+    setup_args["cmdclass"] = wrap_installers(
+        post_develop=post_develop, ensured_targets=ensured_targets
+    )
     setup_args["data_files"] = get_data_files(data_files_spec)
 except ImportError as e:
     import logging
+
     logging.basicConfig(format="%(levelname)s: %(message)s")
-    logging.warning("Build tool `jupyter-packaging` is missing. Install it with pip or conda.")
+    logging.warning(
+        "Build tool `jupyter-packaging` is missing. Install it with pip or conda."
+    )
     if not ("--name" in sys.argv or "--version" in sys.argv):
         raise e
 
