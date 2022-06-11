@@ -49,7 +49,7 @@ source = "nodejs"
 
 [tool.hatch.build.targets.wheel.shared-data]
 "install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
-"jupyterlab-myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
+"jupyterlab_myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
 
 
 [tool.hatch.build.hooks.jupyter-builder]
