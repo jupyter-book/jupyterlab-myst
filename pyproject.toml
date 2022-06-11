@@ -60,7 +60,7 @@ source = "nodejs"
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder"]
 build-function = "hatch_jupyter_builder.npm_builder"
-skip_if_exists = ["jupyterlab_myst/labextension/static/style.js"]
+#skip_if_exists = ["jupyterlab_myst/labextension/static/style.js"] TODO - wait for fix in hatch-jupyter-builder
 ensured-targets = ["jupyterlab_myst/labextension/static/style.js", "jupyterlab_myst/labextension/package.json"]
 install-pre-commit-hook = true
 
