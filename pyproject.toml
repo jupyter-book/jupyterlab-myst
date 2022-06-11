@@ -41,6 +41,11 @@ dynamic = [
     "version",
 ]
 
+[project.optional-dependencies]
+eval = [
+    "jupyterlab-imarkdown>=0.2.0a0",
+]
+
 [project.urls]
 Homepage = "https://github.com/executablebooks/jupyterlab-myst"
 
