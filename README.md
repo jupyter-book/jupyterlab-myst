@@ -14,11 +14,18 @@ This is a repository to track to-do items and potentially infrastructure around 
 
 ## Install
 
-To install the extension, execute:
+To install the base extension, execute:
 
 ```bash
 pip install jupyterlab-myst
 ```
+
+For the `eval` role and directive, the `eval` extra should also be installed:
+
+```bash
+pip install "jupyterlab-myst[eval]"
+```
+
 
 ## Uninstall
 
