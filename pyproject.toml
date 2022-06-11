@@ -41,6 +41,11 @@ dynamic = [
     "version",
 ]
 
+[project.optional-dependencies]
+eval = [
+    "jupyterlab-imarkdown>=0.2.0a0",
+]
+
 [project.urls]
 Homepage = "https://github.com/executablebooks/jupyterlab-myst"
 
@@ -49,13 +54,15 @@ source = "nodejs"
 
 [tool.hatch.build.targets.wheel.shared-data]
 "install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
-"jupyterlab-myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
+"jupyterlab_myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
 
+[tool.hatch.build.targets.sdist]
+artifacts = ["jupyterlab_myst/labextension"]
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder"]
 build-function = "hatch_jupyter_builder.npm_builder"
-skip_if_exists = ["jupyterlab_myst/labextension/static/style.js"]
+#skip_if_exists = ["jupyterlab_myst/labextension/static/style.js"] TODO - wait for fix in hatch-jupyter-builder
 ensured-targets = ["jupyterlab_myst/labextension/static/style.js", "jupyterlab_myst/labextension/package.json"]
 install-pre-commit-hook = true
 
