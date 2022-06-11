@@ -56,6 +56,8 @@ source = "nodejs"
 "install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
 "jupyterlab-myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
 
+[tool.hatch.build.targets.sdist]
+artifacts = ["jupyterlab-myst/labextension"]
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder"]

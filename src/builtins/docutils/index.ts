@@ -3,7 +3,7 @@ import { JupyterFrontEndPlugin } from '@jupyterlab/application';
 import type MarkdownIt from 'markdown-it';
 import katex from 'katex';
 
-import { PACKAGE_NS } from '../tokens';
+import { PACKAGE_NS } from '../../tokens';
 import { EvalRole } from './roles';
 import { EvalDirectiveAny, EvalFigureDirective } from './directives';
 
