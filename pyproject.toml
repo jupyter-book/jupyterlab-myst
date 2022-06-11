@@ -34,11 +34,15 @@ classifiers = [
 ]
 dependencies = [
     "jupyterlab-markup>=2.0",
-    "jupyterlab-imarkdown>=0.2.0a0",
     "importlib_metadata"
 ]
 dynamic = [
     "version",
+]
+
+[project.optional-dependencies]
+eval = [
+    "jupyterlab-imarkdown>=0.2.0a0",
 ]
 
 [project.urls]
