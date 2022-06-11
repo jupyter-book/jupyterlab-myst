@@ -13,15 +13,27 @@ function wrapDocutilsPlugin(docutilsPlugin: IMarkdownIt.IPlugin) {
   return function (md: MarkdownIt, options: any) {
     docutilsPlugin(md, options);
 
-    // Add renderer to MarkdownIt
+    // Add renderers to MarkdownIt
     md.renderer.rules['math_block'] = (tokens, idx) => {
-      const content = tokens[idx].content.trim();
+      const token = tokens[idx];
+      const content = token.content.trim();
       const rendered = katex.renderToString(content, {
         displayMode: true,
         throwOnError: false,
         output: 'htmlAndMathml'
       });
-      return `<div class="math">${rendered}</div>`;
+      return `<div class="${token.attrGet('class')}">${rendered}</div>`;
+    };
+
+    md.renderer.rules['math_inline'] = (tokens, idx) => {
+      const token = tokens[idx];
+      const content = token.content.trim();
+      const rendered = katex.renderToString(content, {
+        displayMode: false,
+        throwOnError: false,
+        output: 'htmlAndMathml'
+      });
+      return `<span class="${token.attrGet('class')}">${rendered}</span>`;
     };
   };
 }

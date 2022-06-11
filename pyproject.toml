@@ -1,17 +1,64 @@
 [build-system]
-requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.0"]
-build-backend = "jupyter_packaging.build_api"
+requires = [
+    "hatchling>=1.3.1", "hatch-nodejs-version>=0.0.1", "jupyterlab~=3.1"
+]
+build-backend = "hatchling.build"
 
-[tool.jupyter-packaging.options]
-skip-if-exists = ["jupyterlab_myst/labextension/static/style.js"]
+[project]
+name = "jupyterlab-myst"
+description = "A Myst renderer for JupyterLab"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.7"
+authors = [
+    { name = "Executable Book team", email = "executablebooks@gmail.com" },
+]
+keywords = [
+    "Jupyter",
+    "JupyterLab",
+    "JupyterLab3",
+]
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: Extensions",
+    "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+    "jupyter_server>=1.6,<2",
+    "jupyterlab-markup~=2.0",
+    "importlib_metadata"
+]
+dynamic = [
+    "version",
+]
+
+[project.urls]
+Homepage = "https://github.com/executablebooks/jupyterlab-myst"
+
+[tool.hatch.version]
+source = "nodejs"
+
+[tool.hatch.build.targets.wheel.shared-data]
+"install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
+"jupyterlab-myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
+
+
+[tool.hatch.build.hooks.jupyter-builder]
+dependencies = ["hatch-jupyter-builder"]
+build-function = "hatch_jupyter_builder.npm_builder"
+skip_if_exists = ["jupyterlab_myst/labextension/static/style.js"]
 ensured-targets = ["jupyterlab_myst/labextension/static/style.js", "jupyterlab_myst/labextension/package.json"]
+install-pre-commit-hook = true
 
-[tool.jupyter-packaging.builder]
-factory = "jupyter_packaging.npm_builder"
-
-[tool.jupyter-packaging.build-args]
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
-npm = ["jlpm"]
-
-[tool.check-manifest]
-ignore = ["jupyterlab_myst/labextension/**", "yarn.lock", ".*", "package-lock.json"]
+npm = "jlpm"
