@@ -20,6 +20,11 @@ To install the extension, execute:
 pip install jupyterlab-myst
 ```
 
+To enable `eval` rendering, install the `eval` extra:
+```bash
+pip install "jupyterlab-myst[eval]"
+```
+
 ## Uninstall
 
 To remove the extension, execute:
