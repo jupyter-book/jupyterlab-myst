@@ -55,7 +55,7 @@
         "markdown-it-myst-extras": "^0.2.0"
     },
     "devDependencies": {
-        "@jupyterlab/builder": "^3.0.0",
+        "@jupyterlab/builder": "^3.4.0",
         "@types/katex": "^0.14.0",
         "@types/markdown-it": "^12.2.3",
         "@types/punycode": "^2.1.0",
