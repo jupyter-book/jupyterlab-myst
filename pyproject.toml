@@ -34,7 +34,7 @@ classifiers = [
 ]
 dependencies = [
     "jupyter_server>=1.6,<2",
-    "jupyterlab-markup~=2.1.0a0",
+    "jupyterlab-markup>=2.1.0a0",
     "importlib_metadata"
 ]
 dynamic = [
