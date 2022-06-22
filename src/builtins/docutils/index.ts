@@ -8,33 +8,9 @@ import { EvalDirectiveAny, EvalFigureDirective } from './directives';
 
 import {
   directivesDefault,
-  rolesDefault,
-  IOptions
+  IOptions,
+  rolesDefault
 } from 'markdown-it-docutils';
-
-function splitPart(text: string): string {
-  if (text.includes('\\\\')) {
-    return `\\begin{split}${text}\\end{split}`;
-  } else {
-    return text;
-  }
-}
-
-function wrapDisplayMath(text: string): string {
-  const parts = text.split('\n\n');
-  const split_parts = parts.map(splitPart);
-
-  if (parts.length === 1) {
-    return `\\begin{equation}\\begin{split}${parts[0]}\\end{split}\\end{equation}\n`;
-  } else if (parts.length > 1) {
-    let result = ' \\begin{align}\\begin{aligned}';
-    result += split_parts.join('\\\\');
-    result += ' \\begin{aligned}\\end{align}';
-    return result;
-  } else {
-    return split_parts.join('////');
-  }
-}
 
 /**
  * Provides docutils roles and directives
@@ -73,19 +49,6 @@ export const docutils: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
           roles: roles,
           directives: directives
         });
-
-        // Add renderers to MarkdownIt
-        md.renderer.rules['math_block'] = (tokens, idx) => {
-          const token = tokens[idx];
-          const content = wrapDisplayMath(token.content.trim());
-          return `<div class="${token.attrGet('class')}">$$${content}$$</div>`;
-        };
-
-        md.renderer.rules['math_inline'] = (tokens, idx) => {
-          const token = tokens[idx];
-          const content = token.content.trim();
-          return `<span class="${token.attrGet('class')}">$${content}$</span>`;
-        };
       }
 
       return [wrappedDocutilsPlugin];
