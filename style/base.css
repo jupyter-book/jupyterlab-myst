@@ -1,5 +1,4 @@
 @import 'markdown-it-docutils';
-@import 'katex/dist/katex.css';
 
 /* Use theme colours */
 :root {
