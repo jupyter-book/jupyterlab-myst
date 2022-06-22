@@ -1,7 +1,6 @@
 import { simpleMarkdownItPlugin } from '@agoose77/jupyterlab-markup';
 import { JupyterFrontEndPlugin } from '@jupyterlab/application';
 import type MarkdownIt from 'markdown-it';
-import katex from 'katex';
 
 import { PACKAGE_NS } from '../../tokens';
 import { EvalRole } from './roles';
@@ -79,23 +78,13 @@ export const docutils: JupyterFrontEndPlugin<void> = simpleMarkdownItPlugin(
         md.renderer.rules['math_block'] = (tokens, idx) => {
           const token = tokens[idx];
           const content = wrapDisplayMath(token.content.trim());
-          const rendered = katex.renderToString(content, {
-            displayMode: true,
-            throwOnError: false,
-            output: 'htmlAndMathml'
-          });
-          return `<div class="${token.attrGet('class')}">${rendered}</div>`;
+          return `<div class="${token.attrGet('class')}">$$${content}$$</div>`;
         };
 
         md.renderer.rules['math_inline'] = (tokens, idx) => {
           const token = tokens[idx];
           const content = token.content.trim();
-          const rendered = katex.renderToString(content, {
-            displayMode: false,
-            throwOnError: false,
-            output: 'htmlAndMathml'
-          });
-          return `<span class="${token.attrGet('class')}">${rendered}</span>`;
+          return `<span class="${token.attrGet('class')}">$${content}$</span>`;
         };
       }
 
