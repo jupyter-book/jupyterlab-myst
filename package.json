@@ -45,7 +45,7 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
-        "@agoose77/jupyterlab-markup": "^2.0.0",
+        "@agoose77/jupyterlab-markup": "^2.1.0-alpha.0",
         "@jupyterlab/application": "^3.0.0",
         "markdown-it": "^12.2.3",
         "markdown-it-amsmath": "^0.3.1",
