@@ -6,8 +6,9 @@
 clean:
 	rm -rf build
 	rm -rf dist
+	yarn clean:all
 
-build:
+build: clean
 	python -m build
 
 deploy-check:
