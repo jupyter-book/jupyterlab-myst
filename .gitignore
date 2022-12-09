@@ -118,3 +118,6 @@ dmypy.json
 
 # OSX files
 .DS_Store
+
+coverage/
+yarn-error.log
