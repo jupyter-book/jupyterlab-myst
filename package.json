@@ -11,10 +11,10 @@
   "bugs": {
     "url": "https://github.com/executablebooks/jupyterlab-mystjs/issues"
   },
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "author": {
-    "name": "Steve Purves",
-    "email": "steve@curvenote.com"
+    "name": "Executable Book Project",
+    "email": "executablebooks@gmail.com"
   },
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
