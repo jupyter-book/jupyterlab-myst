@@ -16,6 +16,14 @@ import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { MySTContentFactory } from './MySTContentFactory';
+import { LabIcon } from '@jupyterlab/ui-components';
+
+import mystIconSvg from '../style/mystlogo.svg';
+
+const mystIcon = new LabIcon({
+  name: 'myst-notebook-extension:mystIcon',
+  svgstr: mystIconSvg
+});
 
 /**
  * Initialization data for the jupyterlab-mystjs extension.
@@ -70,9 +78,10 @@ const plugin: JupyterFrontEndPlugin<void> = {
       widget.id = widget.id || `myst-notebook-${++id}`;
 
       // Set up the title icon
-      // widget.title.icon = ft?.icon ?? ;
-      // widget.title.iconClass = ft?.iconClass ?? '';
-      // widget.title.iconLabel = ft?.iconLabel ?? '';
+      widget.title.icon = mystIcon ?? '';
+      widget.toolbar.title.icon = mystIcon;
+      widget.title.iconClass = '';
+      widget.title.iconLabel = 'MyST Notebook';
 
       // Notify the widget tracker if restore data needs to update.
       widget.context.pathChanged.connect(() => {
