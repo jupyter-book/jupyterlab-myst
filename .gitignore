@@ -121,3 +121,6 @@ dmypy.json
 
 coverage/
 yarn-error.log
+.yalc
+yalc.lock
+style/app.css

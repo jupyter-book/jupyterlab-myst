@@ -25,6 +25,18 @@ const mystIcon = new LabIcon({
   svgstr: mystIconSvg
 });
 
+function loadKatex() {
+  if (typeof document === 'undefined') {
+    return;
+  }
+  const head = document.getElementsByTagName('HEAD')[0];
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css';
+  head.appendChild(link);
+}
+
 /**
  * Initialization data for the jupyterlab-mystjs extension.
  */
@@ -50,6 +62,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette | null
   ) => {
     console.log('JupyterLab extension jupyterlab-mystjs is activated!');
+    loadKatex();
 
     const contentFactory = new MySTContentFactory();
 
