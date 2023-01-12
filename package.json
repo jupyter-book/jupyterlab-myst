@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-mystjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Render markdown cells using MySTjs",
   "keywords": [
     "jupyter",
@@ -28,7 +28,7 @@
     "url": "https://github.com/executablebooks/jupyterlab-mystjs.git"
   },
   "scripts": {
-    "build": "jlpm build:lib && jlpm build:labextension:dev",
+    "build": "npm run build:css && jlpm build:lib && jlpm build:labextension:dev",
     "build:prod": "jlpm clean && jlpm build:lib && jlpm build:labextension",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
@@ -49,7 +49,9 @@
     "stylelint": "jlpm stylelint:check --fix",
     "stylelint:check": "stylelint --cache \"style/**/*.css\"",
     "test": "jest --coverage",
-    "watch": "run-p watch:src watch:labextension",
+    "build:css": "tailwindcss -m -i ./style/tailwind.css -o style/app.css",
+    "watch:css": "tailwindcss -w -i ./style/tailwind.css -o style/app.css",
+    "watch": "run-p watch:src watch:css watch:labextension",
     "watch:src": "tsc -w",
     "watch:labextension": "jupyter labextension watch ."
   },
@@ -59,7 +61,12 @@
     "@jupyterlab/notebook": "^3.5.1",
     "@jupyterlab/rendermime": "^3.5.1",
     "@jupyterlab/translation": "^3.5.1",
+    "@myst-theme/frontmatter": "^0.1.20",
+    "@myst-theme/providers": "^0.1.20",
     "@types/markdown-it": "^12.2.3",
+    "myst-frontmatter": "^0.0.5",
+    "myst-to-react": "^0.1.20",
+    "myst-transforms": "^0.0.13",
     "mystjs": "^0.0.15"
   },
   "devDependencies": {
@@ -67,7 +74,9 @@
     "@babel/preset-env": "^7.0.0",
     "@jupyterlab/builder": "^3.1.0",
     "@jupyterlab/testutils": "^3.0.0",
+    "@tailwindcss/typography": "^0.5.8",
     "@types/jest": "^26.0.0",
+    "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "eslint": "^7.14.0",
@@ -82,6 +91,7 @@
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "~24.0.0",
     "stylelint-prettier": "^2.0.0",
+    "tailwindcss": "^3.2.4",
     "ts-jest": "^26.0.0",
     "typescript": "~4.1.3"
   },

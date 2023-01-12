@@ -3,4 +3,10 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
-@import url('myst.css');
+@import url('app.css');
+
+/* Allow overflow on input areas for myst */
+.jp-MySTMarkdownCell .jp-InputArea,
+.jp-MySTMarkdownCell .jp-InputArea > .p-Widget {
+  overflow: visible;
+}
