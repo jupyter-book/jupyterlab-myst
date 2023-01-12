@@ -15,14 +15,6 @@ import { useParse } from 'myst-to-react';
 import { parseContent } from './myst';
 import { IMySTMarkdownCell } from './types';
 
-function findCellIndex(notebook: StaticNotebook, cell: MarkdownCell): number {
-  const index =
-    ((notebook as any)?._cellsArray as MarkdownCell[])?.findIndex(
-      c => c === cell
-    ) ?? -1;
-  return index;
-}
-
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
@@ -52,7 +44,7 @@ export class MySTMarkdownCell
     const notebook = this.parent as StaticNotebook & {
       myst: { frontmatter: PageFrontmatter; references: References };
     };
-    const isFirstCell = findCellIndex(notebook, this) === 0;
+    const isFirstCell = notebook.children().next() === this;
     const { post: mdast } = this.myst ?? {};
     if (!this.myst?.node || !notebook?.myst || !mdast) {
       console.log('MyST: Did not render?', this);

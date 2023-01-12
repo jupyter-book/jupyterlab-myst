@@ -19,26 +19,7 @@ import { VFile } from 'vfile';
 import { validatePageFrontmatter } from 'myst-frontmatter';
 import { copyNode, GenericParent as Root } from 'myst-common';
 import { StaticNotebook } from '@jupyterlab/notebook';
-import { IMySTMarkdownCell } from './types';
-
-function getCellList(
-  notebook: StaticNotebook
-): IMySTMarkdownCell[] | undefined {
-  // Need the full list of widgets, not just models
-  const n = notebook?.children();
-  if (!n) {
-    return undefined;
-  }
-  const cells = [];
-  let cell;
-  do {
-    cell = n.next() as IMySTMarkdownCell | undefined;
-    if (cell) {
-      cells.push(cell);
-    }
-  } while (cell);
-  return cells;
-}
+import { getCellList } from './utils';
 
 export function markdownParse(text: string): Root {
   const myst = new MyST();
