@@ -55,6 +55,7 @@ export class MySTMarkdownCell
     const isFirstCell = findCellIndex(notebook, this) === 0;
     const { post: mdast } = this.myst ?? {};
     if (!this.myst?.node || !notebook?.myst || !mdast) {
+      console.log('MyST: Did not render?', this);
       return;
     }
     const { references, frontmatter } = notebook.myst;
