@@ -34,8 +34,10 @@ The `jlpm` command is JupyterLab's pinned version of
 `yarn` or `npm` in lieu of `jlpm` below.
 
 ```bash
+# Make sure jupyterlab is up to date
+conda update jupyterlab
 # Clone the repo to your local environment
-# Change directory to the jupyterlab_mystjs directory
+# Change directory to the cloned jupyterlab-mystjs directory
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab

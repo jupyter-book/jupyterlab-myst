@@ -66,7 +66,7 @@ export function parseContent(notebook: StaticNotebook): void {
     mdast.children[0]?.children[0] as any,
     {
       removeYaml: true,
-      removeHeading: false
+      removeHeading: true
     }
   );
 
