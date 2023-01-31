@@ -20,6 +20,7 @@ import { validatePageFrontmatter } from 'myst-frontmatter';
 import { copyNode, GenericParent as Root } from 'myst-common';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
+import { imageUrlSourceTransform } from './images';
 
 export function markdownParse(text: string): Root {
   const myst = new MyST();
@@ -98,7 +99,13 @@ export function parseContent(notebook: StaticNotebook): void {
 
   // Render the full result in each cell using React
   // Any cell can have side-effects into other cells, so this is necessary
-  cells.forEach((cell, index) => {
+  cells.forEach(async (cell, index) => {
+    try {
+      // Go through all links and replace the source if they are local
+      await imageUrlSourceTransform(mdast.children[index] as any, { cell });
+    } catch (error) {
+      // pass
+    }
     cell.myst.post = mdast.children[index];
     cell.mystRender();
   });
