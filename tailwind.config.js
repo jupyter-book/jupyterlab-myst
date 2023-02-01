@@ -6,7 +6,7 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
     'node_modules/myst-to-react/dist/**/*.{js,ts,jsx,tsx}',
     'node_modules/@myst-theme/frontmatter/dist/**/*.{js,ts,jsx,tsx}',
-    // Ocassionally look to these folders as well in development only
+    // Occasionally look to these folders as well in development only
     '.yalc/myst-to-react/dist/**/*.{js,ts,jsx,tsx}',
     '.yalc/@myst-theme/frontmatter/dist/**/*.{js,ts,jsx,tsx}'
   ],
@@ -34,6 +34,16 @@ module.exports = {
             li: {
               marginTop: '0.25rem',
               marginBottom: '0.25rem'
+            },
+            a: {
+              textDecoration: 'none',
+              color: 'var(--jp-content-link-color, #1976d2)', // --md-blue-700
+              fontWeight: 400,
+              '&:hover': {
+                color: 'var(--jp-content-link-color, #1976d2)', // --md-blue-700
+                textDecoration: 'underline',
+                fontWeight: 400
+              }
             },
             'li > p, dd > p, header > p, footer > p': {
               marginTop: '0.25rem',
