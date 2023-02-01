@@ -72,3 +72,4 @@ build_dir = "jupyterlab_mystjs/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
+before-build-python = ["npm install", "npm run build"]
