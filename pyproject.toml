@@ -72,4 +72,5 @@ build_dir = "jupyterlab_mystjs/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
-before-build-python = ["npm install", "npm run build"]
+before-build-npm = ["python -m pip install jupyterlab~=3.1", "jlpm", "jlpm build:prod"]
+before-build-python = ["jlpm clean:all"]
