@@ -14,6 +14,7 @@ import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
 import { parseContent } from './myst';
 import { IMySTMarkdownCell } from './types';
+import { linkFactory } from './links';
 
 export class MySTMarkdownCell
   extends MarkdownCell
@@ -55,7 +56,7 @@ export class MySTMarkdownCell
     const children = useParse(mdast as any);
 
     render(
-      <ThemeProvider theme={Theme.light}>
+      <ThemeProvider theme={Theme.light} Link={linkFactory(notebook)}>
         <ReferencesProvider references={references} frontmatter={frontmatter}>
           {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
           {children}

@@ -21,6 +21,7 @@ import { copyNode, GenericParent as Root } from 'myst-common';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
+import { internalLinksPlugin } from './links';
 
 export function markdownParse(text: string): Root {
   const myst = new MyST();
@@ -87,6 +88,7 @@ export function parseContent(notebook: StaticNotebook): void {
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin, { references })
     .use(resolveReferencesPlugin, { state })
+    .use(internalLinksPlugin, { notebook })
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
