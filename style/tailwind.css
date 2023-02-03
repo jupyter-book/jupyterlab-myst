@@ -106,15 +106,26 @@
 
     details > summary {
       list-style: none;
+      transition: margin 150ms ease-out;
     }
 
     details > summary::marker, /* Latest Chrome, Edge, Firefox */
-details > summary::-webkit-details-marker /* Safari */ {
+    details > summary::-webkit-details-marker /* Safari */ {
       display: none;
     }
 
-    details[open] > summary svg {
+    details[open] > summary .details-toggle {
       transform: rotate(90deg) translateX(-5px) translateY(-5px);
+    }
+
+    details[open] > summary {
+      /* Fake the animation */
+      margin-bottom: 10px;
+    }
+
+    details[open] .details-body {
+      /* But keep the placement */
+      margin-top: -10px;
     }
 
     .smallcaps {

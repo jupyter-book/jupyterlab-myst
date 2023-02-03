@@ -8,7 +8,8 @@ import { References, GenericParent } from 'myst-common';
 import {
   Theme,
   ThemeProvider,
-  ReferencesProvider
+  ReferencesProvider,
+  TabStateProvider
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
@@ -57,10 +58,12 @@ export class MySTMarkdownCell
 
     render(
       <ThemeProvider theme={Theme.light} Link={linkFactory(notebook)}>
-        <ReferencesProvider references={references} frontmatter={frontmatter}>
-          {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
-          {children}
-        </ReferencesProvider>
+        <TabStateProvider>
+          <ReferencesProvider references={references} frontmatter={frontmatter}>
+            {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
+            {children}
+          </ReferencesProvider>
+        </TabStateProvider>
       </ThemeProvider>,
       this.myst.node
     );

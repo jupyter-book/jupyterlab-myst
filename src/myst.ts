@@ -18,13 +18,22 @@ import { unified } from 'unified';
 import { VFile } from 'vfile';
 import { validatePageFrontmatter } from 'myst-frontmatter';
 import { copyNode, GenericParent as Root } from 'myst-common';
+import cardDirectives from 'myst-ext-card';
+import gridDirectives from 'myst-ext-grid';
+import tabsDirectives from 'myst-ext-tabs';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 
 export function markdownParse(text: string): Root {
-  const myst = new MyST();
+  const myst = new MyST({
+    directives: {
+      ...cardDirectives,
+      ...gridDirectives,
+      ...tabsDirectives
+    }
+  });
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer
   const mdast = myst.parse(text) as Root;

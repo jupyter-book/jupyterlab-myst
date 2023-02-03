@@ -1,7 +1,10 @@
 # jupyterlab_mystjs
 
 [![Github Actions Status](https://github.com/executablebooks/jupyterlab-mystjs/workflows/Build/badge.svg)](https://github.com/executablebooks/jupyterlab-mystjs/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-mystjs/main?urlpath=lab)
-Render markdown cells using MySTjs
+
+Render markdown cells using [MyST Markdown](https://myst-tools.org/)
+
+![](./images/walkthrough.gif)
 
 ## Requirements
 
