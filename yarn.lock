@@ -1945,10 +1945,10 @@
     "@lumino/signaling" "^1.11.0"
     "@lumino/virtualdom" "^1.14.3"
 
-"@myst-theme/frontmatter@^0.1.23":
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/@myst-theme/frontmatter/-/frontmatter-0.1.23.tgz#3354dfd553be0b0a6e5fddeb66ebf20fbfbe7951"
-  integrity sha512-79sYgH3IO9+O7PMY8L0sywAcPVWvxIx5lseGl0tBHh5MFgVNYxSb6HtsVawdNOVYknl9A6xs2Pa2+jwKo9GadQ==
+"@myst-theme/frontmatter@^0.1.24":
+  version "0.1.24"
+  resolved "https://registry.yarnpkg.com/@myst-theme/frontmatter/-/frontmatter-0.1.24.tgz#e2f565e3d1be3df2f59bd1598348bb621146fc00"
+  integrity sha512-rLuRsx0f3Qv6+YrurR16nSnO+GEDtFYGUgmVSbrFwasZg5hC6/1QVWwnv0A4H/nVEZMKEN1jEQH6PmXDWSmglQ==
   dependencies:
     "@headlessui/react" "^1.7.7"
     "@heroicons/react" "^2.0.13"
@@ -1956,10 +1956,10 @@
     classnames "^2.3.2"
     myst-frontmatter "*"
 
-"@myst-theme/providers@^0.1.23":
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/@myst-theme/providers/-/providers-0.1.23.tgz#98b0724c080d9ef2dc53b75905367b875718558d"
-  integrity sha512-GIcTeamJSL4HHUQAMWlHfqV28REz2ZROS/V93P654uKeUFhGvBEdp5S3VhRnO2TvNl4A5A4TGMpYGAkofcgAXQ==
+"@myst-theme/providers@^0.1.24":
+  version "0.1.24"
+  resolved "https://registry.yarnpkg.com/@myst-theme/providers/-/providers-0.1.24.tgz#1f48ecaca7dec7bca5e343cc2eb7a7720de646c0"
+  integrity sha512-pgOytNCXA1wNy3rQD70JssmiHqo5abiRWnKeWbfgj1CuzNgoMZohfqbticxuD8CXkGVpcKMWZD2u1ej86YtJ1A==
   dependencies:
     myst-common "^0.0.12"
     myst-config "^0.0.9"
@@ -7589,14 +7589,14 @@ myst-spec@^0.0.4:
   resolved "https://registry.yarnpkg.com/myst-spec/-/myst-spec-0.0.4.tgz#fb998ec09e330810b454f4643c0116a25a057b80"
   integrity sha512-1j7184Wmg5lhgSXt6AXtG82E0PFJ7ULFPplfshQDzb4nIOLKruYFD0CYWheRPMM/eVqNbNZUzc/LLrhyubsK0Q==
 
-myst-to-react@^0.1.23:
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/myst-to-react/-/myst-to-react-0.1.23.tgz#4149ca4528896854cf85ceb4c5caf90f7bd373b0"
-  integrity sha512-yez1LMkXECuGZx0zXRM3sKUrGsigSa91CWMsh26V+CRzBR4+bzc9V06cffncUtsPsiPEUmgPZBX2lMJQ67sPsg==
+myst-to-react@^0.1.24:
+  version "0.1.24"
+  resolved "https://registry.yarnpkg.com/myst-to-react/-/myst-to-react-0.1.24.tgz#0010c14b915f31ed54a44d233191e0061d1d0b50"
+  integrity sha512-D7kv+M/Sq1e7A1m+8fMKgljZPrbDbBehc0KmWC9z9m2ZqrkbsvqQR6gv8WoOo7lFkk/RdtEUWHxG4p3kPnp1Lg==
   dependencies:
     "@headlessui/react" "^1.7.7"
     "@heroicons/react" "^2.0.13"
-    "@myst-theme/providers" "^0.1.23"
+    "@myst-theme/providers" "^0.1.24"
     "@popperjs/core" "^2.11.6"
     buffer "^6.0.3"
     classnames "^2.3.2"
