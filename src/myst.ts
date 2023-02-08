@@ -12,7 +12,8 @@ import {
   RRIDTransformer,
   linksPlugin,
   ReferenceState,
-  getFrontmatter
+  getFrontmatter,
+  htmlPlugin
 } from 'myst-transforms';
 import { unified } from 'unified';
 import { VFile } from 'vfile';
@@ -39,6 +40,15 @@ export function markdownParse(text: string): Root {
   const mdast = myst.parse(text) as Root;
   unified()
     .use(basicTransformationsPlugin)
+    .use(htmlPlugin, {
+      htmlHandlers: {
+        comment(h: any, node: any) {
+          const result = h(node, 'comment');
+          (result as any).value = node.value;
+          return result;
+        }
+      }
+    })
     .runSync(mdast as any);
   return mdast;
 }
