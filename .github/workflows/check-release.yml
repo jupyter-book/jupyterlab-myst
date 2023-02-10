@@ -25,5 +25,5 @@ jobs:
       - name: Upload Distributions
         uses: actions/upload-artifact@v2
         with:
-          name: jupyterlab_mystjs-releaser-dist-${{ github.run_number }}
+          name: jupyterlab_myst-releaser-dist-${{ github.run_number }}
           path: .jupyter_releaser_checkout/dist
