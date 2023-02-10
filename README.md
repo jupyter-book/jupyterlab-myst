@@ -1,5 +1,9 @@
 # jupyterlab-myst
 
+> **Note**: If you are looking for the version of this repository based on `mystjs`,
+> see the [`main branch`](https://github.com/executablebooks/jupyterlab-myst).
+> The work on this version of the extension stopped in Feb 2023. See [discussion](https://github.com/executablebooks/jupyterlab-myst/issues/57).
+
 ![Github Actions Status](https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-myst/main?urlpath=lab)
 
 A Myst renderer for JupyterLab.
