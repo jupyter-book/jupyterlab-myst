@@ -1,10 +1,14 @@
-# jupyterlab_mystjs
+# Jupyter Lab MyST Extension
 
-[![Github Actions Status](https://github.com/executablebooks/jupyterlab-mystjs/workflows/Build/badge.svg)](https://github.com/executablebooks/jupyterlab-mystjs/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-mystjs/main?urlpath=lab)
+[![Made with MyST](https://img.shields.io/badge/made%20with-myst-orange)](https://myst-tools.org)
+[![Github Actions Status](https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg)](https://github.com/executablebooks/jupyterlab-myst/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-myst/main?urlpath=lab)
 
-Render markdown cells using [MyST Markdown](https://myst-tools.org/)
+Render markdown cells using [MyST Markdown](https://myst-tools.org/), including support for rich frontmatter, interactive references, admonitions, figure numbering, tabs, cards, and grids!
 
 ![](./images/walkthrough.gif)
+
+> **Note**: If you are looking for the version of this repository based on jupyterlab-markup,
+> see the [`v0 branch`](https://github.com/executablebooks/jupyterlab-myst/tree/v0).
 
 ## Requirements
 
@@ -15,15 +19,15 @@ Render markdown cells using [MyST Markdown](https://myst-tools.org/)
 To install the extension, execute:
 
 ```bash
-pip install jupyterlab_mystjs
+pip install jupyterlab_myst
 ```
 
 ## Usage
 
-By default, the MyST renderer becomes the default notebook renderer. This means that MyST notebook rendering works out-of-the-box with Jupytext and other notebook-aware extensions. Whilst this extension is in a pre-release state, there is also a "legacy mode" that integrates MyST rendering as an additional `Open With` option that does not replace the default notebook renderer. To enable legacy mode, disable the `jupyterlab-mystjs:plugin` plugin with
+By default, the MyST renderer becomes the default notebook renderer. This means that MyST notebook rendering works out-of-the-box with Jupytext and other notebook-aware extensions. Whilst this extension is in a pre-release state, there is also a "legacy mode" that integrates MyST rendering as an additional `Open With` option that does not replace the default notebook renderer. To enable legacy mode, disable the `jupyterlab-myst:plugin` plugin with:
 
 ```bash
-jupyter labextension disable jupyterlab-mystjs:plugin
+jupyter labextension disable jupyterlab-myst:plugin
 ```
 
 ## Uninstall
@@ -31,7 +35,7 @@ jupyter labextension disable jupyterlab-mystjs:plugin
 To remove the extension, execute:
 
 ```bash
-pip uninstall jupyterlab_mystjs
+pip uninstall jupyterlab_myst
 ```
 
 ## Contributing
@@ -48,7 +52,7 @@ The `jlpm` command is JupyterLab's pinned version of
 # Make sure jupyterlab is up to date
 conda update jupyterlab
 # Clone the repo to your local environment
-# Change directory to the cloned jupyterlab-mystjs directory
+# Change directory to the cloned jupyterlab-myst directory
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab
@@ -77,12 +81,12 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
-pip uninstall jupyterlab_mystjs
+pip uninstall jupyterlab_myst
 ```
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `jupyterlab-mystjs` within that folder.
+folder is located. Then you can remove the symlink named `jupyterlab-myst` within that folder.
 
 ### Testing the extension
 
