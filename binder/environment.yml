@@ -1,10 +1,10 @@
-# a mybinder.org-ready environment for demoing jupyterlab_mystjs
+# a mybinder.org-ready environment for demoing jupyterlab_myst
 # this environment may also be used locally on Linux/MacOS/Windows, e.g.
 #
 #   conda env update --file binder/environment.yml
-#   conda activate jupyterlab-mystjs-demo
+#   conda activate jupyterlab-myst-demo
 #
-name: jupyterlab-mystjs-demo
+name: jupyterlab-myst-demo
 
 channels:
   - conda-forge

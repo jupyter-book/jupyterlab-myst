@@ -1,7 +1,7 @@
 {
-  "name": "jupyterlab-mystjs-ui-tests",
+  "name": "jupyterlab-myst-ui-tests",
   "version": "1.0.0",
-  "description": "JupyterLab jupyterlab-mystjs Integration Tests",  
+  "description": "JupyterLab jupyterlab-myst Integration Tests",
   "private": true,
   "scripts": {
     "start": "jupyter lab --config jupyter_server_test_config.py",

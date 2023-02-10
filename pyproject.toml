@@ -3,11 +3,11 @@ requires = ["hatchling>=1.4.0", "jupyterlab>=3.4.7,<4.0.0", "hatch-nodejs-versio
 build-backend = "hatchling.build"
 
 [project]
-name = "jupyterlab_mystjs"
+name = "jupyterlab_myst"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{name = "Executable Book Project", email = "executablebooks@gmail.com"}]
-description = "Render markdown cells using MySTjs"
+description = "Use MyST in JupyterLab"
 requires-python = ">=3.7"
 classifiers = [
     "Framework :: Jupyter",
@@ -41,24 +41,24 @@ test = [
 source = "nodejs"
 
 [tool.hatch.build.targets.sdist]
-artifacts = ["jupyterlab_mystjs/labextension"]
+artifacts = ["jupyterlab_myst/labextension"]
 exclude = [".github", "binder"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlab_mystjs/labextension" = "share/jupyter/labextensions/jupyterlab-mystjs"
-"install.json" = "share/jupyter/labextensions/jupyterlab-mystjs/install.json"
+"jupyterlab_myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
+"install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
 
 [tool.hatch.build.hooks.version]
-path = "jupyterlab_mystjs/_version.py"
+path = "jupyterlab_myst/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
-    "jupyterlab_mystjs/labextension/static/style.js",
-    "jupyterlab_mystjs/labextension/package.json",
+    "jupyterlab_myst/labextension/static/style.js",
+    "jupyterlab_myst/labextension/package.json",
 ]
-skip-if-exists = ["jupyterlab_mystjs/labextension/static/style.js"]
+skip-if-exists = ["jupyterlab_myst/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
@@ -68,7 +68,7 @@ npm = ["jlpm"]
 build_cmd = "install:extension"
 npm = ["jlpm"]
 source_dir = "src"
-build_dir = "jupyterlab_mystjs/labextension"
+build_dir = "jupyterlab_myst/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"

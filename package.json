@@ -1,15 +1,15 @@
 {
-  "name": "jupyterlab-mystjs",
+  "name": "jupyterlab-myst",
   "version": "0.1.4",
-  "description": "Render markdown cells using MySTjs",
+  "description": "Use MyST in JupyterLab",
   "keywords": [
     "jupyter",
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "homepage": "https://github.com/executablebooks/jupyterlab-mystjs",
+  "homepage": "https://github.com/executablebooks/jupyterlab-myst",
   "bugs": {
-    "url": "https://github.com/executablebooks/jupyterlab-mystjs/issues"
+    "url": "https://github.com/executablebooks/jupyterlab-myst/issues"
   },
   "license": "MIT",
   "author": {
@@ -25,7 +25,7 @@
   "style": "style/index.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/executablebooks/jupyterlab-mystjs.git"
+    "url": "https://github.com/executablebooks/jupyterlab-myst.git"
   },
   "scripts": {
     "build": "npm run build:css && jlpm build:lib && jlpm build:labextension:dev",
@@ -36,7 +36,7 @@
     "clean": "jlpm clean:lib",
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
     "clean:lintcache": "rimraf .eslintcache .stylelintcache",
-    "clean:labextension": "rimraf jupyterlab_mystjs/labextension",
+    "clean:labextension": "rimraf jupyterlab_myst/labextension",
     "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
     "eslint": "jlpm eslint:check --fix",
     "eslint:check": "eslint . --cache --ext .ts,.tsx",
@@ -109,6 +109,6 @@
   },
   "jupyterlab": {
     "extension": true,
-    "outputDir": "jupyterlab_mystjs/labextension"
+    "outputDir": "jupyterlab_myst/labextension"
   }
 }

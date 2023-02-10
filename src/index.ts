@@ -30,12 +30,12 @@ const mystIcon = new LabIcon({
  * The notebook content factory provider.
  */
 const plugin: JupyterFrontEndPlugin<NotebookPanel.IContentFactory> = {
-  id: 'jupyterlab-mystjs:plugin',
+  id: 'jupyterlab-myst:plugin',
   provides: NotebookPanel.IContentFactory,
   requires: [IEditorServices],
   autoStart: true,
   activate: (app: JupyterFrontEnd, editorServices: IEditorServices) => {
-    console.log('JupyterLab extension jupyterlab-mystjs is activated!');
+    console.log('JupyterLab extension jupyterlab-myst is activated!');
     const editorFactory = editorServices.factoryService.newInlineEditor;
     return new MySTContentFactory({ editorFactory });
   }
@@ -45,7 +45,7 @@ const plugin: JupyterFrontEndPlugin<NotebookPanel.IContentFactory> = {
  * The legacy-mode content factory.
  */
 const legacyPlugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyterlab-mystjs:legacyPlugin',
+  id: 'jupyterlab-myst:legacyPlugin',
   optional: [ITranslator],
   requires: [
     IEditorServices,
@@ -70,7 +70,7 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
       return;
     }
     console.log(
-      'JupyterLab extension jupyterlab-mystjs (legacy mode) is activated!'
+      'JupyterLab extension jupyterlab-myst (legacy mode) is activated!'
     );
 
     const contentFactory = new MySTContentFactory();

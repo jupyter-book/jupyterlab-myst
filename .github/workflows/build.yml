@@ -37,7 +37,7 @@ jobs:
         python -m pip install .[test]
 
         jupyter labextension list
-        jupyter labextension list 2>&1 | grep -ie "jupyterlab-mystjs.*OK"
+        jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
         python -m jupyterlab.browser_check
 
     - name: Package the extension
@@ -46,13 +46,13 @@ jobs:
 
         pip install build
         python -m build
-        pip uninstall -y "jupyterlab_mystjs" jupyterlab
+        pip uninstall -y "jupyterlab_myst" jupyterlab
 
     - name: Upload extension packages
       uses: actions/upload-artifact@v2
       with:
         name: extension-artifacts
-        path: dist/jupyterlab_mystjs*
+        path: dist/jupyterlab_myst*
         if-no-files-found: error
 
   test_isolated:
@@ -77,11 +77,11 @@ jobs:
         sudo rm -rf $(which node)
         sudo rm -rf $(which node)
 
-        pip install "jupyterlab~=3.1" jupyterlab_mystjs*.whl
+        pip install "jupyterlab~=3.1" jupyterlab_myst*.whl
 
 
         jupyter labextension list
-        jupyter labextension list 2>&1 | grep -ie "jupyterlab-mystjs.*OK"
+        jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
         python -m jupyterlab.browser_check --no-chrome-test
 
   integration-tests:
@@ -107,7 +107,7 @@ jobs:
     - name: Install the extension
       run: |
         set -eux
-        python -m pip install "jupyterlab~=3.1" jupyterlab_mystjs*.whl
+        python -m pip install "jupyterlab~=3.1" jupyterlab_myst*.whl
 
     - name: Install dependencies
       working-directory: ui-tests
@@ -135,7 +135,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: jupyterlab_mystjs-playwright-tests
+        name: jupyterlab_myst-playwright-tests
         path: |
           ui-tests/test-results
           ui-tests/playwright-report
