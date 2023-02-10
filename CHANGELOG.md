@@ -3,3 +3,41 @@
 <!-- <START NEW CHANGELOG ENTRY> -->
 
 <!-- <END NEW CHANGELOG ENTRY> -->
+
+## v1.0.0
+
+Merge and release the next version of jupyterlab-myst as a major version bump! 🚀
+See [](https://github.com/executablebooks/jupyterlab-myst/issues/57) for discussion.
+
+---
+
+# `jupyterlab-mystjs`
+
+Merge the repositories of `jupyterlab-mystjs` and `jupyterlab-myst` together.
+
+### v0.1.4
+
+Support legacy mode to open with the myst renderer or the original notebook with a right click.
+
+### v0.1.3
+
+Support local images and links, for example, opening a link to another notebook.
+
+### v0.1.2
+
+Use `@myst-theme` components from NPM.
+
+---
+
+## `jupyterlab-mystjs`
+
+This project was merged with the original version, based on `jupyterlab-markup`,
+the release history can be found on the [`v0 branch`](https://github.com/executablebooks/jupyterlab-myst/tree/v0).
+
+### v0.1.7 - pre-release
+
+Support for sphinx math, eval inline directives for inline execution.
+
+### v0.1.6
+
+Last stable release of `jupyterlab-myst` based on `markdown-it` and `jupyterlab-markup`.
