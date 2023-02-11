@@ -4,7 +4,7 @@
 
 <!-- <END NEW CHANGELOG ENTRY> -->
 
-## v1.0.0
+## v1.0.0 - 2023/02/11
 
 Merge and release the next version of jupyterlab-myst as a major version bump! 🚀
 See [](https://github.com/executablebooks/jupyterlab-myst/issues/57) for discussion.
