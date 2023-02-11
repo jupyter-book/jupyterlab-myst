@@ -1,7 +1,9 @@
 # Jupyter Lab MyST Extension
 
-[![Made with MyST](https://img.shields.io/badge/made%20with-myst-orange)](https://myst-tools.org)
-[![Github Actions Status](https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg)](https://github.com/executablebooks/jupyterlab-myst/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/executablebooks/jupyterlab-myst/main?urlpath=lab)
+[![Made with MyST][myst-badge]][myst-link]
+[![GitHub Actions Status][actions-badge]][actions-link]
+[![Launch on Binder][binder-badge]][binder-link]
+[![PyPI][pypi-badge]][pypi-link]
 
 Render markdown cells using [MyST Markdown](https://myst-tools.org/), including support for rich frontmatter, interactive references, admonitions, figure numbering, tabs, cards, and grids!
 
@@ -111,3 +113,12 @@ More information are provided within the [ui-tests](./ui-tests/README.md) README
 ### Packaging the extension
 
 See [RELEASE](RELEASE.md)
+
+[myst-badge]: https://img.shields.io/badge/made%20with-myst-orange
+[myst-link]: https://myst-tools.org
+[actions-badge]: https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg
+[actions-link]: https://github.com/executablebooks/jupyterlab-myst/actions/workflows/build.yml
+[binder-badge]: https://mybinder.org/badge_logo.svg
+[binder-link]: https://mybinder.org/v2/gh/executablebooks/jupyterlab-myst/main?urlpath=lab
+[pypi-badge]: https://img.shields.io/pypi/v/jupyterlab-myst.svg
+[pypi-link]: https://pypi.org/project/jupyterlab-myst
