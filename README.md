@@ -26,6 +26,8 @@ pip install jupyterlab_myst
 
 ## Usage
 
+[MyST][myst-quickstart] is a flavour of Markdown, which combines the fluid experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
+
 By default, the MyST renderer becomes the default notebook renderer. This means that MyST notebook rendering works out-of-the-box with Jupytext and other notebook-aware extensions. Whilst this extension is in a pre-release state, there is also a "legacy mode" that integrates MyST rendering as an additional `Open With` option that does not replace the default notebook renderer. To enable legacy mode, disable the `jupyterlab-myst:plugin` plugin with:
 
 ```bash
@@ -116,6 +118,7 @@ See [RELEASE](RELEASE.md)
 
 [myst-badge]: https://img.shields.io/badge/made%20with-myst-orange
 [myst-link]: https://myst-tools.org
+[myst-quickstart]: https://myst-tools.org/docs/mystjs/quickstart-myst-markdown
 [actions-badge]: https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg
 [actions-link]: https://github.com/executablebooks/jupyterlab-myst/actions/workflows/build.yml
 [binder-badge]: https://mybinder.org/badge_logo.svg
