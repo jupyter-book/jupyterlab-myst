@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  darkMode: 'class',
+  darkMode: ['class', '[data-jp-theme-light="false"]'],
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
     'node_modules/myst-to-react/dist/**/*.{js,ts,jsx,tsx}',
