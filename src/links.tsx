@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Plugin } from 'unified';
-import type { Root } from 'mdast';
-import type { Link } from 'myst-spec';
+import type { Root, Link } from 'myst-spec';
 import { selectAll } from 'unist-util-select';
 import type { StaticNotebook } from '@jupyterlab/notebook';
 import { URLExt } from '@jupyterlab/coreutils';

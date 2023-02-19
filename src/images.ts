@@ -1,4 +1,4 @@
-import type { Root } from 'mdast';
+import type { Root } from 'myst-spec';
 import type { MarkdownCell } from '@jupyterlab/cells';
 import { AttachmentsResolver } from '@jupyterlab/attachments';
 import type { Image } from 'myst-spec';
