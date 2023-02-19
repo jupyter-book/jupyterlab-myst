@@ -61,6 +61,7 @@
         "@jupyterlab/notebook": "^3.5.1",
         "@jupyterlab/rendermime": "^3.5.1",
         "@jupyterlab/translation": "^3.5.1",
+        "@myst-theme/diagrams": "^0.1.26",
         "@myst-theme/frontmatter": "^0.1.26",
         "@myst-theme/providers": "^0.1.26",
         "@types/markdown-it": "^12.2.3",
