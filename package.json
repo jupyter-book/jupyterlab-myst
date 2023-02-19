@@ -79,6 +79,7 @@
         "@babel/preset-env": "^7.0.0",
         "@jupyterlab/builder": "^3.1.0",
         "@jupyterlab/testutils": "^3.0.0",
+        "@myst-theme/styles": "^0.1.26",
         "@tailwindcss/typography": "^0.5.8",
         "@types/jest": "^26.0.0",
         "@types/react-dom": "^18.0.10",
