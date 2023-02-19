@@ -3,6 +3,7 @@ import { MarkdownCell } from '@jupyterlab/cells';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { Widget } from '@lumino/widgets';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
+import { renderers } from './renderers';
 import { PageFrontmatter } from 'myst-frontmatter';
 import { References, GenericParent } from 'myst-common';
 import {
@@ -54,10 +55,14 @@ export class MySTMarkdownCell
     }
     const { references, frontmatter } = notebook.myst;
 
-    const children = useParse(mdast as any);
+    const children = useParse(mdast as any, renderers);
 
     render(
-      <ThemeProvider theme={Theme.light} Link={linkFactory(notebook)}>
+      <ThemeProvider
+        theme={Theme.light}
+        Link={linkFactory(notebook)}
+        renderers={renderers}
+      >
         <TabStateProvider>
           <ReferencesProvider references={references} frontmatter={frontmatter}>
             {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
