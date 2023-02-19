@@ -1,5 +1,6 @@
 /* @import '@myst-theme/styles/typography.css'; */
 /* @import '@myst-theme/styles/grid-system.css'; */
+@import './preflight.css';
 @import './jupyterlab-typography.css';
 @import '@myst-theme/styles/details.css';
 @import '@myst-theme/styles/citations.css';
