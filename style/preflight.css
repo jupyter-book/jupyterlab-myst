@@ -11,7 +11,7 @@
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
-  border-color: theme('borderColor.DEFAULT', currentColor); /* 2 */
+  border-color: theme('borderColor.DEFAULT', currentcolor); /* 2 */
 }
 
 ::before,
@@ -49,6 +49,7 @@ html {
     'Segoe UI Symbol',
     'Noto Color Emoji'
   ); /* 4 */
+
   font-feature-settings: theme(
     'fontFamily.sans[1].fontFeatureSettings',
     normal
@@ -137,6 +138,7 @@ pre {
     'Courier New',
     monospace
   ); /* 1 */
+
   font-size: 1em; /* 2 */
 }
 
