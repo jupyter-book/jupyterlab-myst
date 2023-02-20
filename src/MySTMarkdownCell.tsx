@@ -63,8 +63,8 @@ export class MySTMarkdownCell
     if (parseComplete) {
       parseComplete.then(() => this._doneRendering.resolve());
     } else {
-      // Something went wrong, but we will still signal the next step?
-      this._doneRendering.resolve();
+      // Something went wrong, reject the rendering promise
+      this._doneRendering.reject('Unknown error with parsing MyST Markdown.');
     }
   }
 
