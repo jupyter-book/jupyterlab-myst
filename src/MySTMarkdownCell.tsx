@@ -21,7 +21,7 @@ import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { metadataSection, IUserExpressionMetadata } from './metadata';
-import { CellMetadataProvider } from './cellMetadataProvider';
+import { CellMetadataProvider } from './CellMetadataProvider';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 export class MySTMarkdownCell
