@@ -4,4 +4,6 @@ import { GenericParent } from 'myst-common';
 export type IMySTMarkdownCell = MarkdownCell & {
   myst: { pre?: GenericParent; post?: GenericParent; node?: HTMLDivElement };
   mystRender: () => void;
+  expressions: string[];
+  doneRendering: Promise<void>;
 };
