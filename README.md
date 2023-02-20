@@ -24,6 +24,41 @@ To install the extension, execute:
 pip install jupyterlab_myst
 ```
 
+## Features
+
+JupyterLab MyST is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://myst-tools.org/docs/mystjs/quickstart-myst-markdown). You can also use inline execution using the `{eval}` role inline. For example, we can explore properties of a numpy array inline.
+
+In the code cell:
+
+```python
+import numpy as np
+array = np.arange(4)
+```
+
+In the markdown cell:
+
+```markdown
+Let's consider the following array: {eval}`array`.
+
+We can compute the total: {eval}`array.sum()` and the maximum value is {eval}`array.max()`.
+```
+
+This will evaluate inline, and show:
+
+```text
+Let's consider the following array: array([0, 1, 2, 3]).
+
+We can compute the total: 6 and the maximum value is 3.
+```
+
+You can also use this with `ipywidgets`, and have inline interactive text:
+
+![](./images/cookies.gif)
+
+Or with `matplotlib` to show inline spark-lines:
+
+![](./images/stock-price.gif)
+
 ## Usage
 
 [MyST][myst-quickstart] is a flavour of Markdown, which combines the fluid experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
