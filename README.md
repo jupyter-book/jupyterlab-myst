@@ -26,7 +26,7 @@ pip install jupyterlab_myst
 
 ## Features
 
-JupyterLab MyST is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://myst-tools.org/docs/mystjs/quickstart-myst-markdown). You can also use inline execution using the `{eval}` role inline. For example, we can explore properties of a numpy array inline.
+JupyterLab MyST is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://myst-tools.org/docs/mystjs/quickstart-myst-markdown). It supports the MyST `{eval}` inline role, which facilitates the interweaving of code outputs and prose. For example, we can use inline expressions to explore the properties of a NumPy array.
 
 In the code cell:
 
