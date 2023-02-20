@@ -11,3 +11,26 @@
 .jp-MySTMarkdownCell .jp-InputArea > .p-Widget {
   overflow: visible;
 }
+
+.myst p .lm-Widget img {
+  height: 1.5em;
+  transform: translateY(25%);
+}
+
+.myst .lm-Widget {
+  overflow: inherit;
+}
+
+.myst .jp-RenderedHTMLCommon > *:last-child {
+  margin-bottom: 0;
+}
+
+.myst .jp-RenderedHTMLCommon {
+  padding-right: 0.1em;
+}
+
+.myst .jp-RenderedText {
+  text-align: left;
+  padding-left: 0;
+  line-height: inherit;
+}
