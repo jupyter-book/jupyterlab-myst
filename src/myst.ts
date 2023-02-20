@@ -18,7 +18,14 @@ import {
 import { unified } from 'unified';
 import { VFile } from 'vfile';
 import { validatePageFrontmatter } from 'myst-frontmatter';
-import { copyNode, GenericParent as Root } from 'myst-common';
+import {
+  copyNode,
+  GenericParent as Root,
+  RoleSpec,
+  RoleData,
+  ParseTypesEnum,
+  GenericNode
+} from 'myst-common';
 import { cardDirective } from 'myst-ext-card';
 import { gridDirective } from 'myst-ext-grid';
 import { tabDirectives } from 'myst-ext-tabs';
@@ -27,9 +34,22 @@ import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 
+const evalRole: RoleSpec = {
+  name: 'eval',
+  body: {
+    type: ParseTypesEnum.string,
+    required: true
+  },
+  run(data: RoleData): GenericNode[] {
+    const value = data.body as string;
+    return [{ type: 'inlineExpression', value }];
+  }
+};
+
 export function markdownParse(text: string): Root {
   const mdast = mystParse(text, {
-    directives: [cardDirective, gridDirective, ...tabDirectives]
+    directives: [cardDirective, gridDirective, ...tabDirectives],
+    roles: [evalRole]
   });
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer
@@ -48,12 +68,14 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function parseContent(notebook: StaticNotebook): void {
+export function parseContent(
+  notebook: StaticNotebook
+): undefined | Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
   );
-  if (!cells) return;
+  if (!cells) return undefined;
 
   const blocks = cells.map(cell => {
     const text = cell.model?.value.text ?? '';
@@ -115,7 +137,7 @@ export function parseContent(notebook: StaticNotebook): void {
 
   // Render the full result in each cell using React
   // Any cell can have side-effects into other cells, so this is necessary
-  cells.forEach(async (cell, index) => {
+  const promises = cells.map(async (cell, index) => {
     try {
       // Go through all links and replace the source if they are local
       await imageUrlSourceTransform(mdast.children[index] as any, { cell });
@@ -125,4 +147,6 @@ export function parseContent(notebook: StaticNotebook): void {
     cell.myst.post = mdast.children[index];
     cell.mystRender();
   });
+
+  return Promise.all(promises).then(() => undefined);
 }

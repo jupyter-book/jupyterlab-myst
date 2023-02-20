@@ -9,8 +9,11 @@ import {
   INotebookTracker,
   INotebookWidgetFactory,
   NotebookPanel,
-  NotebookWidgetFactory
+  NotebookWidgetFactory,
+  NotebookActions,
+  Notebook
 } from '@jupyterlab/notebook';
+import { Cell } from '@jupyterlab/cells';
 import { MySTContentFactory } from './MySTContentFactory';
 
 import { ISessionContextDialogs } from '@jupyterlab/apputils';
@@ -20,6 +23,7 @@ import { ITranslator } from '@jupyterlab/translation';
 import { LabIcon } from '@jupyterlab/ui-components';
 
 import mystIconSvg from '../style/mystlogo.svg';
+import { notebookExecuted } from './actions';
 
 const mystIcon = new LabIcon({
   name: 'myst-notebook-extension:mystIcon',
@@ -117,4 +121,25 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
   }
 };
 
-export default [plugin, legacyPlugin];
+/**
+ * The notebook cell executor.
+ */
+const executor: JupyterFrontEndPlugin<void> = {
+  id: 'jupyterlab-myst:executor',
+  requires: [INotebookTracker],
+  autoStart: true,
+  activate: (app: JupyterFrontEnd, tracker: INotebookTracker) => {
+    console.log('Using jupyterlab-myst:executor');
+
+    NotebookActions.executed.connect(
+      (sender: any, value: { notebook: Notebook; cell: Cell }) => {
+        const { notebook, cell } = value;
+        notebookExecuted(notebook, cell, tracker);
+      }
+    );
+
+    return;
+  }
+};
+
+export default [plugin, legacyPlugin, executor];

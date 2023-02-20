@@ -17,11 +17,28 @@ import { useParse } from 'myst-to-react';
 import { parseContent } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
+import { selectAll } from 'unist-util-select';
+
+import { PromiseDelegate } from '@lumino/coreutils';
+import { metadataSection, IUserExpressionMetadata } from './metadata';
+import { CellMetadataProvider } from './cellMetadataProvider';
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
 {
+  private _doneRendering = new PromiseDelegate<void>();
+
+  private __rendermime: IRenderMimeRegistry;
+
+  constructor(options: MarkdownCell.IOptions) {
+    super(options);
+
+    this.__rendermime = options.rendermime.clone();
+    // this.__rendermime.addFactory(textRendererFactory);
+  }
+
   myst: {
     pre?: GenericParent;
     post?: GenericParent;
@@ -34,13 +51,34 @@ export class MySTMarkdownCell
       const node = document.createElement('div');
       this.myst = { node };
     }
+
+    this._doneRendering = new PromiseDelegate<void>();
     const notebook = this.parent as StaticNotebook;
     this.myst.pre = undefined;
-    parseContent(notebook);
+    const parseComplete = parseContent(notebook);
     const widget = new Widget({ node: this.myst.node });
     widget.addClass('myst');
     this.addClass('jp-MySTMarkdownCell');
     this.inputArea.renderInput(widget);
+    if (parseComplete) {
+      parseComplete.then(() => this._doneRendering.resolve());
+    } else {
+      // Something went wrong, but we will still signal the next step?
+      this._doneRendering.resolve();
+    }
+  }
+
+  /**
+   * Whether the Markdown renderer has finished rendering.
+   */
+  get doneRendering(): Promise<void> {
+    return this._doneRendering.promise;
+  }
+
+  get expressions(): string[] {
+    const { post: mdast } = this.myst ?? {};
+    const expressions = selectAll('inlineExpression', mdast);
+    return expressions.map(node => (node as any).value);
   }
 
   mystRender(): void {
@@ -56,19 +94,30 @@ export class MySTMarkdownCell
     const { references, frontmatter } = notebook.myst;
 
     const children = useParse(mdast as any, renderers);
-
+    const metadata = this.model.metadata.get(
+      metadataSection
+    ) as IUserExpressionMetadata[];
     render(
       <ThemeProvider
         theme={Theme.light}
         Link={linkFactory(notebook)}
         renderers={renderers}
       >
-        <TabStateProvider>
-          <ReferencesProvider references={references} frontmatter={frontmatter}>
-            {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
-            {children}
-          </ReferencesProvider>
-        </TabStateProvider>
+        <CellMetadataProvider
+          metadata={metadata}
+          trusted={this.model.trusted}
+          rendermime={this.__rendermime}
+        >
+          <TabStateProvider>
+            <ReferencesProvider
+              references={references}
+              frontmatter={frontmatter}
+            >
+              {isFirstCell && <FrontmatterBlock frontmatter={frontmatter} />}
+              {children}
+            </ReferencesProvider>
+          </TabStateProvider>
+        </CellMetadataProvider>
       </ThemeProvider>,
       this.myst.node
     );
