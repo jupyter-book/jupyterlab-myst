@@ -32,10 +32,10 @@ export class MySTMarkdownCell
 
   private __rendermime: IRenderMimeRegistry;
 
-  constructor(options: MarkdownCell.IOptions) {
+  constructor(options: MarkdownCell.IOptions, parent: StaticNotebook) {
     super(options);
-
-    this.__rendermime = options.rendermime.clone();
+    // Note we cannot clone this, and it must be the parents (the notebooks)
+    this.__rendermime = parent.rendermime;
     // this.__rendermime.addFactory(textRendererFactory);
   }
 
