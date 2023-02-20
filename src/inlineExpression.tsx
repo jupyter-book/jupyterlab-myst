@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import { useCellMetadata } from './cellMetadataProvider';
+import { useCellMetadata } from './CellMetadataProvider';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IExpressionResult, isOutput } from './userExpressions';
