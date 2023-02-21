@@ -10,6 +10,6 @@ export class MySTContentFactory extends NotebookPanel.ContentFactory {
     if (!options.contentFactory) {
       options.contentFactory = this;
     }
-    return new MySTMarkdownCell(options, parent).initializeState();
+    return new MySTMarkdownCell(options).initializeState();
   }
 }

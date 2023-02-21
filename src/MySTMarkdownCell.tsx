@@ -20,24 +20,13 @@ import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
-import { metadataSection, IUserExpressionMetadata } from './metadata';
-import { CellMetadataProvider } from './CellMetadataProvider';
-import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
+import { JupyterCellProvider } from './JupyterCellProvider';
 
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
 {
   private _doneRendering = new PromiseDelegate<void>();
-
-  private __rendermime: IRenderMimeRegistry;
-
-  constructor(options: MarkdownCell.IOptions, parent: StaticNotebook) {
-    super(options);
-    // Note we cannot clone this, and it must be the parents (the notebooks)
-    this.__rendermime = parent.rendermime;
-    // this.__rendermime.addFactory(textRendererFactory);
-  }
 
   myst: {
     pre?: GenericParent;
@@ -94,20 +83,13 @@ export class MySTMarkdownCell
     const { references, frontmatter } = notebook.myst;
 
     const children = useParse(mdast as any, renderers);
-    const metadata = this.model.metadata.get(
-      metadataSection
-    ) as IUserExpressionMetadata[];
     render(
       <ThemeProvider
         theme={Theme.light}
         Link={linkFactory(notebook)}
         renderers={renderers}
       >
-        <CellMetadataProvider
-          metadata={metadata}
-          trusted={this.model.trusted}
-          rendermime={this.__rendermime}
-        >
+        <JupyterCellProvider cell={this}>
           <TabStateProvider>
             <ReferencesProvider
               references={references}
@@ -117,7 +99,7 @@ export class MySTMarkdownCell
               {children}
             </ReferencesProvider>
           </TabStateProvider>
-        </CellMetadataProvider>
+        </JupyterCellProvider>
       </ThemeProvider>,
       this.myst.node
     );
