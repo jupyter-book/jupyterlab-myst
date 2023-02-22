@@ -33,6 +33,7 @@ import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
+import { addCiteChildrenPlugin } from './citations';
 
 const evalRole: RoleSpec = {
   name: 'eval',
@@ -125,6 +126,7 @@ export function parseContent(
     .use(footnotesPlugin, { references })
     .use(resolveReferencesPlugin, { state })
     .use(internalLinksPlugin, { notebook })
+    .use(addCiteChildrenPlugin)
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
