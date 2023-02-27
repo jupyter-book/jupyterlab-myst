@@ -62,7 +62,7 @@ export class RenderedMySTMarkdown
     this.resolver = options.resolver;
     this.linkHandler = options.linkHandler;
     this.node.dataset['mimeType'] = MIME_TYPE;
-    this.addClass('myst-RenderedMySTMarkdown');
+    this.addClass('jp-RenderedMySTMarkdown');
     console.log('Rendered markdown');
   }
 
@@ -71,20 +71,20 @@ export class RenderedMySTMarkdown
    */
   readonly resolver: IRenderMime.IResolver | null;
 
-  private _state: MySTState | null;
-  private _stateChanged = new Signal<this, void>(this);
-
   /**
    * The link handler.
    */
   readonly linkHandler: IRenderMime.ILinkHandler | null;
+
+  private _state: MySTState | null;
+  private _stateChanged = new Signal<this, MySTState>(this);
 
   render(): JSX.Element {
     return (
       <UseSignal signal={this._stateChanged} initialSender={this}>
         {(): JSX.Element => {
           if (this._state === null) {
-            return <div>Missing</div>;
+            return <div>Waiting for MyST AST (mdast)</div>;
           }
           const { references, frontmatter, mdast } = this._state;
           const children = useParse(mdast as any, renderers);
@@ -162,13 +162,12 @@ export class RenderedMySTMarkdown
       .use(keysPlugin)
       .runSync(mdast as any, file);
 
-    const nextState: MySTState = {
+    this._state = {
       mdast,
       references,
       frontmatter
     };
-    this._state = nextState;
-    this._stateChanged.emit();
+    this._stateChanged.emit(this._state);
     return Promise.resolve(void 0);
   }
 }
