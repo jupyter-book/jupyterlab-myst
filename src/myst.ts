@@ -1,32 +1,26 @@
 import { mystParse } from 'myst-parser';
 import { liftChildren } from 'myst-common';
 import {
-  mathPlugin,
-  footnotesPlugin,
-  keysPlugin,
   basicTransformationsPlugin,
-  enumerateTargetsPlugin,
-  resolveReferencesPlugin,
-  WikiTransformer,
-  GithubTransformer,
   DOITransformer,
-  RRIDTransformer,
-  linksPlugin,
-  ReferenceState,
+  enumerateTargetsPlugin,
+  footnotesPlugin,
   getFrontmatter,
-  htmlPlugin
+  GithubTransformer,
+  htmlPlugin,
+  keysPlugin,
+  linksPlugin,
+  mathPlugin,
+  ReferenceState,
+  resolveReferencesPlugin,
+  RRIDTransformer,
+  WikiTransformer
 } from 'myst-transforms';
+import type { Root } from 'mdast';
 import { unified } from 'unified';
 import { VFile } from 'vfile';
 import { validatePageFrontmatter } from 'myst-frontmatter';
-import {
-  copyNode,
-  GenericParent as Root,
-  RoleSpec,
-  RoleData,
-  ParseTypesEnum,
-  GenericNode
-} from 'myst-common';
+import { copyNode, GenericParent } from 'myst-common';
 import { cardDirective } from 'myst-ext-card';
 import { gridDirective } from 'myst-ext-grid';
 import { tabDirectives } from 'myst-ext-tabs';
@@ -35,18 +29,7 @@ import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
-
-const evalRole: RoleSpec = {
-  name: 'eval',
-  body: {
-    type: ParseTypesEnum.string,
-    required: true
-  },
-  run(data: RoleData): GenericNode[] {
-    const value = data.body as string;
-    return [{ type: 'inlineExpression', value }];
-  }
-};
+import { evalRole } from './roles';
 
 export function markdownParse(text: string): Root {
   const mdast = mystParse(text, {
@@ -73,7 +56,10 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function parseContent(notebook: StaticNotebook): Promise<void> {
+
+export function renderNotebook(
+  notebook: StaticNotebook
+): undefined | Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
@@ -87,7 +73,7 @@ export function parseContent(notebook: StaticNotebook): Promise<void> {
     const text = cell.model?.value.text ?? '';
     if (!cell.myst.pre) {
       // This will be cleared when the cell is executed, and parsed again here
-      cell.myst.pre = markdownParse(text);
+      cell.myst.pre = markdownParse(text) as GenericParent;
     }
     return { type: 'block', children: copyNode(cell.myst.pre).children };
   });
@@ -130,7 +116,7 @@ export function parseContent(notebook: StaticNotebook): Promise<void> {
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin, { references })
     .use(resolveReferencesPlugin, { state })
-    .use(internalLinksPlugin, { notebook })
+    .use(internalLinksPlugin, { resolver: notebook.rendermime.resolver })
     .use(addCiteChildrenPlugin)
     .use(keysPlugin)
     .runSync(mdast as any, file);
@@ -144,10 +130,14 @@ export function parseContent(notebook: StaticNotebook): Promise<void> {
 
   // Render the full result in each cell using React
   // Any cell can have side-effects into other cells, so this is necessary
+
   const promises = cells.map(async (cell, index) => {
     try {
       // Go through all links and replace the source if they are local
-      await imageUrlSourceTransform(mdast.children[index] as any, { cell });
+      await imageUrlSourceTransform(mdast.children[index] as any, {
+        resolver: notebook.rendermime.resolver,
+        cell
+      });
     } catch (error) {
       // pass
     }

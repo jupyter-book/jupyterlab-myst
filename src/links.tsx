@@ -2,7 +2,6 @@ import React from 'react';
 import type { Plugin } from 'unified';
 import type { Root, Link } from 'myst-spec';
 import { selectAll } from 'unist-util-select';
-import type { StaticNotebook } from '@jupyterlab/notebook';
 import { URLExt } from '@jupyterlab/coreutils';
 import type { LinkProps } from '@myst-theme/providers';
 import { IRenderMime } from '@jupyterlab/rendermime';
@@ -63,17 +62,16 @@ function handleAnchor(
 }
 
 export const linkFactory =
-  (notebook: StaticNotebook) =>
+  (
+    resolver: IRenderMime.IResolver | null,
+    linkHandler: IRenderMime.ILinkHandler | null
+  ) =>
   (props: LinkProps): JSX.Element => {
     const ref = React.useRef<HTMLAnchorElement>(null);
     const { to: url } = props;
     React.useEffect(() => {
-      if (!ref || !ref.current || !notebook.rendermime.resolver) return;
-      handleAnchor(
-        ref.current,
-        notebook.rendermime.resolver,
-        notebook.rendermime.linkHandler
-      );
+      if (!ref || !ref.current || !resolver) return;
+      handleAnchor(ref.current, resolver, linkHandler);
     }, [ref, url]);
     return (
       <a href={url} ref={ref} className={props.className}>
@@ -83,7 +81,7 @@ export const linkFactory =
   };
 
 type Options = {
-  notebook: StaticNotebook;
+  resolver: IRenderMime.IResolver | null;
 };
 
 /**
@@ -96,7 +94,7 @@ export async function internalLinksTransform(
   const links = selectAll('link,linkBlock', tree) as Link[];
   links.forEach(async link => {
     if (!link || !link.url) return;
-    const resolver = opts.notebook.rendermime.resolver;
+    const resolver = opts.resolver;
     const isLocal = resolver?.isLocal
       ? resolver.isLocal(link.url)
       : URLExt.isLocal(link.url);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MarkdownCell } from '@jupyterlab/cells';
-import { StaticNotebook } from '@jupyterlab/notebook';
+import { Notebook } from '@jupyterlab/notebook';
 import { Widget } from '@lumino/widgets';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { renderers } from './renderers';
@@ -14,13 +14,14 @@ import {
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
-import { parseContent } from './myst';
+import { renderNotebook } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ObservableValue } from '@jupyterlab/observables';
 
@@ -29,6 +30,14 @@ export class MySTMarkdownCell
   implements IMySTMarkdownCell
 {
   private _doneRendering = new PromiseDelegate<void>();
+
+  private __rendermime: IRenderMimeRegistry;
+
+  constructor(options: MarkdownCell.IOptions) {
+    super(options);
+
+    this.__rendermime = options.rendermime;
+  }
 
   myst: {
     pre?: GenericParent;
@@ -52,13 +61,13 @@ export class MySTMarkdownCell
     }
 
     this._doneRendering = new PromiseDelegate<void>();
-    const notebook = this.parent as StaticNotebook;
+    const notebook = this.parent as Notebook;
     this.myst.pre = undefined;
-    const parseComplete = parseContent(notebook);
+    const parseComplete = renderNotebook(notebook);
     const widget = new Widget({ node: this.myst.node });
     widget.addClass('myst');
     widget.addClass('jp-MarkdownOutput');
-    this.addClass('jp-MySTMarkdownCell');
+    this.addClass('myst-MySTMarkdownCell');
     this.inputArea.renderInput(widget);
     if (parseComplete) {
       parseComplete.then(() => this._doneRendering.resolve());
@@ -82,7 +91,7 @@ export class MySTMarkdownCell
   }
 
   mystRender(): void {
-    const notebook = this.parent as StaticNotebook & {
+    const notebook = this.parent as Notebook & {
       myst: { frontmatter: PageFrontmatter; references: References };
     };
     const isFirstCell = notebook.children().next() === this;
@@ -97,7 +106,10 @@ export class MySTMarkdownCell
     render(
       <ThemeProvider
         theme={Theme.light}
-        Link={linkFactory(notebook)}
+        Link={linkFactory(
+          this.__rendermime.resolver,
+          this.__rendermime.linkHandler
+        )}
         renderers={renderers}
       >
         <JupyterCellProvider cell={this}>
