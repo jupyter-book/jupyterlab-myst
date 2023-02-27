@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import { useJupyterCell } from './JupyterCellProvider';
 import { SingletonLayout, Widget } from '@lumino/widgets';
-import { IRenderMimeRegistry, IRenderMime } from '@jupyterlab/rendermime';
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IExpressionResult, isOutput } from './userExpressions';
 import { getUserExpressions, IUserExpressionMetadata } from './metadata';
 import { StaticNotebook } from '@jupyterlab/notebook';
@@ -85,15 +85,8 @@ export class RenderedExpression extends Widget {
   }
 }
 
-function PlainTextRenderer({
-  content,
-  sanitizer
-}: {
-  content: string;
-  sanitizer: IRenderMime.ISanitizer;
-}) {
+function PlainTextRenderer({ content }: { content: string }) {
   content = content.replace(/^(["'])(.*)\1$/, '$2');
-  content = sanitizer.sanitize(content);
   return <span>{content}</span>;
 }
 
@@ -130,10 +123,7 @@ function MimeBundleRenderer({
     if (!renderer) return;
     return () => renderer.dispose();
   }, [renderer]);
-
-  const mimeBundle = expressionMetadata.result.data as Record<string, string>;
-  const text = mimeBundle?.['text/plain'];
-  console.debug(`Rendering react ${expressionMetadata.expression} = ${text}`);
+  console.debug(`Rendering react ${expressionMetadata.expression}`);
   return <div ref={ref} className="not-prose inline-block" />;
 }
 
@@ -155,26 +145,19 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   const expressionMetadata = metadata?.find(p => p.expression === value);
   const mimeBundle = expressionMetadata?.result.data as Record<string, string>;
 
-  let element: JSX.Element;
-
   if (!mimeBundle || !expressionMetadata) {
-    element = <code>{value}</code>;
-  } else if (isPlainTextMimeBundle(mimeBundle)) {
-    element = (
-      <PlainTextRenderer
-        content={mimeBundle['text/plain']}
-        sanitizer={rendermime.sanitizer}
-      ></PlainTextRenderer>
-    );
-  } else {
-    element = (
-      <MimeBundleRenderer
-        rendermime={rendermime}
-        trusted={trusted}
-        expressionMetadata={expressionMetadata}
-      ></MimeBundleRenderer>
+    return <code>{value}</code>;
+  }
+  if (isPlainTextMimeBundle(mimeBundle)) {
+    return (
+      <PlainTextRenderer content={mimeBundle['text/plain']}></PlainTextRenderer>
     );
   }
-
-  return element;
+  return (
+    <MimeBundleRenderer
+      rendermime={rendermime}
+      trusted={trusted}
+      expressionMetadata={expressionMetadata}
+    ></MimeBundleRenderer>
+  );
 }
