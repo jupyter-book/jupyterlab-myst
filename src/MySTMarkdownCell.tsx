@@ -1,6 +1,6 @@
 import React from 'react';
 import { MarkdownCell } from '@jupyterlab/cells';
-import { Notebook } from '@jupyterlab/notebook';
+import { StaticNotebook } from '@jupyterlab/notebook';
 import { Widget } from '@lumino/widgets';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { renderers } from './renderers';
@@ -61,7 +61,7 @@ export class MySTMarkdownCell
     }
 
     this._doneRendering = new PromiseDelegate<void>();
-    const notebook = this.parent as Notebook;
+    const notebook = this.parent as StaticNotebook;
     this.myst.pre = undefined;
     const parseComplete = renderNotebook(notebook);
     const widget = new Widget({ node: this.myst.node });
@@ -91,7 +91,7 @@ export class MySTMarkdownCell
   }
 
   mystRender(): void {
-    const notebook = this.parent as Notebook & {
+    const notebook = this.parent as StaticNotebook & {
       myst: { frontmatter: PageFrontmatter; references: References };
     };
     const isFirstCell = notebook.children().next() === this;
