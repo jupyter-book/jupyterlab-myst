@@ -24,7 +24,6 @@ import { ITranslator } from '@jupyterlab/translation';
 import { notebookExecuted } from './actions';
 import { mystIcon } from './icon';
 import { mystMarkdownRendererFactory } from './mime';
-import { DocumentRegistry } from '@jupyterlab/docregistry';
 
 /**
  * The notebook content factory provider.
@@ -75,7 +74,7 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
 
     const contentFactory = new MySTContentFactory();
 
-    const factory: DocumentRegistry.WidgetFactory = new NotebookWidgetFactory({
+    const factory = new NotebookWidgetFactory({
       name: 'Jupyter MyST Notebook',
       // label: trans.__("Jupyter MyST Notebook"), // will be needed in JupyterLab 4
       fileTypes: ['notebook', 'markdown', 'myst'],
@@ -141,6 +140,7 @@ const executorPlugin: JupyterFrontEndPlugin<void> = {
 const mimeRendererPlugin: JupyterFrontEndPlugin<void> = {
   id: 'jupyterlab-myst:mimeRenderer',
   requires: [IRenderMimeRegistry],
+  autoStart: true,
   optional: [IMarkdownViewerTracker],
   activate: (
     app: JupyterFrontEnd,

@@ -1,7 +1,5 @@
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 // import { mystIcon } from './icon';
-import { RenderedCommon } from '@jupyterlab/rendermime';
-import { Message } from '@lumino/messaging';
 import { markdownParse } from './myst';
 import {
   DOITransformer,
@@ -18,28 +16,99 @@ import {
   WikiTransformer
 } from 'myst-transforms';
 import { VFile } from 'vfile';
-import { validatePageFrontmatter } from 'myst-frontmatter';
+import { PageFrontmatter, validatePageFrontmatter } from 'myst-frontmatter';
+import { internalLinksPlugin, linkFactory } from './links';
+import { FrontmatterBlock } from '@myst-theme/frontmatter';
+import {
+  ReferencesProvider,
+  TabStateProvider,
+  Theme,
+  ThemeProvider
+} from '@myst-theme/providers';
+import { useParse } from 'myst-to-react';
+import { renderers } from './renderers';
+import { References } from 'myst-common';
+import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
 import { unified } from 'unified';
-import { internalLinksPlugin } from './links';
+import { Signal } from '@lumino/signaling';
+import React from 'react';
 
 /**
  * The MIME type for Markdown.
  */
 export const MIME_TYPE = 'text/markdown';
 
+type MySTState = {
+  references: References;
+  frontmatter: PageFrontmatter;
+  mdast: any;
+};
+
 /**
  * A mime renderer for displaying Markdown with embedded latex.
  */
-export class RenderedMySTMarkdown extends RenderedCommon {
+export class RenderedMySTMarkdown
+  extends ReactWidget
+  implements IRenderMime.IRenderer
+{
   /**
    * Construct a new rendered markdown widget.
    *
    * @param options - The options for initializing the widget.
    */
   constructor(options: IRenderMime.IRendererOptions) {
-    super(options);
+    super();
+    this._state = null;
+    this.resolver = options.resolver;
+    this.linkHandler = options.linkHandler;
+    this.node.dataset['mimeType'] = MIME_TYPE;
     this.addClass('myst-RenderedMySTMarkdown');
     console.log('Rendered markdown');
+  }
+
+  /**
+   * The resolver object.
+   */
+  readonly resolver: IRenderMime.IResolver | null;
+
+  private _state: MySTState | null;
+  private _stateChanged = new Signal<this, void>(this);
+
+  /**
+   * The link handler.
+   */
+  readonly linkHandler: IRenderMime.ILinkHandler | null;
+
+  render(): JSX.Element {
+    return (
+      <UseSignal signal={this._stateChanged} initialSender={this}>
+        {(): JSX.Element => {
+          if (this._state === null) {
+            return <div>Missing</div>;
+          }
+          const { references, frontmatter, mdast } = this._state;
+          const children = useParse(mdast as any, renderers);
+
+          return (
+            <ThemeProvider
+              theme={Theme.light}
+              Link={linkFactory(this.resolver, this.linkHandler)}
+              renderers={renderers}
+            >
+              <TabStateProvider>
+                <ReferencesProvider
+                  references={references}
+                  frontmatter={frontmatter}
+                >
+                  <FrontmatterBlock frontmatter={frontmatter} />
+                  {children}
+                </ReferencesProvider>
+              </TabStateProvider>
+            </ThemeProvider>
+          );
+        }}
+      </UseSignal>
+    );
   }
 
   /**
@@ -49,8 +118,8 @@ export class RenderedMySTMarkdown extends RenderedCommon {
    *
    * @returns A promise which resolves when rendering is complete.
    */
-  render(model: IRenderMime.IMimeModel): Promise<void> {
-    const x = String(model.data[this.mimeType]);
+  renderModel(model: IRenderMime.IMimeModel): Promise<void> {
+    const x = String(model.data[MIME_TYPE]);
     const mdast = markdownParse(x);
     const linkTransforms = [
       new WikiTransformer(),
@@ -93,16 +162,14 @@ export class RenderedMySTMarkdown extends RenderedCommon {
       .use(keysPlugin)
       .runSync(mdast as any, file);
 
+    const nextState: MySTState = {
+      mdast,
+      references,
+      frontmatter
+    };
+    this._state = nextState;
+    this._stateChanged.emit();
     return Promise.resolve(void 0);
-  }
-
-  /**
-   * A message handler invoked on an `'after-attach'` message.
-   */
-  onAfterAttach(msg: Message): void {
-    if (this.latexTypesetter) {
-      this.latexTypesetter.typeset(this.node);
-    }
   }
 }
 
