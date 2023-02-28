@@ -127,12 +127,6 @@ function MimeBundleRenderer({
   return <div ref={ref} className="not-prose inline-block" />;
 }
 
-function isPlainTextMimeBundle(mimeBundle: Record<string, string>): boolean {
-  return (
-    Object.keys(mimeBundle).length === 1 && mimeBundle['text/plain'] !== null
-  );
-}
-
 export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   const { cell } = useJupyterCell();
   // Load the information from the MystMarkdownCell
@@ -148,7 +142,10 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   if (!mimeBundle || !expressionMetadata) {
     return <code>{value}</code>;
   }
-  if (isPlainTextMimeBundle(mimeBundle)) {
+
+  // Explicitly render text/plain
+  const preferredMimeType = rendermime.preferredMimeType(mimeBundle);
+  if (preferredMimeType === 'text/plain') {
     return (
       <PlainTextRenderer content={mimeBundle['text/plain']}></PlainTextRenderer>
     );
