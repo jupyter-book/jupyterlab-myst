@@ -2,7 +2,12 @@ import React, { useRef, useEffect, useMemo } from 'react';
 import { useJupyterCell } from './JupyterCellProvider';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IExpressionResult, isOutput } from './userExpressions';
+import {
+  IExpressionError,
+  IExpressionResult,
+  isError,
+  isOutput
+} from './userExpressions';
 import { getUserExpressions, IUserExpressionMetadata } from './metadata';
 import { StaticNotebook } from '@jupyterlab/notebook';
 
@@ -54,6 +59,7 @@ export class RenderedExpression extends Widget {
       };
     } else {
       // Errors need to be formatted as stderr objects
+      // Note, this may no longer be necessary as errors are explicitly rendered
       options = {
         data: {
           'application/vnd.jupyter.stderr':
@@ -88,6 +94,25 @@ export class RenderedExpression extends Widget {
 function PlainTextRenderer({ content }: { content: string }) {
   content = content.replace(/^(["'])(.*)\1$/, '$2');
   return <span>{content}</span>;
+}
+
+/**
+ * The `ErrorRenderer` does a slightly better job of showing errors inline than Jupyter's widget view.
+ */
+function ErrorRenderer({ error }: { error: IExpressionError }) {
+  return (
+    <span
+      className="text-black p-2"
+      data-mime-type="application/vnd.jupyter.stderr"
+      style={{
+        backgroundColor: 'var(--jp-rendermime-error-background, #F9DEDE)',
+        fontFamily: 'var(--jp-code-font-family, monospace)',
+        fontSize: 'var(--jp-code-font-size)'
+      }}
+    >
+      <span className="text-[#e75c58]">{error.ename}</span>: {error.evalue}
+    </span>
+  );
 }
 
 function MimeBundleRenderer({
@@ -137,18 +162,22 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
 
   // Find the expressionResult that is for this node
   const expressionMetadata = metadata?.find(p => p.expression === value);
-  const mimeBundle = expressionMetadata?.result.data as Record<string, string>;
+  const mimeBundle = expressionMetadata?.result.data as
+    | Record<string, string>
+    | undefined;
 
-  if (!mimeBundle || !expressionMetadata) {
+  if (!expressionMetadata) {
     return <code>{value}</code>;
   }
 
   // Explicitly render text/plain
-  const preferredMimeType = rendermime.preferredMimeType(mimeBundle);
+  const preferredMimeType = rendermime.preferredMimeType(mimeBundle ?? {});
   if (preferredMimeType === 'text/plain') {
-    return (
-      <PlainTextRenderer content={mimeBundle['text/plain']}></PlainTextRenderer>
-    );
+    return <PlainTextRenderer content={mimeBundle?.['text/plain'] as string} />;
+  }
+  // Explicitly render errors
+  if (isError(expressionMetadata.result)) {
+    return <ErrorRenderer error={expressionMetadata.result} />;
   }
   return (
     <MimeBundleRenderer
