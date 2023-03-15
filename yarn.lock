@@ -1021,10 +1021,10 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@headlessui/react@^1.7.7":
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.8.tgz#d7b4a95d50f9a386f7d1259d5ff8a6d7eb552ef0"
-  integrity sha512-zcwb0kd7L05hxmoAMIioEaOn235Dg0fUO+iGbLPgLVSjzl/l39V6DTpC2Df49PE5aG5/f5q0PZ9ZHZ78ENNV+A==
+"@headlessui/react@^1.7.13":
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.13.tgz#fd150b394954e9f1d86ed2340cffd1217d6e7628"
+  integrity sha512-9n+EQKRtD9266xIHXdY5MfiXPDfYwl7zBM7KOx2Ae3Gdgxy8QML1FkCMjq6AsOf0l6N9uvI4HcFtuFlenaldKg==
   dependencies:
     client-only "^0.0.1"
 
@@ -1950,38 +1950,38 @@
     "@lumino/signaling" "^1.11.0"
     "@lumino/virtualdom" "^1.14.3"
 
-"@myst-theme/diagrams@^0.1.26":
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/@myst-theme/diagrams/-/diagrams-0.1.26.tgz#56f92ab7524d5c1933c1c2bb91086f0052625a01"
-  integrity sha512-aLr94BcpDmWvPcRz0o3aoqGOzcJJMHMlMlKMPMtu1VlkDVj+M/o/PiMdTBSW9bjSbrZBE9VwO1ffNOlCULTJrw==
+"@myst-theme/diagrams@^0.1.31":
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@myst-theme/diagrams/-/diagrams-0.1.31.tgz#4d4d32880d0da58b4e1536e942ee2d06ed0185e3"
+  integrity sha512-d5o/dAJfjkT397cRLNCPqb+PYYbgNzt9IzYKGdALtNNZTipQlbahFgDoORNUxDnM2KubbGgPgx/YhGiHgFAAPg==
   dependencies:
-    "@myst-theme/providers" "^0.1.26"
+    "@myst-theme/providers" "^0.1.31"
     mermaid "^9.3.0"
 
-"@myst-theme/frontmatter@^0.1.26":
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/@myst-theme/frontmatter/-/frontmatter-0.1.26.tgz#d42cd49fcc2accb673aa2b18d7a49a8720572dc4"
-  integrity sha512-etn/j65OJz+9fqheCmqUEIj/FaeSqeiaISuXn5g9qbQA9W0iMrw3xzrXFxoTez4UHbqM4Ng/9MSxKuOnUTr15w==
+"@myst-theme/frontmatter@^0.1.31":
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@myst-theme/frontmatter/-/frontmatter-0.1.31.tgz#b5df0e3e28b8910502f42191dd3601947fd9d02f"
+  integrity sha512-rHOlAx56GAaY0lGJ0nVxQTCrNGPLxIt5t0Csdt9CykTxgdqP/L5FqBfPtkoFxk6Hx43b5WxxbLFLzkNsm97o5Q==
   dependencies:
-    "@headlessui/react" "^1.7.7"
+    "@headlessui/react" "^1.7.13"
     "@heroicons/react" "^2.0.13"
     "@scienceicons/react" "^0.0.1"
     classnames "^2.3.2"
     myst-frontmatter "*"
 
-"@myst-theme/providers@^0.1.26":
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/@myst-theme/providers/-/providers-0.1.26.tgz#df2262c0fca50adbd5edec52ac691c421846fe54"
-  integrity sha512-zBd6GVCZ3Zekwz3rcqLxnJgIybJVeKFtTyYD0B2WtEB+QgIGV8cekFRi9woDQe9+nDSX0tA9jmTTlvml/53CcQ==
+"@myst-theme/providers@^0.1.31":
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@myst-theme/providers/-/providers-0.1.31.tgz#71ea02bca8a808ccf78d5a1d4eb66bb9fc18119f"
+  integrity sha512-xVYj4vFW/2NQuSH7RzDd0XtpfbI89fxOJp2RnUA+rK3S6ZLiv7ih9aoKQX3gIMda6WoubiI1KLW3BOp6OVzqZQ==
   dependencies:
     myst-common "^0.0.14"
-    myst-config "^0.0.9"
-    myst-frontmatter "^0.0.8"
+    myst-config "^0.0.10"
+    myst-frontmatter "^0.0.9"
 
-"@myst-theme/styles@^0.1.26":
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/@myst-theme/styles/-/styles-0.1.26.tgz#d035dc137222d3c35bc623ed9540db90b21aa653"
-  integrity sha512-pEZ8WSM/cu8I1vc3Qlh09rhfst1VW0u8//bMo2GlpZqCaOPenQk3fwvWvIOA/HFc1qQRUn5evV011pI5Gd0Y5w==
+"@myst-theme/styles@^0.1.31":
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@myst-theme/styles/-/styles-0.1.31.tgz#bd28b839a468ea5a411aaa8840bbb0e5bf170eef"
+  integrity sha512-+UO/JVqhN5Ky0NJodA+1YZg72tAUrp2DVx1c3daDS9n2VI00c2PbaNJH9Cjnrd1RkHLjoR/dILWDFZb7ULyPew==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -7834,22 +7834,22 @@ myst-common@^0.0.14:
     vfile "^5.0.0"
     vfile-message "^3.0.0"
 
-myst-config@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/myst-config/-/myst-config-0.0.9.tgz#0cb84a5854c9f8e511ae5055444b14d18612bc5f"
-  integrity sha512-gP5Env6usIJUBM9pdpbQLAHhe0nC1HDna2XiXa+mUSHoeQ5LyYO4U8Npl+BeiPVjSR+SSRUJdnNN3lvw4zVBiA==
+myst-config@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/myst-config/-/myst-config-0.0.10.tgz#24865281c3fc977409cf64032f2f099e6089698e"
+  integrity sha512-Qd3zNwYohbosFhIqnJVztYktr2owPoi3IeZjxsaSSbsX21EIWzkWkPGnE7vp1wdiADLY3cLXrBk+5olaYlQxrA==
   dependencies:
-    myst-frontmatter "^0.0.8"
+    myst-frontmatter "^0.0.9"
     simple-validators "^0.0.3"
 
-myst-directives@^0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/myst-directives/-/myst-directives-0.0.20.tgz#11f9f2ce78fda2ee248802ee61a2cc5d5c58f6dc"
-  integrity sha512-phhG02eF4BDqxQPgbuZGirf5HE9C1fxWECfT7HkPaN7vLWAsyABUmtFj0awA4+smX3yseoBgOF8n4hgRz104Vw==
+myst-directives@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/myst-directives/-/myst-directives-0.0.22.tgz#15ea500348bb06226c261c6e8afe9e0a6133674c"
+  integrity sha512-GDc07L2e4DVzD0CVH818KcnTrvGs8nxc7b1tLG/K41ov63y42ugv02neHmWwYpLklzqOh2y0DKwyHQUgPv5F/Q==
   dependencies:
     js-yaml "^4.1.0"
     myst-common "^0.0.14"
-    myst-spec-ext "^0.0.6"
+    myst-spec-ext "^0.0.8"
     vfile "^5.3.7"
 
 myst-ext-card@^0.0.4:
@@ -7884,17 +7884,6 @@ myst-frontmatter@*:
     simple-validators "^0.0.3"
     spdx-correct "^3.1.1"
 
-myst-frontmatter@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/myst-frontmatter/-/myst-frontmatter-0.0.8.tgz#a9a645cb4b4162364ef1996b70f7af73a71f94ca"
-  integrity sha512-0IMD5ZWporgF4a9HXOc2DCv5vhSAOW2vEObJrftK3u/OJv3xV29UVXIaU67RhoIF+y0fyS3vMZUrkOdmg6z1tQ==
-  dependencies:
-    credit-roles "^1.0.0"
-    doi-utils "^1.0.9"
-    orcid "^0.0.5"
-    simple-validators "^0.0.3"
-    spdx-correct "^3.1.1"
-
 myst-frontmatter@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/myst-frontmatter/-/myst-frontmatter-0.0.9.tgz#083262525de07e1a38cbb0b22d0a2639ba4d45cb"
@@ -7906,10 +7895,10 @@ myst-frontmatter@^0.0.9:
     simple-validators "^0.0.3"
     spdx-correct "^3.1.1"
 
-myst-parser@^0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/myst-parser/-/myst-parser-0.0.20.tgz#6c93bc316edaad657c5206d443f83c5dd1219f40"
-  integrity sha512-HJJxQGpqRhgXrcXFp5LJeZZ3XqGeFjbmiAO188n6UryiIl93O1sippw0cowh36SobnBvXLKu5GmnNUFHYr0hRw==
+myst-parser@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/myst-parser/-/myst-parser-0.0.22.tgz#3ec8de11a8e54724b672af3f27985e264e24b6f9"
+  integrity sha512-fcIUkhhRxJVxohpTmq8ph4GD4wE3sa0hIKFzlEcaoZVh+21PFx5YL9QEJw9EdqMMM4NEaTfQ2T0RFutBkZS/9w==
   dependencies:
     he "^1.2.0"
     markdown-it "^12.3.2"
@@ -7921,8 +7910,8 @@ myst-parser@^0.0.20:
     markdown-it-myst "0.1.3"
     markdown-it-myst-extras "0.2.0"
     markdown-it-task-lists "^2.1.1"
-    myst-directives "^0.0.20"
-    myst-roles "^0.0.20"
+    myst-directives "^0.0.22"
+    myst-roles "^0.0.22"
     myst-spec "^0.0.4"
     unified "^10.1.1"
     unist-builder "^3.0.0"
@@ -7931,17 +7920,18 @@ myst-parser@^0.0.20:
     unist-util-visit "^4.1.0"
     vfile "^5.3.7"
 
-myst-roles@^0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/myst-roles/-/myst-roles-0.0.20.tgz#da69265ab1910943b7da45196773bce39c1905ff"
-  integrity sha512-ooKu1sUmonrgs5iNhZQclDT+UvkvrwuR5zXKMUQ72783Hfpu9tMC9i5g4XQ8DIQC0bs7YuR8dNRfnGpfjUupTg==
+myst-roles@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/myst-roles/-/myst-roles-0.0.22.tgz#c55c15a8e15a9f5a56061f60a8cdfa0ed3bd172c"
+  integrity sha512-jc6+k9stniiVrxINhFJcEdP8HuDXlxPMWBbAWY6cX0GylKFbZc5KzOlyUQGT4gZhnp3VFaI6X92ocHrJW1/D2g==
   dependencies:
     myst-common "^0.0.14"
+    myst-spec-ext "^0.0.8"
 
-myst-spec-ext@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/myst-spec-ext/-/myst-spec-ext-0.0.6.tgz#ddc4adbcdab69bf81ad49ecbe044a69a4074e155"
-  integrity sha512-WBo0yBsrxX+8lHXWUVPMkf2pgFpgjYH7QFIzy4vVoiNLLpA7xdzM5sDjK1WRLCJVmJIiZ9TDfNIQNdmw0RJb3A==
+myst-spec-ext@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/myst-spec-ext/-/myst-spec-ext-0.0.8.tgz#eaffe57b13d50ebecf1ac1712aef9f95364d7d1d"
+  integrity sha512-6q/dKtfGJR1wUmyHT5WbeLkSEe4baQQ0sLsUBM4KGGFHgo+oHM626cCDZsg4AAsfdH/9ibHgkZPizIsCMH2FyQ==
   dependencies:
     myst-spec "^0.0.4"
 
@@ -7950,19 +7940,19 @@ myst-spec@^0.0.4:
   resolved "https://registry.yarnpkg.com/myst-spec/-/myst-spec-0.0.4.tgz#fb998ec09e330810b454f4643c0116a25a057b80"
   integrity sha512-1j7184Wmg5lhgSXt6AXtG82E0PFJ7ULFPplfshQDzb4nIOLKruYFD0CYWheRPMM/eVqNbNZUzc/LLrhyubsK0Q==
 
-myst-to-react@^0.1.26:
-  version "0.1.26"
-  resolved "https://registry.yarnpkg.com/myst-to-react/-/myst-to-react-0.1.26.tgz#9daf76d891ac7c1cdcccc7fd0cc3690f50274c7b"
-  integrity sha512-1arjy8ssuZHC3YKxwHM/y9EI61XsW4H+TGKTAf1mINRjBtBYDgZ/P92S2cuJW87V6l62o8XwuAKxwH3xYbda5A==
+myst-to-react@^0.1.31:
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/myst-to-react/-/myst-to-react-0.1.31.tgz#5503dddb38d5bf0cf9bb815983283c8237d761bf"
+  integrity sha512-FmR72u2vGrC9J7x962pFtka/G1p3zasyU9PY8nYJVPVWghPKyTyRGJPD2OHMEeeKfWieHoG9Wb03P4aW47U/5g==
   dependencies:
-    "@headlessui/react" "^1.7.7"
+    "@headlessui/react" "^1.7.13"
     "@heroicons/react" "^2.0.13"
-    "@myst-theme/providers" "^0.1.26"
+    "@myst-theme/providers" "^0.1.31"
     "@popperjs/core" "^2.11.6"
     buffer "^6.0.3"
     classnames "^2.3.2"
     myst-common "^0.0.14"
-    myst-config "^0.0.9"
+    myst-config "^0.0.10"
     myst-spec "^0.0.4"
     nanoid "^4.0.0"
     react-popper "^2.3.0"
@@ -7970,10 +7960,10 @@ myst-to-react@^0.1.26:
     swr "^1.3.0"
     unist-util-select "^4.0.1"
 
-myst-transforms@^0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/myst-transforms/-/myst-transforms-0.0.20.tgz#0e6c01163be1a819655570412ed13f2bc164bb6d"
-  integrity sha512-dWy0NOHA+rZirbQRz4mmiPgDc6jkAEvLQ4lKdofKVV8hyPrFbVW5nBebW5xaG6E/rYgwlprsGgJZRYcQY/pnDw==
+myst-transforms@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/myst-transforms/-/myst-transforms-0.0.22.tgz#804671a35cca948c7e1e50a67bd03ede59b0b808"
+  integrity sha512-jCJUhOSaj4eIbjLNi8Pvl/iwFyLxQfqQsAgT6Gt9J+a9vxYuCTcpoQbOC9AkNAjdGl5AqP36R2nRNGU1i0pcDQ==
   dependencies:
     doi-utils "^1.0.9"
     intersphinx "^0.0.8"
@@ -7982,7 +7972,7 @@ myst-transforms@^0.0.20:
     mdast-util-find-and-replace "^2.1.0"
     myst-common "^0.0.14"
     myst-spec "^0.0.4"
-    myst-spec-ext "^0.0.6"
+    myst-spec-ext "^0.0.8"
     rehype-parse "^8.0.4"
     rehype-remark "^9.1.2"
     unified "^10.0.0"
