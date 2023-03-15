@@ -171,8 +171,8 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   }
 
   // Explicitly render text/plain
-  const preferredMimeType = rendermime.preferredMimeType(mimeBundle ?? {});
-  if (preferredMimeType === 'text/plain') {
+  const preferred = rendermime.preferredMimeType(mimeBundle ?? {}, 'any');
+  if (preferred === 'text/plain') {
     return <PlainTextRenderer content={mimeBundle?.['text/plain'] as string} />;
   }
   // Explicitly render errors
