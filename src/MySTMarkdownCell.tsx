@@ -5,12 +5,12 @@ import { Widget } from '@lumino/widgets';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { renderers } from './renderers';
 import { PageFrontmatter } from 'myst-frontmatter';
-import { References, GenericParent } from 'myst-common';
+import { GenericParent, References } from 'myst-common';
 import {
-  Theme,
-  ThemeProvider,
   ReferencesProvider,
-  TabStateProvider
+  TabStateProvider,
+  Theme,
+  ThemeProvider
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
@@ -21,6 +21,8 @@ import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
+
+import { ObservableValue } from '@jupyterlab/observables';
 
 export class MySTMarkdownCell
   extends MarkdownCell
@@ -33,6 +35,14 @@ export class MySTMarkdownCell
     post?: GenericParent;
     node?: HTMLDivElement;
   } = {};
+
+  constructor(options: MarkdownCell.IOptions) {
+    super(options);
+
+    // Listen for changes to the cell trust
+    const trusted = this.model.modelDB.get('trusted') as ObservableValue;
+    trusted.changed.connect(this.mystRender, this);
+  }
 
   renderInput(_: Widget): void {
     if (!this.myst || !this.myst.node) {
