@@ -20,6 +20,13 @@ module.exports = {
       typography: theme => ({
         DEFAULT: {
           css: {
+            'h1,h2,h3,h4': {
+              marginTop: '0',
+              marginBottom: '0.5em',
+            },
+            '*+h1,*+h2,*+h3,*+h4': {
+              marginTop: '1em',
+            },
             code: {
               fontWeight: '400'
             },
