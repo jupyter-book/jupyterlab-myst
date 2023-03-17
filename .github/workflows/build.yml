@@ -88,7 +88,7 @@ jobs:
         python -m jupyterlab.browser_check --no-chrome-test
         
         python -m pytest "${{ github.workspace }}/tests"
-    working-directory: "${{ runner.temp }}"
+      working-directory: "${{ runner.temp }}"
 
   integration-tests:
     name: Integration tests
