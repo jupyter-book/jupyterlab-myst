@@ -70,7 +70,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: extension-artifacts
-    - name: Install and Test
+    - name: Install
       run: |
         set -eux
         # Remove NodeJS, twice to take care of system and locally installed node versions.
@@ -79,11 +79,16 @@ jobs:
 
         pip install "jupyterlab~=3.1" jupyterlab_myst*.whl -r requirements-test.txt
 
+    - name: Install and Test
+      run: |
+        set -eux
+
         jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
         python -m jupyterlab.browser_check --no-chrome-test
         
-        python -m pytest tests
+        python -m pytest "${{ github.workspace }}/tests"
+    working-directory: "${{ runner.temp }}"
 
   integration-tests:
     name: Integration tests
