@@ -25,7 +25,7 @@ jobs:
         set -eux
         jlpm
         jlpm run lint:check
-    
+
     - name: Test the extension
       run: |
         set -eux
@@ -77,12 +77,13 @@ jobs:
         sudo rm -rf $(which node)
         sudo rm -rf $(which node)
 
-        pip install "jupyterlab~=3.1" jupyterlab_myst*.whl
-
+        pip install "jupyterlab~=3.1" jupyterlab_myst*.whl -r requirements-test.txt
 
         jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
         python -m jupyterlab.browser_check --no-chrome-test
+        
+        python -m pytest tests
 
   integration-tests:
     name: Integration tests
@@ -103,7 +104,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: extension-artifacts
-        
+
     - name: Install the extension
       run: |
         set -eux

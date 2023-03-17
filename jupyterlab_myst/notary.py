@@ -29,8 +29,9 @@ class MySTNotebookNotary(NotebookNotary):
         if cell["metadata"].pop("trusted", False):
             return True
 
-        expressions = cell["metadata"].get("user_expressions", {})
-        return bool(expressions)
+        # Any expression with a non-error output is considered untrusted
+        expressions = cell["metadata"].get("user_expressions", [])
+        return all([e.get("result", {}).get("status") == "error" for e in expressions])
 
     def check_cells(self, nb: NotebookNode) -> bool:
         """Return whether all code/markdown cells are trusted.
@@ -39,6 +40,8 @@ class MySTNotebookNotary(NotebookNotary):
         If there are no code or markdown cells, return True.
         This function is the inverse of mark_cells.
         """
+        self.log.debug("Checking if cells are trusted")
+
         if nb.nbformat < 3:  # noqa
             return False
         trusted = True
@@ -50,7 +53,6 @@ class MySTNotebookNotary(NotebookNotary):
             # only distrust a cell if it actually has some output to distrust
             if not self._check_markdown_cell(cell, nb.nbformat):
                 trusted = False
-
         return trusted
 
     def mark_cells(self, nb: NotebookNode, trusted: bool):
@@ -62,6 +64,8 @@ class MySTNotebookNotary(NotebookNotary):
         """
         if nb.nbformat < 3:  # noqa
             return
+
+        self.log.debug("Marking cells as trusted")
 
         for cell in yield_code_cells(nb):
             cell["metadata"]["trusted"] = trusted
