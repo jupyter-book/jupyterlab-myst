@@ -47,6 +47,7 @@ exclude = [".github", "binder"]
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlab_myst/labextension" = "share/jupyter/labextensions/jupyterlab-myst"
 "install.json" = "share/jupyter/labextensions/jupyterlab-myst/install.json"
+"jupyter-config/jupyter_server_config.d/jupyterlab-myst.json" = "etc/jupyter/jupyter_server_config.d/jupyterlab-myst.json"
 
 [tool.hatch.build.hooks.version]
 path = "jupyterlab_myst/_version.py"
