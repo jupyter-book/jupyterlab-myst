@@ -1,4 +1,4 @@
-import { mystParse } from 'myst-parser';
+import { mystParse, AllOptions } from 'myst-parser';
 import {
   mathPlugin,
   footnotesPlugin,
@@ -35,6 +35,28 @@ import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 
+export interface MySTOptions {
+
+  parserOptions: Partial<AllOptions>;
+}
+
+export interface MySTOptionsProvider<Widget> {
+
+  get(widget: Widget): MySTOptions;
+}
+
+export class MySTNotebookDefaults implements MySTOptionsProvider<StaticNotebook> {
+
+  get(notebook: StaticNotebook): MySTOptions {
+    return {
+      parserOptions: {
+        directives: [cardDirective, gridDirective, ...tabDirectives],
+        roles: [evalRole],
+      },
+    };
+  }
+}
+
 const evalRole: RoleSpec = {
   name: 'eval',
   body: {
@@ -47,11 +69,8 @@ const evalRole: RoleSpec = {
   }
 };
 
-export function markdownParse(text: string): Root {
-  const mdast = mystParse(text, {
-    directives: [cardDirective, gridDirective, ...tabDirectives],
-    roles: [evalRole]
-  });
+export function markdownParse(text: string, options: Partial<AllOptions>): Root {
+  const mdast = mystParse(text, options);
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer
   unified()
@@ -70,7 +89,8 @@ export function markdownParse(text: string): Root {
 }
 
 export function parseContent(
-  notebook: StaticNotebook
+  notebook: StaticNotebook,
+  options: MySTOptions,
 ): undefined | Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
@@ -82,7 +102,7 @@ export function parseContent(
     const text = cell.model?.value.text ?? '';
     if (!cell.myst.pre) {
       // This will be cleared when the cell is executed, and parsed again here
-      cell.myst.pre = markdownParse(text);
+      cell.myst.pre = markdownParse(text, options.parserOptions);
     }
     return { type: 'block', children: copyNode(cell.myst.pre).children };
   });

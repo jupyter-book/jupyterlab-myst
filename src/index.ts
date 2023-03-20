@@ -3,6 +3,7 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
+import { Token } from '@lumino/coreutils';
 import { IEditorServices } from '@jupyterlab/codeeditor';
 
 import {
@@ -11,9 +12,11 @@ import {
   NotebookPanel,
   NotebookWidgetFactory,
   NotebookActions,
-  Notebook
+  Notebook,
+  StaticNotebook
 } from '@jupyterlab/notebook';
 import { Cell } from '@jupyterlab/cells';
+import { MySTOptionsProvider } from './myst';
 import { MySTContentFactory } from './MySTContentFactory';
 
 import { ISessionContextDialogs } from '@jupyterlab/apputils';
@@ -31,17 +34,24 @@ const mystIcon = new LabIcon({
 });
 
 /**
+ * Extension point for MyST options to be defined given a notebook.
+ * A null provider results in default parser options appropriate to all notebooks.
+ */
+export const IMySTNotebookOptions = new Token<MySTOptionsProvider<StaticNotebook>>('jupyterlab-myst:IMySTNotebookOptions');
+
+/**
  * The notebook content factory provider.
  */
 const plugin: JupyterFrontEndPlugin<NotebookPanel.IContentFactory> = {
   id: 'jupyterlab-myst:plugin',
   provides: NotebookPanel.IContentFactory,
   requires: [IEditorServices],
+  optional: [IMySTNotebookOptions],
   autoStart: true,
-  activate: (app: JupyterFrontEnd, editorServices: IEditorServices) => {
+  activate: (app: JupyterFrontEnd, editorServices: IEditorServices, mystOptions: MySTOptionsProvider<StaticNotebook>) => {
     console.log('JupyterLab extension jupyterlab-myst is activated!');
     const editorFactory = editorServices.factoryService.newInlineEditor;
-    return new MySTContentFactory({ editorFactory });
+    return new MySTContentFactory({ editorFactory }, mystOptions || undefined);
   }
 };
 
