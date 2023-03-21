@@ -26,3 +26,7 @@
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
 }
+
+.myst figure img {
+  display: block;
+}
