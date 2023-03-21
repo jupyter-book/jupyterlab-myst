@@ -1,4 +1,5 @@
 import { mystParse, AllOptions } from 'myst-parser';
+import { liftChildren } from 'myst-common';
 import {
   mathPlugin,
   footnotesPlugin,
@@ -85,18 +86,24 @@ export function markdownParse(text: string, options: Partial<AllOptions>): Root 
       }
     })
     .runSync(mdast as any);
+  // Lift children out of blocks for the next step
+  // We are working here as one cell at a time
+  liftChildren(mdast, 'block');
   return mdast as Root;
 }
 
 export function parseContent(
   notebook: StaticNotebook,
-  options: MySTOptions,
-): undefined | Promise<void> {
+  options: MySTOptions
+): Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
   );
-  if (!cells) return undefined;
+  if (!cells) {
+    // This is expected on the first render, we do not want to throw later
+    return Promise.resolve(undefined);
+  }
 
   const blocks = cells.map(cell => {
     const text = cell.model?.value.text ?? '';
@@ -121,8 +128,8 @@ export function parseContent(
     article: mdast as any
   };
   const { frontmatter: frontmatterRaw } = getFrontmatter(
-    // This is a bit weird, but if there is a YAML block in the first cell, this is where it will be.
-    mdast.children[0]?.children[0] as any,
+    // This is the first cell, which might have a YAML block or header.
+    mdast.children[0] as any,
     {
       removeYaml: true,
       removeHeading: true
@@ -154,7 +161,7 @@ export function parseContent(
 
   if (file.messages.length > 0) {
     // TODO: better error messages in the future
-    console.log(file.messages);
+    console.warn(file.messages.map(m => m.message).join('\n'));
   }
 
   // Render the full result in each cell using React
