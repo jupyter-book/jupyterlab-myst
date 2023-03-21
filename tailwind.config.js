@@ -28,7 +28,7 @@ module.exports = {
               marginTop: 0,
               marginBottom: '1em'
             },
-            'h1,h2,h3,h4': {
+            'h1,h2,h3,h4,h5,h6': {
               lineHeight: 'var(--jp-content-heading-line-height, 1)',
               fontWeight: 'var(--jp-content-heading-font-weight, 500)',
               fontStyle: 'normal',
