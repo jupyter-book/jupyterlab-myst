@@ -73,14 +73,15 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function parseContent(
-  notebook: StaticNotebook
-): undefined | Promise<void> {
+export function parseContent(notebook: StaticNotebook): Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
   );
-  if (!cells) return undefined;
+  if (!cells) {
+    // This is expected on the first render, we do not want to throw later
+    return Promise.resolve(undefined);
+  }
 
   const blocks = cells.map(cell => {
     const text = cell.model?.value.text ?? '';
@@ -138,7 +139,7 @@ export function parseContent(
 
   if (file.messages.length > 0) {
     // TODO: better error messages in the future
-    console.log(file.messages);
+    console.warn(file.messages.map(m => m.message).join('\n'));
   }
 
   // Render the full result in each cell using React
