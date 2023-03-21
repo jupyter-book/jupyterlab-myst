@@ -11,5 +11,9 @@ export const renderers: Record<string, NodeRenderer> = {
   inlineExpression: ({ node }) => {
     return <InlineRenderer value={node.value} />;
   },
-  listItem
+  listItem,
+  html: (node, children) => {
+    // TODO: This needs to be sanitized properly
+    return <span dangerouslySetInnerHTML={{ __html: node.value }}></span>;
+  }
 };

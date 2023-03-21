@@ -9,7 +9,7 @@ import {
   getFrontmatter,
   GithubTransformer,
   glossaryPlugin,
-  htmlPlugin,
+  // htmlPlugin,
   keysPlugin,
   linksPlugin,
   mathPlugin,
@@ -65,15 +65,15 @@ export function markdownParse(text: string): Root {
   // This is consistent with the current Jupyter markdown renderer
   unified()
     .use(basicTransformationsPlugin)
-    .use(htmlPlugin, {
-      htmlHandlers: {
-        comment(h: any, node: any) {
-          const result = h(node, 'comment');
-          (result as any).value = node.value;
-          return result;
-        }
-      }
-    })
+    // .use(htmlPlugin, {
+    //   htmlHandlers: {
+    //     comment(h: any, node: any) {
+    //       const result = h(node, 'comment');
+    //       (result as any).value = node.value;
+    //       return result;
+    //     }
+    //   }
+    // })
     .runSync(mdast as any);
   return mdast as Root;
 }
