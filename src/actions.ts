@@ -23,6 +23,13 @@ export async function executeUserExpressions(
   cell: IMySTMarkdownCell,
   sessionContext: ISessionContext
 ): Promise<void> {
+  console.debug('Clear existing metadata');
+  // Clear metadata if present
+  cell.model.metadata.delete(metadataSection);
+
+  // Trust cell!
+  cell.model.trusted = true;
+
   // Check we have a kernel
   const kernel = sessionContext.session?.kernel;
   if (!kernel) {
@@ -68,10 +75,6 @@ export async function executeUserExpressions(
       console.error('Kernel response was not OK', msg);
       return;
     }
-
-    console.debug('Clear existing metadata');
-    // Clear metadata if present
-    cell.model.metadata.delete(metadataSection);
 
     // Store results as metadata
     const expressions: IUserExpressionMetadata[] = [];
