@@ -1,4 +1,5 @@
 import { mystParse } from 'myst-parser';
+import { liftChildren } from 'myst-common';
 import {
   mathPlugin,
   footnotesPlugin,
@@ -66,6 +67,9 @@ export function markdownParse(text: string): Root {
       }
     })
     .runSync(mdast as any);
+  // Lift children out of blocks for the next step
+  // We are working here as one cell at a time
+  liftChildren(mdast, 'block');
   return mdast as Root;
 }
 
@@ -101,8 +105,8 @@ export function parseContent(
     article: mdast as any
   };
   const { frontmatter: frontmatterRaw } = getFrontmatter(
-    // This is a bit weird, but if there is a YAML block in the first cell, this is where it will be.
-    mdast.children[0]?.children[0] as any,
+    // This is the first cell, which might have a YAML block or header.
+    mdast.children[0] as any,
     {
       removeYaml: true,
       removeHeading: true
