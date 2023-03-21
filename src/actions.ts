@@ -127,5 +127,5 @@ export function notebookExecuted(
     `Markdown cell ${cell.model.id} was executed, waiting for render to complete ...`
   );
 
-  cell.doneRendering.then(() => executeUserExpressions(cell, ctx));
+  cell.doneRendering?.then(() => executeUserExpressions(cell, ctx));
 }
