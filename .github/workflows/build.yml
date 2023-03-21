@@ -154,3 +154,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
       - uses: jupyterlab/maintainer-tools/.github/actions/check-links@v1
+        with:
+          ignore_links: "https:\/\/mybinder\.org.*"

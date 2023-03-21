@@ -20,8 +20,59 @@ module.exports = {
       typography: theme => ({
         DEFAULT: {
           css: {
+            p: {
+              color: 'var(--jp-content-font-color1)',
+              fontFamily: 'var(--jp-content-font-family)',
+              fontSize: 'var(--jp-content-font-size1)',
+              lineHeight: 'var(--jp-content-line-height)',
+              marginTop: 0,
+              marginBottom: '1em'
+            },
+            'h1,h2,h3,h4,h5,h6': {
+              lineHeight: 'var(--jp-content-heading-line-height, 1)',
+              fontWeight: 'var(--jp-content-heading-font-weight, 500)',
+              fontStyle: 'normal',
+              marginTop: 'var(--jp-content-heading-margin-top, 1.2em)',
+              marginBottom: 'var(--jp-content-heading-margin-bottom, 0.8em)',
+              color: 'var(--jp-content-font-color1)'
+            },
+            'h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child':
+              {
+                marginTop: 'calc(0.5 * var(--jp-content-heading-margin-top))'
+              },
+            'h1:last-child,h2:last-child,h3:last-child,h4:last-child,h5:last-child,h6:last-child':
+              {
+                marginBottom:
+                  'calc(0.5 * var(--jp-content-heading-margin-bottom))'
+              },
+            h1: {
+              fontSize: 'var(--jp-content-font-size5)'
+            },
+            h2: {
+              fontSize: 'var(--jp-content-font-size4)'
+            },
+            h3: {
+              fontSize: 'var(--jp-content-font-size3)'
+            },
+            h4: {
+              fontSize: 'var(--jp-content-font-size2)'
+            },
+            h5: {
+              fontSize: 'var(--jp-content-font-size1)'
+            },
+            h6: {
+              fontSize: 'var(--jp-content-font-size0)'
+            },
             code: {
-              fontWeight: '400'
+              fontWeight: 'inherit',
+              color: 'var(--jp-content-font-color1)',
+              fontFamily: 'var(--jp-code-font-family)',
+              fontSize: 'inherit',
+              lineHeight: 'var(--jp-code-line-height)',
+              padding: 0,
+              whiteSpace: 'pre-wrap',
+              backgroundColor: 'var(--jp-layout-color2)',
+              padding: '1px 5px'
             },
             'code::before': {
               content: ''
@@ -51,14 +102,9 @@ module.exports = {
             }
           }
         },
-        invert: {
-          css: {
-            '--tw-prose-code': theme('colors.pink[500]')
-          }
-        },
         stone: {
           css: {
-            '--tw-prose-code': theme('colors.pink[600]')
+            '--tw-prose-bullets': 'var(--jp-content-font-color1)'
           }
         }
       }),

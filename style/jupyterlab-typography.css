@@ -32,5 +32,15 @@
 
   .myst {
     @apply prose prose-stone dark:prose-invert break-words max-w-none w-full overflow-auto;
+
+    font-size: var(--jp-content-font-size1);
+    color: var(--jp-content-font-color1);
+
+    /* Comes from .jp-RenderedHTMLCommon */
+    padding-right: 20px;
+  }
+
+  .myst > *:last-child {
+    margin-bottom: 0.5em;
   }
 }
