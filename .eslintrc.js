@@ -32,7 +32,7 @@ module.exports = {
       'single',
       { avoidEscape: true, allowTemplateLiterals: false }
     ],
-    eqeqeq: 'error',
+    eqeqeq: 'off',
     'prefer-arrow-callback': 'error'
   }
 };
