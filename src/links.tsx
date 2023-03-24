@@ -76,7 +76,7 @@ export const linkFactory =
       );
     }, [ref, url]);
     return (
-      <a href={url} ref={ref}>
+      <a href={url} ref={ref} className={props.className}>
         {props.children}
       </a>
     );

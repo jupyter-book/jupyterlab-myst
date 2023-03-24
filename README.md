@@ -59,6 +59,10 @@ Or with `matplotlib` to show inline spark-lines:
 
 ![](./images/stock-price.gif)
 
+You can also edit tasklists directly in the rendered markdown.
+
+![](./images/tasklists-in-jupyterlab.gif)
+
 ## Usage
 
 [MyST][myst-quickstart] is a flavour of Markdown, which combines the fluid experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
