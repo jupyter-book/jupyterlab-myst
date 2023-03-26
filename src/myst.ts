@@ -36,13 +36,13 @@ import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 
-export interface MySTOptions {
+export type MySTOptions = {
   parserOptions: Partial<AllOptions>;
-}
+};
 
-export interface MySTOptionsProvider<Widget> {
+export type MySTOptionsProvider<Widget> = {
   get(widget: Widget): MySTOptions;
-}
+};
 
 /**
  * The interface which must be implemented to customize options for notebooks.
