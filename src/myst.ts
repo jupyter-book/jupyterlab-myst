@@ -37,23 +37,28 @@ import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 
 export interface MySTOptions {
-
   parserOptions: Partial<AllOptions>;
 }
 
 export interface MySTOptionsProvider<Widget> {
-
   get(widget: Widget): MySTOptions;
 }
 
-export class MySTNotebookDefaults implements MySTOptionsProvider<StaticNotebook> {
+/**
+ * The interface which must be implemented to customize options for notebooks.
+ */
+export type MySTNotebookOptions = MySTOptionsProvider<StaticNotebook>;
 
+/**
+ * Global default myst options for notebooks.
+ */
+export class MySTNotebookDefaults implements MySTNotebookOptions {
   get(notebook: StaticNotebook): MySTOptions {
     return {
       parserOptions: {
         directives: [cardDirective, gridDirective, ...tabDirectives],
-        roles: [evalRole],
-      },
+        roles: [evalRole]
+      }
     };
   }
 }
@@ -70,7 +75,10 @@ const evalRole: RoleSpec = {
   }
 };
 
-export function markdownParse(text: string, options: Partial<AllOptions>): Root {
+export function markdownParse(
+  text: string,
+  options: Partial<AllOptions>
+): Root {
   const mdast = mystParse(text, options);
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer

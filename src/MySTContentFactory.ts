@@ -1,14 +1,15 @@
 import { MarkdownCell } from '@jupyterlab/cells';
 import { NotebookPanel, StaticNotebook } from '@jupyterlab/notebook';
 import { MySTMarkdownCell } from './MySTMarkdownCell';
-import { MySTOptionsProvider, MySTNotebookDefaults } from './myst';
+import { MySTNotebookOptions, MySTNotebookDefaults } from './myst';
 
 export class MySTContentFactory extends NotebookPanel.ContentFactory {
+  mystOptions: MySTNotebookOptions;
 
-  mystOptions: MySTOptionsProvider<StaticNotebook>;
-
-  constructor(options = {},
-              mystOptions = new MySTNotebookDefaults() as MySTOptionsProvider<StaticNotebook>) {
+  constructor(
+    options = {},
+    mystOptions = new MySTNotebookDefaults() as MySTNotebookOptions
+  ) {
     super(options);
     this.mystOptions = mystOptions;
   }

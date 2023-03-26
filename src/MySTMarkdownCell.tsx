@@ -14,7 +14,7 @@ import {
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
-import { parseContent, MySTOptionsProvider } from './myst';
+import { parseContent, MySTNotebookOptions } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
@@ -31,7 +31,7 @@ export class MySTMarkdownCell
   private _doneRendering = new PromiseDelegate<void>();
   private _doRendering = false;
 
-  mystOptions: MySTOptionsProvider<StaticNotebook>;
+  mystOptions: MySTNotebookOptions;
 
   myst: {
     pre?: GenericParent;
@@ -39,7 +39,10 @@ export class MySTMarkdownCell
     node?: HTMLDivElement;
   } = {};
 
-  constructor(options: MarkdownCell.IOptions, mystOptions: MySTOptionsProvider<StaticNotebook>) {
+  constructor(
+    options: MarkdownCell.IOptions,
+    mystOptions: MySTNotebookOptions
+  ) {
     super(options);
     this.mystOptions = mystOptions;
 
@@ -67,7 +70,10 @@ export class MySTMarkdownCell
     this._doneRendering = new PromiseDelegate<void>();
     const notebook = this.parent as StaticNotebook;
     this.myst.pre = undefined;
-    const parseComplete = parseContent(notebook, this.mystOptions.get(notebook));
+    const parseComplete = parseContent(
+      notebook,
+      this.mystOptions.get(notebook)
+    );
     const widget = new Widget({ node: this.myst.node });
     widget.addClass('myst');
     widget.addClass('jp-MarkdownOutput');
