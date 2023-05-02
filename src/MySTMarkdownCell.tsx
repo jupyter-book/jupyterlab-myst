@@ -21,7 +21,6 @@ import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
-import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ObservableValue } from '@jupyterlab/observables';
 
@@ -30,14 +29,6 @@ export class MySTMarkdownCell
   implements IMySTMarkdownCell
 {
   private _doneRendering = new PromiseDelegate<void>();
-
-  private __rendermime: IRenderMimeRegistry;
-
-  constructor(options: MarkdownCell.IOptions) {
-    super(options);
-
-    this.__rendermime = options.rendermime;
-  }
 
   myst: {
     pre?: GenericParent;
@@ -107,8 +98,8 @@ export class MySTMarkdownCell
       <ThemeProvider
         theme={Theme.light}
         Link={linkFactory(
-          this.__rendermime.resolver,
-          this.__rendermime.linkHandler
+          notebook.rendermime.resolver,
+          notebook.rendermime.linkHandler
         )}
         renderers={renderers}
       >

@@ -56,10 +56,7 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-
-export function renderNotebook(
-  notebook: StaticNotebook
-): undefined | Promise<void> {
+export function renderNotebook(notebook: StaticNotebook): Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
