@@ -56,11 +56,8 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
-        "@jupyterlab/application": "^3.1.0",
-        "@jupyterlab/codeeditor": "^3.5.1",
-        "@jupyterlab/notebook": "^3.5.1",
-        "@jupyterlab/rendermime": "^3.5.1",
-        "@jupyterlab/translation": "^3.5.1",
+        "@jupyterlab/application": "^3.6.3",
+        "@jupyterlab/notebook": "^3.6.3",
         "@myst-theme/diagrams": "^0.1.32",
         "@myst-theme/frontmatter": "^0.1.32",
         "@myst-theme/providers": "^0.1.32",
@@ -76,8 +73,8 @@
     "devDependencies": {
         "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
-        "@jupyterlab/builder": "^3.1.0",
-        "@jupyterlab/testutils": "^3.0.0",
+        "@jupyterlab/builder": "^3.6.3",
+        "@jupyterlab/testutils": "^3.6.3",
         "@myst-theme/styles": "^0.1.32",
         "@tailwindcss/typography": "^0.5.8",
         "@types/jest": "^26.0.0",
