@@ -64,7 +64,6 @@
         "@myst-theme/diagrams": "^0.1.32",
         "@myst-theme/frontmatter": "^0.1.32",
         "@myst-theme/providers": "^0.1.32",
-        "@types/markdown-it": "^12.2.3",
         "katex": "^0.15.2",
         "myst-ext-card": "^0.0.4",
         "myst-ext-grid": "^0.0.4",
