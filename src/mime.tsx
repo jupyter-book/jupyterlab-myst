@@ -63,6 +63,7 @@ export class RenderedMySTMarkdown
     this.linkHandler = options.linkHandler;
     this.node.dataset['mimeType'] = MIME_TYPE;
     this.addClass('jp-RenderedMySTMarkdown');
+    this.addClass('myst');
     console.log('Rendered markdown');
   }
 
