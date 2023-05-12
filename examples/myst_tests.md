@@ -61,7 +61,7 @@ Ax=b
 
 [hello](https://en.wikipedia.org/wiki/OK) or [code](https://github.com/executablebooks/mystjs/blob/main/packages/myst-directives/src/admonition.ts#L5)
 
-[](#ok) [](#hello)  [](#cross)
+[](#ok) [](#hello) [](#cross)
 
 ```{warning}
 :class: dropdown
@@ -137,9 +137,7 @@ Execute notebook cells, store results, and insert outputs across pages.
 :::
 ::::
 
-
 ## Cards
-
 
 :::{card}
 MyST Markdown 🚀
