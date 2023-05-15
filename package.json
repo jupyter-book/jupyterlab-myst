@@ -76,9 +76,6 @@
         "myst-to-react": "^0.2.8",
         "myst-transforms": "^0.0.31"
     },
-    "resolutions": {
-        "@jupyterlab/rendermime-interfaces": ">=3.4.7 <3.8.0"
-    },
     "devDependencies": {
         "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
