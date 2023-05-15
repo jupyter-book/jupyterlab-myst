@@ -27,6 +27,7 @@ import {
 } from '@myst-theme/providers';
 import { useParse } from 'myst-to-react';
 import { renderers } from './renderers';
+import { addCiteChildrenPlugin } from './citations';
 import { References } from 'myst-common';
 import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
 import { unified } from 'unified';
@@ -58,7 +59,7 @@ export class RenderedMySTMarkdown
    */
   constructor(options: IRenderMime.IRendererOptions) {
     super();
-    this._state = null;
+    this.state = null;
     this.resolver = options.resolver;
     this.linkHandler = options.linkHandler;
     this.node.dataset['mimeType'] = MIME_TYPE;
@@ -77,17 +78,17 @@ export class RenderedMySTMarkdown
    */
   readonly linkHandler: IRenderMime.ILinkHandler | null;
 
-  private _state: MySTState | null;
-  private _stateChanged = new Signal<this, MySTState>(this);
+  private state: MySTState | null;
+  private stateChanged = new Signal<this, MySTState>(this);
 
   render(): JSX.Element {
     return (
-      <UseSignal signal={this._stateChanged} initialSender={this}>
+      <UseSignal signal={this.stateChanged} initialSender={this}>
         {(): JSX.Element => {
-          if (this._state === null) {
+          if (this.state === null) {
             return <div>Waiting for MyST AST (mdast)</div>;
           }
-          const { references, frontmatter, mdast } = this._state;
+          const { references, frontmatter, mdast } = this.state;
           const children = useParse(mdast as any, renderers);
 
           return (
@@ -134,15 +135,10 @@ export class RenderedMySTMarkdown
       footnotes: {},
       article: mdast as any
     };
-    const { frontmatter: frontmatterRaw } = getFrontmatter(
-      // This is a bit weird, but if there is a YAML block in the first cell, this is where it will be.
-      mdast,
-      {
-        removeYaml: true,
-        removeHeading: true
-      }
-    );
-
+    const { frontmatter: frontmatterRaw } = getFrontmatter(mdast, {
+      removeYaml: true,
+      removeHeading: true
+    });
     const frontmatter = validatePageFrontmatter(frontmatterRaw, {
       property: 'frontmatter',
       messages: {}
@@ -160,15 +156,16 @@ export class RenderedMySTMarkdown
       .use(footnotesPlugin, { references })
       .use(resolveReferencesPlugin, { state })
       .use(internalLinksPlugin, { resolver })
+      .use(addCiteChildrenPlugin)
       .use(keysPlugin)
       .runSync(mdast as any, file);
 
-    this._state = {
+    this.state = {
       mdast,
       references,
       frontmatter
     };
-    this._stateChanged.emit(this._state);
+    this.stateChanged.emit(this.state);
     return Promise.resolve(void 0);
   }
 }
