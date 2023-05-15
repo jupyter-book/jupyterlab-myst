@@ -46,6 +46,7 @@ jobs:
         run: |
           echo "Verify the final release"
           echo ${{ steps.finalize-release.outputs.release_url }}
+
       - name: "** Failure Message **"
         if: ${{ failure() }}
         run: |
