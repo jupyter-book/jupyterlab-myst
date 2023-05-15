@@ -12,9 +12,14 @@ Render markdown cells using [MyST Markdown](https://myst-tools.org/), including 
 > **Note**: If you are looking for the version of this repository based on jupyterlab-markup,
 > see the [`v0 branch`](https://github.com/executablebooks/jupyterlab-myst/tree/v0).
 
+> **Info**
+> This extension is composed of a Python package named `jupyterlab_myst`
+for the server extension and a NPM package named `jupyterlab-myst`
+for the frontend extension.
+
 ## Requirements
 
-- JupyterLab >= 3.0
+- JupyterLab >= 4.0.0b0
 
 ## Install
 
@@ -104,6 +109,22 @@ To remove the extension, execute:
 pip uninstall jupyterlab_myst
 ```
 
+## Troubleshoot
+
+If you are seeing the frontend extension, but it is not working, check
+that the server extension is enabled:
+
+```bash
+jupyter server extension list
+```
+
+If the server extension is installed and enabled, but you are not seeing
+the frontend extension, check the frontend extension is installed:
+
+```bash
+jupyter labextension list
+```
+
 ## Contributing
 
 ### Development install
@@ -115,14 +136,14 @@ The `jlpm` command is JupyterLab's pinned version of
 `yarn` or `npm` in lieu of `jlpm` below.
 
 ```bash
-# Make sure jupyterlab is up to date
-conda update jupyterlab
 # Clone the repo to your local environment
-# Change directory to the cloned jupyterlab-myst directory
+# Change directory to the jupyterlab_myst directory
 # Install package in development mode
-pip install -e .
+pip install -e ".[test]"
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite
+# Server extension must be manually installed in develop mode
+jupyter server extension enable jupyterlab_myst
 # Rebuild extension Typescript source after making changes
 jlpm build
 ```
@@ -147,6 +168,8 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
+# Server extension must be manually disabled in develop mode
+jupyter server extension disable jupyterlab_myst
 pip uninstall jupyterlab_myst
 ```
 
@@ -155,6 +178,24 @@ command. To find its location, you can run `jupyter labextension list` to figure
 folder is located. Then you can remove the symlink named `jupyterlab-myst` within that folder.
 
 ### Testing the extension
+
+#### Server tests
+
+This extension is using [Pytest](https://docs.pytest.org/) for Python code testing.
+
+Install test dependencies (needed only once):
+
+```sh
+pip install -e ".[test]"
+# Each time you install the Python package, you need to restore the front-end extension link
+jupyter labextension develop . --overwrite
+```
+
+To execute them, run:
+
+```sh
+pytest -vv -r ap --cov jupyterlab_myst
+```
 
 #### Frontend tests
 
@@ -169,7 +210,7 @@ jlpm test
 
 #### Integration tests
 
-This extension uses [Playwright](https://playwright.dev/docs/intro) for the integration tests (aka user level tests).
+This extension uses [Playwright](https://playwright.dev/docs/intro/) for the integration tests (aka user level tests).
 More precisely, the JupyterLab helper [Galata](https://github.com/jupyterlab/jupyterlab/tree/master/galata) is used to handle testing the extension in JupyterLab.
 
 More information are provided within the [ui-tests](./ui-tests/README.md) README.

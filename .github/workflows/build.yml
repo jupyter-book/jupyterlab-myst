@@ -12,13 +12,13 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Base Setup
       uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
     - name: Install dependencies
-      run: python -m pip install -U jupyterlab~=3.1
+      run: python -m pip install -U "jupyterlab>=4.0.0b0,<5"
 
     - name: Lint the extension
       run: |
@@ -36,6 +36,10 @@ jobs:
         set -eux
         python -m pip install .[test]
 
+        pytest -vv -r ap --cov jupyterlab_myst
+        jupyter server extension list
+        jupyter server extension list 2>&1 | grep -ie "jupyterlab_myst.*OK"
+
         jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
         python -m jupyterlab.browser_check
@@ -49,7 +53,7 @@ jobs:
         pip uninstall -y "jupyterlab_myst" jupyterlab
 
     - name: Upload extension packages
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: extension-artifacts
         path: dist/jupyterlab_myst*
@@ -61,34 +65,31 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Install Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.9'
         architecture: 'x64'
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: extension-artifacts
-    - name: Install
+    - name: Install and Test
       run: |
         set -eux
         # Remove NodeJS, twice to take care of system and locally installed node versions.
         sudo rm -rf $(which node)
         sudo rm -rf $(which node)
 
-        pip install "jupyterlab~=3.1" jupyterlab_myst*.whl -r requirements-test.txt
+        pip install "jupyterlab>=4.0.0b0,<5" jupyterlab_myst*.whl
 
-    - name: Install and Test
-      run: |
-        set -eux
+
+        jupyter server extension list
+        jupyter server extension list 2>&1 | grep -ie "jupyterlab_myst.*OK"
 
         jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
-        python -m jupyterlab.browser_check --no-chrome-test
-        
-        python -m pytest "${{ github.workspace }}/tests"
-      working-directory: "${{ runner.temp }}"
+        python -m jupyterlab.browser_check --no-browser-test
 
   integration-tests:
     name: Integration tests
@@ -100,20 +101,20 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Base Setup
       uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
     - name: Download extension package
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: extension-artifacts
 
     - name: Install the extension
       run: |
         set -eux
-        python -m pip install "jupyterlab~=3.1" jupyterlab_myst*.whl
+        python -m pip install "jupyterlab>=4.0.0b0,<5" jupyterlab_myst*.whl
 
     - name: Install dependencies
       working-directory: ui-tests
@@ -122,7 +123,7 @@ jobs:
       run: jlpm install
 
     - name: Set up browser cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ${{ github.workspace }}/pw-browsers
@@ -139,7 +140,7 @@ jobs:
 
     - name: Upload Playwright Test report
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: jupyterlab_myst-playwright-tests
         path: |
@@ -151,11 +152,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
       - name: Install missing dependencies
         # On May 30, 2023 this wasn't included in the base try removing in future!
         run: pip install typing_extensions
       - uses: jupyterlab/maintainer-tools/.github/actions/check-links@v1
-        with:
-          ignore_links: 'https:\/\/mybinder\.org.*'
