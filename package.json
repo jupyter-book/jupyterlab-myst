@@ -104,9 +104,6 @@
         "ts-jest": "^26.0.0",
         "typescript": "~4.1.3"
     },
-    "peerDependencies": {
-        "react": "^17.0.1"
-    },
     "sideEffects": [
         "style/*.css",
         "style/index.js"
