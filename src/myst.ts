@@ -61,7 +61,7 @@ export class MySTNotebookDefaults implements MySTNotebookOptions {
           cardDirective,
           gridDirective,
           proofDirective,
-          ...tabDirectives,
+          ...tabDirectives
         ],
         roles: [evalRole]
       }
