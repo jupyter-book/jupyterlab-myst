@@ -1,5 +1,5 @@
 import { ISessionContext } from '@jupyterlab/apputils';
-import { Cell, IMarkdownCellModel } from '@jupyterlab/cells';
+import { Cell } from '@jupyterlab/cells';
 import { KernelMessage } from '@jupyterlab/services';
 import { JSONObject } from '@lumino/coreutils';
 import { IExpressionResult } from './userExpressions';
@@ -25,7 +25,7 @@ export async function executeUserExpressions(
 ): Promise<void> {
   console.debug('Clear existing metadata');
   // Clear metadata if present
-  cell.model.metadata.delete(metadataSection);
+  cell.model.deleteMetadata(metadataSection);
 
   // Trust cell!
   cell.model.trusted = true;
@@ -35,9 +35,6 @@ export async function executeUserExpressions(
   if (!kernel) {
     throw new Error('Session has no kernel.');
   }
-
-  const model = cell.model as IMarkdownCellModel;
-  const cellId = { cellId: model.id };
 
   // Can simplify with `Object.fromEntries` here
   // requires ts compiler upgrade!
@@ -61,10 +58,7 @@ export async function executeUserExpressions(
 
   // Perform request
   console.debug('Performing kernel request', content);
-  const future = kernel.requestExecute(content, false, {
-    ...model.metadata.toJSON(),
-    ...cellId
-  });
+  const future = kernel.requestExecute(content, false);
 
   // Set response handler
   future.onReply = (msg: KernelMessage.IExecuteReplyMsg) => {
@@ -99,7 +93,7 @@ export async function executeUserExpressions(
     }
 
     // Update cell metadata
-    cell.model.metadata.set(metadataSection, expressions);
+    cell.model.setMetadata(metadataSection, expressions);
     // Rerender the cell with React
     console.debug('Render cell after the metadata is added');
     cell.mystRender();
