@@ -1,4 +1,4 @@
-import { mystParse } from 'myst-parser';
+import { mystParse, AllOptions } from 'myst-parser';
 import { liftChildren } from 'myst-common';
 import {
   mathPlugin,
@@ -37,6 +37,38 @@ import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 
+export type MySTOptions = {
+  parserOptions: Partial<AllOptions>;
+};
+
+export type MySTOptionsProvider<Widget> = {
+  get(widget: Widget): MySTOptions;
+};
+
+/**
+ * The interface which must be implemented to customize options for notebooks.
+ */
+export type MySTNotebookOptions = MySTOptionsProvider<StaticNotebook>;
+
+/**
+ * Global default myst options for notebooks.
+ */
+export class MySTNotebookDefaults implements MySTNotebookOptions {
+  get(notebook: StaticNotebook): MySTOptions {
+    return {
+      parserOptions: {
+        directives: [
+          cardDirective,
+          gridDirective,
+          proofDirective,
+          ...tabDirectives
+        ],
+        roles: [evalRole]
+      }
+    };
+  }
+}
+
 const evalRole: RoleSpec = {
   name: 'eval',
   body: {
@@ -49,16 +81,11 @@ const evalRole: RoleSpec = {
   }
 };
 
-export function markdownParse(text: string): Root {
-  const mdast = mystParse(text, {
-    directives: [
-      cardDirective,
-      gridDirective,
-      proofDirective,
-      ...tabDirectives
-    ],
-    roles: [evalRole]
-  });
+export function markdownParse(
+  text: string,
+  options: Partial<AllOptions>
+): Root {
+  const mdast = mystParse(text, options);
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer
   unified()
@@ -79,7 +106,10 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function parseContent(notebook: StaticNotebook): Promise<void> {
+export function parseContent(
+  notebook: StaticNotebook,
+  options: MySTOptions
+): Promise<void> {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
@@ -93,7 +123,7 @@ export function parseContent(notebook: StaticNotebook): Promise<void> {
     const text = cell.model?.value.text ?? '';
     if (!cell.myst.pre) {
       // This will be cleared when the cell is executed, and parsed again here
-      cell.myst.pre = markdownParse(text);
+      cell.myst.pre = markdownParse(text, options.parserOptions);
     }
     return { type: 'block', children: copyNode(cell.myst.pre).children };
   });

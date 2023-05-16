@@ -3,6 +3,7 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
+import { Token } from '@lumino/coreutils';
 import { IEditorServices } from '@jupyterlab/codeeditor';
 
 import {
@@ -14,6 +15,7 @@ import {
   Notebook
 } from '@jupyterlab/notebook';
 import { Cell } from '@jupyterlab/cells';
+import { MySTNotebookOptions } from './myst';
 import { MySTContentFactory } from './MySTContentFactory';
 
 import { ISessionContextDialogs } from '@jupyterlab/apputils';
@@ -31,17 +33,40 @@ const mystIcon = new LabIcon({
 });
 
 /**
+ * Extension point for MyST options to be defined given a notebook.
+ * A null provider results in default parser options appropriate to all notebooks.
+ *
+ * Notes for labextension authors:
+ *
+ * - This defines a mechanism for controlling myst *parser* options.
+ * - To set options globally just ignore the notebook in `get(notebook)`.
+ * - Various myst extensions to common markdown can be toggled on/off.
+ * - Math options can be tuned.
+ * - Custom directives and roles can be injected.
+ * - It's *not* a general system for extending myst syntax.
+ * - IT'S EXPERIMENTAL AND MIGHT DISAPPEAR IN A FUTURE RELEASE!
+ */
+export const IMySTNotebookOptions = new Token<MySTNotebookOptions>(
+  'jupyterlab-myst:IMySTNotebookOptions'
+);
+
+/**
  * The notebook content factory provider.
  */
 const plugin: JupyterFrontEndPlugin<NotebookPanel.IContentFactory> = {
   id: 'jupyterlab-myst:plugin',
   provides: NotebookPanel.IContentFactory,
   requires: [IEditorServices],
+  optional: [IMySTNotebookOptions],
   autoStart: true,
-  activate: (app: JupyterFrontEnd, editorServices: IEditorServices) => {
+  activate: (
+    app: JupyterFrontEnd,
+    editorServices: IEditorServices,
+    mystOptions: MySTNotebookOptions
+  ) => {
     console.log('JupyterLab extension jupyterlab-myst is activated!');
     const editorFactory = editorServices.factoryService.newInlineEditor;
-    return new MySTContentFactory({ editorFactory });
+    return new MySTContentFactory({ editorFactory }, mystOptions || undefined);
   }
 };
 

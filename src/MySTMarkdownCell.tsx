@@ -14,7 +14,7 @@ import {
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
-import { parseContent } from './myst';
+import { parseContent, MySTNotebookOptions } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
@@ -29,6 +29,9 @@ export class MySTMarkdownCell
   implements IMySTMarkdownCell
 {
   private _doneRendering = new PromiseDelegate<void>();
+  private _doRendering = false;
+
+  mystOptions: MySTNotebookOptions;
 
   myst: {
     pre?: GenericParent;
@@ -36,8 +39,16 @@ export class MySTMarkdownCell
     node?: HTMLDivElement;
   } = {};
 
-  constructor(options: MarkdownCell.IOptions) {
+  constructor(
+    options: MarkdownCell.IOptions,
+    mystOptions: MySTNotebookOptions
+  ) {
     super(options);
+    this.mystOptions = mystOptions;
+
+    // BUG: if renderInput() was attempted from super constructor, now it can be done
+    if (this._doRendering) this.renderInput(null as unknown as Widget);
+    this._doRendering = true;
 
     // Listen for changes to the cell trust
     const trusted = this.model.modelDB.get('trusted') as ObservableValue;
@@ -45,6 +56,11 @@ export class MySTMarkdownCell
   }
 
   renderInput(_: Widget): void {
+    if (!this._doRendering) {
+      // BUG: super constructor calls renderInput() but (of course) object isn't fully constructed
+      this._doRendering = true;
+      return;
+    }
     if (!this.myst || !this.myst.node) {
       // Create the node if it does not exist
       const node = document.createElement('div');
@@ -54,7 +70,10 @@ export class MySTMarkdownCell
     this._doneRendering = new PromiseDelegate<void>();
     const notebook = this.parent as StaticNotebook;
     this.myst.pre = undefined;
-    const parseComplete = parseContent(notebook);
+    const parseComplete = parseContent(
+      notebook,
+      this.mystOptions.get(notebook)
+    );
     const widget = new Widget({ node: this.myst.node });
     widget.addClass('myst');
     widget.addClass('jp-MarkdownOutput');
