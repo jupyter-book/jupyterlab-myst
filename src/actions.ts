@@ -102,11 +102,11 @@ export async function executeUserExpressions(
   await future.done;
 }
 
-export function notebookExecuted(
+export async function notebookCellExecuted(
   notebook: Notebook,
   cell: Cell,
   tracker: INotebookTracker
-): void {
+): Promise<void> {
   // Find the Notebook panel
   const panel = tracker.find((w: NotebookPanel) => {
     return w.content === notebook;
@@ -120,9 +120,7 @@ export function notebookExecuted(
   if (!isMarkdownCell(cell)) {
     return;
   }
-  console.debug(
-    `Markdown cell ${cell.model.id} was executed, waiting for render to complete ...`
-  );
+  console.debug(`Markdown cell ${cell.model.id} was executed`);
 
-  cell.doneRendering?.then(() => executeUserExpressions(cell, ctx));
+  await executeUserExpressions(cell, ctx);
 }

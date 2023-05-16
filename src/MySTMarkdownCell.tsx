@@ -22,7 +22,7 @@ import { selectAll } from 'unist-util-select';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
 import { ObservableValue } from '@jupyterlab/observables';
-import { CellModel } from '@jupyterlab/cells/src/model';
+import { CellModel, MarkdownCellModel } from '@jupyterlab/cells';
 
 export class MySTMarkdownCell
   extends MarkdownCell
@@ -41,11 +41,13 @@ export class MySTMarkdownCell
 
     // Listen for changes to the cell trust
     // TODO: Fix this ugly hack upstream!
-    const concreteModel: CellModel = this.model as unknown as CellModel;
+    const concreteModel: MarkdownCellModel = this
+      .model as unknown as MarkdownCellModel;
     concreteModel.onTrustedChanged = (
       trusted: CellModel,
       args: ObservableValue.IChangedArgs
     ) => {
+      console.log('trust changed', this.model.trusted);
       this.mystRender();
     };
   }
@@ -55,6 +57,7 @@ export class MySTMarkdownCell
       // Create the node if it does not exist
       const node = document.createElement('div');
       this.myst = { node };
+      console.debug('Created MyST node for cell');
     }
 
     this._doneRendering = new PromiseDelegate<void>();
@@ -90,6 +93,7 @@ export class MySTMarkdownCell
   }
 
   mystRender(): void {
+    console.log('Rendering MyST cell into', this.node);
     const notebook = this.parent as StaticNotebook & {
       myst: { frontmatter: PageFrontmatter; references: References };
     };
