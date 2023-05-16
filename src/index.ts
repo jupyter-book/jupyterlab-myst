@@ -35,6 +35,16 @@ const mystIcon = new LabIcon({
 /**
  * Extension point for MyST options to be defined given a notebook.
  * A null provider results in default parser options appropriate to all notebooks.
+ *
+ * Notes for labextension authors:
+ *
+ * - This defines a mechanism for controlling myst *parser* options.
+ * - To set options globally just ignore the notebook in `get(notebook)`.
+ * - Various myst extensions to common markdown can be toggled on/off.
+ * - Math options can be tuned.
+ * - Custom directives and roles can be injected.
+ * - It's *not* a general system for extending myst syntax.
+ * - IT'S EXPERIMENTAL AND MIGHT DISAPPEAR IN A FUTURE RELEASE!
  */
 export const IMySTNotebookOptions = new Token<MySTNotebookOptions>(
   'jupyterlab-myst:IMySTNotebookOptions'
