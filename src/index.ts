@@ -21,6 +21,7 @@ import { ISessionContextDialogs } from '@jupyterlab/apputils';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ITranslator } from '@jupyterlab/translation';
+
 import { notebookExecuted } from './actions';
 import { mystIcon } from './icon';
 import { mystMarkdownRendererFactory } from './mime';
@@ -129,9 +130,9 @@ const executorPlugin: JupyterFrontEndPlugin<void> = {
     console.log('Using jupyterlab-myst:executor');
 
     NotebookActions.executed.connect(
-      (sender: any, value: { notebook: Notebook; cell: Cell }) => {
+      async (sender: any, value: { notebook: Notebook; cell: Cell }) => {
         const { notebook, cell } = value;
-        notebookExecuted(notebook, cell, tracker);
+        await notebookExecuted(notebook, cell, tracker);
       }
     );
 
