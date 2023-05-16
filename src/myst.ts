@@ -73,7 +73,7 @@ export function renderNotebook(notebook: StaticNotebook): Promise<void> {
   }
 
   const blocks = cells.map(cell => {
-    const text = cell.model?.value.text ?? '';
+    const text = cell.model?.sharedModel.getSource() ?? '';
     if (!cell.myst.pre) {
       // This will be cleared when the cell is executed, and parsed again here
       cell.myst.pre = markdownParse(text) as GenericParent;

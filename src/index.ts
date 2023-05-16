@@ -72,7 +72,10 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
       'JupyterLab extension jupyterlab-myst (legacy mode) is activated!'
     );
 
-    const contentFactory = new MySTContentFactory();
+    const contentFactory = new MySTContentFactory({
+      editorFactory: options =>
+        editorServices.factoryService.newInlineEditor(options)
+    });
 
     const factory = new NotebookWidgetFactory({
       name: 'Jupyter MyST Notebook',
@@ -87,7 +90,6 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
       editorConfig: notebookFactory.editorConfig,
       notebookConfig: notebookFactory.notebookConfig,
       mimeTypeService: editorServices.mimeTypeService,
-      sessionDialogs: sessionContextDialogs,
       toolbarFactory: notebookFactory.toolbarFactory,
       translator: translator ?? undefined
     });

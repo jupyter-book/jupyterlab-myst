@@ -7,7 +7,7 @@ export const metadataSection = 'user_expressions';
 export function getUserExpressions(
   cell?: MySTMarkdownCell
 ): IUserExpressionMetadata[] | undefined {
-  const metadata = cell?.model.metadata.get(metadataSection) as
+  const metadata = cell?.model.getMetadata(metadataSection) as
     | IUserExpressionMetadata[]
     | undefined;
   return metadata;

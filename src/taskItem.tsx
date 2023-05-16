@@ -26,7 +26,7 @@ function TaskItem({
         onClick={() => {
           // Bail if no line number was found
           if (!cell || line == null) return;
-          const text = cell.model.value.text;
+          const text = cell.model.sharedModel.getSource();
           // This is a pretty cautious replacement for the identified line
           const lines = text.split('\n');
           lines[line] = lines[line].replace(
@@ -35,7 +35,7 @@ function TaskItem({
           );
           setLocal(!local);
           // Update the Jupyter cell markdown value
-          cell.model.value.text = lines.join('\n');
+          cell.model.sharedModel.setSource(lines.join('\n'));
         }}
       />
       {children}

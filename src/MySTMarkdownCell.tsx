@@ -21,8 +21,8 @@ import { selectAll } from 'unist-util-select';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
-
 import { ObservableValue } from '@jupyterlab/observables';
+import { CellModel } from '@jupyterlab/cells/src/model';
 
 export class MySTMarkdownCell
   extends MarkdownCell
@@ -40,8 +40,14 @@ export class MySTMarkdownCell
     super(options);
 
     // Listen for changes to the cell trust
-    const trusted = this.model.modelDB.get('trusted') as ObservableValue;
-    trusted.changed.connect(this.mystRender, this);
+    // TODO: Fix this ugly hack upstream!
+    const concreteModel: CellModel = this.model as unknown as CellModel;
+    concreteModel.onTrustedChanged = (
+      trusted: CellModel,
+      args: ObservableValue.IChangedArgs
+    ) => {
+      this.mystRender();
+    };
   }
 
   renderInput(_: Widget): void {
@@ -59,7 +65,9 @@ export class MySTMarkdownCell
     widget.addClass('myst');
     widget.addClass('jp-MarkdownOutput');
     this.addClass('jp-MySTMarkdownCell');
-    this.inputArea.renderInput(widget);
+    if (this.inputArea !== null) {
+      this.inputArea.renderInput(widget);
+    }
     if (parseComplete) {
       parseComplete.then(() => this._doneRendering.resolve());
     } else {
@@ -85,7 +93,7 @@ export class MySTMarkdownCell
     const notebook = this.parent as StaticNotebook & {
       myst: { frontmatter: PageFrontmatter; references: References };
     };
-    const isFirstCell = notebook.children().next() === this;
+    const isFirstCell = notebook.children().next().value === this;
     const { post: mdast } = this.myst ?? {};
     if (!this.myst?.node || !notebook?.myst || !mdast) {
       console.log('MyST: Did not render?', this);

@@ -29,7 +29,7 @@
     "url": "https://github.com/executablebooks/jupyterlab-myst.git"
   },
   "scripts": {
-    "build": "jlpm build:lib && jlpm build:labextension:dev",
+    "build": "jlpm build:css && jlpm build:lib && jlpm build:labextension:dev",
     "build:css": "tailwindcss -m -i ./style/tailwind.css -o style/app.css",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
@@ -85,8 +85,9 @@
     "@tailwindcss/typography": "^0.5.8",
     "@types/jest": "^29.2.0",
     "@types/json-schema": "^7.0.11",
+    "@types/markdown-it": "^12.2.3",
     "@types/react": "^18.0.26",
-    "@types/react-dom": "^17.0.1",
+    "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "css-loader": "^6.7.1",
