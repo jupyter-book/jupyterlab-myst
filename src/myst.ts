@@ -30,6 +30,7 @@ import {
 import { cardDirective } from 'myst-ext-card';
 import { gridDirective } from 'myst-ext-grid';
 import { tabDirectives } from 'myst-ext-tabs';
+import { proofDirective } from 'myst-ext-proof';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
@@ -56,7 +57,12 @@ export class MySTNotebookDefaults implements MySTNotebookOptions {
   get(notebook: StaticNotebook): MySTOptions {
     return {
       parserOptions: {
-        directives: [cardDirective, gridDirective, ...tabDirectives],
+        directives: [
+          cardDirective,
+          gridDirective,
+          proofDirective,
+          ...tabDirectives,
+        ],
         roles: [evalRole]
       }
     };
@@ -132,7 +138,6 @@ export function parseContent(
   const file = new VFile();
   const references = {
     cite: { order: [], data: {} },
-    footnotes: {},
     article: mdast as any
   };
   const { frontmatter: frontmatterRaw } = getFrontmatter(
@@ -158,7 +163,7 @@ export function parseContent(
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
-    .use(footnotesPlugin, { references })
+    .use(footnotesPlugin)
     .use(resolveReferencesPlugin, { state })
     .use(internalLinksPlugin, { notebook })
     .use(addCiteChildrenPlugin)
