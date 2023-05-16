@@ -17,7 +17,7 @@
 ### Maintenance and upkeep improvements
 
 - :broom: Rework dependencies [#139](https://github.com/executablebooks/jupyterlab-myst/pull/139) ([@agoose77](https://github.com/agoose77))
-- :broom: Add issue templates  [#131](https://github.com/executablebooks/jupyterlab-myst/pull/131) ([@kolibril13](https://github.com/kolibril13))
+- :broom: Add issue templates [#131](https://github.com/executablebooks/jupyterlab-myst/pull/131) ([@kolibril13](https://github.com/kolibril13))
 
 ### Contributors to this release
 
