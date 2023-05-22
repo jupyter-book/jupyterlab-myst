@@ -5,7 +5,7 @@
 [![Launch on Binder][binder-badge]][binder-link]
 [![PyPI][pypi-badge]][pypi-link]
 
-Render markdown cells using [MyST Markdown](https://myst-tools.org/), including support for rich frontmatter, interactive references, admonitions, figure numbering, tabs, cards, and grids!
+Render markdown cells using [MyST Markdown](https://myst-tools.org/), including support for rich frontmatting, interactive references, admonitions, figure numbering, tabs, proofs, cards, and grids!
 
 ![](./images/walkthrough.gif)
 

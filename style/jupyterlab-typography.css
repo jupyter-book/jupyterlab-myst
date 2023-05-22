@@ -43,4 +43,9 @@
   .myst > *:last-child {
     margin-bottom: 0.5em;
   }
+
+  .article {
+    /* This is a required class currently in the hover-card */
+    @apply myst;
+  }
 }
