@@ -25,6 +25,7 @@ import { cardDirective } from 'myst-ext-card';
 import { gridDirective } from 'myst-ext-grid';
 import { tabDirectives } from 'myst-ext-tabs';
 import { proofDirective } from 'myst-ext-proof';
+import { exerciseDirectives } from 'myst-ext-exercise';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { getCellList } from './utils';
 import { imageUrlSourceTransform } from './images';
@@ -38,7 +39,8 @@ export function markdownParse(text: string, inNotebook = true): Root {
       cardDirective,
       gridDirective,
       proofDirective,
-      ...tabDirectives
+      ...tabDirectives,
+      ...exerciseDirectives
     ],
     roles: [evalRole]
   });
