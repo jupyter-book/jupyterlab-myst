@@ -34,3 +34,9 @@
   padding-left: 0;
   line-height: inherit;
 }
+
+/* Markdown viewer */
+.jp-Document .jp-MarkdownViewer .jp-RenderedMySTMarkdown {
+  padding: var(--jp-private-markdownviewer-padding);
+  overflow: auto;
+}

@@ -14,7 +14,7 @@ import {
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
-import { parseContent } from './myst';
+import { renderNotebook } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
@@ -54,7 +54,7 @@ export class MySTMarkdownCell
     this._doneRendering = new PromiseDelegate<void>();
     const notebook = this.parent as StaticNotebook;
     this.myst.pre = undefined;
-    const parseComplete = parseContent(notebook);
+    const parseComplete = renderNotebook(notebook);
     const widget = new Widget({ node: this.myst.node });
     widget.addClass('myst');
     widget.addClass('jp-MarkdownOutput');
@@ -97,7 +97,10 @@ export class MySTMarkdownCell
     render(
       <ThemeProvider
         theme={Theme.light}
-        Link={linkFactory(notebook)}
+        Link={linkFactory(
+          notebook.rendermime.resolver,
+          notebook.rendermime.linkHandler
+        )}
         renderers={renderers}
       >
         <JupyterCellProvider cell={this}>

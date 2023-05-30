@@ -58,6 +58,7 @@
     "dependencies": {
         "@jupyterlab/application": "^3.4.7",
         "@jupyterlab/codeeditor": "^3.4.7",
+        "@jupyterlab/markdownviewer": "^3.4.7",
         "@jupyterlab/notebook": "^3.4.7",
         "@jupyterlab/rendermime": "^3.4.7",
         "@jupyterlab/translation": "^3.4.7",
@@ -67,12 +68,15 @@
         "katex": "^0.15.2",
         "myst-ext-card": "^0.0.7",
         "myst-ext-grid": "^0.0.7",
-        "myst-ext-tabs": "^0.0.7",
         "myst-ext-proof": "^0.0.2",
+        "myst-ext-tabs": "^0.0.7",
         "myst-frontmatter": "^0.0.13",
         "myst-parser": "^0.0.30",
         "myst-to-react": "^0.2.6",
-        "myst-transforms": "^0.0.30"
+        "myst-transforms": "^0.0.31"
+    },
+    "resolutions": {
+        "@jupyterlab/rendermime-interfaces": ">=3.4.7 <3.8.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
@@ -102,6 +106,9 @@
         "tailwindcss": "^3.2.4",
         "ts-jest": "^26.0.0",
         "typescript": "~4.1.3"
+    },
+    "peerDependencies": {
+        "react": "^17.0.1"
     },
     "sideEffects": [
         "style/*.css",

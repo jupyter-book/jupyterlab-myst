@@ -2,6 +2,7 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
+import { IMarkdownViewerTracker } from '@jupyterlab/markdownviewer';
 
 import { IEditorServices } from '@jupyterlab/codeeditor';
 
@@ -20,15 +21,9 @@ import { ISessionContextDialogs } from '@jupyterlab/apputils';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ITranslator } from '@jupyterlab/translation';
-import { LabIcon } from '@jupyterlab/ui-components';
-
-import mystIconSvg from '../style/mystlogo.svg';
 import { notebookExecuted } from './actions';
-
-const mystIcon = new LabIcon({
-  name: 'myst-notebook-extension:mystIcon',
-  svgstr: mystIconSvg
-});
+import { mystIcon } from './icon';
+import { mystMarkdownRendererFactory } from './mime';
 
 /**
  * The notebook content factory provider.
@@ -124,7 +119,7 @@ const legacyPlugin: JupyterFrontEndPlugin<void> = {
 /**
  * The notebook cell executor.
  */
-const executor: JupyterFrontEndPlugin<void> = {
+const executorPlugin: JupyterFrontEndPlugin<void> = {
   id: 'jupyterlab-myst:executor',
   requires: [INotebookTracker],
   autoStart: true,
@@ -142,4 +137,20 @@ const executor: JupyterFrontEndPlugin<void> = {
   }
 };
 
-export default [plugin, legacyPlugin, executor];
+const mimeRendererPlugin: JupyterFrontEndPlugin<void> = {
+  id: 'jupyterlab-myst:mimeRenderer',
+  requires: [IRenderMimeRegistry],
+  autoStart: true,
+  optional: [IMarkdownViewerTracker],
+  activate: (
+    app: JupyterFrontEnd,
+    registry: IRenderMimeRegistry,
+    tracker?: IMarkdownViewerTracker
+  ) => {
+    console.log('Using jupyterlab-myst:mimeRenderer');
+    // Add the MyST markdown renderer factory.
+    registry.addFactory(mystMarkdownRendererFactory);
+  }
+};
+
+export default [plugin, legacyPlugin, executorPlugin, mimeRendererPlugin];

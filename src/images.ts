@@ -1,11 +1,11 @@
-import type { Root } from 'myst-spec';
-import type { MarkdownCell } from '@jupyterlab/cells';
-import { AttachmentsResolver } from '@jupyterlab/attachments';
-import type { Image } from 'myst-spec';
+import type { Image, Root } from 'myst-spec';
 import { selectAll } from 'unist-util-select';
-import { StaticNotebook } from '@jupyterlab/notebook';
+import { IRenderMime } from '@jupyterlab/rendermime';
+import { MarkdownCell } from '@jupyterlab/cells';
+import { AttachmentsResolver } from '@jupyterlab/attachments';
 
 type Options = {
+  resolver: IRenderMime.IResolver | null;
   cell: MarkdownCell;
 };
 
@@ -17,9 +17,8 @@ export async function imageUrlSourceTransform(
   await Promise.all(
     images.map(async image => {
       if (!image || !image.url) return;
-      const parent = (opts.cell.parent as StaticNotebook).rendermime?.resolver;
       const resolver = new AttachmentsResolver({
-        parent: parent ?? undefined,
+        parent: opts.resolver ?? undefined,
         model: opts.cell.model.attachments
       });
       const path = await resolver.resolveUrl(image.url);
