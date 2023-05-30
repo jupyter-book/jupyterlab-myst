@@ -14,21 +14,22 @@ import {
 } from '@myst-theme/providers';
 import { render } from 'react-dom';
 import { useParse } from 'myst-to-react';
-import { renderNotebook } from './myst';
+import { parseNotebook, renderNotebook } from './myst';
 import { IMySTMarkdownCell } from './types';
 import { linkFactory } from './links';
 import { selectAll } from 'unist-util-select';
 
-import { PromiseDelegate } from '@lumino/coreutils';
 import { JupyterCellProvider } from './JupyterCellProvider';
 import { ObservableValue } from '@jupyterlab/observables';
 import { CellModel, MarkdownCellModel } from '@jupyterlab/cells';
+
+const DEFAULT_MARKDOWN_TEXT = 'Write Markdown Here!';
 
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
 {
-  private _doneRendering = new PromiseDelegate<void>();
+  private _widget: Widget;
 
   myst: {
     pre?: GenericParent;
@@ -39,6 +40,21 @@ export class MySTMarkdownCell
   constructor(options: MarkdownCell.IOptions) {
     super(options);
 
+    this['_updateRenderedInput'] = this.updateRenderedInput;
+
+    // Create the node if it does not exist
+    const node = document.createElement('div');
+    this.myst = { node };
+    console.debug('Created node for MyST cell');
+
+    const widget = new Widget({ node: this.myst.node });
+    widget.addClass('myst');
+    widget.addClass('jp-MarkdownOutput');
+    this._widget = widget;
+    console.debug('Created Widget for MyST cell');
+    this['_renderer'] = this._widget; // TODO HACKY!
+    this.addClass('jp-MySTMarkdownCell');
+
     // Listen for changes to the cell trust
     // TODO: Fix this ugly hack upstream!
     const concreteModel: MarkdownCellModel = this
@@ -48,42 +64,40 @@ export class MySTMarkdownCell
       args: ObservableValue.IChangedArgs
     ) => {
       console.log('trust changed', this.model.trusted);
-      this.mystRender();
+      this.updateRenderedInput()
+        .then(() => console.log('update render succeess'))
+        .catch(() => console.log('FFS'));
     };
   }
 
-  renderInput(_: Widget): void {
-    if (!this.myst || !this.myst.node) {
-      // Create the node if it does not exist
-      const node = document.createElement('div');
-      this.myst = { node };
-      console.debug('Created MyST node for cell');
-    }
-
-    this._doneRendering = new PromiseDelegate<void>();
-    const notebook = this.parent as StaticNotebook;
-    this.myst.pre = undefined;
-    const parseComplete = renderNotebook(notebook);
-    const widget = new Widget({ node: this.myst.node });
-    widget.addClass('myst');
-    widget.addClass('jp-MarkdownOutput');
-    this.addClass('jp-MySTMarkdownCell');
-    if (this.inputArea !== null) {
-      this.inputArea.renderInput(widget);
-    }
-    if (parseComplete) {
-      parseComplete.then(() => this._doneRendering.resolve());
-    } else {
-      // Something went wrong, reject the rendering promise
-      this._doneRendering.reject('Unknown error with parsing MyST Markdown.');
-    }
-  }
-
   /**
-   * Whether the Markdown renderer has finished rendering.
+   * Update the rendered input.
    */
-  get doneRendering(): Promise<void> {
-    return this._doneRendering.promise;
+  protected updateRenderedInput(): Promise<void> {
+    if (this.placeholder) {
+      console.log('Not updating, placeholder!');
+      return Promise.resolve();
+    }
+
+    const model = this.model;
+    const text =
+      (model && model.sharedModel.getSource()) || DEFAULT_MARKDOWN_TEXT;
+    // Do not re-render if the text has not changed.
+    if (text !== this['_prevText']) {
+      this['_prevText'] = text;
+      // const mimeModel = new MimeModel({ data: { 'text/markdown': text } });
+      // return this._renderer.renderModel(mimeModel);
+
+      const notebook = this.parent as StaticNotebook;
+      this.myst.pre = undefined;
+      const result = parseNotebook(notebook);
+      if (result === undefined) {
+        return Promise.reject('invalid parse result');
+      } else {
+        return renderNotebook(notebook, result.mdast);
+      }
+    }
+    return Promise.resolve();
   }
 
   get expressions(): string[] {

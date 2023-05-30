@@ -62,14 +62,22 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function renderNotebook(notebook: StaticNotebook): Promise<void> {
+export interface IMySTParseResult {
+  references: any;
+  frontmatter: Record<string, any>;
+  mdast: any;
+}
+
+export function parseNotebook(
+  notebook: StaticNotebook
+): IMySTParseResult | undefined {
   const cells = getCellList(notebook)?.filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.model.type === 'markdown'
   );
   if (!cells) {
     // This is expected on the first render, we do not want to throw later
-    return Promise.resolve(undefined);
+    return undefined;
   }
 
   const blocks = cells.map(cell => {
@@ -123,13 +131,26 @@ export function renderNotebook(notebook: StaticNotebook): Promise<void> {
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
-  (notebook as any).myst = { references, frontmatter, mdast };
-
   if (file.messages.length > 0) {
     // TODO: better error messages in the future
     console.warn(file.messages.map(m => m.message).join('\n'));
   }
 
+  return { references, frontmatter, mdast };
+}
+
+export function renderNotebook(
+  notebook: StaticNotebook,
+  mdast: any
+): Promise<void> {
+  const cells = getCellList(notebook)?.filter(
+    // In the future, we may want to process the code cells as well, but not now
+    cell => cell.model.type === 'markdown'
+  );
+  if (!cells) {
+    // This is expected on the first render, we do not want to throw later
+    return Promise.reject('Empty cells');
+  }
   // Render the full result in each cell using React
   // Any cell can have side-effects into other cells, so this is necessary
 
