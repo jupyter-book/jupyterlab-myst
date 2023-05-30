@@ -121,8 +121,7 @@ export class RenderedMySTMarkdown
    * @returns A promise which resolves when rendering is complete.
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    const x = String(model.data[MIME_TYPE]);
-    const mdast = markdownParse(x);
+    const mdast = markdownParse(model.data[MIME_TYPE] as string);
     const linkTransforms = [
       new WikiTransformer(),
       new GithubTransformer(),
@@ -153,7 +152,7 @@ export class RenderedMySTMarkdown
       .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
       .use(enumerateTargetsPlugin, { state })
       .use(linksPlugin, { transformers: linkTransforms })
-      .use(footnotesPlugin, { references })
+      .use(footnotesPlugin)
       .use(resolveReferencesPlugin, { state })
       .use(internalLinksPlugin, { resolver })
       .use(addCiteChildrenPlugin)
