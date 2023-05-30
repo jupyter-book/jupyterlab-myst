@@ -22,7 +22,7 @@ import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { ITranslator } from '@jupyterlab/translation';
 
-import { notebookExecuted } from './actions';
+import { notebookCellExecuted } from './actions';
 import { mystIcon } from './icon';
 import { mystMarkdownRendererFactory } from './mime';
 
@@ -132,7 +132,7 @@ const executorPlugin: JupyterFrontEndPlugin<void> = {
     NotebookActions.executed.connect(
       async (sender: any, value: { notebook: Notebook; cell: Cell }) => {
         const { notebook, cell } = value;
-        await notebookExecuted(notebook, cell, tracker);
+        await notebookCellExecuted(notebook, cell, tracker);
       }
     );
 
