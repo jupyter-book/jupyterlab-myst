@@ -33,6 +33,7 @@ import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
 import { unified } from 'unified';
 import { Signal } from '@lumino/signaling';
 import React from 'react';
+import { imageUrlSourceTransform } from './images';
 
 /**
  * The MIME type for Markdown.
@@ -120,8 +121,9 @@ export class RenderedMySTMarkdown
    *
    * @returns A promise which resolves when rendering is complete.
    */
-  renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    const mdast = markdownParse(model.data[MIME_TYPE] as string);
+  async renderModel(model: IRenderMime.IMimeModel): Promise<void> {
+    const markdownText = model.data[MIME_TYPE] as string;
+    const mdast = markdownParse(markdownText, false);
     const linkTransforms = [
       new WikiTransformer(),
       new GithubTransformer(),
@@ -131,7 +133,6 @@ export class RenderedMySTMarkdown
     const file = new VFile();
     const references = {
       cite: { order: [], data: {} },
-      footnotes: {},
       article: mdast as any
     };
     const { frontmatter: frontmatterRaw } = getFrontmatter(mdast, {
@@ -158,6 +159,11 @@ export class RenderedMySTMarkdown
       .use(addCiteChildrenPlugin)
       .use(keysPlugin)
       .runSync(mdast as any, file);
+
+    // Go through all links and replace the source if they are local
+    await imageUrlSourceTransform(mdast as any, {
+      resolver: this.resolver
+    });
 
     this.state = {
       mdast,

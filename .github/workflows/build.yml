@@ -153,6 +153,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+      - name: Install missing dependencies
+        # On May 30, 2023 this wasn't included in the base try removing in future!
+        run: pip install typing_extensions
       - uses: jupyterlab/maintainer-tools/.github/actions/check-links@v1
         with:
           ignore_links: 'https:\/\/mybinder\.org.*'

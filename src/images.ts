@@ -6,7 +6,7 @@ import { AttachmentsResolver } from '@jupyterlab/attachments';
 
 type Options = {
   resolver: IRenderMime.IResolver | null;
-  cell: MarkdownCell;
+  cell?: MarkdownCell;
 };
 
 export async function imageUrlSourceTransform(
@@ -17,10 +17,18 @@ export async function imageUrlSourceTransform(
   await Promise.all(
     images.map(async image => {
       if (!image || !image.url) return;
-      const resolver = new AttachmentsResolver({
-        parent: opts.resolver ?? undefined,
-        model: opts.cell.model.attachments
-      });
+      if (!opts.resolver) {
+        console.warn(
+          'No resolver supplied to `imageUrlSourceTransform`, local images may not work.'
+        );
+        return;
+      }
+      const resolver = opts.cell
+        ? new AttachmentsResolver({
+            parent: opts.resolver ?? undefined,
+            model: opts.cell?.model.attachments
+          })
+        : opts.resolver;
       const path = await resolver.resolveUrl(image.url);
       if (!path) return;
       const url = await resolver.getDownloadUrl(path);
