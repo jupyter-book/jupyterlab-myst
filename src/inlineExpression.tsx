@@ -115,7 +115,7 @@ function ErrorRenderer({ error }: { error: IExpressionError }) {
   );
 }
 
-function MimeBundleRenderer({
+function MIMEBundleRenderer({
   rendermime,
   trusted,
   expressionMetadata
@@ -127,7 +127,6 @@ function MimeBundleRenderer({
   const ref = useRef<HTMLDivElement>(null);
   // Create a single RenderedExpression when the rendermime is available
   const renderer = useMemo<RenderedExpression | undefined>(() => {
-    if (!rendermime) return undefined;
     return new RenderedExpression({
       expression: expressionMetadata.expression,
       trusted,
@@ -138,17 +137,28 @@ function MimeBundleRenderer({
 
   // Attach and render the widget when the expression result changes
   useEffect(() => {
-    if (!ref.current || !renderer || !expressionMetadata) return;
+    if (!ref.current || !renderer || !expressionMetadata) {
+      console.debug('Exit MIMEBundleRenderer renderer: missing state');
+      return;
+    }
     if (!renderer.isAttached) Widget.attach(renderer, ref.current);
     renderer.renderExpression(expressionMetadata.result);
   }, [ref, renderer, expressionMetadata]);
 
   // Clean up the renderer when the component is removed from the dom
   useEffect(() => {
-    if (!renderer) return;
-    return () => renderer.dispose();
+    if (!ref.current || !renderer || !expressionMetadata) {
+      console.debug('Cannot dispose MIMEBundleRenderer: missing state');
+      return;
+    }
+    return () => {
+      console.log('Disposing MIMEBundleRenderer');
+      renderer.dispose();
+    };
   }, [renderer]);
-  console.debug(`Rendering react ${expressionMetadata.expression}`);
+  console.debug(
+    `Rendering MIME bundle for expression: '${expressionMetadata.expression}'`
+  );
   return <div ref={ref} className="not-prose inline-block" />;
 }
 
@@ -183,10 +193,10 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
     return <ErrorRenderer error={expressionMetadata.result} />;
   }
   return (
-    <MimeBundleRenderer
+    <MIMEBundleRenderer
       rendermime={rendermime}
       trusted={trusted}
       expressionMetadata={expressionMetadata}
-    ></MimeBundleRenderer>
+    ></MIMEBundleRenderer>
   );
 }
