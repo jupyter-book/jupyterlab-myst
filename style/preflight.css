@@ -27,11 +27,11 @@
   background-image: none; /* 2 */
 }
 
-.myst figure img {
-  display: block;
+.myst img {
   max-width: 100%;
 }
 
-.myst img {
+.myst figure img {
+  display: block;
   max-width: 100%;
 }
