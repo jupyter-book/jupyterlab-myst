@@ -32,7 +32,7 @@ import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 import { evalRole } from './roles';
 
-export function markdownParse(text: string): Root {
+export function markdownParse(text: string, inNotebook = true): Root {
   const mdast = mystParse(text, {
     directives: [
       cardDirective,
@@ -56,9 +56,11 @@ export function markdownParse(text: string): Root {
       }
     })
     .runSync(mdast as any);
-  // Lift children out of blocks for the next step
-  // We are working here as one cell at a time
-  liftChildren(mdast, 'block');
+  if (inNotebook) {
+    // If in the notebook, lift children out of blocks for the next step
+    // We are working here as one cell at a time
+    liftChildren(mdast, 'block');
+  }
   return mdast as Root;
 }
 

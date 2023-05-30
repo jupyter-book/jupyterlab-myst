@@ -29,4 +29,9 @@
 
 .myst figure img {
   display: block;
+  max-width: 100%;
+}
+
+.myst img {
+  max-width: 100%;
 }
