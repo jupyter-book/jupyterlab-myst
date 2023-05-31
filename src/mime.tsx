@@ -1,23 +1,12 @@
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 // import { mystIcon } from './icon';
-import { markdownParse } from './myst';
 import {
-  DOITransformer,
-  enumerateTargetsPlugin,
-  footnotesPlugin,
-  getFrontmatter,
-  GithubTransformer,
-  keysPlugin,
-  linksPlugin,
-  mathPlugin,
-  ReferenceState,
-  resolveReferencesPlugin,
-  RRIDTransformer,
-  WikiTransformer
-} from 'myst-transforms';
-import { VFile } from 'vfile';
-import { PageFrontmatter, validatePageFrontmatter } from 'myst-frontmatter';
-import { internalLinksPlugin, linkFactory } from './links';
+  IMySTExpressionsState,
+  IMySTFragmentState,
+  markdownParse,
+  processLocalMDAST
+} from './myst';
+import { linkFactory } from './links';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import {
   ReferencesProvider,
@@ -27,24 +16,20 @@ import {
 } from '@myst-theme/providers';
 import { useParse } from 'myst-to-react';
 import { renderers } from './renderers';
-import { addCiteChildrenPlugin } from './citations';
-import { References } from 'myst-common';
 import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
-import { unified } from 'unified';
 import { Signal } from '@lumino/signaling';
 import React from 'react';
-import { imageUrlSourceTransform } from './images';
+import { selectAll } from 'unist-util-select';
+import { UserExpressionsProvider } from './UserExpressionsProvider';
 
 /**
  * The MIME type for Markdown.
  */
 export const MIME_TYPE = 'text/markdown';
 
-type MySTState = {
-  references: References;
-  frontmatter: PageFrontmatter;
-  mdast: any;
-};
+export interface IMySTDocumentContext {
+  requestUpdate(renderer: RenderedMySTMarkdown): void;
+}
 
 /**
  * A mime renderer for displaying Markdown with embedded latex.
@@ -60,14 +45,29 @@ export class RenderedMySTMarkdown
    */
   constructor(options: IRenderMime.IRendererOptions) {
     super();
-    this.state = null;
     this.resolver = options.resolver;
     this.linkHandler = options.linkHandler;
     this.node.dataset['mimeType'] = MIME_TYPE;
     this.addClass('jp-RenderedMySTMarkdown');
     this.addClass('myst');
-    console.log('Rendered markdown');
   }
+
+  get expressions(): string[] {
+    const mdast = this._rawMDAST ?? {};
+    const expressions = selectAll('inlineExpression', mdast);
+    return expressions.map(node => (node as any).value);
+  }
+  //
+  // renderExpressions(
+  //   value: IUserExpressionMetadata[],
+  //   rendermime: IRenderMimeRegistry
+  // ) {
+  //   this.expressionsState = {
+  //     expressions: value,
+  //     rendermime
+  //   };
+  //   this._stateChanged.emit();
+  // }
 
   /**
    * The resolver object.
@@ -79,39 +79,91 @@ export class RenderedMySTMarkdown
    */
   readonly linkHandler: IRenderMime.ILinkHandler | null;
 
-  private state: MySTState | null;
-  private stateChanged = new Signal<this, MySTState>(this);
+  public documentContext: IMySTDocumentContext | undefined;
+  private _documentStateChanged = new Signal<this, IMySTFragmentState>(this);
+  private _expressionStateChanged = new Signal<this, IMySTExpressionsState>(
+    this
+  );
+  private _documentState: IMySTFragmentState | undefined;
+  private _expressionState: IMySTExpressionsState | undefined;
+  private _rawMDAST: any | undefined;
 
-  render(): JSX.Element {
+  get rawMDAST(): any | undefined {
+    return this._rawMDAST;
+  }
+
+  render() {
     return (
-      <UseSignal signal={this.stateChanged} initialSender={this}>
-        {(): JSX.Element => {
-          if (this.state === null) {
-            return <div>Waiting for MyST AST (mdast)</div>;
-          }
-          const { references, frontmatter, mdast } = this.state;
-          const children = useParse(mdast as any, renderers);
-
+      <UseSignal signal={this._expressionStateChanged} initialSender={this}>
+        {() => {
+          const expressionState = this._expressionState;
           return (
-            <ThemeProvider
-              theme={Theme.light}
-              Link={linkFactory(this.resolver, this.linkHandler)}
-              renderers={renderers}
-            >
-              <TabStateProvider>
-                <ReferencesProvider
-                  references={references}
-                  frontmatter={frontmatter}
-                >
-                  <FrontmatterBlock frontmatter={frontmatter} />
-                  {children}
-                </ReferencesProvider>
-              </TabStateProvider>
-            </ThemeProvider>
+            <UseSignal signal={this._documentStateChanged} initialSender={this}>
+              {() => {
+                const documentState = this._documentState;
+                console.log('re-rendering VDOM', expressionState);
+                if (!documentState) {
+                  return <div>Waiting for MyST AST (mdast)</div>;
+                }
+                const { references, frontmatter, mdast, showFrontMatter } =
+                  documentState;
+
+                const expressions = expressionState?.expressions;
+                const rendermime = expressionState?.rendermime;
+                const children = useParse(mdast as any, renderers);
+
+                return (
+                  <ThemeProvider
+                    theme={Theme.light}
+                    Link={linkFactory(this.resolver, this.linkHandler)}
+                    renderers={renderers}
+                  >
+                    <UserExpressionsProvider
+                      expressions={expressions}
+                      rendermime={rendermime}
+                    >
+                      <TabStateProvider>
+                        <ReferencesProvider
+                          references={references}
+                          frontmatter={frontmatter}
+                        >
+                          {showFrontMatter && (
+                            <FrontmatterBlock frontmatter={frontmatter} />
+                          )}
+                          {children}
+                        </ReferencesProvider>
+                      </TabStateProvider>
+                    </UserExpressionsProvider>
+                  </ThemeProvider>
+                );
+              }}
+            </UseSignal>
           );
         }}
       </UseSignal>
     );
+  }
+
+  /**
+   * Update the MyST document state, triggering a re-render
+   *
+   * @param state - The MyST document state to use
+   */
+  onDocumentUpdated(state: IMySTFragmentState) {
+    console.debug('document changed', state);
+    this._documentState = state;
+    this._documentStateChanged.emit(state);
+  }
+
+  /**
+   * Update the MyST expressions state, triggering a re-render
+   *
+   * @param state - The MyST document state to use
+   */
+  onExpressionsUpdated(state: IMySTExpressionsState) {
+    console.debug('expressions changed', state);
+    this._expressionState = state;
+    this._expressionStateChanged.emit(state);
   }
 
   /**
@@ -121,57 +173,22 @@ export class RenderedMySTMarkdown
    *
    * @returns A promise which resolves when rendering is complete.
    */
-  async renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    const markdownText = model.data[MIME_TYPE] as string;
-    const mdast = markdownParse(markdownText, false);
-    const linkTransforms = [
-      new WikiTransformer(),
-      new GithubTransformer(),
-      new DOITransformer(),
-      new RRIDTransformer()
-    ];
-    const file = new VFile();
-    const references = {
-      cite: { order: [], data: {} },
-      article: mdast as any
-    };
-    const { frontmatter: frontmatterRaw } = getFrontmatter(mdast, {
-      removeYaml: true,
-      removeHeading: true
-    });
-    const frontmatter = validatePageFrontmatter(frontmatterRaw, {
-      property: 'frontmatter',
-      messages: {}
-    });
+  renderModel(model: IRenderMime.IMimeModel): Promise<void> {
+    this._rawMDAST = markdownParse(model.data[MIME_TYPE] as string);
+    console.debug('Storing raw MDAST for cell', this._rawMDAST);
 
-    const state = new ReferenceState({
-      numbering: frontmatter.numbering,
-      file
-    });
-    const resolver = this.resolver;
-    unified()
-      .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-      .use(enumerateTargetsPlugin, { state })
-      .use(linksPlugin, { transformers: linkTransforms })
-      .use(footnotesPlugin)
-      .use(resolveReferencesPlugin, { state })
-      .use(internalLinksPlugin, { resolver })
-      .use(addCiteChildrenPlugin)
-      .use(keysPlugin)
-      .runSync(mdast as any, file);
+    let processedState: IMySTFragmentState;
+    if (this.documentContext === undefined) {
+      processedState = processLocalMDAST(this._rawMDAST, this.resolver);
+      console.log('Render local!');
+      this.onDocumentUpdated(processedState);
+    } else {
+      console.log('Request document update!');
+      this.documentContext.requestUpdate(this);
+    }
 
-    // Go through all links and replace the source if they are local
-    await imageUrlSourceTransform(mdast as any, {
-      resolver: this.resolver
-    });
-
-    this.state = {
-      mdast,
-      references,
-      frontmatter
-    };
-    this.stateChanged.emit(this.state);
-    return Promise.resolve(void 0);
+    console.log('State changed', this);
+    return this.renderPromise || Promise.resolve();
   }
 }
 
