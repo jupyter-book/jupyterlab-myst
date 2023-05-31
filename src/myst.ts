@@ -241,7 +241,7 @@ export function renderNotebook(
       showFrontMatter: index == 0
     };
     console.debug('notebook re-rendering', cell, 'with', cellPartialState);
-    (cell.renderer as RenderedMySTMarkdown).onDocumentUpdated(cellPartialState);
+    (cell.renderer as RenderedMySTMarkdown).onFragmentUpdated(cellPartialState);
   });
 
   return Promise.all(promises).then(() => undefined);

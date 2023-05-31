@@ -80,11 +80,11 @@ export class RenderedMySTMarkdown
   readonly linkHandler: IRenderMime.ILinkHandler | null;
 
   public documentContext: IMySTDocumentContext | undefined;
-  private _documentStateChanged = new Signal<this, IMySTFragmentState>(this);
+  private _fragmentStateChanged = new Signal<this, IMySTFragmentState>(this);
   private _expressionStateChanged = new Signal<this, IMySTExpressionsState>(
     this
   );
-  private _documentState: IMySTFragmentState | undefined;
+  private _fragmentState: IMySTFragmentState | undefined;
   private _expressionState: IMySTExpressionsState | undefined;
   private _rawMDAST: any | undefined;
 
@@ -92,51 +92,55 @@ export class RenderedMySTMarkdown
     return this._rawMDAST;
   }
 
+  protected renderMyST(
+    fragmentState: IMySTFragmentState | undefined,
+    expressionState: IMySTExpressionsState | undefined
+  ): React.JSX.Element {
+    console.log('re-rendering VDOM', expressionState);
+    if (!fragmentState) {
+      return <div>Waiting for MyST AST (mdast)</div>;
+    }
+    const { references, frontmatter, mdast, showFrontMatter } = fragmentState;
+
+    const expressions = expressionState?.expressions;
+    const rendermime = expressionState?.rendermime;
+    const children = useParse(mdast as any, renderers);
+
+    return (
+      <ThemeProvider
+        theme={Theme.light}
+        Link={linkFactory(this.resolver, this.linkHandler)}
+        renderers={renderers}
+      >
+        <UserExpressionsProvider
+          expressions={expressions}
+          rendermime={rendermime}
+        >
+          <TabStateProvider>
+            <ReferencesProvider
+              references={references}
+              frontmatter={frontmatter}
+            >
+              {showFrontMatter && (
+                <FrontmatterBlock frontmatter={frontmatter} />
+              )}
+              {children}
+            </ReferencesProvider>
+          </TabStateProvider>
+        </UserExpressionsProvider>
+      </ThemeProvider>
+    );
+  }
+
   render() {
     return (
       <UseSignal signal={this._expressionStateChanged} initialSender={this}>
         {() => {
-          const expressionState = this._expressionState;
           return (
-            <UseSignal signal={this._documentStateChanged} initialSender={this}>
-              {() => {
-                const documentState = this._documentState;
-                console.log('re-rendering VDOM', expressionState);
-                if (!documentState) {
-                  return <div>Waiting for MyST AST (mdast)</div>;
-                }
-                const { references, frontmatter, mdast, showFrontMatter } =
-                  documentState;
-
-                const expressions = expressionState?.expressions;
-                const rendermime = expressionState?.rendermime;
-                const children = useParse(mdast as any, renderers);
-
-                return (
-                  <ThemeProvider
-                    theme={Theme.light}
-                    Link={linkFactory(this.resolver, this.linkHandler)}
-                    renderers={renderers}
-                  >
-                    <UserExpressionsProvider
-                      expressions={expressions}
-                      rendermime={rendermime}
-                    >
-                      <TabStateProvider>
-                        <ReferencesProvider
-                          references={references}
-                          frontmatter={frontmatter}
-                        >
-                          {showFrontMatter && (
-                            <FrontmatterBlock frontmatter={frontmatter} />
-                          )}
-                          {children}
-                        </ReferencesProvider>
-                      </TabStateProvider>
-                    </UserExpressionsProvider>
-                  </ThemeProvider>
-                );
-              }}
+            <UseSignal signal={this._fragmentStateChanged} initialSender={this}>
+              {() =>
+                this.renderMyST(this._fragmentState, this._expressionState)
+              }
             </UseSignal>
           );
         }}
@@ -149,16 +153,16 @@ export class RenderedMySTMarkdown
    *
    * @param state - The MyST document state to use
    */
-  onDocumentUpdated(state: IMySTFragmentState) {
+  onFragmentUpdated(state: IMySTFragmentState) {
     console.debug('document changed', state);
-    this._documentState = state;
-    this._documentStateChanged.emit(state);
+    this._fragmentState = state;
+    this._fragmentStateChanged.emit(state);
   }
 
   /**
    * Update the MyST expressions state, triggering a re-render
    *
-   * @param state - The MyST document state to use
+   * @param state - The MyST expressions state to use
    */
   onExpressionsUpdated(state: IMySTExpressionsState) {
     console.debug('expressions changed', state);
@@ -181,7 +185,7 @@ export class RenderedMySTMarkdown
     if (this.documentContext === undefined) {
       processedState = processLocalMDAST(this._rawMDAST, this.resolver);
       console.log('Render local!');
-      this.onDocumentUpdated(processedState);
+      this.onFragmentUpdated(processedState);
     } else {
       console.log('Request document update!');
       this.documentContext.requestUpdate(this);
