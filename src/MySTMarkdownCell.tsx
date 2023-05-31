@@ -26,8 +26,10 @@ export class MySTMarkdownCell
     (this.model as unknown as MarkdownCellModel).onTrustedChanged = () =>
       this.onTrustedChanged();
 
-    this.mystRenderer.documentContext = {
-      requestUpdate: _ => this.onRendererRequestUpdate()
+    this.mystRenderer.fragmentContext = {
+      requestUpdate: _ => this.onRendererRequestUpdate(),
+      getSource: () => this.model.sharedModel.getSource(),
+      setSource: (source: string) => this.model.sharedModel.setSource(source)
     };
 
     // We need to write the initial metadata values from the cell

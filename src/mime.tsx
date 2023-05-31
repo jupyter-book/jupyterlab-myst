@@ -21,14 +21,17 @@ import { Signal } from '@lumino/signaling';
 import React from 'react';
 import { selectAll } from 'unist-util-select';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
+import { TextModelProvider } from './TextModelProvider';
 
 /**
  * The MIME type for Markdown.
  */
 export const MIME_TYPE = 'text/markdown';
 
-export interface IMySTDocumentContext {
+export interface IMySTFragmentContext {
   requestUpdate(renderer: RenderedMySTMarkdown): void;
+  getSource(): string;
+  setSource(value: string): void;
 }
 
 /**
@@ -79,7 +82,7 @@ export class RenderedMySTMarkdown
    */
   readonly linkHandler: IRenderMime.ILinkHandler | null;
 
-  public documentContext: IMySTDocumentContext | undefined;
+  public fragmentContext: IMySTFragmentContext | undefined;
   private _fragmentStateChanged = new Signal<this, IMySTFragmentState>(this);
   private _expressionStateChanged = new Signal<this, IMySTExpressionsState>(
     this
@@ -107,28 +110,30 @@ export class RenderedMySTMarkdown
     const children = useParse(mdast as any, renderers);
 
     return (
-      <ThemeProvider
-        theme={Theme.light}
-        Link={linkFactory(this.resolver, this.linkHandler)}
-        renderers={renderers}
-      >
-        <UserExpressionsProvider
-          expressions={expressions}
-          rendermime={rendermime}
+      <TextModelProvider model={this.fragmentContext}>
+        <ThemeProvider
+          theme={Theme.light}
+          Link={linkFactory(this.resolver, this.linkHandler)}
+          renderers={renderers}
         >
-          <TabStateProvider>
-            <ReferencesProvider
-              references={references}
-              frontmatter={frontmatter}
-            >
-              {showFrontMatter && (
-                <FrontmatterBlock frontmatter={frontmatter} />
-              )}
-              {children}
-            </ReferencesProvider>
-          </TabStateProvider>
-        </UserExpressionsProvider>
-      </ThemeProvider>
+          <UserExpressionsProvider
+            expressions={expressions}
+            rendermime={rendermime}
+          >
+            <TabStateProvider>
+              <ReferencesProvider
+                references={references}
+                frontmatter={frontmatter}
+              >
+                {showFrontMatter && (
+                  <FrontmatterBlock frontmatter={frontmatter} />
+                )}
+                {children}
+              </ReferencesProvider>
+            </TabStateProvider>
+          </UserExpressionsProvider>
+        </ThemeProvider>
+      </TextModelProvider>
     );
   }
 
@@ -182,13 +187,13 @@ export class RenderedMySTMarkdown
     console.debug('Storing raw MDAST for cell', this._rawMDAST);
 
     let processedState: IMySTFragmentState;
-    if (this.documentContext === undefined) {
+    if (this.fragmentContext === undefined) {
       processedState = processLocalMDAST(this._rawMDAST, this.resolver);
       console.log('Render local!');
       this.onFragmentUpdated(processedState);
     } else {
       console.log('Request document update!');
-      this.documentContext.requestUpdate(this);
+      this.fragmentContext.requestUpdate(this);
     }
 
     console.log('State changed', this);
