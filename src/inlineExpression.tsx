@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import { useJupyterCell } from './JupyterCellProvider';
+import { useUserExpressions } from './UserExpressionsProvider';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import {
@@ -8,8 +8,7 @@ import {
   isError,
   isOutput
 } from './userExpressions';
-import { getUserExpressions, IUserExpressionMetadata } from './metadata';
-import { StaticNotebook } from '@jupyterlab/notebook';
+import { IUserExpressionMetadata } from './metadata';
 
 export interface IRenderedExpressionOptions {
   expression: string;
@@ -141,7 +140,10 @@ function MIMEBundleRenderer({
       console.debug('Exit MIMEBundleRenderer renderer: missing state');
       return;
     }
-    if (!renderer.isAttached) Widget.attach(renderer, ref.current);
+    if (!renderer.isAttached) {
+      Widget.attach(renderer, ref.current);
+      console.log('ATTACH TO RENDERER');
+    }
     renderer.renderExpression(expressionMetadata.result);
   }, [ref, renderer, expressionMetadata]);
 
@@ -163,20 +165,22 @@ function MIMEBundleRenderer({
 }
 
 export function InlineRenderer({ value }: { value?: string }): JSX.Element {
-  const { cell } = useJupyterCell();
-  // Load the information from the MystMarkdownCell
-  const metadata = getUserExpressions(cell);
-  const trusted = cell?.model.trusted ?? false;
-  // We use the notebook rendermime directly
-  const rendermime = (cell?.parent as StaticNotebook).rendermime;
+  const { expressions, rendermime } = useUserExpressions();
+
+  if (!expressions || !rendermime) {
+    return <code>{value}</code>;
+  }
+  console.log('Found', expressions);
+  const trusted = true; //cell?.model.trusted ?? false;
 
   // Find the expressionResult that is for this node
-  const expressionMetadata = metadata?.find(p => p.expression === value);
+  const expressionMetadata = expressions?.find(p => p.expression === value);
   const mimeBundle = expressionMetadata?.result.data as
     | Record<string, string>
     | undefined;
 
   if (!expressionMetadata) {
+    console.log('No metadata for', value);
     return <code>{value}</code>;
   }
 
@@ -190,8 +194,10 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   }
   // Explicitly render errors
   if (isError(expressionMetadata.result)) {
+    console.log('Error for', value, expressionMetadata.result);
     return <ErrorRenderer error={expressionMetadata.result} />;
   }
+
   return (
     <MIMEBundleRenderer
       rendermime={rendermime}
