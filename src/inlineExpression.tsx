@@ -165,13 +165,12 @@ function MIMEBundleRenderer({
 }
 
 export function InlineRenderer({ value }: { value?: string }): JSX.Element {
-  const { expressions, rendermime } = useUserExpressions();
+  const { expressions, rendermime, trusted } = useUserExpressions();
 
   if (!expressions || !rendermime) {
     return <code>{value}</code>;
   }
   console.log('Found', expressions);
-  const trusted = true; //cell?.model.trusted ?? false;
 
   // Find the expressionResult that is for this node
   const expressionMetadata = expressions?.find(p => p.expression === value);
@@ -201,7 +200,7 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   return (
     <MIMEBundleRenderer
       rendermime={rendermime}
-      trusted={trusted}
+      trusted={!!trusted}
       expressionMetadata={expressionMetadata}
     ></MIMEBundleRenderer>
   );
