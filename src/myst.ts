@@ -50,6 +50,7 @@ export interface IMySTFragmentState extends IMySTDocumentState {
 export interface IMySTExpressionsState {
   expressions: IUserExpressionMetadata[];
   rendermime: IRenderMimeRegistry;
+  trusted: boolean;
 }
 
 export function markdownParse(text: string, inNotebook = true): Root {

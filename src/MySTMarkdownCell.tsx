@@ -45,7 +45,8 @@ export class MySTMarkdownCell
     if (expressions !== undefined) {
       this.mystRenderer.onExpressionsUpdated({
         expressions: expressions,
-        rendermime: this._notebookRendermime
+        rendermime: this._notebookRendermime,
+        trusted: this.model.trusted
       });
     }
   }
@@ -84,7 +85,8 @@ export class MySTMarkdownCell
         console.log('metadata changed', args);
         this.mystRenderer.onExpressionsUpdated({
           expressions: args.newValue,
-          rendermime: this._notebookRendermime
+          rendermime: this._notebookRendermime,
+          trusted: model.trusted
         });
         break;
       default:
