@@ -107,6 +107,7 @@ export class RenderedMySTMarkdown
 
     const expressions = expressionState?.expressions;
     const rendermime = expressionState?.rendermime;
+    const trusted = expressionState?.trusted;
     const children = useParse(mdast as any, renderers);
 
     return (
@@ -119,6 +120,7 @@ export class RenderedMySTMarkdown
           <UserExpressionsProvider
             expressions={expressions}
             rendermime={rendermime}
+            trusted={trusted}
           >
             <TabStateProvider>
               <ReferencesProvider
