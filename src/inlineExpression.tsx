@@ -170,7 +170,7 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   if (!expressions || !rendermime) {
     return <code>{value}</code>;
   }
-  console.log('Found', expressions);
+  console.log('Rendering inline:', expressions);
 
   // Find the expressionResult that is for this node
   const expressionMetadata = expressions?.find(p => p.expression === value);

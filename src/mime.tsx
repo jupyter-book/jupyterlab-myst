@@ -99,7 +99,7 @@ export class RenderedMySTMarkdown
     fragmentState: IMySTFragmentState | undefined,
     expressionState: IMySTExpressionsState | undefined
   ): React.JSX.Element {
-    console.log('re-rendering VDOM', expressionState);
+    console.log('re-rendering VDOM', fragmentState, expressionState);
     if (!fragmentState) {
       return <div>Waiting for MyST AST (mdast)</div>;
     }
@@ -189,14 +189,14 @@ export class RenderedMySTMarkdown
     let processedState: IMySTFragmentState;
     if (this.fragmentContext === undefined) {
       processedState = processLocalMDAST(this._rawMDAST, this.resolver);
-      console.log('Render local!');
+      console.debug('Render local!');
       this.onFragmentUpdated(processedState);
     } else {
-      console.log('Request document update!');
+      console.debug('Request document update!');
       this.fragmentContext.requestUpdate(this);
     }
 
-    console.log('State changed', this);
+    console.debug('State changed', this);
     return this.renderPromise || Promise.resolve();
   }
 }
