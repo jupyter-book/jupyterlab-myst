@@ -153,7 +153,13 @@ function MIMEBundleRenderer({
 
   // Clean up the renderer when the component is removed from the dom
   useEffect(() => {
-    if (!ref.current || !renderer || !expressionMetadata) {
+    if (
+      !ref.current ||
+      !renderer ||
+      !expressionMetadata ||
+      !renderer.node.isConnected ||
+      !renderer.isAttached
+    ) {
       console.debug(
         `Cannot dispose of expression renderer for \`${expressionMetadata.expression}\`: missing state`
       );
@@ -163,9 +169,13 @@ function MIMEBundleRenderer({
       console.log(
         `Disposing of expression renderer for \`${expressionMetadata.expression}\``,
         renderer,
+        renderer.isAttached,
         ref.current
       );
-      renderer.dispose();
+      // TODO fix this properly! At the moment, this gets called when `ref` is already disposed.
+      if (renderer.isAttached && renderer.node.isConnected) {
+        renderer.dispose();
+      }
     };
   }, [renderer]);
   console.debug(

@@ -140,6 +140,13 @@ export class RenderedMySTMarkdown
   }
 
   render() {
+    console.log(
+      'Render RenderedMySTMarkdown',
+      this.isDisposed,
+      this.isAttached,
+      this.node.isConnected,
+      this
+    );
     return (
       <UseSignal signal={this._expressionStateChanged} initialSender={this}>
         {() => {
