@@ -99,7 +99,7 @@ export class RenderedMySTMarkdown
     fragmentState: IMySTFragmentState | undefined,
     expressionState: IMySTExpressionsState | undefined
   ): React.JSX.Element {
-    console.log('re-rendering VDOM', fragmentState, expressionState);
+    console.debug('re-rendering VDOM', fragmentState, expressionState);
     if (!fragmentState) {
       return <div>Waiting for MyST AST (mdast)</div>;
     }
@@ -140,7 +140,7 @@ export class RenderedMySTMarkdown
   }
 
   render() {
-    console.log(
+    console.debug(
       'Render RenderedMySTMarkdown',
       this.isDisposed,
       this.isAttached,

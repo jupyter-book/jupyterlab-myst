@@ -52,7 +52,7 @@ export class MySTMarkdownCell
   }
 
   protected onTrustedChanged() {
-    console.log('trust changed', this.model.trusted);
+    console.debug('trust changed', this.model.trusted);
     this.restoreExpressionsFromMetadata();
   }
 
@@ -82,7 +82,7 @@ export class MySTMarkdownCell
   protected onMetadataChanged(model: CellModel, args: IMapChange): void {
     switch (args.key) {
       case metadataSection:
-        console.log('metadata changed', args);
+        console.debug('metadata changed', args);
         this.mystRenderer.onExpressionsUpdated({
           expressions: args.newValue,
           rendermime: this._notebookRendermime,

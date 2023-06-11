@@ -166,7 +166,7 @@ function MIMEBundleRenderer({
       return;
     }
     return () => {
-      console.log(
+      console.debug(
         `Disposing of expression renderer for \`${expressionMetadata.expression}\``,
         renderer,
         renderer.isAttached,
@@ -190,7 +190,7 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   if (!expressions || !rendermime) {
     return <code>{value}</code>;
   }
-  console.log('Rendering inline:', expressions);
+  console.debug('Rendering inline:', expressions);
 
   // Find the expressionResult that is for this node
   const expressionMetadata = expressions?.find(p => p.expression === value);
@@ -199,7 +199,7 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
     | undefined;
 
   if (!expressionMetadata) {
-    console.log('No metadata for', value);
+    console.debug('No metadata for', value);
     return <code>{value}</code>;
   }
 
@@ -213,7 +213,7 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   }
   // Explicitly render errors
   if (isError(expressionMetadata.result)) {
-    console.log('Error for', value, expressionMetadata.result);
+    console.debug('Error for', value, expressionMetadata.result);
     return <ErrorRenderer error={expressionMetadata.result} />;
   }
 

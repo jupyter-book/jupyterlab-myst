@@ -9,7 +9,7 @@ export function getCellList(
   if (!n) {
     return undefined;
   }
-  const cells = [];
+  const cells: IMySTMarkdownCell[] = [];
   let cell;
   do {
     cell = n.next().value as IMySTMarkdownCell | undefined;
