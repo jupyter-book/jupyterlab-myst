@@ -60,17 +60,6 @@ export class RenderedMySTMarkdown
     const expressions = selectAll('inlineExpression', mdast);
     return expressions.map(node => (node as any).value);
   }
-  //
-  // renderExpressions(
-  //   value: IUserExpressionMetadata[],
-  //   rendermime: IRenderMimeRegistry
-  // ) {
-  //   this.expressionsState = {
-  //     expressions: value,
-  //     rendermime
-  //   };
-  //   this._stateChanged.emit();
-  // }
 
   /**
    * The resolver object.
