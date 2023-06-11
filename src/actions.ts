@@ -123,6 +123,7 @@ export async function notebookCellExecuted(
     cell.model.setMetadata(metadataSection, expressions);
     cell.model.trusted = true;
   } else {
-    cell.model.deleteMetadata(metadataSection);
+    // In 3.6 this is not a function
+    cell.model.deleteMetadata?.(metadataSection);
   }
 }

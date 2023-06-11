@@ -26,6 +26,11 @@ export class MySTMarkdownCell
     (this.model as unknown as MarkdownCellModel).onTrustedChanged = () =>
       this.onTrustedChanged();
 
+    if (!this.renderer) {
+      // This is a backwards compatible 3.6 change
+      (this as any).renderer = new RenderedMySTMarkdown({} as any);
+    }
+
     this.mystRenderer.fragmentContext = {
       requestUpdate: _ => this.onRendererRequestUpdate(),
       getSource: () => this.model.sharedModel.getSource(),
@@ -41,7 +46,8 @@ export class MySTMarkdownCell
   }
 
   protected restoreExpressionsFromMetadata() {
-    const expressions = this.model.getMetadata(metadataSection);
+    // In 3.6 this is not a function
+    const expressions = this.model.getMetadata?.(metadataSection);
     if (expressions !== undefined) {
       this.mystRenderer.onExpressionsUpdated({
         expressions: expressions,
