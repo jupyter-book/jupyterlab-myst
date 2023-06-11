@@ -142,7 +142,11 @@ function MIMEBundleRenderer({
     }
     if (!renderer.isAttached) {
       Widget.attach(renderer, ref.current);
-      console.log('ATTACH TO RENDERER');
+      console.debug(
+        `Attached expression renderer for \`${expressionMetadata.expression}\` to parent widget`,
+        renderer,
+        ref.current
+      );
     }
     renderer.renderExpression(expressionMetadata.result);
   }, [ref, renderer, expressionMetadata]);
@@ -150,11 +154,17 @@ function MIMEBundleRenderer({
   // Clean up the renderer when the component is removed from the dom
   useEffect(() => {
     if (!ref.current || !renderer || !expressionMetadata) {
-      console.debug('Cannot dispose MIMEBundleRenderer: missing state');
+      console.debug(
+        `Cannot dispose of expression renderer for \`${expressionMetadata.expression}\`: missing state`
+      );
       return;
     }
     return () => {
-      console.log('Disposing MIMEBundleRenderer');
+      console.log(
+        `Disposing of expression renderer for \`${expressionMetadata.expression}\``,
+        renderer,
+        ref.current
+      );
       renderer.dispose();
     };
   }, [renderer]);
