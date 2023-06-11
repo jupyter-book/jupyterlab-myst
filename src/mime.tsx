@@ -4,7 +4,7 @@ import {
   IMySTExpressionsState,
   IMySTFragmentState,
   markdownParse,
-  processLocalMDAST
+  processArticleMDAST
 } from './myst';
 import { linkFactory } from './links';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
@@ -187,18 +187,22 @@ export class RenderedMySTMarkdown
   /**
    * Render a mime model.
    *
+   * This is called both for notebook cells and for markdown documents.
+   * A markdown cell in a notebook will have `fragmentContext` defined.
+   *
    * @param model - The mime model to render.
    *
    * @returns A promise which resolves when rendering is complete.
    */
-  renderModel(model: IRenderMime.IMimeModel): Promise<void> {
+  async renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     this._rawMDAST = markdownParse(model.data[MIME_TYPE] as string);
     console.debug('Storing raw MDAST for cell', this._rawMDAST);
 
     let processedState: IMySTFragmentState;
     if (this.fragmentContext === undefined) {
-      processedState = processLocalMDAST(this._rawMDAST, this.resolver);
-      console.debug('Render local!');
+      // We are in a markdown file, not a notebook cell.
+      processedState = await processArticleMDAST(this._rawMDAST, this.resolver);
+      console.debug('Render ArticleMDAST');
       this.onFragmentUpdated(processedState);
     } else {
       console.debug('Request document update!');

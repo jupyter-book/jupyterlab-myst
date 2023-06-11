@@ -161,10 +161,13 @@ export function processNotebookMDAST(
   return { references, frontmatter, mdast };
 }
 
-export function processLocalMDAST(
+/**
+ * Called when processing a full markdown article.
+ */
+export async function processArticleMDAST(
   mdast: any,
   resolver: IRenderMime.IResolver | null
-): IMySTFragmentState {
+): Promise<IMySTFragmentState> {
   mdast = copyNode(mdast);
   const linkTransforms = [
     new WikiTransformer(),
@@ -175,7 +178,6 @@ export function processLocalMDAST(
   const file = new VFile();
   const references = {
     cite: { order: [], data: {} },
-    footnotes: {},
     article: mdast as any
   };
 
@@ -203,6 +205,9 @@ export function processLocalMDAST(
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
+  // Go through all links and replace the source if they are local
+  await imageUrlSourceTransform(mdast, { resolver });
+
   return {
     references,
     frontmatter,
@@ -211,7 +216,7 @@ export function processLocalMDAST(
   };
 }
 
-export function renderNotebook(
+export async function renderNotebook(
   cells: MarkdownCell[],
   state: IMySTDocumentState,
   resolver: IRenderMime.IResolver | null
