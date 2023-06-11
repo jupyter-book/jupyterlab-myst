@@ -42,6 +42,7 @@ jobs:
       - uses: jupyterlab/maintainer-tools/.github/actions/update-snapshots@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          npm_client: jlpm
           # Playwright knows how to start JupyterLab server
           start_server_script: 'null'
           test_folder: ui-tests
