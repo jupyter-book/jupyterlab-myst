@@ -53,7 +53,7 @@ export interface IMySTExpressionsState {
   trusted: boolean;
 }
 
-export function markdownParse(text: string, inNotebook = true): Root {
+export function markdownParse(text: string): Root {
   const mdast = mystParse(text, {
     directives: [
       cardDirective,
@@ -78,11 +78,9 @@ export function markdownParse(text: string, inNotebook = true): Root {
       }
     })
     .runSync(mdast as any);
-  if (inNotebook) {
-    // If in the notebook, lift children out of blocks for the next step
-    // We are working here as one cell at a time
-    liftChildren(mdast, 'block');
-  }
+  // If in the notebook, lift children out of blocks for the next step
+  // We are working here as one cell at a time
+  liftChildren(mdast, 'block');
   return mdast as Root;
 }
 

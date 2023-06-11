@@ -3263,24 +3263,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@myst-theme/diagrams@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "@myst-theme/diagrams@npm:0.2.6"
+"@myst-theme/diagrams@npm:^0.2.8":
+  version: 0.2.10
+  resolution: "@myst-theme/diagrams@npm:0.2.10"
   dependencies:
-    "@myst-theme/providers": ^0.2.6
+    "@myst-theme/providers": ^0.2.10
     mermaid: ^9.3.0
   peerDependencies:
     "@types/react": ^16.8 || ^17.0 || ^18.0
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 514bfaaf6697e7edde94205aafbbbf3df2118ba2a0c9140a6e232ba27bd418e0d0f30ef2a1033939b3c18c949da1849c4649b59520b71ced147c6340d6b4d87a
+  checksum: 374aed6640d43464846962a90877d3c756fe408c93ec5ca07d2fcb988d7061186546ed7aefe3d7623e557b615d0228b1d5e0d1b7932deb6d2762d455d3da819d
   languageName: node
   linkType: hard
 
-"@myst-theme/frontmatter@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "@myst-theme/frontmatter@npm:0.2.6"
+"@myst-theme/frontmatter@npm:^0.2.8":
+  version: 0.2.10
+  resolution: "@myst-theme/frontmatter@npm:0.2.10"
   dependencies:
     "@headlessui/react": ^1.7.13
     "@heroicons/react": ^2.0.13
@@ -3293,30 +3293,29 @@ __metadata:
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 48451008692e103aa2cdbf3cd67e76434b2c45600b0d9e00e40e513319e0de3e68ef43ee56ef7f0d358ec07aa0e65159d5d3b96abc4366a5c966c03cc3cebfbe
+  checksum: b0ffd3d5c1107cc88e5ff980331034079abb3ff09d951091cd9d12d58a2def2d2bf716676ef3c8429e06150cbd13d1000f1cdedf2faedcacbdf2464e8913d332
   languageName: node
   linkType: hard
 
-"@myst-theme/providers@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "@myst-theme/providers@npm:0.2.6"
-  dependencies:
-    myst-common: ^0.0.16
-    myst-config: ^0.0.14
-    myst-frontmatter: ^0.0.13
+"@myst-theme/providers@npm:^0.2.10, @myst-theme/providers@npm:^0.2.8":
+  version: 0.2.10
+  resolution: "@myst-theme/providers@npm:0.2.10"
   peerDependencies:
     "@types/react": ^16.8 || ^17.0 || ^18.0
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
+    myst-common: ^0.0.17
+    myst-config: ^0.0.16
+    myst-frontmatter: ^0.0.14
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 705f932f7c36cd956ce0b7b98fad1b447618569faa99887736f6036dca360ff79057aca8ea69d7291ea785be5c1d39bb451e45b1371d15b525b6360edd23b0bf
+  checksum: 767bf5c3997ef2f8db60591b441d34292b37c84e650233955c4de2bf44c67ef92d810220bd58bba42840d448a00e8fac7faee9d5f463d93f99b116186bc1f3d7
   languageName: node
   linkType: hard
 
-"@myst-theme/styles@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "@myst-theme/styles@npm:0.2.6"
-  checksum: 195c20c03e7602fc9f7d130537db6817c0bd138b055a50370a2e69e264075a125288f13ba09ed3a29e1507142ff274e9653cb2a50ca319cff33b67623599b93d
+"@myst-theme/styles@npm:^0.2.8":
+  version: 0.2.10
+  resolution: "@myst-theme/styles@npm:0.2.10"
+  checksum: 85e8e842956fbd9276f2d64565e9d3427d1558edb1c8fdd43dc3d13473f7d5ca54abe06f6a07cb1606be102d074290d8a39094191c001c0b1250f93dc4d7424d
   languageName: node
   linkType: hard
 
@@ -8560,10 +8559,10 @@ __metadata:
     "@jupyterlab/rendermime": ^4.0.0
     "@jupyterlab/testutils": ^4.0.0
     "@jupyterlab/translation": ^4.0.0
-    "@myst-theme/diagrams": ^0.2.6
-    "@myst-theme/frontmatter": ^0.2.6
-    "@myst-theme/providers": ^0.2.6
-    "@myst-theme/styles": ^0.2.6
+    "@myst-theme/diagrams": ^0.2.8
+    "@myst-theme/frontmatter": ^0.2.8
+    "@myst-theme/providers": ^0.2.8
+    "@myst-theme/styles": ^0.2.8
     "@tailwindcss/typography": ^0.5.8
     "@types/jest": ^29.2.0
     "@types/json-schema": ^7.0.11
@@ -8580,12 +8579,13 @@ __metadata:
     katex: ^0.15.2
     mkdirp: ^1.0.3
     myst-ext-card: ^0.0.7
+    myst-ext-exercise: ^0.0.2
     myst-ext-grid: ^0.0.7
     myst-ext-proof: ^0.0.2
     myst-ext-tabs: ^0.0.7
     myst-frontmatter: ^0.0.13
-    myst-parser: ^0.0.30
-    myst-to-react: ^0.2.6
+    myst-parser: ^0.0.31
+    myst-to-react: ^0.2.8
     myst-transforms: ^0.0.31
     npm-run-all: ^4.1.5
     prettier: ^2.8.7
@@ -9440,39 +9440,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"myst-common@npm:^0.0.16":
+"myst-config@npm:^0.0.16":
   version: 0.0.16
-  resolution: "myst-common@npm:0.0.16"
+  resolution: "myst-config@npm:0.0.16"
   dependencies:
-    mdast: ^3.0.0
-    myst-spec: ^0.0.4
-    nanoid: ^4.0.0
-    unist-util-map: ^3.0.0
-    vfile: ^5.0.0
-    vfile-message: ^3.0.0
-  checksum: d6309c5bac1daed13835260f9a9cf87e2fe582cfd2b1aef19615b00a05726186f0ef4cd2cc2548b13128c898064dfdab865260911939dc42f68ad5181b3945b1
-  languageName: node
-  linkType: hard
-
-"myst-config@npm:^0.0.14":
-  version: 0.0.14
-  resolution: "myst-config@npm:0.0.14"
-  dependencies:
-    myst-frontmatter: ^0.0.13
+    myst-frontmatter: ^0.0.14
     simple-validators: ^0.0.3
-  checksum: 2899e26e9f7edb7341f88369fff01d97e8c7affc74167ae6c57e691d2de3d09cb03510981a41dcdce8d3397336c3845f90b805d4764cb4aec37eac0d6a679547
+  checksum: 570ab1af14ea82e212e5d0571b5d64d07c2baf84bf29538ff1cad905d33f3d668b8fadb55200230386682a7fd8706305a34eb79bfed9567f34e5ca090b31dfdc
   languageName: node
   linkType: hard
 
-"myst-directives@npm:^0.0.30":
-  version: 0.0.30
-  resolution: "myst-directives@npm:0.0.30"
+"myst-directives@npm:^0.0.31":
+  version: 0.0.31
+  resolution: "myst-directives@npm:0.0.31"
   dependencies:
     js-yaml: ^4.1.0
     myst-common: ^0.0.17
     myst-spec-ext: ^0.0.12
     vfile: ^5.3.7
-  checksum: dd8e966db340ab28f98f216913a21d7a66b7a36a8a76860a4ffbcdef0f725a43546fc6d272327b851b2ae1c0496baa977b73ee63bcc0c1e60a9bf6fd7c33ff61
+  checksum: 8bd41e0dccd2164507562207869b6b9a9323e4c7f2e5aad277924449124f6df09caac6e705ba614471ef59289fbab80bfe34ecb7144ca30b259422d468048b75
   languageName: node
   linkType: hard
 
@@ -9482,6 +9468,15 @@ __metadata:
   dependencies:
     myst-common: ^0.0.17
   checksum: 1b47cdcc5c15043cf88be016540ea06d0b9cede9f6e3d0155419d7393baebe4355af132a07e960e2315dc9716ec8118796ac9116671c42a654b7cc48f7026a0c
+  languageName: node
+  linkType: hard
+
+"myst-ext-exercise@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "myst-ext-exercise@npm:0.0.2"
+  dependencies:
+    myst-common: ^0.0.17
+  checksum: 486ae7d53428e23a4e669f6d4c11fafa57afd1fc4709172b793609f7115afe260624943e5e529e7707252898e22c9268402eccc357b2b8863e5b41b1819e722c
   languageName: node
   linkType: hard
 
@@ -9525,9 +9520,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"myst-parser@npm:^0.0.30":
-  version: 0.0.30
-  resolution: "myst-parser@npm:0.0.30"
+"myst-frontmatter@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "myst-frontmatter@npm:0.0.14"
+  dependencies:
+    credit-roles: ^1.0.0
+    doi-utils: ^1.0.9
+    orcid: ^0.0.5
+    simple-validators: ^0.0.3
+    spdx-correct: ^3.1.1
+  checksum: fc9f42bc5efc459dadf69ad6fe79d0c44e9d37144cfe0618f69784bfebb139f0c0e97b1bf444eb0aaa91f4ab13e740c4f342122e11bb8c52837a5e7190f94dd7
+  languageName: node
+  linkType: hard
+
+"myst-parser@npm:^0.0.31":
+  version: 0.0.31
+  resolution: "myst-parser@npm:0.0.31"
   dependencies:
     he: ^1.2.0
     markdown-it: ^12.3.2
@@ -9539,8 +9547,8 @@ __metadata:
     markdown-it-myst: 0.1.3
     markdown-it-myst-extras: 0.2.0
     markdown-it-task-lists: ^2.1.1
-    myst-directives: ^0.0.30
-    myst-roles: ^0.0.30
+    myst-directives: ^0.0.31
+    myst-roles: ^0.0.31
     myst-spec: ^0.0.4
     unified: ^10.1.1
     unist-builder: ^3.0.0
@@ -9548,17 +9556,17 @@ __metadata:
     unist-util-select: ^4.0.3
     unist-util-visit: ^4.1.0
     vfile: ^5.3.7
-  checksum: 72b95a9f66f681d4fa6a3b9994da63fbf9e320bf9abdd573e777b9290a89e66a0f17fbba6e385bdb4f3d63bd919c06e1cdcb9149391a2b57d4827a4daab99065
+  checksum: fb22c96aa783d1dc37d3d1f4f2e760e3382d627a53b4f00864aa2f3abdc879dace90e3e893cc90ed3faa9bb5b083998e714a867d1b32aac9dd3dba5674ede89d
   languageName: node
   linkType: hard
 
-"myst-roles@npm:^0.0.30":
-  version: 0.0.30
-  resolution: "myst-roles@npm:0.0.30"
+"myst-roles@npm:^0.0.31":
+  version: 0.0.31
+  resolution: "myst-roles@npm:0.0.31"
   dependencies:
     myst-common: ^0.0.17
     myst-spec-ext: ^0.0.12
-  checksum: 23abe6e8db9170b8b147542702f4acc75b2c7133623dd7b7aabcd18275143dcc31e0300f26e1b2e9d3a275d2a61bd39e55ad7e05e10e1d22babd13c9b0090927
+  checksum: 4007b28b88409d1c958d410f8ffd633a2a555b1ee784318cd1fb1e2260552f012fc351c6d89f39c60fc65fef1e4ae6c0f703d39f17d4caec645066c55f382d2f
   languageName: node
   linkType: hard
 
@@ -9578,17 +9586,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"myst-to-react@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "myst-to-react@npm:0.2.6"
+"myst-to-react@npm:^0.2.8":
+  version: 0.2.10
+  resolution: "myst-to-react@npm:0.2.10"
   dependencies:
     "@heroicons/react": ^2.0.13
-    "@myst-theme/providers": ^0.2.6
+    "@myst-theme/providers": ^0.2.10
     "@radix-ui/react-hover-card": ^1.0.5
     buffer: ^6.0.3
     classnames: ^2.3.2
-    myst-common: ^0.0.16
-    myst-config: ^0.0.14
+    myst-common: ^0.0.17
+    myst-config: ^0.0.16
     myst-spec: ^0.0.4
     nanoid: ^4.0.0
     react-syntax-highlighter: ^15.5.0
@@ -9599,7 +9607,7 @@ __metadata:
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: c42c165ab648b407adc83b12d7c4ad50bc31842e7082c3a10bb1e560083832ee86185719cfc0f1600cca3eebf0446f0666ddf2ef0291f037e2fddc639e146ee0
+  checksum: ce6a3de9328faf17ef167ef266aa622967f03490851367c00505e3924157d4c925f27865f7ffbf79fad09c9e17aff67f4fba041aa70469c82c32bdd9af17789c
   languageName: node
   linkType: hard
 
