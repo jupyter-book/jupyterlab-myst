@@ -52,7 +52,7 @@
     "stylelint": "jlpm stylelint:check --fix",
     "stylelint:check": "stylelint --cache \"style/**/*.css\"",
     "test": "jest --coverage",
-    "watch": "run-p watch:src watch:labextension",
+    "watch": "run-p watch:src watch:css watch:labextension",
     "watch:css": "tailwindcss -w -i ./style/tailwind.css -o style/app.css",
     "watch:labextension": "jupyter labextension watch .",
     "watch:src": "tsc -w"
