@@ -83,7 +83,7 @@ export class RenderedExpression extends Widget {
 
     // Create renderer
     const renderer = this.rendermime.createRenderer(mimeType);
-    layout.widget = renderer;
+    if (layout) layout.widget = renderer;
     console.assert(renderer.isAttached, 'renderer was not attached!', renderer);
     // Render model
     return renderer.renderModel(model);

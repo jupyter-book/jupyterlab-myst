@@ -257,7 +257,7 @@ export function renderNotebook(
   cells.forEach((cell, index) => {
     const cellMDAST = mdast.children[index];
     const promise = buildPartialState(cell, cellMDAST, index === 0);
-    if (cell.id === caller?.id) {
+    if (caller && cell === caller) {
       thisPromise = promise;
     } else {
       promises.push(

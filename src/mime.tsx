@@ -96,7 +96,7 @@ export class RenderedMySTMarkdown
     const trusted = expressionState?.trusted;
     const children = useParse(mdast as any, renderers);
 
-    console.log('Rendering MyST with trust?:', trusted);
+    console.debug('Rendering MyST with trust?:', trusted);
 
     return (
       <TaskItemControllerProvider controller={this.fragmentContext}>
