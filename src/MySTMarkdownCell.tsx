@@ -25,7 +25,7 @@ export class MySTMarkdownCell
   private _metadataJustChanged = false;
 
   constructor(options: MarkdownCell.IOptions) {
-    super(options);
+    super({ ...options, placeholder: false });
 
     this._notebookRendermime = options.rendermime;
 
