@@ -14,12 +14,15 @@ import {
   renderNotebook
 } from './myst';
 import { StaticNotebook } from '@jupyterlab/notebook';
+import { ActivityMonitor } from '@jupyterlab/coreutils';
 
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
 {
   private _notebookRendermime;
+  private _activityMonitor: ActivityMonitor<ICellModel, void>;
+  private _metadataJustChanged = false;
 
   constructor(options: MarkdownCell.IOptions) {
     super(options);
@@ -39,6 +42,34 @@ export class MySTMarkdownCell
 
     // We need to write the initial metadata values from the cell
     this.restoreExpressionsFromMetadata();
+
+    // HACK: activity monitor also triggers for metadata changes
+    // So, let's re-order the signal registration so that metadata changes can
+    // veto the delayed render
+    (this as any)._monitor.dispose();
+    this._activityMonitor = new ActivityMonitor({
+      signal: this.model.contentChanged,
+      timeout: (this as any)._monitor.timeout
+    });
+    // Throttle the rendering rate of the widget.
+    this.ready
+      .then(() => {
+        if (this.isDisposed) {
+          // Bail early
+          return;
+        }
+        console.debug('ready and connected activityStopped signal');
+        this._activityMonitor.activityStopped.connect(() => {
+          if (this.rendered && !this._metadataJustChanged) {
+            console.debug('Updating after activity monitor expired');
+            this.update();
+          }
+          this._metadataJustChanged = false;
+        }, this);
+      })
+      .catch(reason => {
+        console.error('Failed to be ready', reason);
+      });
   }
 
   private rendererSetTaskItem(line: number, checked: boolean) {
@@ -107,6 +138,7 @@ export class MySTMarkdownCell
     switch (args.key) {
       case metadataSection:
         console.debug('metadata changed', args);
+        this._metadataJustChanged = true;
         this.mystRenderer.onExpressionsUpdated({
           expressions: args.newValue,
           rendermime: this._notebookRendermime,
