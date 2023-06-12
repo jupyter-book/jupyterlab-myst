@@ -216,37 +216,62 @@ export async function processArticleMDAST(
   };
 }
 
-export async function renderNotebook(
+export function renderNotebook(
   cells: MarkdownCell[],
   state: IMySTDocumentState,
-  resolver: IRenderMime.IResolver | null
-): Promise<void> {
+  resolver: IRenderMime.IResolver | null,
+  caller: MarkdownCell | undefined
+): [Promise<IMySTFragmentState> | undefined, Promise<void[]>] {
   const { mdast } = state;
   // Render the full result in each cell using React
   // Any cell can have side-effects into other cells, so this is necessary
 
-  const promises = cells.map(async (cell, index) => {
+  let thisPromise: Promise<IMySTFragmentState> | undefined;
+  const promises: Promise<void>[] = [];
+
+  const buildPartialState = async (
+    cell: MarkdownCell,
+    mdast: any,
+    showFrontMatter: boolean
+  ) => {
     try {
       const attachmentsResolver = new AttachmentsResolver({
         parent: resolver ?? undefined,
         model: cell.model.attachments
       });
       // Go through all links and replace the source if they are local
-      await imageUrlSourceTransform(mdast.children[index] as any, {
+      await imageUrlSourceTransform(mdast as any, {
         resolver: attachmentsResolver
       });
     } catch (error) {
       // pass
     }
 
-    const cellPartialState: IMySTFragmentState = {
+    return {
       ...state,
-      mdast: mdast.children[index],
-      showFrontMatter: index == 0
+      mdast: mdast,
+      showFrontMatter: showFrontMatter
     };
-    console.debug('notebook re-rendering', cell, 'with', cellPartialState);
-    (cell.renderer as RenderedMySTMarkdown).onFragmentUpdated(cellPartialState);
+  };
+
+  cells.forEach((cell, index) => {
+    const cellMDAST = mdast.children[index];
+    const promise = buildPartialState(cell, cellMDAST, index === 0);
+    if (cell.id === caller?.id) {
+      thisPromise = promise;
+    } else {
+      promises.push(
+        promise.then(fragmentState => {
+          (cell.renderer as RenderedMySTMarkdown).onFragmentUpdated(
+            fragmentState
+          );
+        })
+      );
+    }
   });
 
-  return Promise.all(promises).then(() => undefined);
+  if (thisPromise === undefined) {
+    throw Error('Specified cell not found in target');
+  }
+  return [thisPromise || Promise.resolve(), Promise.all(promises)];
 }

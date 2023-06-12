@@ -1,4 +1,9 @@
-import { CellModel, MarkdownCell, MarkdownCellModel } from '@jupyterlab/cells';
+import {
+  CellModel,
+  MarkdownCell,
+  ICellModel,
+  MarkdownCellModel
+} from '@jupyterlab/cells';
 import { IMySTMarkdownCell } from './types';
 import { IMapChange } from '@jupyter/ydoc';
 import { metadataSection } from './metadata';
@@ -78,16 +83,21 @@ export class MySTMarkdownCell
     // Transform AST
     const state = processNotebookMDAST(mdast, notebook.rendermime.resolver);
     if (state === undefined) {
-      return console.error('could not update cell, no state from parse');
+      throw Error('could not update cell, no state from parse');
     }
+
     // Update all cells with rendered result
-    const result = renderNotebook(cells, state, notebook.rendermime.resolver);
-    result.then(() => {
-      console.debug('successfully rendered notebook');
-    });
-    result.catch(err => {
-      console.error('failed to render notebook', err);
-    });
+    const [thisPromise, _] = renderNotebook(
+      cells,
+      state,
+      notebook.rendermime.resolver,
+      this
+    );
+    // Appease type checker
+    if (thisPromise === undefined) {
+      throw Error('this should not happen!');
+    }
+    return thisPromise;
   }
 
   /**

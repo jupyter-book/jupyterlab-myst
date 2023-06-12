@@ -32,7 +32,7 @@ import {
 export const MIME_TYPE = 'text/markdown';
 
 export interface IMySTFragmentContext extends ITaskItemController {
-  requestUpdate(renderer: RenderedMySTMarkdown): void;
+  requestUpdate(renderer: RenderedMySTMarkdown): Promise<IMySTFragmentState>;
   setTaskItem(line: number, checked: boolean): void;
 }
 
@@ -196,14 +196,14 @@ export class RenderedMySTMarkdown
 
     let processedState: IMySTFragmentState;
     if (this.fragmentContext === undefined) {
+      console.debug('Render ArticleMDAST');
       // We are in a markdown file, not a notebook cell.
       processedState = await processArticleMDAST(this._rawMDAST, this.resolver);
-      console.debug('Render ArticleMDAST');
-      this.onFragmentUpdated(processedState);
     } else {
       console.debug('Request document update!');
-      this.fragmentContext.requestUpdate(this);
+      processedState = await this.fragmentContext.requestUpdate(this);
     }
+    this.onFragmentUpdated(processedState);
 
     console.debug('State changed', this);
     return this.renderPromise || Promise.resolve();
