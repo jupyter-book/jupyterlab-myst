@@ -28,12 +28,24 @@ export class MySTMarkdownCell
 
     this.mystRenderer.fragmentContext = {
       requestUpdate: _ => this.onRendererRequestUpdate(),
-      getSource: () => this.model.sharedModel.getSource(),
-      setSource: (source: string) => this.model.sharedModel.setSource(source)
+      setTaskItem: (line: number, checked: boolean) =>
+        this.rendererSetTaskItem(line, checked)
     };
 
     // We need to write the initial metadata values from the cell
     this.restoreExpressionsFromMetadata();
+  }
+
+  private rendererSetTaskItem(line: number, checked: boolean) {
+    const text = this.model.sharedModel.getSource();
+    // This is a pretty cautious replacement for the identified line
+    const lines = text.split('\n');
+    lines[line] = lines[line].replace(
+      /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
+      checked ? '$1[x]' : '$1[ ]'
+    );
+    // Update the Jupyter cell markdown value
+    this.model.sharedModel.setSource(lines.join('\n'));
   }
 
   get mystRenderer(): RenderedMySTMarkdown {

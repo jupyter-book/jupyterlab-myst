@@ -21,17 +21,19 @@ import { Signal } from '@lumino/signaling';
 import React from 'react';
 import { selectAll } from 'unist-util-select';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
-import { TextModelProvider } from './TextModelProvider';
+import {
+  ITaskItemController,
+  TaskItemControllerProvider
+} from './TaskItemControllerProvider';
 
 /**
  * The MIME type for Markdown.
  */
 export const MIME_TYPE = 'text/markdown';
 
-export interface IMySTFragmentContext {
+export interface IMySTFragmentContext extends ITaskItemController {
   requestUpdate(renderer: RenderedMySTMarkdown): void;
-  getSource(): string;
-  setSource(value: string): void;
+  setTaskItem(line: number, checked: boolean): void;
 }
 
 /**
@@ -102,7 +104,7 @@ export class RenderedMySTMarkdown
     console.log('Rendering MyST with trust?:', trusted);
 
     return (
-      <TextModelProvider model={this.fragmentContext}>
+      <TaskItemControllerProvider controller={this.fragmentContext}>
         <ThemeProvider
           theme={Theme.light}
           Link={linkFactory(this.resolver, this.linkHandler)}
@@ -126,7 +128,7 @@ export class RenderedMySTMarkdown
             </TabStateProvider>
           </UserExpressionsProvider>
         </ThemeProvider>
-      </TextModelProvider>
+      </TaskItemControllerProvider>
     );
   }
 
