@@ -31,7 +31,7 @@ export class MySTMarkdownCell
 
     // Listen for changes to the cell trust
     // TODO: Fix this ugly hack upstream!
-    (this.model as unknown as MarkdownCellModel).onTrustedChanged = () =>
+    (this.model as MarkdownCellModel).onTrustedChanged = () =>
       this.onTrustedChanged();
 
     this.mystRenderer.fragmentContext = {

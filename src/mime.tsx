@@ -16,8 +16,7 @@ import {
 } from '@myst-theme/providers';
 import { useParse } from 'myst-to-react';
 import { renderers } from './renderers';
-import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
-import { Signal } from '@lumino/signaling';
+import { ReactWidget } from '@jupyterlab/apputils';
 import React from 'react';
 import { selectAll } from 'unist-util-select';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
@@ -74,10 +73,6 @@ export class RenderedMySTMarkdown
   readonly linkHandler: IRenderMime.ILinkHandler | null;
 
   public fragmentContext: IMySTFragmentContext | undefined;
-  private _fragmentStateChanged = new Signal<this, IMySTFragmentState>(this);
-  private _expressionStateChanged = new Signal<this, IMySTExpressionsState>(
-    this
-  );
   private _fragmentState: IMySTFragmentState | undefined;
   private _expressionState: IMySTExpressionsState | undefined;
   private _rawMDAST: any | undefined;
@@ -134,28 +129,7 @@ export class RenderedMySTMarkdown
 
   render() {
     console.debug('RenderedMySTMarkdown.render()');
-    return (
-      <UseSignal
-        signal={this._expressionStateChanged}
-        initialSender={this}
-        // UseSignal only connects upon mounting, which may happen _after_ the first emission!
-        initialArgs={this._expressionState}
-      >
-        {(_, expressionState) => {
-          return (
-            <UseSignal
-              signal={this._fragmentStateChanged}
-              initialSender={this}
-              initialArgs={this._fragmentState}
-            >
-              {(_, fragmentState) => {
-                return this.renderMyST(fragmentState, expressionState);
-              }}
-            </UseSignal>
-          );
-        }}
-      </UseSignal>
-    );
+    return this.renderMyST(this._fragmentState, this._expressionState);
   }
 
   /**
@@ -166,7 +140,7 @@ export class RenderedMySTMarkdown
   onFragmentUpdated(state: IMySTFragmentState) {
     console.debug('document changed', state);
     this._fragmentState = state;
-    this._fragmentStateChanged.emit(state);
+    this.update();
   }
 
   /**
@@ -177,7 +151,7 @@ export class RenderedMySTMarkdown
   onExpressionsUpdated(state: IMySTExpressionsState) {
     console.debug('expressions changed', state);
     this._expressionState = state;
-    this._expressionStateChanged.emit(state);
+    this.update();
   }
 
   /**
