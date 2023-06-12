@@ -12,7 +12,7 @@ import {
 import { IMySTMarkdownCell } from './types';
 import { RenderedMySTMarkdown } from './mime';
 
-function isMarkdownCell(cell: Cell): cell is IMySTMarkdownCell {
+function isMySTMarkdownCell(cell: Cell): cell is IMySTMarkdownCell {
   return cell.model.type === 'markdown';
 }
 
@@ -89,7 +89,10 @@ export async function executeUserExpressions(
         };
         expressions.push(expressionMetadata);
 
-        console.debug(`Saving ${expr} to cell attachments`, expressionMetadata);
+        console.debug(
+          `Saving \`${expr}\` result to cell attachments`,
+          expressionMetadata
+        );
       }
 
       return resolve(expressions);
@@ -112,7 +115,7 @@ export async function notebookCellExecuted(
     return;
   }
   // Load the user expressions for the given cell.
-  if (!isMarkdownCell(cell)) {
+  if (!isMySTMarkdownCell(cell)) {
     return;
   }
   console.debug(`Markdown cell ${cell.model.id} was executed`);
