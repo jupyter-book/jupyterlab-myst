@@ -91,7 +91,7 @@ export class RenderedExpression extends Widget {
 }
 
 function PlainTextRenderer({ content }: { content: string }) {
-  //content = content.replace(/^(["'])(.*)\1$/, '$2');
+  content = content.replace(/^(["'])(.*)\1$/, '$2');
   return <span>{content}</span>;
 }
 
