@@ -43,11 +43,13 @@ export class MySTMarkdownCell
   protected restoreExpressionsFromMetadata() {
     const expressions = this.model.getMetadata(metadataSection);
     if (expressions !== undefined) {
-      this.mystRenderer.onExpressionsUpdated({
+      const state = {
         expressions: expressions,
         rendermime: this._notebookRendermime,
         trusted: this.model.trusted
-      });
+      };
+      console.debug('restoring expressions from metadata', state);
+      this.mystRenderer.onExpressionsUpdated(state);
     }
   }
 

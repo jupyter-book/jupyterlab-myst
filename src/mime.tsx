@@ -99,6 +99,8 @@ export class RenderedMySTMarkdown
     const trusted = expressionState?.trusted;
     const children = useParse(mdast as any, renderers);
 
+    console.log('Rendering MyST with trust?:', trusted);
+
     return (
       <TextModelProvider model={this.fragmentContext}>
         <ThemeProvider
@@ -129,21 +131,24 @@ export class RenderedMySTMarkdown
   }
 
   render() {
-    console.debug(
-      'Render RenderedMySTMarkdown',
-      this.isDisposed,
-      this.isAttached,
-      this.node.isConnected,
-      this
-    );
+    console.debug('RenderedMySTMarkdown.render()');
     return (
-      <UseSignal signal={this._expressionStateChanged} initialSender={this}>
-        {() => {
+      <UseSignal
+        signal={this._expressionStateChanged}
+        initialSender={this}
+        // UseSignal only connects upon mounting, which may happen _after_ the first emission!
+        initialArgs={this._expressionState}
+      >
+        {(_, expressionState) => {
           return (
-            <UseSignal signal={this._fragmentStateChanged} initialSender={this}>
-              {() =>
-                this.renderMyST(this._fragmentState, this._expressionState)
-              }
+            <UseSignal
+              signal={this._fragmentStateChanged}
+              initialSender={this}
+              initialArgs={this._fragmentState}
+            >
+              {(_, fragmentState) => {
+                return this.renderMyST(fragmentState, expressionState);
+              }}
             </UseSignal>
           );
         }}

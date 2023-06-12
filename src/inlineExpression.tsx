@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useUserExpressions } from './UserExpressionsProvider';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
@@ -91,7 +91,7 @@ export class RenderedExpression extends Widget {
 }
 
 function PlainTextRenderer({ content }: { content: string }) {
-  content = content.replace(/^(["'])(.*)\1$/, '$2');
+  //content = content.replace(/^(["'])(.*)\1$/, '$2');
   return <span>{content}</span>;
 }
 
@@ -124,60 +124,79 @@ function MIMEBundleRenderer({
   expressionMetadata: IUserExpressionMetadata;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Create a single RenderedExpression when the rendermime is available
-  const renderer = useMemo<RenderedExpression | undefined>(() => {
-    return new RenderedExpression({
+  const [renderer, setRenderer] = useState<RenderedExpression | undefined>(
+    undefined
+  );
+
+  // Create renderer
+  useEffect(() => {
+    console.debug(
+      `Creating inline renderer for  \`${expressionMetadata.expression}\``
+    );
+    const thisRenderer = new RenderedExpression({
       expression: expressionMetadata.expression,
       trusted,
       rendermime,
       safe: 'any'
     });
-  }, [rendermime]);
+    setRenderer(thisRenderer);
+
+    return () => {
+      if (thisRenderer.isAttached && !thisRenderer.node.isConnected) {
+        console.error(
+          `Could not dispose of renderer for \`${expressionMetadata.expression}\`: node is not connected`
+        );
+      } else {
+        thisRenderer.dispose();
+      }
+    };
+  }, [rendermime, expressionMetadata]);
+
+  // Attach when ref changes
+  useEffect(() => {
+    const thisRenderer = renderer;
+    if (!ref.current || !thisRenderer) {
+      console.debug(
+        `Cannot attach expression renderer for \`${expressionMetadata.expression}\``
+      );
+      return;
+    }
+    if (thisRenderer.isAttached) {
+      console.error(
+        `Expression renderer for \`${expressionMetadata.expression}\` is already attached to another node`
+      );
+    }
+    Widget.attach(thisRenderer, ref.current);
+    console.debug(
+      `Attached expression renderer for \`${expressionMetadata.expression}\` to parent widget`
+    );
+
+    return () => {
+      // Widget may also be detached through disposal above
+      if (thisRenderer.isAttached && !thisRenderer.node.isConnected) {
+        console.error(
+          `Unable to detach expression renderer for \`${expressionMetadata.expression}\`: node is not connected`
+        );
+      } else if (thisRenderer.isAttached) {
+        console.debug(
+          `Detaching expression renderer for \`${expressionMetadata.expression}\``
+        );
+        Widget.detach(thisRenderer);
+      }
+    };
+  }, [ref, renderer]);
 
   // Attach and render the widget when the expression result changes
   useEffect(() => {
-    if (!ref.current || !renderer || !expressionMetadata) {
-      console.debug('Exit MIMEBundleRenderer renderer: missing state');
-      return;
-    }
-    if (!renderer.isAttached) {
-      Widget.attach(renderer, ref.current);
+    if (!renderer || !expressionMetadata) {
       console.debug(
-        `Attached expression renderer for \`${expressionMetadata.expression}\` to parent widget`,
-        renderer,
-        ref.current
+        `Cannot render expression \`${expressionMetadata.expression}\``
       );
+      return;
     }
     renderer.renderExpression(expressionMetadata.result);
-  }, [ref, renderer, expressionMetadata]);
+  }, [renderer, expressionMetadata]);
 
-  // Clean up the renderer when the component is removed from the dom
-  useEffect(() => {
-    if (
-      !ref.current ||
-      !renderer ||
-      !expressionMetadata ||
-      !renderer.node.isConnected ||
-      !renderer.isAttached
-    ) {
-      console.debug(
-        `Cannot dispose of expression renderer for \`${expressionMetadata.expression}\`: missing state`
-      );
-      return;
-    }
-    return () => {
-      console.debug(
-        `Disposing of expression renderer for \`${expressionMetadata.expression}\``,
-        renderer,
-        renderer.isAttached,
-        ref.current
-      );
-      // TODO fix this properly! At the moment, this gets called when `ref` is already disposed.
-      if (renderer.isAttached && renderer.node.isConnected) {
-        renderer.dispose();
-      }
-    };
-  }, [renderer]);
   console.debug(
     `Rendering MIME bundle for expression: '${expressionMetadata.expression}'`
   );
@@ -190,7 +209,6 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
   if (!expressions || !rendermime) {
     return <code>{value}</code>;
   }
-  console.debug('Rendering inline:', expressions);
 
   // Find the expressionResult that is for this node
   const expressionMetadata = expressions?.find(p => p.expression === value);
@@ -198,10 +216,15 @@ export function InlineRenderer({ value }: { value?: string }): JSX.Element {
     | Record<string, string>
     | undefined;
 
+  console.debug(
+    `Rendering \`${value}\` inline ${trusted ? 'with' : 'without'} trust`
+  );
   if (!expressionMetadata) {
     console.debug('No metadata for', value);
     return <code>{value}</code>;
   }
+
+  console.debug(`Using MIME bundle for \`${value}\``, mimeBundle);
 
   // Explicitly render text/plain
   const preferred = rendermime.preferredMimeType(
