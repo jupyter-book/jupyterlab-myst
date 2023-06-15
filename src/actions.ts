@@ -10,7 +10,7 @@ import {
   NotebookPanel
 } from '@jupyterlab/notebook';
 import { IMySTMarkdownCell } from './types';
-import { RenderedMySTMarkdown } from './mime';
+import { selectAll } from 'unist-util-select';
 
 function isMySTMarkdownCell(cell: Cell): cell is IMySTMarkdownCell {
   return cell.model.type === 'markdown';
@@ -24,22 +24,21 @@ export async function executeUserExpressions(
   cell: IMySTMarkdownCell,
   sessionContext: ISessionContext
 ): Promise<IUserExpressionMetadata[]> {
-  console.debug('Clear existing metadata');
   // Check we have a kernel
   const kernel = sessionContext.session?.kernel;
   if (!kernel) {
     throw new Error('Session has no kernel.');
   }
 
-  // Can simplify with `Object.fromEntries` here
-  // requires ts compiler upgrade!
-
-  const renderer = cell.renderer as RenderedMySTMarkdown;
+  const mdast = cell.mystModel?.mdast ?? {};
+  const expressions = selectAll('inlineExpression', mdast).map(
+    node => (node as any).value
+  );
   // Build ordered map from string index to node
   const namedExpressions = new Map(
-    renderer.expressions.map((expr, index) => [`${index}`, expr])
+    expressions.map((expr, index) => [`${index}`, expr])
   );
-
+  console.debug('Executing named expressions', namedExpressions);
   // No expressions!
   if (namedExpressions.size == 0) {
     return Promise.resolve([]);
@@ -88,11 +87,6 @@ export async function executeUserExpressions(
           result: result
         };
         expressions.push(expressionMetadata);
-
-        console.debug(
-          `Saving \`${expr}\` result to cell attachments`,
-          expressionMetadata
-        );
       }
 
       return resolve(expressions);
@@ -105,6 +99,10 @@ export async function notebookCellExecuted(
   cell: Cell,
   tracker: INotebookTracker
 ): Promise<void> {
+  console.debug(
+    'Executing cell, expressions',
+    cell.model.getMetadata(metadataSection)
+  );
   // Find the Notebook panel
   const panel = tracker.find((w: NotebookPanel) => {
     return w.content === notebook;
@@ -120,12 +118,22 @@ export async function notebookCellExecuted(
   }
   console.debug(`Markdown cell ${cell.model.id} was executed`);
 
+  await cell.parseSource();
+
   // Trust cell!
   const expressions = await executeUserExpressions(cell, ctx);
+  console.debug('Handling evaluated user expressions', expressions);
   if (expressions.length) {
+    console.debug(
+      'Setting metadata, before:',
+      cell.model.getMetadata(metadataSection),
+      'after:',
+      expressions
+    );
     cell.model.setMetadata(metadataSection, expressions);
-    cell.model.trusted = true;
   } else {
     cell.model.deleteMetadata(metadataSection);
+    console.debug('Setting metadata for expressions');
   }
+  cell.model.trusted = true;
 }

@@ -26,27 +26,22 @@ import { tabDirectives } from 'myst-ext-tabs';
 import { proofDirective } from 'myst-ext-proof';
 import { exerciseDirectives } from 'myst-ext-exercise';
 import { StaticNotebook } from '@jupyterlab/notebook';
-import { getCellList } from './utils';
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
+import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksPlugin } from './links';
 import { addCiteChildrenPlugin } from './citations';
 import { evalRole } from './roles';
-import { RenderedMySTMarkdown } from './mime';
 import { IUserExpressionMetadata } from './metadata';
-import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { AttachmentsResolver } from '@jupyterlab/attachments';
-import { MarkdownCell } from '@jupyterlab/cells';
+import { IMySTMarkdownCell } from './types';
+import { Cell, ICellModel } from '@jupyterlab/cells';
+import { MySTModel } from './widget';
 
 export interface IMySTDocumentState {
   references: References;
   frontmatter: PageFrontmatter;
   mdast: any;
 }
-export interface IMySTFragmentState extends IMySTDocumentState {
-  showFrontMatter: boolean;
-}
-
 export interface IMySTExpressionsState {
   expressions: IUserExpressionMetadata[];
   rendermime: IRenderMimeRegistry;
@@ -84,90 +79,13 @@ export function markdownParse(text: string): Root {
   return mdast as Root;
 }
 
-export function buildNotebookMDAST(notebook: StaticNotebook): any {
-  const cells = getCellList(notebook)?.filter(
-    // In the future, we may want to process the code cells as well, but not now
-    cell =>
-      cell.model.type === 'markdown' &&
-      (cell.renderer as RenderedMySTMarkdown).rawMDAST !== undefined
-  );
-  console.debug('list of cells', getCellList(notebook), 'for', notebook);
-  console.debug('list of useful cells', cells);
-  if (!cells) {
-    // This is expected on the first render, we do not want to throw later
-    return undefined;
-  }
-
-  const blocks = cells.map(cell => {
-    return {
-      type: 'block',
-      children: copyNode((cell.renderer as RenderedMySTMarkdown).rawMDAST)
-        .children
-    };
-  });
-  return { cells, mdast: { type: 'root', children: blocks } };
-}
-
-export function processNotebookMDAST(
-  mdast: any,
-  resolver: IRenderMime.IResolver | null
-): IMySTDocumentState | undefined {
-  const linkTransforms = [
-    new WikiTransformer(),
-    new GithubTransformer(),
-    new DOITransformer(),
-    new RRIDTransformer()
-  ];
-  const file = new VFile();
-  const references = {
-    cite: { order: [], data: {} },
-    article: mdast as any
-  };
-  const { frontmatter: frontmatterRaw } = getFrontmatter(
-    // This is the first cell, which might have a YAML block or header.
-    mdast.children[0] as any,
-    {
-      removeYaml: true,
-      removeHeading: true
-    }
-  );
-
-  const frontmatter = validatePageFrontmatter(frontmatterRaw, {
-    property: 'frontmatter',
-    messages: {}
-  });
-
-  const state = new ReferenceState({
-    numbering: frontmatter.numbering,
-    file
-  });
-
-  unified()
-    .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(enumerateTargetsPlugin, { state })
-    .use(linksPlugin, { transformers: linkTransforms })
-    .use(footnotesPlugin)
-    .use(resolveReferencesPlugin, { state })
-    .use(internalLinksPlugin, { resolver: resolver })
-    .use(addCiteChildrenPlugin)
-    .use(keysPlugin)
-    .runSync(mdast as any, file);
-
-  if (file.messages.length > 0) {
-    // TODO: better error messages in the future
-    console.warn(file.messages.map(m => m.message).join('\n'));
-  }
-
-  return { references, frontmatter, mdast };
-}
-
 /**
  * Called when processing a full markdown article.
  */
 export async function processArticleMDAST(
   mdast: any,
-  resolver: IRenderMime.IResolver | null
-): Promise<IMySTFragmentState> {
+  resolver: IRenderMime.IResolver | undefined
+): Promise<IMySTDocumentState> {
   mdast = copyNode(mdast);
   const linkTransforms = [
     new WikiTransformer(),
@@ -211,67 +129,114 @@ export async function processArticleMDAST(
   return {
     references,
     frontmatter,
-    mdast,
-    showFrontMatter: true
+    mdast
   };
 }
 
-export function renderNotebook(
-  cells: MarkdownCell[],
-  state: IMySTDocumentState,
-  resolver: IRenderMime.IResolver | null,
-  caller: MarkdownCell | undefined
-): [Promise<IMySTFragmentState> | undefined, Promise<void[]>] {
-  const { mdast } = state;
-  // Render the full result in each cell using React
-  // Any cell can have side-effects into other cells, so this is necessary
+function isMySTMarkdownCell(cell: Cell<ICellModel>): cell is IMySTMarkdownCell {
+  return cell.model.type === 'markdown';
+}
 
-  let thisPromise: Promise<IMySTFragmentState> | undefined;
-  const promises: Promise<void>[] = [];
-
-  const buildPartialState = async (
-    cell: MarkdownCell,
-    mdast: any,
-    showFrontMatter: boolean
-  ) => {
-    try {
-      const attachmentsResolver = new AttachmentsResolver({
-        parent: resolver ?? undefined,
-        model: cell.model.attachments
-      });
-      // Go through all links and replace the source if they are local
-      await imageUrlSourceTransform(mdast as any, {
-        resolver: attachmentsResolver
-      });
-    } catch (error) {
-      // pass
-    }
-
+export function buildNotebookMDAST(mystCells: IMySTMarkdownCell[]): any {
+  const blocks = mystCells.map(cell => {
     return {
-      ...state,
-      mdast: mdast,
-      showFrontMatter: showFrontMatter
+      type: 'block',
+      children: copyNode(cell.fragmentMDAST).children
     };
-  };
+  });
+  return { type: 'root', children: blocks };
+}
 
-  cells.forEach((cell, index) => {
-    const cellMDAST = mdast.children[index];
-    const promise = buildPartialState(cell, cellMDAST, index === 0);
-    if (cell.id === caller?.id) {
-      thisPromise = promise;
-    } else {
-      promises.push(
-        promise.then(fragmentState => {
-          (cell.renderer as RenderedMySTMarkdown).onFragmentUpdated(
-            fragmentState
-          );
-        })
-      );
+export function processNotebookMDAST(
+  mdast: any,
+  resolver: IRenderMime.IResolver | undefined
+): IMySTDocumentState {
+  const linkTransforms = [
+    new WikiTransformer(),
+    new GithubTransformer(),
+    new DOITransformer(),
+    new RRIDTransformer()
+  ];
+  const file = new VFile();
+  const references = {
+    cite: { order: [], data: {} },
+    article: mdast as any
+  };
+  const { frontmatter: frontmatterRaw } = getFrontmatter(
+    // This is the first cell, which might have a YAML block or header.
+    mdast.children[0] as any,
+    {
+      removeYaml: true,
+      removeHeading: true
     }
+  );
+
+  const frontmatter = validatePageFrontmatter(frontmatterRaw, {
+    property: 'frontmatter',
+    messages: {}
   });
 
-  if (thisPromise === undefined) {
-    throw Error('Specified cell not found in target');
+  const state = new ReferenceState({
+    numbering: frontmatter.numbering,
+    file
+  });
+
+  unified()
+    .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
+    .use(enumerateTargetsPlugin, { state })
+    .use(linksPlugin, { transformers: linkTransforms })
+    .use(footnotesPlugin)
+    .use(resolveReferencesPlugin, { state })
+    .use(internalLinksPlugin, { resolver: resolver })
+    .use(addCiteChildrenPlugin)
+    .use(keysPlugin)
+    .runSync(mdast as any, file);
+
+  if (file.messages.length > 0) {
+    // TODO: better error messages in the future
+    throw Error(file.messages.map(m => m.message).join('\n'));
   }
-  return [thisPromise || Promise.resolve(), Promise.all(promises)];
+
+  return { references, frontmatter, mdast };
+}
+
+export async function processCellMDAST(
+  resolver: IRenderMime.IResolver,
+  mdast: any
+) {
+  mdast = copyNode(mdast);
+  try {
+    // Go through all links and replace the source if they are local
+    await imageUrlSourceTransform(mdast as any, {
+      resolver: resolver
+    });
+  } catch (error) {
+    // pass
+  }
+
+  return mdast;
+}
+
+export function renderNotebook(notebook: StaticNotebook) {
+  const mystCells = notebook.widgets.filter(isMySTMarkdownCell).filter(
+    // In the future, we may want to process the code cells as well, but not now
+    cell => cell.fragmentMDAST !== undefined
+  );
+  const mdast = buildNotebookMDAST(mystCells);
+  const {
+    references,
+    frontmatter,
+    mdast: processedMDAST
+  } = processNotebookMDAST(mdast, notebook.rendermime.resolver ?? undefined);
+
+  mystCells.forEach((cell, index) => {
+    if (cell.rendered) {
+      const nextModel = new MySTModel();
+      nextModel.references = references;
+      nextModel.frontmatter = index === 0 ? frontmatter : undefined;
+      nextModel.mdast = processedMDAST.children[index];
+      nextModel.expressions = cell.mystModel.expressions;
+      cell.mystModel = nextModel;
+    }
+  });
 }

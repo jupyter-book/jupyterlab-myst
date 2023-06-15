@@ -1,53 +1,93 @@
-import {
-  CellModel,
-  MarkdownCell,
-  ICellModel,
-  MarkdownCellModel
-} from '@jupyterlab/cells';
-import { IMySTMarkdownCell } from './types';
-import { IMapChange } from '@jupyter/ydoc';
-import { metadataSection } from './metadata';
-import { RenderedMySTMarkdown } from './mime';
-import {
-  buildNotebookMDAST,
-  processNotebookMDAST,
-  renderNotebook
-} from './myst';
+import { CellModel, MarkdownCell, MarkdownCellModel } from '@jupyterlab/cells';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { ActivityMonitor } from '@jupyterlab/coreutils';
+import { AttachmentsResolver } from '@jupyterlab/attachments';
+import { IMapChange } from '@jupyter/ydoc';
+import { IMySTMarkdownCell } from './types';
+import { metadataSection } from './metadata';
+import { IMySTModel, MySTModel, MySTWidget } from './widget';
+import { markdownParse, processCellMDAST, renderNotebook } from './myst';
+import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 
 export class MySTMarkdownCell
   extends MarkdownCell
   implements IMySTMarkdownCell
 {
-  private _notebookRendermime;
-  private _activityMonitor: ActivityMonitor<ICellModel, void>;
+  private readonly _notebookRendermime;
+  private readonly _attachmentsResolver: IRenderMime.IResolver;
+  private readonly _mystWidget: MySTWidget;
   private _metadataJustChanged = false;
+  private _fragmentMDAST: any | undefined;
+  private _mystModel: IMySTModel;
+
+  get fragmentMDAST(): any {
+    return this._fragmentMDAST;
+  }
 
   constructor(options: MarkdownCell.IOptions) {
-    super({ ...options, placeholder: false });
+    super(options);
 
+    // We need the notebook's rendermime registry for widgets
     this._notebookRendermime = options.rendermime;
+    // But, we also want a per-cell rendermime for resolving attachments
+    this._attachmentsResolver = new AttachmentsResolver({
+      parent: options.rendermime.resolver ?? undefined,
+      model: this.model.attachments
+    });
 
-    // Listen for changes to the cell trust
-    // TODO: Fix this ugly hack upstream!
+    // Create MyST renderer
+    this._mystModel = new MySTModel();
+    this._mystWidget = new MySTWidget({
+      model: this._mystModel,
+      rendermime: this._notebookRendermime,
+      linkHandler: this._notebookRendermime.linkHandler ?? undefined,
+      resolver: this._attachmentsResolver,
+      trusted: this.model.trusted
+    });
+
+    // HACK: we don't use the rendermime system for output rendering.
+    //       Let's instead create an unused text/plain renderer
+    this['_renderer'].dispose();
+    this['_renderer'] = this._notebookRendermime.createRenderer('text/plain');
+
+    // HACK: catch changes to the cell model trust
     (this.model as MarkdownCellModel).onTrustedChanged = () =>
-      this.onTrustedChanged();
+      this.onModelTrustedChanged();
 
-    this.mystRenderer.fragmentContext = {
-      requestUpdate: _ => this.onRendererRequestUpdate(),
-      setTaskItem: (line: number, checked: boolean) =>
-        this.rendererSetTaskItem(line, checked)
-    };
+    // HACK: re-order signal handlers by recreating activity monitor,
+    //       and introduce veto for metadataonly changes
+    (this as any)._monitor.dispose();
+    this['_monitor'] = this.createActivityMonitor();
+
+    // HACK: patch the callback for changes to `rendered`
+    this['_handleRendered'] = this.onRenderedChanged;
 
     // We need to write the initial metadata values from the cell
     this.restoreExpressionsFromMetadata();
+  }
+  /**
+   * Handle the rendered state.
+   */
+  private async onRenderedChanged(): Promise<void> {
+    if (!this.rendered) {
+      this.showEditor();
+    } else {
+      if (this.placeholder) {
+        return;
+      }
 
+      if (this.rendered) {
+        // The rendered flag may be updated in the mean time
+        this.render();
+      }
+    }
+  }
+
+  private createActivityMonitor() {
     // HACK: activity monitor also triggers for metadata changes
     // So, let's re-order the signal registration so that metadata changes can
     // veto the delayed render
-    (this as any)._monitor.dispose();
-    this._activityMonitor = new ActivityMonitor({
+    const activityMonitor = new ActivityMonitor({
       signal: this.model.contentChanged,
       timeout: (this as any)._monitor.timeout
     });
@@ -59,9 +99,10 @@ export class MySTMarkdownCell
           return;
         }
         console.debug('ready and connected activityStopped signal');
-        this._activityMonitor.activityStopped.connect(() => {
+        activityMonitor.activityStopped.connect(() => {
+          console.debug('Activity monitor expired');
           if (this.rendered && !this._metadataJustChanged) {
-            console.debug('Updating after activity monitor expired');
+            console.debug('Updating cell!');
             this.update();
           }
           this._metadataJustChanged = false;
@@ -70,80 +111,82 @@ export class MySTMarkdownCell
       .catch(reason => {
         console.error('Failed to be ready', reason);
       });
+    return activityMonitor;
   }
 
-  private rendererSetTaskItem(line: number, checked: boolean) {
-    const text = this.model.sharedModel.getSource();
-    // This is a pretty cautious replacement for the identified line
-    const lines = text.split('\n');
-    lines[line] = lines[line].replace(
-      /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
-      checked ? '$1[x]' : '$1[ ]'
-    );
-    // Update the Jupyter cell markdown value
-    this.model.sharedModel.setSource(lines.join('\n'));
+  // private rendererSetTaskItem(line: number, checked: boolean) {
+  //   const text = this.model.sharedModel.getSource();
+  //   // This is a pretty cautious replacement for the identified line
+  //   const lines = text.split('\n');
+  //   lines[line] = lines[line].replace(
+  //     /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
+  //     checked ? '$1[x]' : '$1[ ]'
+  //   );
+  //   // Update the Jupyter cell markdown value
+  //   this.model.sharedModel.setSource(lines.join('\n'));
+  // }
+
+  get attachmentsResolver(): IRenderMime.IResolver {
+    return this._attachmentsResolver;
   }
 
-  get mystRenderer(): RenderedMySTMarkdown {
-    return this.renderer as RenderedMySTMarkdown;
+  get mystModel(): IMySTModel {
+    return this._mystModel;
+  }
+
+  set mystModel(model: IMySTModel) {
+    if (model !== this._mystModel) {
+      this._mystModel.dispose();
+    }
+    this._mystModel = model;
+    this._mystWidget.model = model;
   }
 
   protected restoreExpressionsFromMetadata() {
     const expressions = this.model.getMetadata(metadataSection);
     if (expressions !== undefined) {
-      const state = {
-        expressions: expressions,
-        rendermime: this._notebookRendermime,
-        trusted: this.model.trusted
-      };
-      console.debug('restoring expressions from metadata', state);
-      this.mystRenderer.onExpressionsUpdated(state);
+      console.debug('Restoring expressions from metadata', expressions);
+      this._mystWidget.model.expressions = expressions;
     }
   }
 
-  protected onTrustedChanged() {
+  protected onModelTrustedChanged() {
     console.debug('trust changed', this.model.trusted);
+    this._mystWidget.trusted = this.model.trusted;
     this.restoreExpressionsFromMetadata();
   }
-
-  protected onRendererRequestUpdate() {
-    console.debug('On request update', this.parent, this);
-    // Build the whole-document AST
-    const notebook = this.parent as StaticNotebook;
-    const { cells, mdast } = buildNotebookMDAST(notebook);
-    // Transform AST
-    const state = processNotebookMDAST(mdast, notebook.rendermime.resolver);
-    if (state === undefined) {
-      throw Error('could not update cell, no state from parse');
+  async parseSource() {
+    // Resolve per-cell MDAST
+    let fragmentMDAST: any = markdownParse(this.model.sharedModel.getSource());
+    if (this._attachmentsResolver) {
+      fragmentMDAST = await processCellMDAST(
+        this._attachmentsResolver,
+        fragmentMDAST
+      );
     }
+    this._fragmentMDAST = fragmentMDAST;
+  }
 
-    // Update all cells with rendered result
-    const [thisPromise, _] = renderNotebook(
-      cells,
-      state,
-      notebook.rendermime.resolver,
-      this
-    );
-    // Appease type checker
-    if (thisPromise === undefined) {
-      throw Error('this should not happen!');
+  async render() {
+    await this.parseSource();
+
+    if (!this._mystWidget.node || !this.isAttached) {
+      return;
     }
-    return thisPromise;
+    this.inputArea!.renderInput(this._mystWidget);
+    renderNotebook(this.parent as StaticNotebook);
   }
 
   /**
    * Handle changes in the metadata.
    */
   protected onMetadataChanged(model: CellModel, args: IMapChange): void {
+    console.debug('metadata changed', args);
+    this._metadataJustChanged = true;
     switch (args.key) {
       case metadataSection:
         console.debug('metadata changed', args);
-        this._metadataJustChanged = true;
-        this.mystRenderer.onExpressionsUpdated({
-          expressions: args.newValue,
-          rendermime: this._notebookRendermime,
-          trusted: model.trusted
-        });
+        this.restoreExpressionsFromMetadata();
         break;
       default:
         super.onMetadataChanged(model, args);

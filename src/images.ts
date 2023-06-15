@@ -3,7 +3,7 @@ import { selectAll } from 'unist-util-select';
 import { IRenderMime } from '@jupyterlab/rendermime';
 
 type Options = {
-  resolver: IRenderMime.IResolver | null;
+  resolver: IRenderMime.IResolver | undefined;
 };
 
 export async function imageUrlSourceTransform(

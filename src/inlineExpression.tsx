@@ -48,6 +48,16 @@ export class RenderedExpression extends Widget {
   renderExpression(payload: IExpressionResult): Promise<void> {
     const layout = this.layout as SingletonLayout;
 
+    if (!layout) {
+      console.error('Our layout is already disposed!!');
+      return Promise.resolve();
+    }
+
+    if (this.isDisposed) {
+      console.error('Our layout is already disposed!!');
+      return Promise.resolve();
+    }
+
     let options: any;
     if (isOutput(payload)) {
       // Output results are simple to reinterpret
