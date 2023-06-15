@@ -5,7 +5,7 @@
 [![Launch on Binder][binder-badge]][binder-link]
 [![PyPI][pypi-badge]][pypi-link]
 
-Render markdown cells using [MyST Markdown](https://myst-tools.org/), including support for rich frontmatting, interactive references, admonitions, figure numbering, tabs, proofs, cards, and grids!
+Render markdown cells using [MyST Markdown](https://mystmd.org/), including support for rich frontmatting, interactive references, admonitions, figure numbering, tabs, proofs, cards, and grids!
 
 ![](./images/walkthrough.gif)
 
@@ -26,7 +26,7 @@ pip install jupyterlab_myst
 
 ## Features
 
-`jupyterlab-myst` is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://myst-tools.org/docs/mystjs/quickstart-myst-markdown). It supports the MyST `{eval}` inline role, which facilitates the interweaving of code outputs and prose. For example, we can use inline expressions to explore the properties of a NumPy array.
+`jupyterlab-myst` is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://mystmd.org/guide/quickstart-myst-markdown). It supports the MyST `{eval}` inline role, which facilitates the interweaving of code outputs and prose. For example, we can use inline expressions to explore the properties of a NumPy array.
 
 In the code cell:
 
@@ -179,8 +179,8 @@ More information are provided within the [ui-tests](./ui-tests/README.md) README
 See [RELEASE](RELEASE.md)
 
 [myst-badge]: https://img.shields.io/badge/made%20with-myst-orange
-[myst-link]: https://myst-tools.org
-[myst-quickstart]: https://myst-tools.org/docs/mystjs/quickstart-myst-markdown
+[myst-link]: https://mystmd.org
+[myst-quickstart]: https://mystmd.org/guide/quickstart-myst-markdown
 [actions-badge]: https://github.com/executablebooks/jupyterlab-myst/workflows/Build/badge.svg
 [actions-link]: https://github.com/executablebooks/jupyterlab-myst/actions/workflows/build.yml
 [binder-badge]: https://mybinder.org/badge_logo.svg
