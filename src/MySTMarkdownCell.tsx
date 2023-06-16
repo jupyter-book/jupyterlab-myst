@@ -203,7 +203,13 @@ export class MySTMarkdownCell
     if (!this._mystWidget.node || !this.isAttached) {
       return;
     }
-    this.inputArea!.renderInput(this._mystWidget);
+
+    // The notebook update is asynchronous
     renderNotebook(this.parent as StaticNotebook);
+
+    // Let's wait for this cell to be rendered
+    await this._mystWidget.renderPromise;
+
+    this.inputArea!.renderInput(this._mystWidget);
   }
 }

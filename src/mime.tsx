@@ -38,6 +38,7 @@ export class RenderedMySTMarkdown
     mystModel.references = references;
     mystModel.mdast = mdastNext;
     mystModel.frontmatter = frontmatter;
+    mystModel.expressions = this.model.expressions; // Re-use expressions even if AST changes
     this.model = mystModel;
 
     console.debug('State changed', this);
