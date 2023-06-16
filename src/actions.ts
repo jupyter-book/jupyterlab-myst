@@ -118,7 +118,7 @@ export async function notebookCellExecuted(
   }
   console.debug(`Markdown cell ${cell.model.id} was executed`);
 
-  await cell.parseSource();
+  await cell.updateFragmentMDAST();
 
   // Trust cell!
   const expressions = await executeUserExpressions(cell, ctx);

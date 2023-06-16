@@ -23,10 +23,6 @@ export class MySTMarkdownCell
   private _fragmentMDAST: any | undefined;
   private _mystModel: IMySTModel;
 
-  get fragmentMDAST(): any {
-    return this._fragmentMDAST;
-  }
-
   constructor(options: MarkdownCell.IOptions) {
     super(options);
 
@@ -92,12 +88,13 @@ export class MySTMarkdownCell
       this.showEditor();
     } else {
       if (this.placeholder) {
+        await this.updateFragmentMDAST();
         return;
       }
 
       if (this.rendered) {
         // The rendered flag may be updated in the mean time
-        this.render();
+        await this.render();
       }
     }
   }
@@ -179,7 +176,16 @@ export class MySTMarkdownCell
     this._mystWidget.model = model;
   }
 
-  async parseSource() {
+  get fragmentMDAST(): any {
+    return this._fragmentMDAST;
+  }
+
+  /**
+   * Update fragment MDAST from raw source of cell model.
+   * This ensures that notebook-wide updates take the latest version of a cell.
+   * Even if it is not yet rendered.
+   */
+  async updateFragmentMDAST() {
     // Resolve per-cell MDAST
     let fragmentMDAST: any = markdownParse(this.model.sharedModel.getSource());
     if (this._attachmentsResolver) {
@@ -192,7 +198,7 @@ export class MySTMarkdownCell
   }
 
   async render() {
-    await this.parseSource();
+    await this.updateFragmentMDAST();
 
     if (!this._mystWidget.node || !this.isAttached) {
       return;

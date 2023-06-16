@@ -6,5 +6,5 @@ export type IMySTMarkdownCell = MarkdownCell & {
   readonly fragmentMDAST: any | undefined;
   readonly attachmentsResolver: IRenderMime.IResolver;
   mystModel: IMySTModel;
-  parseSource(): Promise<void>;
+  updateFragmentMDAST(): Promise<void>;
 };
