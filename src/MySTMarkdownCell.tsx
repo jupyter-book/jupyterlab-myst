@@ -133,17 +133,35 @@ export class MySTMarkdownCell
     return activityMonitor;
   }
 
-  // private rendererSetTaskItem(line: number, checked: boolean) {
-  //   const text = this.model.sharedModel.getSource();
-  //   // This is a pretty cautious replacement for the identified line
-  //   const lines = text.split('\n');
-  //   lines[line] = lines[line].replace(
-  //     /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
-  //     checked ? '$1[x]' : '$1[ ]'
-  //   );
-  //   // Update the Jupyter cell markdown value
-  //   this.model.sharedModel.setSource(lines.join('\n'));
-  // }
+  private restoreExpressionsFromMetadata() {
+    const expressions = this.model.getMetadata(metadataSection);
+    if (expressions !== undefined) {
+      console.debug('Restoring expressions from metadata', expressions);
+      this._mystWidget.model.expressions = expressions;
+    }
+  }
+
+  private onModelTrustedChanged() {
+    console.debug('trust changed', this.model.trusted);
+    this._mystWidget.trusted = this.model.trusted;
+    this.restoreExpressionsFromMetadata();
+  }
+
+  /**
+   * Handle changes in the metadata.
+   */
+  protected onMetadataChanged(model: CellModel, args: IMapChange): void {
+    console.debug('metadata changed', args);
+    this._metadataJustChanged = true;
+    switch (args.key) {
+      case metadataSection:
+        console.debug('metadata changed', args);
+        this.restoreExpressionsFromMetadata();
+        break;
+      default:
+        super.onMetadataChanged(model, args);
+    }
+  }
 
   get attachmentsResolver(): IRenderMime.IResolver {
     return this._attachmentsResolver;
@@ -161,19 +179,6 @@ export class MySTMarkdownCell
     this._mystWidget.model = model;
   }
 
-  protected restoreExpressionsFromMetadata() {
-    const expressions = this.model.getMetadata(metadataSection);
-    if (expressions !== undefined) {
-      console.debug('Restoring expressions from metadata', expressions);
-      this._mystWidget.model.expressions = expressions;
-    }
-  }
-
-  protected onModelTrustedChanged() {
-    console.debug('trust changed', this.model.trusted);
-    this._mystWidget.trusted = this.model.trusted;
-    this.restoreExpressionsFromMetadata();
-  }
   async parseSource() {
     // Resolve per-cell MDAST
     let fragmentMDAST: any = markdownParse(this.model.sharedModel.getSource());
@@ -194,21 +199,5 @@ export class MySTMarkdownCell
     }
     this.inputArea!.renderInput(this._mystWidget);
     renderNotebook(this.parent as StaticNotebook);
-  }
-
-  /**
-   * Handle changes in the metadata.
-   */
-  protected onMetadataChanged(model: CellModel, args: IMapChange): void {
-    console.debug('metadata changed', args);
-    this._metadataJustChanged = true;
-    switch (args.key) {
-      case metadataSection:
-        console.debug('metadata changed', args);
-        this.restoreExpressionsFromMetadata();
-        break;
-      default:
-        super.onMetadataChanged(model, args);
-    }
   }
 }
