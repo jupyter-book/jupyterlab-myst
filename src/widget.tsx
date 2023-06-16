@@ -16,6 +16,7 @@ import React from 'react';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
 import {
   ITaskItemChange,
+  ITaskItemController,
   TaskItemControllerProvider
 } from './TaskItemControllerProvider';
 import { renderers } from './renderers';
@@ -109,6 +110,8 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     this._rendermime = rendermime;
     this._trusted = trusted;
     this.addClass('myst');
+
+    this._taskItemController = change => this._taskItemChanged.emit(change);
   }
 
   private _trusted?: boolean = false;
@@ -116,6 +119,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   private readonly _linkHandler?: IRenderMime.ILinkHandler;
   private readonly _rendermime?: IRenderMimeRegistry;
   private readonly _taskItemChanged = new Signal<this, ITaskItemChange>(this);
+  private readonly _taskItemController: ITaskItemController;
 
   get taskItemChanged(): ISignal<this, ITaskItemChange> {
     return this._taskItemChanged;
@@ -131,7 +135,11 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   }
 
   protected render(): React.JSX.Element {
-    console.debug('re-rendering VDOM', this.model);
+    console.debug(
+      'Re-rendering VDOM for MySTWidget',
+      this.model,
+      this._trusted
+    );
     if (!this.model) {
       return <span>MyST Renderer!</span>;
     }
@@ -139,12 +147,8 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
 
     const children = useParse(mdast || null, renderers);
 
-    console.log('Rendering MyST with trust?:', this._trusted);
-
     return (
-      <TaskItemControllerProvider
-        controller={change => this._taskItemChanged.emit(change)}
-      >
+      <TaskItemControllerProvider controller={this._taskItemController}>
         <ThemeProvider
           theme={Theme.light}
           Link={linkFactory(this._resolver, this._linkHandler)}
