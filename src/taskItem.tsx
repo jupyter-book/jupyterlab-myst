@@ -26,7 +26,7 @@ function TaskItem({
         onClick={() => {
           // Bail if no line number was found
           if (!controller || line == null) return;
-          controller.setTaskItem(line, !local);
+          controller({ line, checked: !local });
           setLocal(!local);
         }}
       />

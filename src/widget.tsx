@@ -1,5 +1,5 @@
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { ISignal } from '@lumino/signaling';
+import { ISignal, Signal } from '@lumino/signaling';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { VDomModel, VDomRenderer } from '@jupyterlab/apputils';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
@@ -15,7 +15,7 @@ import { useParse } from 'myst-to-react';
 import React from 'react';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
 import {
-  ITaskItemController,
+  ITaskItemChange,
   TaskItemControllerProvider
 } from './TaskItemControllerProvider';
 import { renderers } from './renderers';
@@ -85,7 +85,6 @@ export class MySTModel extends VDomModel implements IMySTModel {
 
 export interface IMySTOptions {
   model?: IMySTModel;
-  taskItemController?: ITaskItemController;
   resolver?: IRenderMime.IResolver;
   linkHandler?: IRenderMime.ILinkHandler;
   rendermime?: IRenderMimeRegistry;
@@ -102,17 +101,9 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
    * @param options - The options for initializing the widget.
    */
   constructor(options: IMySTOptions) {
-    const {
-      model,
-      taskItemController,
-      resolver,
-      linkHandler,
-      rendermime,
-      trusted
-    } = options;
+    const { model, resolver, linkHandler, rendermime, trusted } = options;
     super(model);
 
-    this._taskItemController = taskItemController;
     this._resolver = resolver;
     this._linkHandler = linkHandler;
     this._rendermime = rendermime;
@@ -120,11 +111,15 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     this.addClass('myst');
   }
 
-  private readonly _taskItemController?: ITaskItemController;
+  private _trusted?: boolean = false;
   private readonly _resolver?: IRenderMime.IResolver;
   private readonly _linkHandler?: IRenderMime.ILinkHandler;
   private readonly _rendermime?: IRenderMimeRegistry;
-  private _trusted?: boolean = false;
+  private readonly _taskItemChanged = new Signal<this, ITaskItemChange>(this);
+
+  get taskItemChanged(): ISignal<this, ITaskItemChange> {
+    return this._taskItemChanged;
+  }
 
   get trusted(): boolean | undefined {
     return this._trusted;
@@ -147,7 +142,9 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     console.log('Rendering MyST with trust?:', this._trusted);
 
     return (
-      <TaskItemControllerProvider controller={this._taskItemController}>
+      <TaskItemControllerProvider
+        controller={change => this._taskItemChanged.emit(change)}
+      >
         <ThemeProvider
           theme={Theme.light}
           Link={linkFactory(this._resolver, this._linkHandler)}

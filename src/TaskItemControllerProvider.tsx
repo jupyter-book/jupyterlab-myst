@@ -1,7 +1,12 @@
 import React, { createContext, useContext } from 'react';
 
+export interface ITaskItemChange {
+  line: number;
+  checked: boolean;
+}
+
 export interface ITaskItemController {
-  setTaskItem(line: number, checked: boolean): void;
+  (change: ITaskItemChange): void;
 }
 
 type TaskItemControllerState = {

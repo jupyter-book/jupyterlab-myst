@@ -8,6 +8,9 @@ import { metadataSection } from './metadata';
 import { IMySTModel, MySTModel, MySTWidget } from './widget';
 import { markdownParse, processCellMDAST, renderNotebook } from './myst';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { ITaskItemChange } from './TaskItemControllerProvider';
+
+class IMySTWidget {}
 
 export class MySTMarkdownCell
   extends MarkdownCell
@@ -44,6 +47,9 @@ export class MySTMarkdownCell
       resolver: this._attachmentsResolver,
       trusted: this.model.trusted
     });
+    this._mystWidget.taskItemChanged.connect((caller, change) =>
+      this.setTaskItem(caller, change)
+    );
 
     // HACK: we don't use the rendermime system for output rendering.
     //       Let's instead create an unused text/plain renderer
@@ -65,6 +71,19 @@ export class MySTMarkdownCell
     // We need to write the initial metadata values from the cell
     this.restoreExpressionsFromMetadata();
   }
+
+  private setTaskItem(_: IMySTWidget, change: ITaskItemChange): void {
+    const text = this.model.sharedModel.getSource();
+    // This is a pretty cautious replacement for the identified line
+    const lines = text.split('\n');
+    lines[change.line] = lines[change.line].replace(
+      /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
+      change.checked ? '$1[x]' : '$1[ ]'
+    );
+    // Update the Jupyter cell markdown value
+    this.model.sharedModel.setSource(lines.join('\n'));
+  }
+
   /**
    * Handle the rendered state.
    */
