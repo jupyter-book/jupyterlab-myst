@@ -135,7 +135,7 @@ export class MySTMarkdownCell
   }
 
   private restoreExpressionsFromMetadata() {
-    const expressions = this.model.getMetadata(metadataSection);
+    const expressions = this.model.getMetadata?.(metadataSection);
     if (expressions !== undefined) {
       console.debug('Restoring expressions from metadata', expressions);
       this._mystWidget.model.expressions = expressions;

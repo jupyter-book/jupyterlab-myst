@@ -101,7 +101,7 @@ export async function notebookCellExecuted(
 ): Promise<void> {
   console.debug(
     'Executing cell, expressions',
-    cell.model.getMetadata(metadataSection)
+    cell.model.getMetadata?.(metadataSection)
   );
   // Find the Notebook panel
   const panel = tracker.find((w: NotebookPanel) => {
@@ -126,13 +126,13 @@ export async function notebookCellExecuted(
   if (expressions.length) {
     console.debug(
       'Setting metadata, before:',
-      cell.model.getMetadata(metadataSection),
+      cell.model.getMetadata?.(metadataSection),
       'after:',
       expressions
     );
-    cell.model.setMetadata(metadataSection, expressions);
+    cell.model.setMetadata?.(metadataSection, expressions);
   } else {
-    cell.model.deleteMetadata(metadataSection);
+    cell.model.deleteMetadata?.(metadataSection);
     console.debug('Setting metadata for expressions');
   }
   cell.model.trusted = true;
