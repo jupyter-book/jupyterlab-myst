@@ -1,12 +1,14 @@
 import { mystParse } from 'myst-parser';
 import { copyNode, References } from 'myst-common';
 import {
+  abbreviationPlugin,
   basicTransformationsPlugin,
   DOITransformer,
   enumerateTargetsPlugin,
   footnotesPlugin,
   getFrontmatter,
   GithubTransformer,
+  glossaryPlugin,
   htmlPlugin,
   keysPlugin,
   linksPlugin,
@@ -111,6 +113,8 @@ export async function processArticleMDAST(
   });
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
+    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
@@ -175,6 +179,8 @@ export function processNotebookMDAST(
 
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
+    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
@@ -186,7 +192,7 @@ export function processNotebookMDAST(
 
   if (file.messages.length > 0) {
     // TODO: better error messages in the future
-    throw Error(file.messages.map(m => m.message).join('\n'));
+    console.error(file.messages.map(m => m.message).join('\n'));
   }
 
   return { references, frontmatter, mdast };
