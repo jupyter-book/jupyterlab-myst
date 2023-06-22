@@ -105,7 +105,11 @@ export class MySTMarkdownCell
     // veto the delayed render
     const activityMonitor = new ActivityMonitor({
       signal: this.model.contentChanged,
-      timeout: (this as any)._monitor.timeout
+      // timeout: (this as any)._monitor.timeout
+      // HACK: This generally makes the jupyter content update happen first
+      // Which prevents a noticeable double render of the react component
+      // This is really signalling the content change before the shift-enter
+      timeout: 100
     });
     // Throttle the rendering rate of the widget.
     this.ready
