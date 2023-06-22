@@ -20,7 +20,7 @@ export class RenderedMySTMarkdown
       resolver: options.resolver ?? undefined,
       linkHandler: options.linkHandler ?? undefined
     });
-
+    this.resolver = options.resolver ?? undefined;
     this.node.dataset['mimeType'] = MIME_TYPE;
     this.addClass('jp-RenderedMySTMarkdown');
   }
