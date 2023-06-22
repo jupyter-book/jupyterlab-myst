@@ -194,6 +194,7 @@ export class MySTMarkdownCell
         fragmentMDAST
       );
     }
+    fragmentMDAST.type = 'block';
     this._fragmentMDAST = fragmentMDAST;
   }
 

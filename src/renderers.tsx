@@ -8,7 +8,7 @@ import { listItem } from './taskItem';
 export const renderers: Record<string, NodeRenderer> = {
   ...DEFAULT_RENDERERS,
   mermaid: MermaidNodeRenderer,
-  inlineExpression: (node, children) => {
+  inlineExpression: node => {
     return <InlineRenderer value={node.value} />;
   },
   listItem

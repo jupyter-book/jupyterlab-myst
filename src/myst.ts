@@ -1,5 +1,5 @@
 import { mystParse } from 'myst-parser';
-import { copyNode, liftChildren, References } from 'myst-common';
+import { copyNode, References } from 'myst-common';
 import {
   basicTransformationsPlugin,
   DOITransformer,
@@ -73,9 +73,6 @@ export function markdownParse(text: string): Root {
       }
     })
     .runSync(mdast as any);
-  // If in the notebook, lift children out of blocks for the next step
-  // We are working here as one cell at a time
-  liftChildren(mdast, 'block');
   return mdast as Root;
 }
 
@@ -138,12 +135,7 @@ function isMySTMarkdownCell(cell: Cell<ICellModel>): cell is IMySTMarkdownCell {
 }
 
 export function buildNotebookMDAST(mystCells: IMySTMarkdownCell[]): any {
-  const blocks = mystCells.map(cell => {
-    return {
-      type: 'block',
-      children: copyNode(cell.fragmentMDAST).children
-    };
-  });
+  const blocks = mystCells.map(cell => copyNode(cell.fragmentMDAST));
   return { type: 'root', children: blocks };
 }
 
