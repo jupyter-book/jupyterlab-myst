@@ -14,7 +14,7 @@ import { IRenderMime } from '@jupyterlab/rendermime';
 function handleAnchor(
   anchor: HTMLAnchorElement,
   resolver: IRenderMime.IResolver,
-  linkHandler: IRenderMime.ILinkHandler | null
+  linkHandler: IRenderMime.ILinkHandler | undefined
 ): Promise<void> {
   // Get the link path without the location prepended.
   // (e.g. "./foo.md#Header 1" vs "http://localhost:8888/foo.md#Header 1")
@@ -63,8 +63,8 @@ function handleAnchor(
 
 export const linkFactory =
   (
-    resolver: IRenderMime.IResolver | null,
-    linkHandler: IRenderMime.ILinkHandler | null
+    resolver: IRenderMime.IResolver | undefined,
+    linkHandler: IRenderMime.ILinkHandler | undefined
   ) =>
   (props: LinkProps): JSX.Element => {
     const ref = React.useRef<HTMLAnchorElement>(null);
@@ -81,7 +81,7 @@ export const linkFactory =
   };
 
 type Options = {
-  resolver: IRenderMime.IResolver | null;
+  resolver: IRenderMime.IResolver | undefined;
 };
 
 /**

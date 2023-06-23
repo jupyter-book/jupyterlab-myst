@@ -1,9 +1,10 @@
 import { MarkdownCell } from '@jupyterlab/cells';
-import { GenericParent } from 'myst-common';
+import { IMySTModel } from './widget';
+import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 
 export type IMySTMarkdownCell = MarkdownCell & {
-  myst: { pre?: GenericParent; post?: GenericParent; node?: HTMLDivElement };
-  mystRender: () => void;
-  expressions: string[];
-  doneRendering: Promise<void>;
+  readonly fragmentMDAST: any | undefined;
+  readonly attachmentsResolver: IRenderMime.IResolver;
+  mystModel: IMySTModel;
+  updateFragmentMDAST(): Promise<void>;
 };

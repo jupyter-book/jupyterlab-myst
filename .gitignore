@@ -1,6 +1,7 @@
 *.bundle.*
 lib/
 node_modules/
+*.log
 .eslintcache
 .stylelintcache
 *.egg-info/
@@ -64,6 +65,7 @@ htmlcov/
 .coverage.*
 .cache
 nosetests.xml
+coverage/
 coverage.xml
 *.cover
 .hypothesis/
@@ -119,8 +121,8 @@ dmypy.json
 # OSX files
 .DS_Store
 
-coverage/
-yarn-error.log
-.yalc
-yalc.lock
+# Yarn cache
+.yarn/
+
+# Generated css files by tailwind
 style/app.css

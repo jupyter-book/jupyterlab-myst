@@ -9,8 +9,8 @@ const fileName = 'myst_tests.ipynb';
 // test.use({ tmpPath: 'notebook-run-test' });
 
 test.describe.serial('Notebook Run', () => {
-  test.beforeEach(async ({ baseURL, page, tmpPath }) => {
-    const contents = galata.newContentsHelper(baseURL!, page);
+  test.beforeEach(async ({ request, page, tmpPath }) => {
+    const contents = galata.newContentsHelper(request, page);
     await contents.uploadFile(
       path.resolve(__dirname, `./notebooks/${fileName}`),
       `${tmpPath}/${fileName}`

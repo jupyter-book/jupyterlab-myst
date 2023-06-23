@@ -1,7 +1,7 @@
 import React from 'react';
 import { NodeRenderer } from '@myst-theme/providers';
 import type { ListItem } from 'myst-spec-ext';
-import { useJupyterCell } from './JupyterCellProvider';
+import { useTaskItemController } from './TaskItemControllerProvider';
 
 function TaskItem({
   checked,
@@ -15,27 +15,19 @@ function TaskItem({
   // The rendering waiting on promises from Jupyter is slow
   // By keeping state here we can render fast & optimistically
   const [local, setLocal] = React.useState(checked ?? false);
-  const { cell } = useJupyterCell();
+  const { controller } = useTaskItemController();
   return (
     <li className="task-list-item">
       <input
         type="checkbox"
-        disabled={!cell}
+        disabled={!controller}
         className="task-list-item-checkbox"
         checked={local}
         onClick={() => {
           // Bail if no line number was found
-          if (!cell || line == null) return;
-          const text = cell.model.value.text;
-          // This is a pretty cautious replacement for the identified line
-          const lines = text.split('\n');
-          lines[line] = lines[line].replace(
-            /^(\s*(?:-|\*)\s*)(\[[\s|x]\])/,
-            local ? '$1[ ]' : '$1[x]'
-          );
+          if (!controller || line == null) return;
+          controller({ line, checked: !local });
           setLocal(!local);
-          // Update the Jupyter cell markdown value
-          cell.model.value.text = lines.join('\n');
         }}
       />
       {children}
