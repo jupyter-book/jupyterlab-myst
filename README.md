@@ -5,7 +5,7 @@
 [![Launch on Binder][binder-badge]][binder-link]
 [![PyPI][pypi-badge]][pypi-link]
 
-Render markdown cells using [MyST Markdown](https://mystmd.org/), including support for rich frontmatting, interactive references, admonitions, figure numbering, tabs, proofs, cards, and grids!
+Render markdown cells using [MyST Markdown](https://mystmd.org/), including support for rich frontmatter, interactive references, admonitions, figure numbering, tabs, proofs, exercises, glossaries, cards, and grids!
 
 ![](./images/walkthrough.gif)
 
@@ -19,7 +19,7 @@ Render markdown cells using [MyST Markdown](https://mystmd.org/), including supp
 
 ## Requirements
 
-- JupyterLab >= 4.0.0b0
+- JupyterLab >= 4.0.0
 
 ## Install
 
@@ -64,7 +64,7 @@ Or with `matplotlib` to show inline spark-lines:
 
 ![](./images/stock-price.gif)
 
-You can also edit tasklists directly in the rendered markdown.
+You can also edit task lists directly in the rendered markdown.
 
 ![](./images/tasklists-in-jupyterlab.gif)
 
@@ -72,15 +72,7 @@ You can also edit tasklists directly in the rendered markdown.
 
 [MyST][myst-quickstart] is a flavour of Markdown, which combines the fluid experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
 
-### Restore default renderer :notebook:
-
-By default, the MyST renderer becomes the default notebook renderer. This means that MyST notebook rendering works out-of-the-box with Jupytext and other notebook-aware extensions. Whilst this extension is in a pre-release state, there is also a "legacy mode" that integrates MyST rendering as an additional `Open With` option that does not replace the default notebook renderer. To enable legacy mode, disable the `jupyterlab-myst:plugin` plugin with:
-
-```bash
-jupyter labextension disable jupyterlab-myst:plugin
-```
-
-### Execution :rocket:
+### Execution 🚀
 
 To facilitate inline expressions, `jupyterlab-myst` defines a `jupyterlab-myst:executor` plugin. This plugin sends expression code fragments to the active kernel when the user "executes" a Markdown cell. To disable this functionality, disable the `jupyterlab-myst:executor` plugin with:
 
@@ -88,7 +80,7 @@ To facilitate inline expressions, `jupyterlab-myst` defines a `jupyterlab-myst:e
 jupyter labextension disable jupyterlab-myst:executor
 ```
 
-### Trust :detective:
+### Trust 🔎
 
 Jupyter Notebooks implement a [trust-based security model](https://jupyter-notebook.readthedocs.io/en/stable/security.html). With the addition of inline expressions, Markdown cells are now considered when determining whether a given notebook is "trusted". Any Markdown cell with inline-expression metadata (with display data) is considered "untrusted". Like outputs, expression results are rendered using safe renderers if the cell is not considered trusted.
 Executing the notebook will cause each cell to be considered trusted.
