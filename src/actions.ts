@@ -3,7 +3,12 @@ import { Cell } from '@jupyterlab/cells';
 import { KernelMessage } from '@jupyterlab/services';
 import { JSONObject } from '@lumino/coreutils';
 import { IExpressionResult } from './userExpressions';
-import { IUserExpressionMetadata, metadataSection } from './metadata';
+import {
+  IUserExpressionMetadata,
+  getUserExpressions,
+  setUserExpressions,
+  deleteUserExpressions
+} from './metadata';
 import {
   INotebookTracker,
   Notebook,
@@ -99,10 +104,7 @@ export async function notebookCellExecuted(
   cell: Cell,
   tracker: INotebookTracker
 ): Promise<void> {
-  console.debug(
-    'Executing cell, expressions',
-    cell.model.getMetadata?.(metadataSection)
-  );
+  console.debug('Executing cell, expressions', getUserExpressions(cell));
   // Find the Notebook panel
   const panel = tracker.find((w: NotebookPanel) => {
     return w.content === notebook;
@@ -126,14 +128,13 @@ export async function notebookCellExecuted(
   if (expressions.length) {
     console.debug(
       'Setting metadata, before:',
-      cell.model.getMetadata?.(metadataSection),
+      getUserExpressions(cell),
       'after:',
       expressions
     );
-    cell.model.setMetadata?.(metadataSection, expressions);
+    setUserExpressions(cell, expressions);
   } else {
-    cell.model.deleteMetadata?.(metadataSection);
-    console.debug('Setting metadata for expressions');
+    deleteUserExpressions(cell);
   }
   cell.model.trusted = true;
 }

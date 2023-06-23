@@ -4,7 +4,7 @@ import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { AttachmentsResolver } from '@jupyterlab/attachments';
 import { IMapChange } from '@jupyter/ydoc';
 import { IMySTMarkdownCell } from './types';
-import { metadataSection } from './metadata';
+import { getUserExpressions, metadataSection } from './metadata';
 import { IMySTModel, MySTModel, MySTWidget } from './widget';
 import { markdownParse, processCellMDAST, renderNotebook } from './myst';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
@@ -135,7 +135,7 @@ export class MySTMarkdownCell
   }
 
   private restoreExpressionsFromMetadata() {
-    const expressions = this.model.getMetadata?.(metadataSection);
+    const expressions = getUserExpressions(this);
     if (expressions !== undefined) {
       console.debug('Restoring expressions from metadata', expressions);
       this._mystWidget.model.expressions = expressions;
