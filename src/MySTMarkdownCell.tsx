@@ -210,7 +210,7 @@ export class MySTMarkdownCell
     }
 
     // The notebook update is asynchronous
-    renderNotebook(this.parent as StaticNotebook);
+    await renderNotebook(this.parent as StaticNotebook);
 
     // Let's wait for this cell to be rendered
     await this._mystWidget.renderPromise;

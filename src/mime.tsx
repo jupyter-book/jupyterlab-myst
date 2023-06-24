@@ -24,6 +24,7 @@ export class RenderedMySTMarkdown
     this.node.dataset['mimeType'] = MIME_TYPE;
     this.addClass('jp-RenderedMySTMarkdown');
   }
+
   async renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     if ((window as any).trigger) {
       throw Error('triggered!');
