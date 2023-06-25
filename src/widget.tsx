@@ -5,7 +5,6 @@ import { VDomModel, VDomRenderer } from '@jupyterlab/apputils';
 import { ILatexTypesetter, IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { References } from 'myst-common';
 import { PageFrontmatter } from 'myst-frontmatter';
-import MathJax from 'mathjax3-react';
 import {
   ReferencesProvider,
   TabStateProvider,
@@ -118,6 +117,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   private _trusted?: boolean = false;
   private readonly _typesetter?: ILatexTypesetter;
   private readonly _resolver?: IRenderMime.IResolver;
+  private readonly _linkHandler?: IRenderMime.ILinkHandler;
   private readonly _rendermime?: IRenderMimeRegistry;
   private readonly _taskItemChanged = new Signal<this, ITaskItemChange>(this);
   private readonly _taskItemController: ITaskItemController;
@@ -155,10 +155,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
         <TaskItemControllerProvider controller={this._taskItemController}>
           <ThemeProvider
             theme={Theme.light}
-            Link={linkFactory(
-              this._resolver,
-              this._rendermime?.linkHandler ?? undefined
-            )}
+            Link={linkFactory(this._resolver, this._linkHandler)}
             renderers={renderers}
           >
             <UserExpressionsProvider

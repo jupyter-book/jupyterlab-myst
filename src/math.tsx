@@ -70,18 +70,18 @@ function DisplayTypesetterMath({
 }
 export const mathRenderer: NodeRenderer<MathLike> = node => {
   if (node.type === 'math') {
-    if (node.error) {
-      return (
-        <pre key={node.key} title={node.message}>
-          <span className="text-red-500">
-            <ExclamationCircleIcon className="inline h-[1em] mr-1" />
-            {node.message}
-            {'\n\n'}
-          </span>
-          {node.value}
-        </pre>
-      );
-    }
+    // if (node.error) {
+    //   return (
+    //     <pre key={node.key} title={node.message}>
+    //       <span className="text-red-500">
+    //         <ExclamationCircleIcon className="inline h-[1em] mr-1" />
+    //         {node.message}
+    //         {'\n\n'}
+    //       </span>
+    //       {node.value}
+    //     </pre>
+    //   );
+    // }
     const id = node.html_id || node.identifier || node.key;
     return (
       <DisplayTypesetterMath
@@ -92,11 +92,11 @@ export const mathRenderer: NodeRenderer<MathLike> = node => {
       />
     );
   }
-  if (node.error || !node.html) {
-    return (
-      <InlineError key={node.key} value={node.value} message={node.message} />
-    );
-  }
+  // if (node.error || !node.html) {
+  //   return (
+  //     <InlineError key={node.key} value={node.value} message={node.message} />
+  //   );
+  // }
 
   const { value } = node;
 
