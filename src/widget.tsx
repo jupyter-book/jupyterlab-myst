@@ -89,6 +89,7 @@ export interface IMySTOptions {
   model?: IMySTModel;
   resolver?: IRenderMime.IResolver;
   linkHandler?: IRenderMime.ILinkHandler;
+  latexTypesetter?: IRenderMime.ILatexTypesetter;
   rendermime?: IRenderMimeRegistry;
   trusted?: boolean;
 }
@@ -103,12 +104,13 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
    * @param options - The options for initializing the widget.
    */
   constructor(options: IMySTOptions) {
-    const { model, resolver, rendermime, trusted } = options;
+    const { model, resolver, rendermime, trusted, latexTypesetter } = options;
     super(model);
 
     this._resolver = resolver;
     this._rendermime = rendermime;
     this._trusted = trusted;
+    this._latexTypesetter = latexTypesetter;
     this.addClass('myst');
 
     this._taskItemController = change => this._taskItemChanged.emit(change);
@@ -118,6 +120,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   private readonly _typesetter?: ILatexTypesetter;
   private readonly _resolver?: IRenderMime.IResolver;
   private readonly _linkHandler?: IRenderMime.ILinkHandler;
+  private readonly _latexTypesetter?: IRenderMime.ILatexTypesetter;
   private readonly _rendermime?: IRenderMimeRegistry;
   private readonly _taskItemChanged = new Signal<this, ITaskItemChange>(this);
   private readonly _taskItemController: ITaskItemController;
@@ -149,9 +152,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     const children = useParse(mdast || null, renderers);
 
     return (
-      <TypesetterProvider
-        typesetter={this._rendermime?.latexTypesetter ?? undefined}
-      >
+      <TypesetterProvider typesetter={this._latexTypesetter}>
         <TaskItemControllerProvider controller={this._taskItemController}>
           <ThemeProvider
             theme={Theme.light}
