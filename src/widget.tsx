@@ -2,9 +2,10 @@ import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { ISignal, Signal } from '@lumino/signaling';
 import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { VDomModel, VDomRenderer } from '@jupyterlab/apputils';
-import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
+import { ILatexTypesetter, IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { References } from 'myst-common';
 import { PageFrontmatter } from 'myst-frontmatter';
+import MathJax from 'mathjax3-react';
 import {
   ReferencesProvider,
   TabStateProvider,
@@ -22,6 +23,7 @@ import {
 import { renderers } from './renderers';
 import { IUserExpressionMetadata } from './metadata';
 import { linkFactory } from './links';
+import { TypesetterProvider } from './typesetterProvider';
 
 /**
  * The MIME type for Markdown.
@@ -102,11 +104,10 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
    * @param options - The options for initializing the widget.
    */
   constructor(options: IMySTOptions) {
-    const { model, resolver, linkHandler, rendermime, trusted } = options;
+    const { model, resolver, rendermime, trusted } = options;
     super(model);
 
     this._resolver = resolver;
-    this._linkHandler = linkHandler;
     this._rendermime = rendermime;
     this._trusted = trusted;
     this.addClass('myst');
@@ -115,8 +116,8 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   }
 
   private _trusted?: boolean = false;
+  private readonly _typesetter?: ILatexTypesetter;
   private readonly _resolver?: IRenderMime.IResolver;
-  private readonly _linkHandler?: IRenderMime.ILinkHandler;
   private readonly _rendermime?: IRenderMimeRegistry;
   private readonly _taskItemChanged = new Signal<this, ITaskItemChange>(this);
   private readonly _taskItemController: ITaskItemController;
@@ -148,29 +149,38 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     const children = useParse(mdast || null, renderers);
 
     return (
-      <TaskItemControllerProvider controller={this._taskItemController}>
-        <ThemeProvider
-          theme={Theme.light}
-          Link={linkFactory(this._resolver, this._linkHandler)}
-          renderers={renderers}
-        >
-          <UserExpressionsProvider
-            expressions={expressions}
-            rendermime={this._rendermime}
-            trusted={this._trusted}
+      <TypesetterProvider
+        typesetter={this._rendermime?.latexTypesetter ?? undefined}
+      >
+        <TaskItemControllerProvider controller={this._taskItemController}>
+          <ThemeProvider
+            theme={Theme.light}
+            Link={linkFactory(
+              this._resolver,
+              this._rendermime?.linkHandler ?? undefined
+            )}
+            renderers={renderers}
           >
-            <TabStateProvider>
-              <ReferencesProvider
-                references={references}
-                frontmatter={frontmatter}
-              >
-                {frontmatter && <FrontmatterBlock frontmatter={frontmatter} />}
-                {children}
-              </ReferencesProvider>
-            </TabStateProvider>
-          </UserExpressionsProvider>
-        </ThemeProvider>
-      </TaskItemControllerProvider>
+            <UserExpressionsProvider
+              expressions={expressions}
+              rendermime={this._rendermime}
+              trusted={this._trusted}
+            >
+              <TabStateProvider>
+                <ReferencesProvider
+                  references={references}
+                  frontmatter={frontmatter}
+                >
+                  {frontmatter && (
+                    <FrontmatterBlock frontmatter={frontmatter} />
+                  )}
+                  {children}
+                </ReferencesProvider>
+              </TabStateProvider>
+            </UserExpressionsProvider>
+          </ThemeProvider>
+        </TaskItemControllerProvider>
+      </TypesetterProvider>
     );
   }
 }

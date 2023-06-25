@@ -39,7 +39,6 @@ export class MySTMarkdownCell
     this._mystWidget = new MySTWidget({
       model: this._mystModel,
       rendermime: this._notebookRendermime,
-      linkHandler: this._notebookRendermime.linkHandler ?? undefined,
       resolver: this._attachmentsResolver,
       trusted: this.model.trusted
     });
