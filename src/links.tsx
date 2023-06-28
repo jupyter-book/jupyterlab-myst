@@ -4,6 +4,7 @@ import { selectAll } from 'unist-util-select';
 import { URLExt } from '@jupyterlab/coreutils';
 import type { LinkProps } from '@myst-theme/providers';
 import { IRenderMime } from '@jupyterlab/rendermime';
+import { updateLinkTextIfEmpty } from 'myst-transforms';
 
 /**
  * Handle an anchor node.
@@ -91,6 +92,7 @@ export async function internalLinksTransform(
       if (!link || !link.url) return;
       const resolver = opts.resolver;
       const href = link.url;
+      updateLinkTextIfEmpty(link, href);
       const isLocal = resolver?.isLocal
         ? resolver.isLocal(href)
         : URLExt.isLocal(href);
