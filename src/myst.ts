@@ -31,7 +31,7 @@ import { StaticNotebook } from '@jupyterlab/notebook';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { imageUrlSourceTransform } from './images';
-import { internalLinksPlugin } from './links';
+import { internalLinksTransform } from './links';
 import { addCiteChildrenPlugin } from './citations';
 import { evalRole } from './roles';
 import { IUserExpressionMetadata } from './metadata';
@@ -119,12 +119,12 @@ export async function processArticleMDAST(
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
     .use(resolveReferencesPlugin, { state })
-    .use(internalLinksPlugin, { resolver })
     .use(addCiteChildrenPlugin)
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
   // Go through all links and replace the source if they are local
+  await internalLinksTransform(mdast, { resolver });
   await imageUrlSourceTransform(mdast, { resolver });
 
   return {
@@ -143,10 +143,10 @@ export function buildNotebookMDAST(mystCells: IMySTMarkdownCell[]): any {
   return { type: 'root', children: blocks };
 }
 
-export function processNotebookMDAST(
+export async function processNotebookMDAST(
   mdast: any,
   resolver: IRenderMime.IResolver | undefined
-): IMySTDocumentState {
+): Promise<IMySTDocumentState> {
   const linkTransforms = [
     new WikiTransformer(),
     new GithubTransformer(),
@@ -185,10 +185,11 @@ export function processNotebookMDAST(
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
     .use(resolveReferencesPlugin, { state })
-    .use(internalLinksPlugin, { resolver: resolver })
     .use(addCiteChildrenPlugin)
     .use(keysPlugin)
     .runSync(mdast as any, file);
+
+  await internalLinksTransform(mdast, { resolver });
 
   if (file.messages.length > 0) {
     // TODO: better error messages in the future
@@ -215,7 +216,7 @@ export async function processCellMDAST(
   return mdast;
 }
 
-export function renderNotebook(notebook: StaticNotebook) {
+export async function renderNotebook(notebook: StaticNotebook) {
   const mystCells = notebook.widgets.filter(isMySTMarkdownCell).filter(
     // In the future, we may want to process the code cells as well, but not now
     cell => cell.fragmentMDAST !== undefined
@@ -225,7 +226,10 @@ export function renderNotebook(notebook: StaticNotebook) {
     references,
     frontmatter,
     mdast: processedMDAST
-  } = processNotebookMDAST(mdast, notebook.rendermime.resolver ?? undefined);
+  } = await processNotebookMDAST(
+    mdast,
+    notebook.rendermime.resolver ?? undefined
+  );
 
   mystCells.forEach((cell, index) => {
     if (cell.rendered) {

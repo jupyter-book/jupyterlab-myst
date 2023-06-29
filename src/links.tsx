@@ -1,17 +1,16 @@
 import React from 'react';
-import type { Plugin } from 'unified';
 import type { Root, Link } from 'myst-spec';
 import { selectAll } from 'unist-util-select';
 import { URLExt } from '@jupyterlab/coreutils';
 import type { LinkProps } from '@myst-theme/providers';
 import { IRenderMime } from '@jupyterlab/rendermime';
+import { updateLinkTextIfEmpty } from 'myst-transforms';
 
 /**
  * Handle an anchor node.
- * NOTE: This is copied from @jupyterlab/rendermime renderers.ts
- * ideally this should be removed and exported from there?
+ * Originally from @jupyterlab/rendermime renderers.ts
  */
-function handleAnchor(
+async function handleAnchor(
   anchor: HTMLAnchorElement,
   resolver: IRenderMime.IResolver,
   linkHandler: IRenderMime.ILinkHandler | undefined
@@ -24,7 +23,7 @@ function handleAnchor(
     : URLExt.isLocal(href);
   // Bail if it is not a file-like url.
   if (!href || !isLocal) {
-    return Promise.resolve(undefined);
+    return;
   }
   // Remove the hash until we can handle it.
   const hash = anchor.hash;
@@ -32,33 +31,29 @@ function handleAnchor(
     // Handle internal link in the file.
     if (hash === href) {
       anchor.target = '_self';
-      return Promise.resolve(undefined);
+      return;
     }
     // For external links, remove the hash until we have hash handling.
     href = href.replace(hash, '');
   }
-  // Get the appropriate file path.
-  return resolver
-    .resolveUrl(href)
-    .then(urlPath => {
-      // decode encoded url from url to api path
-      const path = decodeURIComponent(urlPath);
-      // Handle the click override.
-      if (linkHandler) {
-        linkHandler.handleLink(anchor, path, hash);
-      }
-      // Get the appropriate file download path.
-      return resolver.getDownloadUrl(urlPath);
-    })
-    .then(url => {
-      // Set the visible anchor.
-      anchor.href = url + hash;
-    })
-    .catch(err => {
-      // If there was an error getting the url,
-      // just make it an empty link.
-      anchor.href = '';
-    });
+  try {
+    // Get the appropriate file path.
+    const urlPath = await resolver.resolveUrl(href);
+    // decode encoded url from url to api path
+    const path = decodeURIComponent(urlPath);
+    // Handle the click override.
+    if (linkHandler) {
+      linkHandler.handleLink(anchor, path, hash);
+    }
+    // Get the appropriate file download path.
+    const url = await resolver.getDownloadUrl(urlPath);
+    // Set the visible anchor.
+    anchor.href = url + hash;
+  } catch (error) {
+    // If there was an error getting the url,
+    // just make it an empty link.
+    anchor.href = '';
+  }
 }
 
 export const linkFactory =
@@ -92,17 +87,26 @@ export async function internalLinksTransform(
   opts: Options
 ): Promise<void> {
   const links = selectAll('link,linkBlock', tree) as Link[];
-  links.forEach(async link => {
-    if (!link || !link.url) return;
-    const resolver = opts.resolver;
-    const isLocal = resolver?.isLocal
-      ? resolver.isLocal(link.url)
-      : URLExt.isLocal(link.url);
-    if (isLocal) (link as any).internal = true;
-  });
+  await Promise.all(
+    links.map(async link => {
+      if (!link || !link.url) return;
+      const resolver = opts.resolver;
+      const href = link.url;
+      updateLinkTextIfEmpty(link, href);
+      const isLocal = resolver?.isLocal
+        ? resolver.isLocal(href)
+        : URLExt.isLocal(href);
+      if (!isLocal) return;
+      if (!resolver) return;
+      if ((link as any).static) {
+        // TODO: remove hash
+        const urlPath = await resolver.resolveUrl(href);
+        const url = await resolver.getDownloadUrl(urlPath);
+        (link as any).urlSource = href;
+        link.url = url;
+      } else {
+        (link as any).internal = true;
+      }
+    })
+  );
 }
-
-export const internalLinksPlugin: Plugin<[Options], Root, Root> =
-  opts => tree => {
-    internalLinksTransform(tree, opts);
-  };
