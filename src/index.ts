@@ -20,6 +20,7 @@ import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { notebookCellExecuted } from './actions';
 import { mystMarkdownRendererFactory } from './mime';
+import { citationRenderers } from './myst';
 
 /**
  * The notebook content factory provider.
@@ -83,12 +84,20 @@ const bibPlugin: JupyterFrontEndPlugin<IBibliographyManager> = {
   activate: (app: JupyterFrontEnd) => {
     console.log('Using jupyterlab-myst:bibliography');
 
+    const bibFile = 'bibliography.bib';
     const manager = new BibliographyManager(
       app.serviceManager.contents,
-      'bibliography.bib'
+      bibFile
     );
     manager.changed.connect((manager, renderer) => {
       console.log(renderer, 'CHANGE');
+      // TODO: not sure how to pass this state over to the myst renderer. We need some global state?
+      // If that is the case, we can do that using redux.
+      if (renderer) {
+        citationRenderers[bibFile] = renderer;
+      } else {
+        delete citationRenderers[bibFile];
+      }
     });
     return manager;
   }

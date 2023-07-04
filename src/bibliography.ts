@@ -1,6 +1,6 @@
 import { Token } from '@lumino/coreutils';
 import { getCitations, CitationRenderer } from 'citation-js-utils';
-import { Contents, ContentsManager } from '@jupyterlab/services';
+import { Contents } from '@jupyterlab/services';
 import { ISignal, Signal } from '@lumino/signaling';
 
 export interface IBibliographyManager {
