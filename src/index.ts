@@ -14,6 +14,8 @@ import {
 } from '@jupyterlab/notebook';
 import { Cell } from '@jupyterlab/cells';
 import { MySTContentFactory } from './MySTContentFactory';
+import { IBibliographyManager, BibliographyManager } from './bibliography';
+
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 import { notebookCellExecuted } from './actions';
@@ -73,4 +75,23 @@ const mimeRendererPlugin: JupyterFrontEndPlugin<void> = {
   }
 };
 
-export default [plugin, executorPlugin, mimeRendererPlugin];
+const bibPlugin: JupyterFrontEndPlugin<IBibliographyManager> = {
+  id: 'jupyterlab-myst:bibliography',
+  requires: [],
+  provides: IBibliographyManager,
+  autoStart: true,
+  activate: (app: JupyterFrontEnd) => {
+    console.log('Using jupyterlab-myst:bibliography');
+
+    const manager = new BibliographyManager(
+      app.serviceManager.contents,
+      'bibliography.bib'
+    );
+    manager.changed.connect((manager, renderer) => {
+      console.log(renderer, 'CHANGE');
+    });
+    return manager;
+  }
+};
+
+export default [plugin, executorPlugin, mimeRendererPlugin, bibPlugin];
