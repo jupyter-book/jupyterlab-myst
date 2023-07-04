@@ -28,6 +28,13 @@ import { linkFactory } from './links';
  */
 export const MIME_TYPE = 'text/markdown';
 
+function getJupyterTheme(): Theme {
+  if (typeof document === 'undefined') return Theme.light;
+  return document.body.dataset.jpThemeLight === 'false'
+    ? Theme.dark
+    : Theme.light;
+}
+
 // export interface IMySTFragmentContext extends ITaskItemController {
 //   requestUpdate(renderer: RenderedMySTMarkdown): Promise<IMySTDocumentState>;
 //   setTaskItem(line: number, checked: boolean): void;
@@ -150,7 +157,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     return (
       <TaskItemControllerProvider controller={this._taskItemController}>
         <ThemeProvider
-          theme={Theme.light}
+          theme={getJupyterTheme()}
           Link={linkFactory(this._resolver, this._linkHandler)}
           renderers={renderers}
         >
