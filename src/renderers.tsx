@@ -1,4 +1,5 @@
 import React from 'react';
+import { sanitize } from 'isomorphic-dompurify';
 import { DEFAULT_RENDERERS } from 'myst-to-react';
 import { MermaidNodeRenderer } from '@myst-theme/diagrams';
 import { NodeRenderer } from '@myst-theme/providers';
@@ -14,6 +15,8 @@ export const renderers: Record<string, NodeRenderer> = {
   listItem,
   html: (node, children) => {
     // TODO: This needs to be sanitized properly
-    return <span dangerouslySetInnerHTML={{ __html: node.value }}></span>;
+    return (
+      <span dangerouslySetInnerHTML={{ __html: sanitize(node.value) }}></span>
+    );
   }
 };
