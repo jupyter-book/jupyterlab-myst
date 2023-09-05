@@ -2,6 +2,8 @@ import React from 'react';
 import { NodeRenderer } from '@myst-theme/providers';
 import type { ListItem } from 'myst-spec-ext';
 import { useTaskItemController } from './TaskItemControllerProvider';
+import { MyST } from 'myst-to-react';
+import { GenericNode } from 'myst-common';
 
 function TaskItem({
   checked,
@@ -9,7 +11,7 @@ function TaskItem({
   children
 }: {
   checked?: boolean;
-  children: React.ReactNode;
+  children: GenericNode[];
   line?: number;
 }) {
   // The rendering waiting on promises from Jupyter is slow
@@ -30,14 +32,20 @@ function TaskItem({
           setLocal(!local);
         }}
       />
-      {children}
+      <MyST ast={children} />
     </li>
   );
 }
 
-export const listItem: NodeRenderer<ListItem> = (node, children) => {
+export const listItem: NodeRenderer<ListItem & { checked?: boolean }> = ({
+  node
+}) => {
   if (node.checked == null) {
-    return <li key={node.key}>{children}</li>;
+    return (
+      <li key={node.key}>
+        <MyST ast={node.children} />
+      </li>
+    );
   }
   return (
     <TaskItem
@@ -45,7 +53,7 @@ export const listItem: NodeRenderer<ListItem> = (node, children) => {
       checked={node.checked}
       line={node.position?.start.line}
     >
-      {children}
+      {node.children}
     </TaskItem>
   );
 };

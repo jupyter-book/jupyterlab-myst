@@ -98,7 +98,7 @@ export async function processArticleMDAST(
     article: mdast as any
   };
 
-  const { frontmatter: frontmatterRaw } = getFrontmatter(mdast, {
+  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {
     removeYaml: true,
     removeHeading: true
   });
@@ -159,6 +159,7 @@ export async function processNotebookMDAST(
     article: mdast as any
   };
   const { frontmatter: frontmatterRaw } = getFrontmatter(
+    file,
     // This is the first cell, which might have a YAML block or header.
     mdast.children[0] as any,
     {

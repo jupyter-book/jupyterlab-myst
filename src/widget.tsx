@@ -11,7 +11,7 @@ import {
   Theme,
   ThemeProvider
 } from '@myst-theme/providers';
-import { useParse } from 'myst-to-react';
+import { MyST } from 'myst-to-react';
 import React from 'react';
 import { UserExpressionsProvider } from './UserExpressionsProvider';
 import {
@@ -152,8 +152,6 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     }
     const { references, frontmatter, mdast, expressions } = this.model;
 
-    const children = useParse(mdast || null, renderers);
-
     return (
       <TaskItemControllerProvider controller={this._taskItemController}>
         <ThemeProvider
@@ -172,7 +170,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
                 frontmatter={frontmatter}
               >
                 {frontmatter && <FrontmatterBlock frontmatter={frontmatter} />}
-                {children}
+                <MyST ast={mdast}></MyST>
               </ReferencesProvider>
             </TabStateProvider>
           </UserExpressionsProvider>

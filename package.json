@@ -64,9 +64,9 @@
     "@jupyterlab/notebook": "^4.0.0",
     "@jupyterlab/rendermime": "^4.0.0",
     "@jupyterlab/translation": "^4.0.0",
-    "@myst-theme/diagrams": "^0.3.3",
-    "@myst-theme/frontmatter": "^0.3.3",
-    "@myst-theme/providers": "^0.3.3",
+    "@myst-theme/diagrams": "^0.5.6",
+    "@myst-theme/frontmatter": "^0.5.6",
+    "@myst-theme/providers": "^0.5.6",
     "katex": "^0.15.2",
     "myst-ext-card": "^1.0.0",
     "myst-ext-exercise": "^1.0.0",
@@ -75,7 +75,7 @@
     "myst-ext-tabs": "^1.0.0",
     "myst-frontmatter": "^1.0.1",
     "myst-parser": "^1.0.2",
-    "myst-to-react": "^0.3.3",
+    "myst-to-react": "^0.5.6",
     "myst-transforms": "^1.0.2"
   },
   "devDependencies": {
