@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-myst",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Use MyST in JupyterLab",
   "keywords": [
     "jupyter",
@@ -69,17 +69,17 @@
     "@myst-theme/frontmatter": "^0.5.6",
     "@myst-theme/providers": "^0.5.6",
     "katex": "^0.15.2",
-    "myst-common": "/home/angus/Git/mystmd/packages/myst-common/myst-common-1.1.4.tgz",
+    "myst-common": "^1.1.5",
     "myst-ext-card": "^1.0.0",
     "myst-ext-exercise": "^1.0.0",
     "myst-ext-grid": "^1.0.0",
     "myst-ext-proof": "^1.0.0",
     "myst-ext-tabs": "^1.0.0",
-    "myst-frontmatter": "^1.0.1",
-    "myst-parser": "^1.0.2",
-    "myst-to-html": "/home/angus/Git/mystmd/packages/myst-to-html/myst-to-html-1.0.6.tgz",
+    "myst-frontmatter": "^1.1.5",
+    "myst-parser": "^1.0.7",
+    "myst-to-html": "^1.0.7",
     "myst-to-react": "^0.5.6",
-    "myst-transforms": "/home/angus/Git/mystmd/packages/myst-transforms/myst-transforms-1.1.0.tgz"
+    "myst-transforms": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
