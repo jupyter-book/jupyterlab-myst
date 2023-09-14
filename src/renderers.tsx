@@ -4,6 +4,7 @@ import { MermaidNodeRenderer } from '@myst-theme/diagrams';
 import { NodeRenderer } from '@myst-theme/providers';
 import { InlineRenderer } from './inlineExpression';
 import { listItem } from './taskItem';
+import { useSanitizer } from './SanitizerProvider';
 
 export const renderers: Record<string, NodeRenderer> = {
   ...DEFAULT_RENDERERS,
@@ -11,5 +12,17 @@ export const renderers: Record<string, NodeRenderer> = {
   inlineExpression: ({ node }) => {
     return <InlineRenderer value={node.value} />;
   },
-  listItem
+  listItem,
+  html: ({ node }, children) => {
+    const { sanitizer } = useSanitizer();
+    if (sanitizer !== undefined) {
+      return (
+        <span
+          dangerouslySetInnerHTML={{ __html: sanitizer.sanitize(node.value) }}
+        ></span>
+      );
+    } else {
+      return <pre> {`${node.value}`} </pre>;
+    }
+  }
 };
