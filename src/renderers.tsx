@@ -18,11 +18,12 @@ export const renderers: Record<string, NodeRenderer> = {
     if (sanitizer !== undefined) {
       return (
         <span
+          className="jp-RenderedHTMLCommon not-prose"
           dangerouslySetInnerHTML={{ __html: sanitizer.sanitize(node.value) }}
         ></span>
       );
     } else {
-      return <pre> {`${node.value}`} </pre>;
+      return <pre>{node.value}</pre>;
     }
   }
 };
