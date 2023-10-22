@@ -43,7 +43,7 @@ jobs:
           jupyter labextension list
           jupyter labextension list 2>&1 | grep -ie "jupyterlab-myst.*OK"
           # Temporarily allow CI to pass
-          python -c "from packaging.version import Version; from importlib.metadata import version as version_of; raise SystemExit(Version(version_of('jupyterlab')) > Version('4.0.6'))" 
+          python -c "from packaging.version import Version; from importlib.metadata import version as version_of; raise SystemExit(Version(version_of('jupyterlab')) > Version('4.0.7'))" 
           # python -m jupyterlab.browser_check
 
       - name: Package the extension
