@@ -51,20 +51,26 @@ export interface IMySTExpressionsState {
 }
 
 export function markdownParse(text: string): Root {
-  const mdast = mystParse(text, {
-    directives: [
-      cardDirective,
-      gridDirective,
-      proofDirective,
-      ...tabDirectives,
-      ...exerciseDirectives
-    ],
-    roles: [evalRole]
-  });
+  const parseMyst = (content: string) => {
+    return mystParse(content, {
+      directives: [
+        cardDirective,
+        gridDirective,
+        proofDirective,
+        ...tabDirectives,
+        ...exerciseDirectives
+      ],
+      roles: [evalRole]
+    });
+  };
+
+  const mdast = parseMyst(text);
   // Parsing individually here requires that link and footnote references are contained to the cell
   // This is consistent with the current Jupyter markdown renderer
   unified()
-    .use(basicTransformationsPlugin)
+    .use(basicTransformationsPlugin, {
+      parser: parseMyst
+    })
     .runSync(mdast as any);
   return mdast as Root;
 }
