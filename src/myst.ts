@@ -32,12 +32,15 @@ import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksTransform } from './links';
-import { addCiteChildrenPlugin } from './citations';
+import { addCiteChildrenPlugin, combineCitationRenderers } from './citations';
+import { CitationRenderer } from 'citation-js-utils';
 import { evalRole } from './roles';
 import { IUserExpressionMetadata } from './metadata';
 import { IMySTMarkdownCell } from './types';
 import { Cell, ICellModel } from '@jupyterlab/cells';
 import { MySTModel } from './widget';
+
+export const citationRenderers: Record<string, CitationRenderer> = {};
 
 export interface IMySTDocumentState {
   references: References;
@@ -108,6 +111,11 @@ export async function processArticleMDAST(
     numbering: frontmatter.numbering,
     file
   });
+
+  const renderer = combineCitationRenderers(
+    Object.entries(citationRenderers).map(([, v]) => v)
+  );
+
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
     .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
@@ -116,7 +124,7 @@ export async function processArticleMDAST(
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
     .use(resolveReferencesPlugin, { state })
-    .use(addCiteChildrenPlugin)
+    .use(addCiteChildrenPlugin, { references, renderer })
     .use(keysPlugin)
     .runSync(mdast as any, file);
 
@@ -178,6 +186,10 @@ export async function processNotebookMDAST(
     file
   });
 
+  const renderer = combineCitationRenderers(
+    Object.entries(citationRenderers).map(([, v]) => v)
+  );
+
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
     .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
@@ -186,7 +198,7 @@ export async function processNotebookMDAST(
     .use(linksPlugin, { transformers: linkTransforms })
     .use(footnotesPlugin)
     .use(resolveReferencesPlugin, { state })
-    .use(addCiteChildrenPlugin)
+    .use(addCiteChildrenPlugin, { references, renderer })
     .use(keysPlugin)
     .runSync(mdast as any, file);
 

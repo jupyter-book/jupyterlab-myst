@@ -79,7 +79,8 @@
     "myst-parser": "^1.0.21",
     "myst-to-html": "^1.0.21",
     "myst-to-react": "^0.5.21",
-    "myst-transforms": "^1.1.19"
+    "myst-transforms": "^1.1.19",
+    "citation-js-utils": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
