@@ -123,4 +123,6 @@ dmypy.json
 
 # Yarn cache
 .yarn/
-.nix*
+
+# Generated css files by tailwind
+style/app.css
