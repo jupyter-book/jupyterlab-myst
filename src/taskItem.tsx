@@ -25,9 +25,9 @@ function TaskItem({
         className="task-list-item-checkbox"
         checked={local}
         onClick={() => {
-	  // Bail if no line number was found
+          // Bail if no line number was found
           if (!controller || line == null) return;
-          controller({ line: line-1, checked: !local });
+          controller({ line: line - 1, checked: !local });
           setLocal(!local);
         }}
       />
