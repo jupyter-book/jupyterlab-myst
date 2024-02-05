@@ -2,29 +2,75 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
+import { IMarkdownViewerTracker } from '@jupyterlab/markdownviewer';
 
-import { requestAPI } from './handler';
+import { IEditorServices } from '@jupyterlab/codeeditor';
+
+import {
+  INotebookTracker,
+  Notebook,
+  NotebookActions,
+  NotebookPanel
+} from '@jupyterlab/notebook';
+import { Cell } from '@jupyterlab/cells';
+import { MySTContentFactory } from './MySTContentFactory';
+import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
+
+import { notebookCellExecuted } from './actions';
+import { mystMarkdownRendererFactory } from './mime';
 
 /**
- * Initialization data for the jupyterlab-myst extension.
+ * The notebook content factory provider.
  */
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyterlab-myst:plugin',
-  description: 'Use MyST in JupyterLab',
+const plugin: JupyterFrontEndPlugin<NotebookPanel.IContentFactory> = {
+  id: 'jupyterlab-myst:content-factory',
+  provides: NotebookPanel.IContentFactory,
+  requires: [IEditorServices],
   autoStart: true,
-  activate: (app: JupyterFrontEnd) => {
+  activate: (app: JupyterFrontEnd, editorServices: IEditorServices) => {
     console.log('JupyterLab extension jupyterlab-myst is activated!');
-
-    requestAPI<any>('get-example')
-      .then(data => {
-        console.log(data);
-      })
-      .catch(reason => {
-        console.error(
-          `The jupyterlab_myst server extension appears to be missing.\n${reason}`
-        );
-      });
+    const editorFactory = editorServices.factoryService.newInlineEditor;
+    return new MySTContentFactory({ editorFactory });
   }
 };
 
-export default plugin;
+/**
+ * The notebook cell executor.
+ */
+const executorPlugin: JupyterFrontEndPlugin<void> = {
+  id: 'jupyterlab-myst:executor',
+  requires: [INotebookTracker],
+  autoStart: true,
+  activate: (app: JupyterFrontEnd, tracker: INotebookTracker) => {
+    console.log('Using jupyterlab-myst:executor');
+
+    NotebookActions.executed.connect(
+      async (sender: any, value: { notebook: Notebook; cell: Cell }) => {
+        const { notebook, cell } = value;
+        await notebookCellExecuted(notebook, cell, tracker);
+      }
+    );
+
+    return;
+  }
+};
+
+const mimeRendererPlugin: JupyterFrontEndPlugin<void> = {
+  id: 'jupyterlab-myst:mime-renderer',
+  requires: [IRenderMimeRegistry],
+  autoStart: true,
+  optional: [IMarkdownViewerTracker],
+  activate: (
+    app: JupyterFrontEnd,
+    registry: IRenderMimeRegistry,
+    // We don't need this tracker directly, but it ensures that the built-in
+    // Markdown renderer is registered, so that we can then safely add our own.
+    tracker?: IMarkdownViewerTracker
+  ) => {
+    console.log('Using jupyterlab-myst:mime-renderer');
+    // Add the MyST markdown renderer factory.
+    registry.addFactory(mystMarkdownRendererFactory);
+  }
+};
+
+export default [plugin, executorPlugin, mimeRendererPlugin];
