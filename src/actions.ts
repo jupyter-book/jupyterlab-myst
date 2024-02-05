@@ -45,7 +45,7 @@ export async function executeUserExpressions(
   );
   console.debug('Executing named expressions', namedExpressions);
   // No expressions!
-  if (namedExpressions.size == 0) {
+  if (namedExpressions.size === 0) {
     return Promise.resolve([]);
   }
 

@@ -10,15 +10,14 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "preserveWatchOutput": true,
     "resolveJsonModule": true,
     "outDir": "lib",
     "rootDir": "src",
     "strict": true,
     "strictNullChecks": true,
-    "target": "ES2018",
-    "types": ["jest"]
+    "target": "ES2018"
   },
   "include": ["src/*"]
 }

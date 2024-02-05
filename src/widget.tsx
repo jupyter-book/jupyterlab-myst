@@ -30,7 +30,9 @@ import { SanitizerProvider } from './SanitizerProvider';
 export const MIME_TYPE = 'text/markdown';
 
 function getJupyterTheme(): Theme {
-  if (typeof document === 'undefined') return Theme.light;
+  if (typeof document === 'undefined') {
+    return Theme.light;
+  }
   return document.body.dataset.jpThemeLight === 'false'
     ? Theme.dark
     : Theme.light;
