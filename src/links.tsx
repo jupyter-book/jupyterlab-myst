@@ -65,7 +65,9 @@ export const linkFactory =
     const ref = React.useRef<HTMLAnchorElement>(null);
     const { to: url } = props;
     React.useEffect(() => {
-      if (!ref || !ref.current || !resolver) return;
+      if (!ref || !ref.current || !resolver) {
+        return;
+      }
       handleAnchor(ref.current, resolver, linkHandler);
     }, [ref, url]);
     return (
@@ -89,15 +91,21 @@ export async function internalLinksTransform(
   const links = selectAll('link,linkBlock', tree) as Link[];
   await Promise.all(
     links.map(async link => {
-      if (!link || !link.url) return;
+      if (!link || !link.url) {
+        return;
+      }
       const resolver = opts.resolver;
       const href = link.url;
       updateLinkTextIfEmpty(link, href);
       const isLocal = resolver?.isLocal
         ? resolver.isLocal(href)
         : URLExt.isLocal(href);
-      if (!isLocal) return;
-      if (!resolver) return;
+      if (!isLocal) {
+        return;
+      }
+      if (!resolver) {
+        return;
+      }
       if ((link as any).static) {
         // TODO: remove hash
         const urlPath = await resolver.resolveUrl(href);

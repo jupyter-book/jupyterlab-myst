@@ -11,15 +11,23 @@ export async function imageUrlSourceTransform(
   opts: Options
 ): Promise<void> {
   const resolver = opts.resolver;
-  if (!resolver) return;
+  if (!resolver) {
+    return;
+  }
   const images = selectAll('image', tree) as Image[];
   await Promise.all(
     images.map(async image => {
-      if (!image || !image.url) return;
+      if (!image || !image.url) {
+        return;
+      }
       const path = await resolver.resolveUrl(image.url);
-      if (!path) return;
+      if (!path) {
+        return;
+      }
       const url = await resolver.getDownloadUrl(path);
-      if (!url) return;
+      if (!url) {
+        return;
+      }
       image.url = url;
     })
   );

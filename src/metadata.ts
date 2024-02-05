@@ -23,7 +23,9 @@ export function setUserExpressions(
   cell: IMySTMarkdownCell | Cell,
   expressions: IUserExpressionMetadata[]
 ) {
-  if (!cell) return;
+  if (!cell) {
+    return;
+  }
   if (!cell.model.setMetadata) {
     // this is JupyterLab 3.6
     (cell.model.metadata as any).set(metadataSection, expressions);
@@ -33,7 +35,9 @@ export function setUserExpressions(
 }
 
 export function deleteUserExpressions(cell: IMySTMarkdownCell | Cell) {
-  if (!cell) return;
+  if (!cell) {
+    return;
+  }
   if (!cell.model.setMetadata) {
     // this is JupyterLab 3.6
     (cell.model.metadata as any).delete(metadataSection);

@@ -26,7 +26,9 @@ function TaskItem({
         checked={local}
         onClick={() => {
           // Bail if no line number was found
-          if (!controller || line == null) return;
+          if (!controller || line === null) {
+            return;
+          }
           controller({ line, checked: !local });
           setLocal(!local);
         }}
@@ -39,7 +41,7 @@ function TaskItem({
 export const listItem: NodeRenderer<ListItem & { checked?: boolean }> = ({
   node
 }) => {
-  if (node.checked == null) {
+  if (node.checked === null) {
     return (
       <li key={node.key}>
         <MyST ast={node.children} />
