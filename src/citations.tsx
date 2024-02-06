@@ -9,7 +9,9 @@ import { selectAll } from 'unist-util-select';
 export async function addCiteChildrenTransform(tree: Root): Promise<void> {
   const links = selectAll('cite', tree) as GenericNode[];
   links.forEach(async cite => {
-    if (cite.children && cite.children.length > 0) return;
+    if (cite.children && cite.children.length > 0) {
+      return;
+    }
     cite.error = true;
     cite.children = [{ type: 'text', value: cite.label }];
   });

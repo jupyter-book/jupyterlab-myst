@@ -3,8 +3,8 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
-@import 'app.css';
-@import '~katex/dist/katex.css';
+@import url('app.css');
+@import url('~katex/dist/katex.css');
 
 /* Allow overflow on input areas for myst */
 .jp-MySTMarkdownCell .jp-InputArea,
