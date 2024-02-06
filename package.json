@@ -223,5 +223,9 @@
             "selector-no-vendor-prefix": null,
             "value-no-vendor-prefix": null
         }
+    },
+    "resolutions": {
+        "myst-spec": "0.0.4",
+        "myst-frontmatter": "1.1.22"
     }
 }

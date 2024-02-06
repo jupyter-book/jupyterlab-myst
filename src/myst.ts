@@ -95,22 +95,24 @@ export async function processArticleMDAST(
     article: mdast as any
   };
 
-  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {
-    removeYaml: true,
-    removeHeading: true
-  });
+  const { frontmatter: frontmatterRaw, identifiers } = getFrontmatter(
+    file,
+    mdast,
+    {}
+  );
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState('<internal>', {
     numbering: frontmatter.numbering,
-    file
+    vfile: file,
+    identifiers
   });
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
@@ -158,14 +160,11 @@ export async function processNotebookMDAST(
     cite: { order: [], data: {} },
     article: mdast as any
   };
-  const { frontmatter: frontmatterRaw } = getFrontmatter(
+  const { frontmatter: frontmatterRaw, identifiers } = getFrontmatter(
     file,
     // This is the first cell, which might have a YAML block or header.
     mdast.children[0] as any,
-    {
-      removeYaml: true,
-      removeHeading: true
-    }
+    {}
   );
 
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
@@ -173,14 +172,15 @@ export async function processNotebookMDAST(
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState('<internal>', {
     numbering: frontmatter.numbering,
-    file
+    vfile: file,
+    identifiers
   });
 
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
