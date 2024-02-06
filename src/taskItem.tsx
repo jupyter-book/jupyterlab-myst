@@ -29,7 +29,7 @@ function TaskItem({
           if (!controller || line === undefined) {
             return;
           }
-          controller({ line, checked: !local });
+          controller({ line: line - 1, checked: !local });
           setLocal(!local);
         }}
       />
