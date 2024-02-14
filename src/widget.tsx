@@ -122,9 +122,9 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     this._rendermime = rendermime;
     this._trusted = trusted;
     this._sanitizer = sanitizer;
+    this._taskItemController = change => this._taskItemChanged.emit(change);
     this.addClass('myst');
 
-    this._taskItemController = change => this._taskItemChanged.emit(change);
   }
 
   private _trusted?: boolean = false;

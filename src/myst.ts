@@ -104,13 +104,15 @@ export async function processArticleMDAST(
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState(
+	  "<PATH>",
+  {
     numbering: frontmatter.numbering,
     file
   });
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
@@ -173,14 +175,14 @@ export async function processNotebookMDAST(
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState("<PATH>",{
     numbering: frontmatter.numbering,
     file
   });
 
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
@@ -231,6 +233,7 @@ export async function renderNotebook(notebook: StaticNotebook) {
     frontmatter,
     mdast: processedMDAST
   } = await processNotebookMDAST(
+    	   
     mdast,
     notebook.rendermime.resolver ?? undefined
   );

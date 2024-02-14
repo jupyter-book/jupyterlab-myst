@@ -11,8 +11,8 @@ export class RenderedMySTMarkdown
   extends MySTWidget
   implements IRenderMime.IRenderer
 {
-  readonly resolver: IRenderMime.IResolver | undefined;
-  readonly linkHandler: IRenderMime.ILinkHandler | undefined;
+  readonly resolver?: IRenderMime.IResolver;
+  readonly linkHandler?: IRenderMime.ILinkHandler;
 
   constructor(options: IRenderMime.IRendererOptions) {
     super({
