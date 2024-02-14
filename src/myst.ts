@@ -33,7 +33,6 @@ import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { imageUrlSourceTransform } from './images';
 import { internalLinksTransform } from './links';
 import { addCiteChildrenPlugin } from './citations';
-import { evalRole } from './roles';
 import { IUserExpressionMetadata } from './metadata';
 import { IMySTMarkdownCell } from './types';
 import { Cell, ICellModel } from '@jupyterlab/cells';
@@ -60,7 +59,7 @@ export function markdownParse(text: string): Root {
         ...tabDirectives,
         ...exerciseDirectives
       ],
-      roles: [evalRole]
+      roles: []
     });
   };
 
