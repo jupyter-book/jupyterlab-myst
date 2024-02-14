@@ -95,8 +95,6 @@ export async function processArticleMDAST(
   };
 
   const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {
-    removeYaml: true,
-    removeHeading: true
   });
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
@@ -164,8 +162,6 @@ export async function processNotebookMDAST(
     // This is the first cell, which might have a YAML block or header.
     mdast.children[0] as any,
     {
-      removeYaml: true,
-      removeHeading: true
     }
   );
 
