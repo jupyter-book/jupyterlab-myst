@@ -105,7 +105,7 @@ export async function processArticleMDAST(
 	  "<PATH>",
   {
     numbering: frontmatter.numbering,
-    file
+    vfile: file
   });
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
@@ -172,7 +172,7 @@ export async function processNotebookMDAST(
 
   const state = new ReferenceState("<PATH>",{
     numbering: frontmatter.numbering,
-    file
+    vfile: file
   });
 
   unified()
