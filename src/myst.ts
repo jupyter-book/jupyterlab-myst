@@ -30,7 +30,11 @@ import { exerciseDirectives } from 'myst-ext-exercise';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { imageUrlSourceTransform, internalLinksTransform, addCiteChildrenPlugin } from './transforms';
+import {
+  imageUrlSourceTransform,
+  internalLinksTransform,
+  addCiteChildrenPlugin
+} from './transforms';
 import { IUserExpressionMetadata } from './userExpressions';
 import { IMySTMarkdownCell } from './types';
 import { Cell, ICellModel } from '@jupyterlab/cells';
@@ -92,16 +96,13 @@ export async function processArticleMDAST(
     article: mdast as any
   };
 
-  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {
-  });
+  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {});
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
     messages: {}
   });
 
-  const state = new ReferenceState(
-	  "<PATH>",
-  {
+  const state = new ReferenceState('<PATH>', {
     numbering: frontmatter.numbering,
     vfile: file
   });
@@ -159,8 +160,7 @@ export async function processNotebookMDAST(
     file,
     // This is the first cell, which might have a YAML block or header.
     mdast.children[0] as any,
-    {
-    }
+    {}
   );
 
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
@@ -168,7 +168,7 @@ export async function processNotebookMDAST(
     messages: {}
   });
 
-  const state = new ReferenceState("<PATH>",{
+  const state = new ReferenceState('<PATH>', {
     numbering: frontmatter.numbering,
     vfile: file
   });
@@ -226,7 +226,6 @@ export async function renderNotebook(notebook: StaticNotebook) {
     frontmatter,
     mdast: processedMDAST
   } = await processNotebookMDAST(
-    	   
     mdast,
     notebook.rendermime.resolver ?? undefined
   );

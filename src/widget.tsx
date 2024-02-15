@@ -13,11 +13,13 @@ import {
 } from '@myst-theme/providers';
 import { MyST } from 'myst-to-react';
 import React from 'react';
-import { UserExpressionsProvider,
+import {
+  UserExpressionsProvider,
   ITaskItemChange,
   ITaskItemController,
   TaskItemControllerProvider,
-  SanitizerProvider } from './providers';
+  SanitizerProvider
+} from './providers';
 import { renderers } from './renderers';
 import { IUserExpressionMetadata } from './userExpressions';
 import { linkFactory } from './transforms';
@@ -122,7 +124,6 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     this._sanitizer = sanitizer;
     this._taskItemController = change => this._taskItemChanged.emit(change);
     this.addClass('myst');
-
   }
 
   private _trusted?: boolean = false;

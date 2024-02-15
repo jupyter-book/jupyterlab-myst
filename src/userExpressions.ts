@@ -2,7 +2,6 @@ import { PartialJSONObject } from '@lumino/coreutils';
 import { Cell } from '@jupyterlab/cells';
 import type { IMySTMarkdownCell } from './types';
 
-
 export const metadataSection = 'user_expressions';
 
 /**
@@ -38,7 +37,6 @@ export function isError(output: IExpressionResult): output is IExpressionError {
   return output.status === 'error';
 }
 
-
 export interface IUserExpressionMetadata extends PartialJSONObject {
   expression: string;
   result: IExpressionResult;
@@ -47,7 +45,6 @@ export interface IUserExpressionMetadata extends PartialJSONObject {
 export interface IUserExpressionsMetadata extends PartialJSONObject {
   [metadataSection]: IUserExpressionMetadata[];
 }
-
 
 export function getUserExpressions(
   cell: IMySTMarkdownCell | Cell

@@ -2,7 +2,7 @@ import React from 'react';
 import { DEFAULT_RENDERERS } from 'myst-to-react';
 import { MermaidNodeRenderer } from '@myst-theme/diagrams';
 import { NodeRenderer } from '@myst-theme/providers';
-import { InlineExpression,  ListItem } from './components';
+import { InlineExpression, ListItem } from './components';
 import { useSanitizer } from './providers';
 
 export const renderers: Record<string, NodeRenderer> = {
@@ -12,7 +12,13 @@ export const renderers: Record<string, NodeRenderer> = {
     return <InlineExpression value={node.value} />;
   },
   listItem: ({ node }) => {
-    return <ListItem checked={node.checked} line={node.position?.start.line} children={node.children}/>;
+    return (
+      <ListItem
+        checked={node.checked}
+        line={node.position?.start.line}
+        children={node.children}
+      />
+    );
   },
   html: ({ node }, children) => {
     const { sanitizer } = useSanitizer();
