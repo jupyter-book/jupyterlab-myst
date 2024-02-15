@@ -5,6 +5,11 @@
 
 /* This is a highly simplified version of https://tailwindcss.com/docs/preflight to work with JupyterLab */
 
+.myst {
+  font-size: var(--jp-content-font-size1);
+  color: var(--jp-content-font-color1);
+}
+
 .myst
   :where(*):not(
     :where([class~='jp-RenderedHTMLCommon'], [class~='jp-RenderedHTMLCommon'] *)
@@ -46,4 +51,8 @@
   ) {
   display: block;
   max-width: 100%;
+}
+
+.myst :where(button, input, optgroup, select, textarea) {
+  color: inherit; /* 1 */
 }

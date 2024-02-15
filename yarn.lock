@@ -3230,10 +3230,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@myst-theme/styles@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "@myst-theme/styles@npm:0.5.21"
-  checksum: 69213bad0c157914b557e94330b88c5505090096e7d0d8b8d71c7f98ecb4559b8ddedc4e5d06ee9a45766a146c51a2651ff51ea9c15f15c219a0b5b9b98cbb74
+"@myst-theme/styles@npm:^0.5.22":
+  version: 0.5.22
+  resolution: "@myst-theme/styles@npm:0.5.22"
+  checksum: be0d2e9a0f9bd1252848a12aca8ac2d5c88b9473070450d09c5314787c93175b7f34a8712e5ddd82dd832cafce7587437dce3c7de0ebd34b3fa2d5dc2b0bef15
   languageName: node
   linkType: hard
 
@@ -9016,7 +9016,7 @@ __metadata:
     "@myst-theme/diagrams": ^0.5.22
     "@myst-theme/frontmatter": ^0.5.22
     "@myst-theme/providers": ^0.5.22
-    "@myst-theme/styles": ^0.5.21
+    "@myst-theme/styles": ^0.5.22
     "@tailwindcss/typography": ^0.5.8
     "@types/jest": ^29.2.0
     "@types/json-schema": ^7.0.11
