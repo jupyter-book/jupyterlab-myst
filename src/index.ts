@@ -66,22 +66,21 @@ const mimeRendererPlugin: JupyterFrontEndPlugin<void> = {
     // We don't need this tracker directly, but it ensures that the built-in
     // Markdown renderer is registered, so that we can then safely add our own.
     tracker?: IMarkdownViewerTracker,
-    settingRegistry?: ISettingRegistry,
+    settingRegistry?: ISettingRegistry
   ) => {
     console.log('Using jupyterlab-myst:mime-renderer');
 
     // Enable frontmatter by default
     if (settingRegistry) {
-        settingRegistry
-	  .load('@jupyterlab/markdownviewer-extension:plugin')
-	  .then((settings: ISettingRegistry.ISettings) => {
-            settings.set('hideFrontMatter', false);
-	  });
+      settingRegistry
+        .load('@jupyterlab/markdownviewer-extension:plugin')
+        .then((settings: ISettingRegistry.ISettings) => {
+          settings.set('hideFrontMatter', false);
+        });
     }
 
     // Add the MyST markdown renderer factory.
     registry.addFactory(mystMarkdownRendererFactory);
-
   }
 };
 

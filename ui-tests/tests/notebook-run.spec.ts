@@ -28,4 +28,3 @@ test.describe.serial('Notebook Run', () => {
     expect(await nbPanel!.screenshot()).toMatchSnapshot();
   });
 });
-

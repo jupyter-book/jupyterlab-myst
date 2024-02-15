@@ -18,7 +18,7 @@ test.describe.serial('File Run', () => {
   });
 
   test('View Markdown file and render result', async ({ page, tmpPath }) => {
-    const filePath = `${tmpPath}/${fileName}`
+    const filePath = `${tmpPath}/${fileName}`;
     await page.filebrowser.open(filePath, FACTORY);
 
     const name = path.basename(filePath);
