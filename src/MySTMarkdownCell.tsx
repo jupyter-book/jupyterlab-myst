@@ -4,11 +4,11 @@ import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { AttachmentsResolver } from '@jupyterlab/attachments';
 import { IMapChange } from '@jupyter/ydoc';
 import { IMySTMarkdownCell } from './types';
-import { getUserExpressions, metadataSection } from './metadata';
+import { getUserExpressions, metadataSection } from './userExpressions';
 import { IMySTModel, MySTModel, MySTWidget } from './widget';
 import { markdownParse, processCellMDAST, renderNotebook } from './myst';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { ITaskItemChange } from './TaskItemControllerProvider';
+import { ITaskItemChange } from './providers';
 
 class IMySTWidget {}
 

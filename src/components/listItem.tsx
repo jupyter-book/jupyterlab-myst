@@ -1,7 +1,5 @@
 import React from 'react';
-import { NodeRenderer } from '@myst-theme/providers';
-import type { ListItem } from 'myst-spec-ext';
-import { useTaskItemController } from './TaskItemControllerProvider';
+import { useTaskItemController } from '../providers';
 import { MyST } from 'myst-to-react';
 
 function TaskItem({
@@ -10,7 +8,7 @@ function TaskItem({
   children
 }: {
   checked?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   line?: number;
 }) {
   // The rendering waiting on promises from Jupyter is slow
@@ -38,23 +36,29 @@ function TaskItem({
   );
 }
 
-export const listItem: NodeRenderer<ListItem & { checked?: boolean }> = ({
-  node
-}) => {
-  if (node.checked === null) {
+export function ListItem({
+  checked,
+  line,
+  children
+}: {
+     checked?: boolean,
+     line?: number,
+     children?: any[]
+
+   }): JSX.Element {
+  if (checked === null) {
     return (
-      <li key={node.key}>
-        <MyST ast={node.children} />
+      <li>
+        <MyST ast={children} />
       </li>
     );
   }
   return (
     <TaskItem
-      key={node.key}
-      checked={node.checked}
-      line={node.position?.start.line}
+      checked={checked}
+      line={line}
     >
-      <MyST ast={node.children} />
+      <MyST ast={children} />
     </TaskItem>
   );
 };
