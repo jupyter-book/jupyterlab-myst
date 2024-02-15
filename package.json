@@ -86,7 +86,7 @@
         "@babel/preset-env": "^7.0.0",
         "@jupyterlab/builder": "^4.0.0",
         "@jupyterlab/testutils": "^4.0.0",
-        "@myst-theme/styles": "^0.5.21",
+        "@myst-theme/styles": "^0.5.22",
         "@tailwindcss/typography": "^0.5.8",
         "@types/jest": "^29.2.0",
         "@types/json-schema": "^7.0.11",
