@@ -96,7 +96,8 @@ export async function processArticleMDAST(
     article: mdast as any
   };
 
-  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {});
+  const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast);
+  // unnestKernelSpec(rawPageFrontmatter);
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
     messages: {}
@@ -159,8 +160,7 @@ export async function processNotebookMDAST(
   const { frontmatter: frontmatterRaw } = getFrontmatter(
     file,
     // This is the first cell, which might have a YAML block or header.
-    mdast.children[0] as any,
-    {}
+    mdast.children[0] as any
   );
 
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
