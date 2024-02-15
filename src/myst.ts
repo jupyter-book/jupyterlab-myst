@@ -30,11 +30,8 @@ import { exerciseDirectives } from 'myst-ext-exercise';
 import { StaticNotebook } from '@jupyterlab/notebook';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { imageUrlSourceTransform } from './images';
-import { internalLinksTransform } from './links';
-import { addCiteChildrenPlugin } from './citations';
-import { evalRole } from './roles';
-import { IUserExpressionMetadata } from './metadata';
+import { imageUrlSourceTransform, internalLinksTransform, addCiteChildrenPlugin } from './transforms';
+import { IUserExpressionMetadata } from './userExpressions';
 import { IMySTMarkdownCell } from './types';
 import { Cell, ICellModel } from '@jupyterlab/cells';
 import { MySTModel } from './widget';
@@ -60,7 +57,7 @@ export function markdownParse(text: string): Root {
         ...tabDirectives,
         ...exerciseDirectives
       ],
-      roles: [evalRole]
+      roles: []
     });
   };
 
@@ -96,21 +93,21 @@ export async function processArticleMDAST(
   };
 
   const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast, {
-    removeYaml: true,
-    removeHeading: true
   });
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState(
+	  "<PATH>",
+  {
     numbering: frontmatter.numbering,
-    file
+    vfile: file
   });
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
@@ -163,8 +160,6 @@ export async function processNotebookMDAST(
     // This is the first cell, which might have a YAML block or header.
     mdast.children[0] as any,
     {
-      removeYaml: true,
-      removeHeading: true
     }
   );
 
@@ -173,14 +168,14 @@ export async function processNotebookMDAST(
     messages: {}
   });
 
-  const state = new ReferenceState({
+  const state = new ReferenceState("<PATH>",{
     numbering: frontmatter.numbering,
-    file
+    vfile: file
   });
 
   unified()
     .use(mathPlugin, { macros: frontmatter?.math ?? {} }) // This must happen before enumeration, as it can add labels
-    .use(glossaryPlugin, { state }) // This should be before the enumerate plugins
+    .use(glossaryPlugin) // This should be before the enumerate plugins
     .use(abbreviationPlugin, { abbreviations: frontmatter.abbreviations })
     .use(enumerateTargetsPlugin, { state })
     .use(linksPlugin, { transformers: linkTransforms })
@@ -231,6 +226,7 @@ export async function renderNotebook(notebook: StaticNotebook) {
     frontmatter,
     mdast: processedMDAST
   } = await processNotebookMDAST(
+    	   
     mdast,
     notebook.rendermime.resolver ?? undefined
   );

@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useUserExpressions } from './UserExpressionsProvider';
+import { useUserExpressions } from '../providers';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import {
+  IUserExpressionMetadata,
   IExpressionError,
   IExpressionResult,
   isError,
   isOutput
-} from './userExpressions';
-import { IUserExpressionMetadata } from './metadata';
+} from '../userExpressions';
 
 export interface IRenderedExpressionOptions {
   expression: string;
@@ -213,7 +213,7 @@ function MIMEBundleRenderer({
   return <div ref={ref} className="not-prose inline-block" />;
 }
 
-export function InlineRenderer({ value }: { value?: string }): JSX.Element {
+export function InlineExpression({ value }: { value?: string }): JSX.Element {
   const { expressions, rendermime, trusted } = useUserExpressions();
 
   if (!expressions || !rendermime) {

@@ -8,7 +8,7 @@ import {
   getUserExpressions,
   setUserExpressions,
   deleteUserExpressions
-} from './metadata';
+} from './userExpressions';
 import {
   INotebookTracker,
   Notebook,

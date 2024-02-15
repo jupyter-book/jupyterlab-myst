@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { IUserExpressionMetadata } from './metadata';
+import { IUserExpressionMetadata } from '../userExpressions';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 
 type UserExpressionsState = {

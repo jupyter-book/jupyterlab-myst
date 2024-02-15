@@ -13,16 +13,14 @@ import {
 } from '@myst-theme/providers';
 import { MyST } from 'myst-to-react';
 import React from 'react';
-import { UserExpressionsProvider } from './UserExpressionsProvider';
-import {
+import { UserExpressionsProvider,
   ITaskItemChange,
   ITaskItemController,
-  TaskItemControllerProvider
-} from './TaskItemControllerProvider';
+  TaskItemControllerProvider,
+  SanitizerProvider } from './providers';
 import { renderers } from './renderers';
-import { IUserExpressionMetadata } from './metadata';
-import { linkFactory } from './links';
-import { SanitizerProvider } from './SanitizerProvider';
+import { IUserExpressionMetadata } from './userExpressions';
+import { linkFactory } from './transforms';
 
 /**
  * The MIME type for Markdown.
@@ -122,9 +120,9 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
     this._rendermime = rendermime;
     this._trusted = trusted;
     this._sanitizer = sanitizer;
+    this._taskItemController = change => this._taskItemChanged.emit(change);
     this.addClass('myst');
 
-    this._taskItemController = change => this._taskItemChanged.emit(change);
   }
 
   private _trusted?: boolean = false;
