@@ -41,11 +41,10 @@ export function ListItem({
   line,
   children
 }: {
-     checked?: boolean,
-     line?: number,
-     children?: any[]
-
-   }): JSX.Element {
+  checked?: boolean;
+  line?: number;
+  children?: any[];
+}): JSX.Element {
   if (checked === null) {
     return (
       <li>
@@ -54,11 +53,8 @@ export function ListItem({
     );
   }
   return (
-    <TaskItem
-      checked={checked}
-      line={line}
-    >
+    <TaskItem checked={checked} line={line}>
       <MyST ast={children} />
     </TaskItem>
   );
-};
+}

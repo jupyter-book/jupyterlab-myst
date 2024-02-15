@@ -3165,37 +3165,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@myst-theme/common@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "@myst-theme/common@npm:0.5.21"
+"@myst-theme/common@npm:^0.5.22":
+  version: 0.5.22
+  resolution: "@myst-theme/common@npm:0.5.22"
   dependencies:
     myst-common: ^1.1.18
     myst-config: ^1.1.18
     myst-spec-ext: ^1.1.18
     nbtx: ^0.2.3
     unist-util-select: ^4.0.3
-  checksum: c4d9c600524ab7b95061230a6bc5335cb3b13b250c424bfc101bf91683d18574bd8f1c6e7889d6055688fa97e571a5def226fa598c98cdb9fde35a776cb709d1
+  checksum: ea47c479cb19c31c75b685bde5356f4d1ed1f7040832510b553a240840393570e65ce5bc27bce082cb6794069005d113618a0e5eb6ab063d19ff8474dde892df
   languageName: node
   linkType: hard
 
-"@myst-theme/diagrams@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "@myst-theme/diagrams@npm:0.5.21"
+"@myst-theme/diagrams@npm:^0.5.22":
+  version: 0.5.22
+  resolution: "@myst-theme/diagrams@npm:0.5.22"
   dependencies:
-    "@myst-theme/providers": ^0.5.21
+    "@myst-theme/providers": ^0.5.22
     mermaid: ^9.3.0
   peerDependencies:
     "@types/react": ^16.8 || ^17.0 || ^18.0
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 4462d1f9bd91f327946f47d2e384d58128df330d8508cb35f41806bed613cf36593bb02e992e7cfd1d202e3c920bdd70dddac076ada799726fee5b99956cf0d2
+  checksum: c53c51cba28c708839155bf0b02c9d8f5d1adae402253593d15c4fc72b56632fafdb8fed641263b0d42d0f7bf7745800fa506a2048d9126608a01b638f0231f1
   languageName: node
   linkType: hard
 
-"@myst-theme/frontmatter@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "@myst-theme/frontmatter@npm:0.5.21"
+"@myst-theme/frontmatter@npm:^0.5.22":
+  version: 0.5.22
+  resolution: "@myst-theme/frontmatter@npm:0.5.22"
   dependencies:
     "@headlessui/react": ^1.7.15
     "@heroicons/react": ^2.0.18
@@ -3209,15 +3209,15 @@ __metadata:
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: e9f25b0a7aa3517988778e246f4b8fd0a602258053b9e65d175ba3297f21f3cbf64ad986b1374d9d5638e99ad86a0603a615d298574d60c21133683e90cbfc2e
+  checksum: 747b8d9c971c1df7d8e369182ef89a17d7bc939e92b7970290529635fa96a549770ca183d4e945b12430a19ea077b3c7273ec34013f2124b7c5340a0c9e75b04
   languageName: node
   linkType: hard
 
-"@myst-theme/providers@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "@myst-theme/providers@npm:0.5.21"
+"@myst-theme/providers@npm:^0.5.21, @myst-theme/providers@npm:^0.5.22":
+  version: 0.5.22
+  resolution: "@myst-theme/providers@npm:0.5.22"
   dependencies:
-    "@myst-theme/common": ^0.5.21
+    "@myst-theme/common": ^0.5.22
   peerDependencies:
     "@types/react": ^16.8 || ^17.0 || ^18.0
     "@types/react-dom": ^16.8 || ^17.0 || ^18.0
@@ -3226,7 +3226,7 @@ __metadata:
     myst-frontmatter: ^1.1.18
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 81d06861353a3955c2bc35c5aaf9e451769afbab835d755e1a74c38883168338fe6fe664f50da9f75317c193a91b44ab881f95d5c0838b343d37f9b5857e5089
+  checksum: 90e7bc72028e40c4bc6aa25e391f1f069916fb46d517176f75f3ea38476460f33073b62f2ec17517e9ad335dbc12e6f33a9ae5ae9037a79b49655c3756b6eeb0
   languageName: node
   linkType: hard
 
@@ -9013,9 +9013,9 @@ __metadata:
     "@jupyterlab/rendermime": ^4.0.0
     "@jupyterlab/testutils": ^4.0.0
     "@jupyterlab/translation": ^4.0.0
-    "@myst-theme/diagrams": ^0.5.21
-    "@myst-theme/frontmatter": ^0.5.21
-    "@myst-theme/providers": ^0.5.21
+    "@myst-theme/diagrams": ^0.5.22
+    "@myst-theme/frontmatter": ^0.5.22
+    "@myst-theme/providers": ^0.5.22
     "@myst-theme/styles": ^0.5.21
     "@tailwindcss/typography": ^0.5.8
     "@types/jest": ^29.2.0
