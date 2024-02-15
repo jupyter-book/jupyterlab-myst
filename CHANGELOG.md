@@ -2,6 +2,22 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 2.3.1
+
+([Full Changelog](https://github.com/executablebooks/jupyterlab-myst/compare/v2.3.0...7b773501c7810764b2ce5edba206fe53a33b674c))
+
+### Bugs fixed
+
+- FIX: inherit Jupyter styles for buttons [#217](https://github.com/executablebooks/jupyterlab-myst/pull/217) ([@agoose77](https://github.com/agoose77))
+
+### Contributors to this release
+
+([GitHub contributors page for this release](https://github.com/executablebooks/jupyterlab-myst/graphs/contributors?from=2024-02-15&to=2024-02-15&type=c))
+
+[@agoose77](https://github.com/search?q=repo%3Aexecutablebooks%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2024-02-15..2024-02-15&type=Issues)
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 2.3.0
 
 ([Full Changelog](https://github.com/executablebooks/jupyterlab-myst/compare/v2.1.0...b0191baacaefacded0f60679c0e6a596c7fd4377))
@@ -28,8 +44,6 @@
 ([GitHub contributors page for this release](https://github.com/executablebooks/jupyterlab-myst/graphs/contributors?from=2023-10-09&to=2024-02-15&type=c))
 
 [@agoose77](https://github.com/search?q=repo%3Aexecutablebooks%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2023-10-09..2024-02-15&type=Issues) | [@github-actions](https://github.com/search?q=repo%3Aexecutablebooks%2Fjupyterlab-myst+involves%3Agithub-actions+updated%3A2023-10-09..2024-02-15&type=Issues) | [@rowanc1](https://github.com/search?q=repo%3Aexecutablebooks%2Fjupyterlab-myst+involves%3Arowanc1+updated%3A2023-10-09..2024-02-15&type=Issues)
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 2.1.0
 
