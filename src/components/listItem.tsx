@@ -45,7 +45,7 @@ export function ListItem({
   line?: number;
   children?: any[];
 }): JSX.Element {
-  if (checked === null) {
+  if (checked === undefined) {
     return (
       <li>
         <MyST ast={children} />
