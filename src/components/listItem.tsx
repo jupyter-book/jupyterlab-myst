@@ -45,16 +45,16 @@ export function ListItem({
   line?: number;
   children?: any[];
 }): JSX.Element {
-  if (checked !== true && checked !== false) {
+  if (typeof checked === 'boolean') {
     return (
-      <li>
+      <TaskItem checked={checked} line={line}>
         <MyST ast={children} />
-      </li>
+      </TaskItem>
     );
   }
   return (
-    <TaskItem checked={checked} line={line}>
+    <li>
       <MyST ast={children} />
-    </TaskItem>
+    </li>
   );
 }
