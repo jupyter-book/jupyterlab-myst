@@ -59,7 +59,7 @@ export function markdownParse(text: string): Root {
         ...gridDirectives,
         proofDirective,
         ...exerciseDirectives,
-        ...tabDirectives,
+        ...tabDirectives
       ],
       roles: []
     });
