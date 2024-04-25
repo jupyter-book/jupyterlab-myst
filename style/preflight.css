@@ -5,7 +5,6 @@
 
 /* This is a highly simplified version of https://tailwindcss.com/docs/preflight to work with JupyterLab */
 
-
 .myst
   :where(*):not(
     :where([class~='jp-RenderedHTMLCommon'], [class~='jp-RenderedHTMLCommon'] *)

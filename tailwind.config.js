@@ -33,7 +33,7 @@ module.exports = {
               fontWeight: 'var(--jp-content-heading-font-weight, 500)',
               fontStyle: 'normal',
               marginTop: 'var(--jp-content-heading-margin-top, 1.2em)',
-              marginBottom: 'var(--jp-content-heading-margin-bottom, 0.8em)',
+              marginBottom: 'var(--jp-content-heading-margin-bottom, 0.8em)'
             },
             'h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child':
               {
