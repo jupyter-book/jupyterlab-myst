@@ -23,7 +23,7 @@ import { unified } from 'unified';
 import { VFile } from 'vfile';
 import { PageFrontmatter, validatePageFrontmatter } from 'myst-frontmatter';
 import { cardDirective } from 'myst-ext-card';
-import { gridDirective } from 'myst-ext-grid';
+import { gridDirectives } from 'myst-ext-grid';
 import { tabDirectives } from 'myst-ext-tabs';
 import { proofDirective } from 'myst-ext-proof';
 import { exerciseDirectives } from 'myst-ext-exercise';
@@ -57,10 +57,10 @@ export function markdownParse(text: string): Root {
       markdownit: { linkify: true },
       directives: [
         cardDirective,
-        gridDirective,
+        ...gridDirectives,
         proofDirective,
-        ...tabDirectives,
-        ...exerciseDirectives
+        ...exerciseDirectives,
+        ...tabDirectives
       ],
       roles: []
     });
