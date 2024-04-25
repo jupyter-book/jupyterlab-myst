@@ -99,7 +99,7 @@ export async function processArticleMDAST(
 
   const { frontmatter: frontmatterRaw } = getFrontmatter(file, mdast);
   // unnestKernelSpec(rawPageFrontmatter);
-  console.log(JSON.stringify(frontmatterRaw))
+  console.log(JSON.stringify(frontmatterRaw));
   const frontmatter = validatePageFrontmatter(frontmatterRaw, {
     property: 'frontmatter',
     messages: {}
