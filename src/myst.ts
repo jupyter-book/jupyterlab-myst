@@ -54,6 +54,7 @@ export interface IMySTExpressionsState {
 export function markdownParse(text: string): Root {
   const parseMyst = (content: string) => {
     return mystParse(content, {
+      markdownit: { linkify: true },
       directives: [
         cardDirective,
         gridDirective,
