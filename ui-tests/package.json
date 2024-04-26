@@ -10,6 +10,7 @@
     },
     "devDependencies": {
         "@jupyterlab/galata": "^5.0.5",
-        "@playwright/test": "^1.37.0"
+        "@playwright/test": "^1.37.0",
+        "glob": "^10.3.12"
     }
 }
