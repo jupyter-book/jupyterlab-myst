@@ -37,4 +37,3 @@ Foo [^c] and Bar [^d]
 
 [^c]: A footnote
 [^d]: Another footnote
-

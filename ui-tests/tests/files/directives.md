@@ -32,7 +32,7 @@ Let $z$ be any other point in $S$ and use the fact that $S$ is a linear subspace
 Hence $\| y - z \| \geq \| y - \hat y \|$, which completes the proof.
 :::
 
-```{mermaid} 
+```{mermaid}
 flowchart LR
   A[Jupyter Notebook] --> C
   B[MyST Markdown] --> C
