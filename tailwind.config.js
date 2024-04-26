@@ -20,11 +20,11 @@ module.exports = {
       typography: theme => ({
         DEFAULT: {
           css: {
+            fontSize: 'var(--jp-content-font-size1)',
+            color: 'var(--jp-content-font-color1)',
+            fontFamily: 'var(--jp-content-font-family)',
+            lineHeight: 'var(--jp-content-line-height)',
             p: {
-              color: 'var(--jp-content-font-color1)',
-              fontFamily: 'var(--jp-content-font-family)',
-              fontSize: 'var(--jp-content-font-size1)',
-              lineHeight: 'var(--jp-content-line-height)',
               marginTop: 0,
               marginBottom: '1em'
             },
@@ -33,8 +33,7 @@ module.exports = {
               fontWeight: 'var(--jp-content-heading-font-weight, 500)',
               fontStyle: 'normal',
               marginTop: 'var(--jp-content-heading-margin-top, 1.2em)',
-              marginBottom: 'var(--jp-content-heading-margin-bottom, 0.8em)',
-              color: 'var(--jp-content-font-color1)'
+              marginBottom: 'var(--jp-content-heading-margin-bottom, 0.8em)'
             },
             'h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child':
               {
