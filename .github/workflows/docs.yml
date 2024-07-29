@@ -22,9 +22,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deploy:
-    defaults:
-      run:
-        working-directory: ./docs
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -40,7 +37,7 @@ jobs:
         run: npm install -g mystmd
       - name: Build HTML Assets
         run: myst build --html
-        working-directory: 
+        working-directory: ./docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
