@@ -43,7 +43,7 @@ Notebooks allow images to be added as cell attachments. This is typically achiev
 
 Cell attachments are inserted into the notebook using standard markdown syntax such as:
 
-```{md}
+```markdown
 ![image.png](attachment:7c0e625d-6238-464f-8100-8d008f30848b.png)
 ```
 

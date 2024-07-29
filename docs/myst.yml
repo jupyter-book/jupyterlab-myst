@@ -7,8 +7,6 @@ project:
   authors: []
   github: https://github.com/executablebooks/jupyterlab-myst
   references:
-    python: https://docs.python.org/3.7/
-    jupyterbook: https://jupyterbook.org/en/stable/
     guide: https://mystmd.org/guide/
     spec: https://mystmd.org/spec/
   abbreviations:
@@ -26,6 +24,4 @@ site:
   nav: []
   actions:
     - title: Learn More
-      url: https://mystmd.org/jupyterlab
-  domains:
-    - mystmd-jupyterlab.curve.space
+      url: https://mystmd.org/guide/quickstart-jupyter-lab-myst
