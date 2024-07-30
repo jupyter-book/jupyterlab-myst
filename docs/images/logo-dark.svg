@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="67.382111mm"
+   height="10.809342mm"
+   viewBox="0 0 67.382111 10.809342"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-137.31875,-53.445832)">
+    <g
+       id="g2"
+       transform="translate(98.93228,-9.9070507)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:font-logos;-inkscape-font-specification:font-logos;fill:#4d4d4d;stroke-width:0.264999;stroke-opacity:6.8515e-05"
+         x="38.640469"
+         y="70.903854"
+         id="text1-8"><tspan
+           id="tspan1-6"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Helvetica Neue LT Std';-inkscape-font-specification:'Helvetica Neue LT Std Light';fill:#9e9e9e;fill-opacity:1;stroke-width:0.265"
+           x="38.640469"
+           y="70.903854">jupyterlab</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:font-logos;-inkscape-font-specification:font-logos;fill:#f37726;fill-opacity:1;stroke-width:0.264999;stroke-opacity:6.8515e-05"
+         x="74.254448"
+         y="72.1558"
+         id="text3-8"><tspan
+           id="tspan3-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Roboto Slab';-inkscape-font-specification:'Roboto Slab';fill:#f37726;fill-opacity:1;stroke-width:0.265"
+           x="74.254448"
+           y="72.1558">{</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Roboto Slab';-inkscape-font-specification:'Roboto Slab';fill:#4d4d4d;fill-opacity:1;stroke-width:0.264999;stroke-opacity:6.8515e-05"
+         x="78.237549"
+         y="71.636703"
+         id="text4-4"><tspan
+           id="tspan4-3"
+           style="fill:#9e9e9e;fill-opacity:1;stroke-width:0.265"
+           x="78.237549"
+           y="71.636703">MyST</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Roboto Slab';-inkscape-font-specification:'Roboto Slab';fill:#f37726;fill-opacity:1;stroke-width:0.264999;stroke-opacity:6.8515e-05"
+         x="102.26836"
+         y="72.1558"
+         id="text5-1"><tspan
+           id="tspan5-4"
+           style="font-size:11.2889px;fill:#f37726;fill-opacity:1;stroke-width:0.265"
+           x="102.26836"
+           y="72.1558">}</tspan></text>
+    </g>
+  </g>
+</svg>
