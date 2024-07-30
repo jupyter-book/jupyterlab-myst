@@ -22,6 +22,10 @@ project:
 site:
   template: book-theme
   nav: []
+  options:
+    logo: images/logo.svg
+    logo_dark: images/logo-dark.svg
+    favicon: images/favicon.ico
   actions:
     - title: Learn More
       url: https://mystmd.org/guide/quickstart-jupyter-lab-myst
