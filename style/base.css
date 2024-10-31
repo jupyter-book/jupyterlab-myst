@@ -40,3 +40,13 @@
   padding: var(--jp-private-markdownviewer-padding);
   overflow: auto;
 }
+
+/* Updated link styles */
+.myst a {
+  color: var(--jp-content-link-color);
+  text-decoration: underline;
+}
+
+.myst a:hover {
+  color: var(--jp-content-link-color-hover);
+}
