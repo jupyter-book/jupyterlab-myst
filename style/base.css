@@ -6,10 +6,16 @@
 @import url('app.css');
 @import url('~katex/dist/katex.css');
 
-/* Allow overflow on input areas for myst */
+/* Allow scrolling on input areas for myst */
+.jp-MySTMarkdownCell {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
 .jp-MySTMarkdownCell .jp-InputArea,
 .jp-MySTMarkdownCell .jp-InputArea > .p-Widget {
-  overflow: visible;
+  overflow-y: visible;
+  overflow-x: auto;
 }
 
 .myst p .lm-Widget img {
@@ -18,7 +24,7 @@
 }
 
 .myst .lm-Widget {
-  overflow: inherit;
+  overflow: visible;
 }
 
 .myst .jp-RenderedHTMLCommon > *:last-child {
@@ -27,6 +33,8 @@
 
 .myst .jp-RenderedHTMLCommon {
   padding-right: 0.1em;
+  overflow-y: visible;
+  overflow-x: auto;
 }
 
 .myst .jp-RenderedText {
