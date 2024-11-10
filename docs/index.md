@@ -60,7 +60,7 @@ You can also edit task-lists directly in the rendered markdown.
 
 ## Usage
 
-[MyST][myst-quickstart] is a flavour of Markdown, which combines the experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
+[MyST](myst-quickstart) is a flavour of Markdown, which combines the experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
 
 ### Execution 🚀
 
