@@ -40,3 +40,15 @@
   padding: var(--jp-private-markdownviewer-padding);
   overflow: auto;
 }
+
+/* ─── Hard-code MyST links to blue ─────────────────────── */
+.jp-ThemedContainer .myst :where(a),
+.jp-ThemedContainer .myst :where(a):visited {
+  color: #0074d9 !important;      /* bright blue in all themes            */
+  text-decoration: none; /*underline !important; */
+}
+
+.jp-ThemedContainer .myst :where(a):hover {
+  text-decoration: none; /*underline !important; */ /* keep underline on hover        */
+}
+/* ───────────────────────────────────────────────────────────────────────── */
