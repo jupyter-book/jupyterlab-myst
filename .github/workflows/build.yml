@@ -2,10 +2,10 @@ name: Build
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - '*'
 
 concurrency:
@@ -59,7 +59,7 @@ jobs:
         pip uninstall -y "jupyterlab_myst" jupyterlab
 
     - name: Upload extension packages
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: extension-artifacts
         path: dist/jupyterlab_myst*
@@ -75,7 +75,7 @@ jobs:
       with:
         python-version: '3.9'
         architecture: 'x64'
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: extension-artifacts
     - name: Install and Test
@@ -111,7 +111,7 @@ jobs:
       uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
     - name: Download extension package
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: extension-artifacts
 
@@ -145,7 +145,7 @@ jobs:
 
     - name: Upload Playwright Test report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: jupyterlab_myst-playwright-tests
         path: |
@@ -161,4 +161,4 @@ jobs:
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
       - uses: jupyterlab/maintainer-tools/.github/actions/check-links@v1
         with:
-          ignore_links: "https?://mybinder\\.org.*" 
+          ignore_links: "https?://mybinder\\.org.*"
