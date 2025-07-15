@@ -23,12 +23,12 @@ Adding an image to your notebook using the standard Markdown syntax will work as
 By switching to MyST Directives or figures (and images) can be inserted with some additional control. `figure`s can also be cross-referenced in other places in the notebook. For example, the following `figure`:
 
 ```{myst}
-:::{figure} https://source.unsplash.com/random/400x200?beach,ocean
+:::{figure} https://picsum.photos/seed/myst-101/400/200
 :name: myFigure
-:alt: Random image of the beach or ocean!
+:alt: Image of a peer by the ocean
 :align: center
 
-Randomized beach and ocean images from Unsplash 🏖
+Ocean image from Lorem Picsum 🏖
 :::
 
 Check out [](#myFigure)!!

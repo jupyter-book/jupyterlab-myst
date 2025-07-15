@@ -32,26 +32,26 @@ math:
 This is MyST in a notebook rendered by `jupyterlab-myst`!!
 :::
 
-```{figure} https://source.unsplash.com/random/800x200?sunset
+```{figure} https://picsum.photos/800/200
 :name: hello
 :width: 40%
-A nice sunset 🌅!!
+A random 800x200 image
 ```
 
-```{figure} https://source.unsplash.com/random/800x200?beach,ocean
+```{figure} https://picsum.photos/seed/myst-003/800/200
 :name: fig4
 :width: 40%
-Relaxing at the beach 🏖
+Image of a wolf 🐺
 ```
 
 This chart shows an example of `using` an interval **selection**[^1] to filter the contents of an attached histogram, allowing the user to see the proportion of items in each category within the selection. See more in the [Altair Documentation](https://altair-viz.github.io/gallery/selection_histogram.html)
 
 [^1]: Footnote text
 
-```{figure} https://source.unsplash.com/random/800x300?beach,ocean
+```{figure} https://picsum.photos/seed/myst-013/800/300
 :name: fig3
 :width: 80%
-Relaxing at the beach
+A rocky coastline
 ```
 
 ```{math}
@@ -84,7 +84,7 @@ For example, this equation:
 \mathbf{u} \times \mathbf{v}=\left|\begin{array}{ll}u_{2} & u_{3} \\ v_{2} & v_{3}\end{array}\right| \mathbf{i}+\left|\begin{array}{ll}u_{3} & u_{1} \\ v_{3} & v_{1}\end{array}\right| \mathbf{j}+\left|\begin{array}{ll}u_{1} & u_{2} \\ v_{1} & v_{2}\end{array}\right| \mathbf{k}
 ```
 
-<div><img src="https://source.unsplash.com/random/800x300?beach,ocean" width="100px"></div>
+<div><img alt="A random 800x300 image" src="https://picsum.photos/800/300" width="100px"></div>
 
 <!-- just a comment! -->
 
