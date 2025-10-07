@@ -21,7 +21,7 @@ pip install jupyterlab_myst
 
 ## Features
 
-`jupyterlab-myst` is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](https://mystmd.org/docs/mystjs/quickstart-myst-markdown). It supports the MyST `{eval}` inline role, which facilitates the interweaving of code outputs and prose. For example, we can use inline expressions to explore the properties of a NumPy array.
+`jupyterlab-myst` is a fully featured markdown renderer for technical documents, [get started with MyST Markdown](xref:guide/quickstart). It supports the MyST `{eval}` inline role, which facilitates the interweaving of code outputs and prose. For example, we can use inline expressions to explore the properties of a NumPy array.
 
 In the code cell:
 
@@ -60,7 +60,7 @@ You can also edit task-lists directly in the rendered markdown.
 
 ## Usage
 
-[MyST](myst-quickstart) is a flavour of Markdown, which combines the experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
+[MyST](xref:guide/quickstart) is a flavour of Markdown, which combines the experience of writing Markdown with the programmable extensibility of reStructuredText. This extension for JupyterLab makes it easier to develop rich, computational narratives, technical documentation, and open scientific communication.
 
 ### Execution 🚀
 
