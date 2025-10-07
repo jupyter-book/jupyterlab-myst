@@ -11,7 +11,6 @@ import {
   Theme,
   ThemeProvider
 } from '@myst-theme/providers';
-import { useTheme } from '@myst-theme/site';
 import { MyST } from 'myst-to-react';
 import React from 'react';
 import {
@@ -104,6 +103,8 @@ export interface IMySTOptions {
   sanitizer?: ISanitizer;
 }
 
+function setTheme() {}
+
 /**
  * A mime renderer for displaying Markdown with embedded latex.
  */
@@ -149,7 +150,6 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   }
 
   protected render(): React.JSX.Element {
-    const [_, setTheme] = useTheme({});
     console.debug(
       'Re-rendering VDOM for MySTWidget',
       this.model,
