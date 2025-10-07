@@ -60,7 +60,8 @@
     "resolutions": {
         "vscode-jsonrpc": "^6.0.0",
         "@types/markdown-it": "^13.0.0",
-        "markdown-it": "^13.0.0"
+        "markdown-it": "^13.0.0",
+        "mermaid": "^11.10.0"
     },
     "dependencies": {
         "@jupyterlab/application": "^4.0.0",
