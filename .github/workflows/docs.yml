@@ -29,7 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Setup Pages
-        uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
@@ -44,4 +43,4 @@ jobs:
           path: './docs/_build/html'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
