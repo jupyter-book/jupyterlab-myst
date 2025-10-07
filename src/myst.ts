@@ -105,7 +105,7 @@ export async function processArticleMDAST(
   });
 
   const state = new ReferenceState('<PATH>', {
-    numbering: frontmatter.numbering,
+    frontmatter,
     vfile: file
   });
   unified()
@@ -170,7 +170,7 @@ export async function processNotebookMDAST(
   });
 
   const state = new ReferenceState('<PATH>', {
-    numbering: frontmatter.numbering,
+    frontmatter,
     vfile: file
   });
 
