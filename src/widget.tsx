@@ -11,6 +11,7 @@ import {
   Theme,
   ThemeProvider
 } from '@myst-theme/providers';
+import { useTheme } from '@myst-theme/site';
 import { MyST } from 'myst-to-react';
 import React from 'react';
 import {
@@ -148,6 +149,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
   }
 
   protected render(): React.JSX.Element {
+    const [_, setTheme] = useTheme({});
     console.debug(
       'Re-rendering VDOM for MySTWidget',
       this.model,
@@ -164,6 +166,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
           theme={getJupyterTheme()}
           Link={linkFactory(this._resolver, this._linkHandler)}
           renderers={renderers}
+          setTheme={setTheme}
         >
           <SanitizerProvider sanitizer={this._sanitizer}>
             <UserExpressionsProvider
@@ -174,7 +177,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
               <TabStateProvider>
                 <ReferencesProvider
                   references={references}
-                  frontmatter={frontmatter}
+                  frontmatter={frontmatter as any}
                 >
                   {frontmatter && (
                     <FrontmatterBlock frontmatter={frontmatter} />
