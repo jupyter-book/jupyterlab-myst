@@ -103,6 +103,8 @@ export interface IMySTOptions {
   sanitizer?: ISanitizer;
 }
 
+function setTheme() {}
+
 /**
  * A mime renderer for displaying Markdown with embedded latex.
  */
@@ -164,6 +166,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
           theme={getJupyterTheme()}
           Link={linkFactory(this._resolver, this._linkHandler)}
           renderers={renderers}
+          setTheme={setTheme}
         >
           <SanitizerProvider sanitizer={this._sanitizer}>
             <UserExpressionsProvider
@@ -174,7 +177,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
               <TabStateProvider>
                 <ReferencesProvider
                   references={references}
-                  frontmatter={frontmatter}
+                  frontmatter={frontmatter as any}
                 >
                   {frontmatter && (
                     <FrontmatterBlock frontmatter={frontmatter} />
