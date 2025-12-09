@@ -235,7 +235,9 @@ export async function renderNotebook(notebook: StaticNotebook) {
     if (cell.rendered) {
       const nextModel = new MySTModel();
       nextModel.references = references;
-      nextModel.frontmatter = index === 0 ? frontmatter : undefined;
+      nextModel.frontmatter =
+        // FIXME: is it possible that forcing the types to agree is a hack? /s
+        index === 0 ? (frontmatter as MySTModel['frontmatter']) : undefined;
       nextModel.mdast = processedMDAST.children[index];
       nextModel.expressions = cell.mystModel.expressions;
       cell.mystModel = nextModel;

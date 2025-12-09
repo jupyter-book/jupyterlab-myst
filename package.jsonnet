@@ -91,7 +91,9 @@
       dependencies: [
 
         'myst-common',
+        'myst-config',
         'myst-frontmatter',
+        'myst-spec-ext'
       ],
     },
     {

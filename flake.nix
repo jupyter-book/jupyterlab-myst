@@ -33,6 +33,7 @@
           # Infra packages
           nodejs_22
           playwright-driver.browsers
+          go-jsonnet
         ]);
       shellHook = ''
         # Unset leaky PYTHONPATH
