@@ -119,6 +119,9 @@ jupyter labextension list
 
 ## Contributing
 
+> [!IMPORTANT]
+> jupyterlab-myst uses `jsonnet` to render `package.jsonnet` into `package.json`
+
 ### Development install
 
 Note: You will need NodeJS to build the extension package.
