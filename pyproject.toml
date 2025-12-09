@@ -79,7 +79,7 @@ version_cmd = "hatch version"
 [tool.jupyter-releaser.hooks]
 before-build-npm = [
     "npm install",
-    "npm build:prod"
+    "npm run build:prod"
 ]
 before-build-python = ["npm run clean:all"]
 
