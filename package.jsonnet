@@ -80,6 +80,8 @@
         '@myst-theme/diagrams',
         '@myst-theme/frontmatter',
         '@myst-theme/providers',
+        // These types are needed for now
+        '@myst-theme/search',
         'myst-to-react',
 
       ],
@@ -143,7 +145,6 @@
     'source-map-loader': '^1.0.2',
     'style-loader': '^3.3.1',
     stylelint: '^15.10.1',
-    'stylelint-config-prettier': '^9.0.4',
     'stylelint-config-recommended': '^13.0.0',
     'stylelint-config-standard': '^34.0.0',
     'stylelint-csstree-validator': '^3.0.0',
