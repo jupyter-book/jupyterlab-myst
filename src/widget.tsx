@@ -4,9 +4,12 @@ import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { ISanitizer, VDomModel, VDomRenderer } from '@jupyterlab/apputils';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { References } from 'myst-common';
+import type { FrontmatterParts } from 'myst-common';
+import type { SiteAction, SiteExport } from 'myst-config';
 import { PageFrontmatter } from 'myst-frontmatter';
+import { SourceFileKind } from 'myst-spec-ext';
 import {
-  ReferencesProvider,
+  ArticleProvider,
   TabStateProvider,
   Theme,
   ThemeProvider
@@ -38,6 +41,12 @@ function getJupyterTheme(): Theme {
     : Theme.light;
 }
 
+type Frontmatter = Omit<PageFrontmatter, 'parts' | 'downloads'> & {
+  parts?: FrontmatterParts;
+  downloads?: SiteAction[];
+  exports?: SiteExport[];
+};
+
 // export interface IMySTFragmentContext extends ITaskItemController {
 //   requestUpdate(renderer: RenderedMySTMarkdown): Promise<IMySTDocumentState>;
 //   setTaskItem(line: number, checked: boolean): void;
@@ -47,7 +56,7 @@ export interface IMySTModel extends VDomRenderer.IModel {
   references?: References;
   mdast?: any;
   expressions?: IUserExpressionMetadata[];
-  frontmatter?: PageFrontmatter;
+  frontmatter?: Frontmatter;
   readonly stateChanged: ISignal<this, void>;
 }
 
@@ -55,7 +64,7 @@ export class MySTModel extends VDomModel implements IMySTModel {
   private _references?: References;
   private _mdast?: any;
   private _expressions?: IUserExpressionMetadata[];
-  private _frontmatter?: PageFrontmatter;
+  private _frontmatter?: Frontmatter;
 
   get references(): References | undefined {
     return this._references;
@@ -84,11 +93,11 @@ export class MySTModel extends VDomModel implements IMySTModel {
     this.stateChanged.emit();
   }
 
-  get frontmatter(): PageFrontmatter | undefined {
+  get frontmatter(): Frontmatter | undefined {
     return this._frontmatter;
   }
 
-  set frontmatter(value: PageFrontmatter | undefined) {
+  set frontmatter(value: Frontmatter | undefined) {
     this._frontmatter = value;
     this.stateChanged.emit();
   }
@@ -102,6 +111,8 @@ export interface IMySTOptions {
   trusted?: boolean;
   sanitizer?: ISanitizer;
 }
+
+function setTheme() {}
 
 /**
  * A mime renderer for displaying Markdown with embedded latex.
@@ -164,6 +175,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
           theme={getJupyterTheme()}
           Link={linkFactory(this._resolver, this._linkHandler)}
           renderers={renderers}
+          setTheme={setTheme}
         >
           <SanitizerProvider sanitizer={this._sanitizer}>
             <UserExpressionsProvider
@@ -172,7 +184,8 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
               trusted={this._trusted}
             >
               <TabStateProvider>
-                <ReferencesProvider
+                <ArticleProvider
+                  kind={SourceFileKind.Article}
                   references={references}
                   frontmatter={frontmatter}
                 >
@@ -180,7 +193,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
                     <FrontmatterBlock frontmatter={frontmatter} />
                   )}
                   <MyST ast={mdast}></MyST>
-                </ReferencesProvider>
+                </ArticleProvider>
               </TabStateProvider>
             </UserExpressionsProvider>
           </SanitizerProvider>

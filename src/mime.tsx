@@ -39,7 +39,7 @@ export class RenderedMySTMarkdown
     const mystModel = new MySTModel();
     mystModel.references = references;
     mystModel.mdast = mdastNext;
-    mystModel.frontmatter = frontmatter;
+    mystModel.frontmatter = frontmatter as MySTModel['frontmatter'];
     if (this.model) {
       // Re-use expressions even if AST changes
       mystModel.expressions = this.model.expressions;

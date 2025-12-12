@@ -1,5 +1,5 @@
 # code-owner: @agoose77
-# This flake sets up an FSH dev-shell that installs all the required
+# This flake sets up an dev-shell that installs all the required
 # packages for running deployer, and then installs the tool in the virtual environment
 # It is not best-practice for the nix-way of distributing this code,
 # but its purpose is to get an environment up and running.
@@ -33,6 +33,7 @@
           # Infra packages
           nodejs_22
           playwright-driver.browsers
+          go-jsonnet
         ]);
       shellHook = ''
         # Unset leaky PYTHONPATH
