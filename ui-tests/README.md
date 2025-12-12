@@ -34,7 +34,7 @@ npm run build:prod
 ```sh
 cd ./ui-tests
 npm install
-npm run playwright install
+npx playwright install
 cd ..
 ```
 
@@ -42,7 +42,7 @@ cd ..
 
 ```sh
 cd ./ui-tests
-npm run playwright test
+npx playwright test
 ```
 
 Test results will be shown in the terminal. In case of any test failures, the test report
@@ -71,7 +71,7 @@ npm run build:prod
 ```sh
 cd ./ui-tests
 npm install
-npm run playwright install
+npx playwright install
 cd ..
 ```
 
@@ -79,7 +79,7 @@ cd ..
 
 ```sh
 cd ./ui-tests
-npm run playwright test -u
+npx playwright test -u
 ```
 
 > Some discrepancy may occurs between the snapshots generated on your computer and
@@ -107,7 +107,7 @@ npm run build:prod
 ```sh
 cd ./ui-tests
 npm install
-npm run playwright install
+npx playwright install
 cd ..
 ```
 
@@ -122,7 +122,7 @@ npm start
 
 ```sh
 cd ./ui-tests
-npm run playwright codegen localhost:8888
+npx playwright codegen localhost:8888
 ```
 
 ## Debug tests
@@ -145,7 +145,7 @@ npm run build:prod
 ```sh
 cd ./ui-tests
 npm install
-npm run playwright install
+npx playwright install
 cd ..
 ```
 
@@ -153,7 +153,7 @@ cd ..
 
 ```sh
 cd ./ui-tests
-npm run playwright test --debug
+npx playwright test --debug
 ```
 
 ## Upgrade Playwright and the browsers
@@ -163,5 +163,5 @@ To update the web browser versions, you must update the package `@playwright/tes
 ```sh
 cd ./ui-tests
 npm up "@playwright/test"
-npm run playwright install
+npx playwright install
 ```
