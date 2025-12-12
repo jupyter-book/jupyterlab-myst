@@ -66,10 +66,10 @@
       "stylelint-csstree-validator": "^3.0.0",
       "stylelint-prettier": "^4.0.0",
       "tailwindcss": "^3.2.4",
-      "ts-jest": "^29.1.0",
-      "typescript": "~5.8.0",
-      "yjs": "^13.5.40"
-   },
+      "ts-jest": "^29.1.0",        
+      "typescript": "~5.5.4",
+      "yjs": "^13.5.0"
+    },
    "eslintConfig": {
       "extends": [
          "eslint:recommended",
@@ -152,7 +152,7 @@
    "main": "lib/index.js",
    "name": "jupyterlab-myst",
    "overrides": {
-      "vscode-jsonrpc": "^6.0.0"
+        "lib0": "0.2.111"
    },
    "prettier": {
       "arrowParens": "avoid",
