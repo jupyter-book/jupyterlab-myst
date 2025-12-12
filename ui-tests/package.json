@@ -5,8 +5,8 @@
     "private": true,
     "scripts": {
         "start": "jupyter lab --config jupyter_server_test_config.py",
-        "test": "npm run playwright test",
-        "test:update": "npm run playwright test --update-snapshots"
+        "test": "playwright test",
+        "test:update": "playwright test --update-snapshots"
     },
     "devDependencies": {
         "@jupyterlab/galata": "^5.0.5",
