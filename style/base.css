@@ -40,3 +40,18 @@
   padding: var(--jp-private-markdownviewer-padding);
   overflow: auto;
 }
+
+/* Taken from generated styles, bump precedence */
+.jp-ThemedContainer
+  .myst
+  :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  color: var(--jp-content-link-color, #1976d2);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.jp-ThemedContainer
+  .myst
+  :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)):hover {
+  text-decoration: underline;
+}
