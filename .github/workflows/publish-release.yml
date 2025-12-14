@@ -33,7 +33,7 @@ jobs:
 
       - name: Finalize Release
         id: finalize-release
-        env:
+        # env:
           # The following are needed if you use legacy PyPI set up
           # PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
           # PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
