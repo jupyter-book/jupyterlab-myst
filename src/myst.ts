@@ -31,6 +31,7 @@ import { StaticNotebook } from '@jupyterlab/notebook';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import {
+  anywidgetUrlSourceTransform,
   imageUrlSourceTransform,
   internalLinksTransform,
   addCiteChildrenPlugin
@@ -123,6 +124,7 @@ export async function processArticleMDAST(
   // Go through all links and replace the source if they are local
   await internalLinksTransform(mdast, { resolver });
   await imageUrlSourceTransform(mdast, { resolver });
+  await anywidgetUrlSourceTransform(mdast, { resolver });
 
   // Fix inline html
   reconstructHtmlTransform(mdast);
@@ -205,10 +207,16 @@ export async function processCellMDAST(
 ) {
   mdast = copyNode(mdast);
   try {
-    // Go through all links and replace the source if they are local
-    await imageUrlSourceTransform(mdast as any, {
-      resolver: resolver
-    });
+    await Promise.all([
+      // Go through all links and replace the source if they are local
+      imageUrlSourceTransform(mdast as any, {
+        resolver: resolver
+      }),
+      // Go through all links and replace the source if they are local
+      anywidgetUrlSourceTransform(mdast as any, {
+        resolver: resolver
+      })
+    ]);
   } catch (error) {
     // pass
   }
