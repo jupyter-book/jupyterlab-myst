@@ -50,6 +50,7 @@
     in {
       default = pkgs.mkShell {
         inherit packages;
+        venvDir = ".venv";
 
         # Drop bad env vars on activation
         postShellHook = unwantedEnvPreamble;
