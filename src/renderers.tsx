@@ -1,11 +1,11 @@
 import { DEFAULT_RENDERERS } from 'myst-to-react';
 import { MermaidNodeRenderer } from '@myst-theme/diagrams';
-import { NodeRenderer } from '@myst-theme/providers';
+import { mergeRenderers } from '@myst-theme/providers';
+import type { NodeRenderers } from '@myst-theme/providers';
 import { InlineExpression, ListItem } from './components';
 import { useSanitizer } from './providers';
 
-export const renderers: Record<string, NodeRenderer> = {
-  ...DEFAULT_RENDERERS,
+const labRenderers: NodeRenderers = {
   mermaid: MermaidNodeRenderer,
   inlineExpression: ({ node }) => {
     return <InlineExpression value={node.value} />;
@@ -19,7 +19,7 @@ export const renderers: Record<string, NodeRenderer> = {
       />
     );
   },
-  html: ({ node }, children) => {
+  html: ({ node }) => {
     const { sanitizer } = useSanitizer();
     if (sanitizer !== undefined) {
       return (
@@ -33,3 +33,8 @@ export const renderers: Record<string, NodeRenderer> = {
     }
   }
 };
+
+export const renderers = mergeRenderers([
+  DEFAULT_RENDERERS,
+  labRenderers
+]);

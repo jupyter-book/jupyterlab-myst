@@ -1,4 +1,5 @@
 @import url('./preflight.css');
+@import url('./links.css');
 @import url('./jupyterlab-typography.css');
 @import url('@myst-theme/styles/details.css');
 @import url('@myst-theme/styles/citations.css');

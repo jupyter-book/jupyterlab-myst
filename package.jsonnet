@@ -58,7 +58,9 @@
     'watch:src': 'tsc -w --sourceMap',
   },
   overrides: {
-    'vscode-jsonrpc': '^6.0.0',
+      'lib0': '0.2.111',
+      'webpack': '5.106.0',
+      'vscode-jsonrpc': '^6.0.0'
   },
   // Define grouped dependencies
   local groups = [
@@ -75,7 +77,7 @@
       ],
     },
     {
-      version: '1.0.0',
+      version: '1.3.0',
       dependencies: [
         '@myst-theme/diagrams',
         '@myst-theme/frontmatter',
@@ -87,7 +89,7 @@
       ],
     },
     {
-      version: '1.9.2',
+      version: '1.10.0',
       dependencies: [
 
         'myst-common',
@@ -97,7 +99,7 @@
       ],
     },
     {
-      version: '1.6.3',
+      version: '1.7.3',
       dependencies: [
         'myst-parser',
         'myst-to-html',
@@ -153,7 +155,7 @@
     'stylelint-prettier': '^4.0.0',
     tailwindcss: '^3.2.4',
     'ts-jest': '^29.1.0',
-    typescript: '~5.8.0',
+    typescript: '~5.5.4',
     yjs: '^13.5.40',
   },
   sideEffects: [
