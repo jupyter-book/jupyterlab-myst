@@ -2,6 +2,29 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 2.7.0
+
+([Full Changelog](https://github.com/jupyter-book/jupyterlab-myst/compare/v2.6.0...4217e0d255c87084d6386fd93115dc6ef897386f))
+
+### Enhancements made
+
+- 💘 Update to latest myst packages [#293](https://github.com/jupyter-book/jupyterlab-myst/pull/293) ([@agoose77](https://github.com/agoose77))
+
+### Maintenance and upkeep improvements
+
+- Use `pnpm` instead of `npm` [#294](https://github.com/jupyter-book/jupyterlab-myst/pull/294) ([@agoose77](https://github.com/agoose77))
+
+### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/use/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyter-book/jupyterlab-myst/graphs/contributors?from=2025-12-14&to=2026-06-17&type=c))
+
+@agoose77 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2025-12-14..2026-06-17&type=Issues))
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 2.6.0
 
 ([Full Changelog](https://github.com/jupyter-book/jupyterlab-myst/compare/v2.4.2...bbef75187fa6adb7ed5e0caa5634509467c2e9d7))
@@ -37,8 +60,6 @@ See [our definition of contributors](https://github-activity.readthedocs.io/en/l
 ([GitHub contributors page for this release](https://github.com/jupyter-book/jupyterlab-myst/graphs/contributors?from=2024-04-26&to=2025-12-14&type=c))
 
 @agoose77 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2024-04-26..2025-12-14&type=Issues)) | @fperez ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Afperez+updated%3A2024-04-26..2025-12-14&type=Issues)) | @krassowski ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Akrassowski+updated%3A2024-04-26..2025-12-14&type=Issues)) | @nthiery ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Anthiery+updated%3A2024-04-26..2025-12-14&type=Issues)) | @rowanc1 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Arowanc1+updated%3A2024-04-26..2025-12-14&type=Issues)) | @stefanv ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Astefanv+updated%3A2024-04-26..2025-12-14&type=Issues)) | @stevejpurves ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Astevejpurves+updated%3A2024-04-26..2025-12-14&type=Issues)) | @teonbrooks ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Ateonbrooks+updated%3A2024-04-26..2025-12-14&type=Issues)) | @tguilment ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Atguilment+updated%3A2024-04-26..2025-12-14&type=Issues))
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 2.5.0
 

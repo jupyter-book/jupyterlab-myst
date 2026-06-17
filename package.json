@@ -226,5 +226,5 @@
     "style": "style/index.css",
     "styleModule": "style/index.js",
     "types": "lib/index.d.ts",
-    "version": "2.4.2"
+    "version": "2.7.0"
 }
