@@ -46,7 +46,7 @@
     'install:extension': 'pnpm run build',
     lint: 'pnpm run prettier && pnpm run eslint',
     'lint:check': 'pnpm run prettier:check && pnpm run eslint:check',
-    prettier: 'pnpm run prettier:base --write --list-different',
+    prettier:'pnpm run prettier:base --write --list-different',
     'prettier:base': 'prettier "**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}"',
     'prettier:check': 'pnpm run prettier:base --check',
     test: 'jest --coverage',
@@ -59,14 +59,7 @@
       node: ">=10",
       pnpm: ">=6.0.0"
   },
-  packageManager: "^pnpm@6.0.0",
-  devEngines: {
-    packageManager: {
-      name: "pnpm",
-      version: ">=6.0.0",
-      onFail: "download"
-    }
-  },
+  packageManager: "pnpm@^6.0.0",
   // Define grouped dependencies
   local groups = [
     {
