@@ -73,6 +73,15 @@ npm = ["pnpm"]
 source_dir = "src"
 build_dir = "jupyterlab_myst/labextension"
 
+[tool.jupyter-releaser]
+# https://github.com/jtpio/xtralab/blob/fb4cac1be0732726c357402aa2dcd82caf832231/pyproject.toml#L112-L119
+# Skip check-npm: it runs a fresh `npm install` on the built tarball (no
+# lockfile), so a floating dependency range can pull a broken upstream release
+# (e.g. @pierre/diffs 1.2.9 requiring the unpublished @pierre/theming). Our
+# builds are reproducible from pnpm-lock.yaml, but a published package can't ship
+# that lock. Revisit if the npm package must install standalone.
+skip = ["check-npm"]
+
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
@@ -80,6 +89,7 @@ version_cmd = "hatch version"
 before-build-npm = [
     # Used by Jupyter Releaser
     "python -m pip install 'jupyterlab>=4.0.0,<5'",
+    "npm install -g pnpm@11.5.2",
     "pnpm ci",
     "pnpm run build:prod"
 ]
