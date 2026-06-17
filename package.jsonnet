@@ -74,8 +74,6 @@
         '@jupyterlab/translation',
         '@jupyterlab/attachments',
         '@jupyterlab/cells',
-        '@jupyterlab/coreutils',
-        '@jupyterlab/services',
         '@jupyterlab/settingregistry',
         '@jupyterlab/ui-components',
 
@@ -131,6 +129,8 @@
     'myst-transforms': '1.3.44',
     // Interfaces
     '@jupyterlab/rendermime-interfaces': '^3.8.0',
+    '@jupyterlab/coreutils': '^6.0.0',
+    '@jupyterlab/services': '^7.0.0',
     // Lumino
     '@lumino/coreutils': '^2.2.2',
     '@lumino/signaling': '^2.1.5',
