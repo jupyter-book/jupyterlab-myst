@@ -34,7 +34,4 @@ const labRenderers: NodeRenderers = {
   }
 };
 
-export const renderers = mergeRenderers([
-  DEFAULT_RENDERERS,
-  labRenderers
-]);
+export const renderers = mergeRenderers([DEFAULT_RENDERERS, labRenderers]);
