@@ -40,17 +40,15 @@
     'clean:all': 'npm run clean:lib && npm run clean:labextension && npm run clean:lintcache',
     'clean:labextension': 'rimraf jupyterlab_myst/labextension jupyterlab_myst/_version.py',
     'clean:lib': 'rimraf lib tsconfig.tsbuildinfo',
-    'clean:lintcache': 'rimraf .eslintcache .stylelintcache',
+    'clean:lintcache': 'rimraf .eslintcache',
     eslint: 'npm run eslint:check --fix',
     'eslint:check': 'eslint . --cache --ext .ts,.tsx',
     'install:extension': 'npm run build',
-    lint: 'npm run stylelint && npm run prettier && npm run eslint',
-    'lint:check': 'npm run stylelint:check && npm run prettier:check && npm run eslint:check',
+    lint: 'npm run prettier && npm run eslint',
+    'lint:check': 'npm run prettier:check && npm run eslint:check',
     prettier: 'npm run prettier:base --write --list-different',
     'prettier:base': 'prettier "**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}"',
     'prettier:check': 'npm run prettier:base --check',
-    stylelint: 'npm run stylelint:check --fix',
-    'stylelint:check': 'stylelint --cache "style/**/*.css"',
     test: 'jest --coverage',
     watch: 'run-p watch:css watch:src watch:labextension',
     'watch:css': 'tailwindcss -w -i ./style/tailwind.css -o style/app.css',
@@ -58,7 +56,9 @@
     'watch:src': 'tsc -w --sourceMap',
   },
   overrides: {
-    'vscode-jsonrpc': '^6.0.0',
+      'lib0': '0.2.111',
+      'webpack': '5.106.0',
+      'vscode-jsonrpc': '^6.0.0'
   },
   // Define grouped dependencies
   local groups = [
@@ -75,7 +75,7 @@
       ],
     },
     {
-      version: '1.0.0',
+      version: '1.3.0',
       dependencies: [
         '@myst-theme/diagrams',
         '@myst-theme/frontmatter',
@@ -87,7 +87,7 @@
       ],
     },
     {
-      version: '1.9.2',
+      version: '1.10.0',
       dependencies: [
 
         'myst-common',
@@ -97,7 +97,7 @@
       ],
     },
     {
-      version: '1.6.3',
+      version: '1.7.3',
       dependencies: [
         'myst-parser',
         'myst-to-html',
@@ -146,14 +146,9 @@
     rimraf: '^5.0.1',
     'source-map-loader': '^1.0.2',
     'style-loader': '^3.3.1',
-    stylelint: '^15.10.1',
-    'stylelint-config-recommended': '^13.0.0',
-    'stylelint-config-standard': '^34.0.0',
-    'stylelint-csstree-validator': '^3.0.0',
-    'stylelint-prettier': '^4.0.0',
     tailwindcss: '^3.2.4',
     'ts-jest': '^29.1.0',
-    typescript: '~5.8.0',
+    typescript: '~5.5.4',
     yjs: '^13.5.40',
   },
   sideEffects: [
@@ -244,22 +239,5 @@
         },
       },
     ],
-  },
-  stylelint: {
-    extends: [
-      'stylelint-config-recommended',
-      'stylelint-config-standard',
-      'stylelint-prettier/recommended',
-    ],
-    plugins: [
-      'stylelint-csstree-validator',
-    ],
-    rules: {
-      'csstree/validator': true,
-      'property-no-vendor-prefix': null,
-      'selector-class-pattern': '^([a-z][A-z\\d]*)(-[A-z\\d]+)*$',
-      'selector-no-vendor-prefix': null,
-      'value-no-vendor-prefix': null,
-    },
-  },
+  }
 }
