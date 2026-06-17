@@ -213,8 +213,8 @@ importers:
   .:
     dependencies:
       '@jupyter/ydoc':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^3.0.0
+        version: 3.5.0
       '@jupyterlab/application':
         specifier: ^4.0.0
         version: 4.5.8(react@18.3.1)
@@ -1280,9 +1280,6 @@ packages:
 
   '@jupyter/ydoc@3.5.0':
     resolution: {integrity: sha512-kY/p4vP4tB606AxoEUZDBDKjKLVTF2q6AJE0bMHA5l2lL0SxrjufjkXCK/EEI/vUCOpHRakysNS8644tVAvhDg==}
-
-  '@jupyter/ydoc@4.0.0':
-    resolution: {integrity: sha512-T6vZHxz3rNINTQAVLHdBpHThUeJY8Tv+IKg8yjp61HuQD3BNBfVnDTcqm5GzoQddXtE9rexIKW+I2yWembenBw==}
 
   '@jupyterlab/application@4.5.8':
     resolution: {integrity: sha512-w2QoCVtO9iH0VYraijkd8MLt4p1sWKH/AasSAO6Lxlm/vru66r3AbG+V+p+EUOjvGFZOFR7px3zlSwK6DGBnew==}
@@ -7059,15 +7056,6 @@ snapshots:
       '@microsoft/fast-web-utilities': 5.4.1
 
   '@jupyter/ydoc@3.5.0':
-    dependencies:
-      '@jupyterlab/nbformat': 4.5.8
-      '@lumino/coreutils': 2.2.2
-      '@lumino/disposable': 2.1.5
-      '@lumino/signaling': 2.1.5
-      y-protocols: 1.0.7(yjs@13.6.31)
-      yjs: 13.6.31
-
-  '@jupyter/ydoc@4.0.0':
     dependencies:
       '@jupyterlab/nbformat': 4.5.8
       '@lumino/coreutils': 2.2.2

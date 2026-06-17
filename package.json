@@ -7,7 +7,7 @@
         "url": "https://github.com/jupyter-book/jupyterlab-myst/issues"
     },
     "dependencies": {
-        "@jupyter/ydoc": "^4.0.0",
+        "@jupyter/ydoc": "^3.0.0",
         "@jupyterlab/application": "^4.0.0",
         "@jupyterlab/apputils": "^4.0.0",
         "@jupyterlab/attachments": "^4.0.0",
