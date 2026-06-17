@@ -29,36 +29,42 @@
     url: 'https://github.com/jupyter-book/jupyterlab-myst.git',
   },
   scripts: {
-    build: 'npm run build:css && npm run build:lib && npm run build:labextension:dev',
+    build: 'pnpm run build:css && pnpm run build:lib && pnpm run build:labextension:dev',
     'build:css': 'tailwindcss -m -i ./style/tailwind.css -o style/app.css',
     'build:labextension': 'jupyter labextension build .',
     'build:labextension:dev': 'jupyter labextension build --development True .',
     'build:lib': 'tsc --sourceMap',
     'build:lib:prod': 'tsc',
-    'build:prod': 'npm run clean && npm run build:css && npm run build:lib:prod && npm run build:labextension',
-    clean: 'npm run clean:lib',
-    'clean:all': 'npm run clean:lib && npm run clean:labextension && npm run clean:lintcache',
+    'build:prod': 'pnpm run clean && pnpm run build:css && pnpm run build:lib:prod && pnpm run build:labextension',
+    clean: 'pnpm run clean:lib',
+    'clean:all': 'pnpm run clean:lib && pnpm run clean:labextension && pnpm run clean:lintcache',
     'clean:labextension': 'rimraf jupyterlab_myst/labextension jupyterlab_myst/_version.py',
     'clean:lib': 'rimraf lib tsconfig.tsbuildinfo',
     'clean:lintcache': 'rimraf .eslintcache',
-    eslint: 'npm run eslint:check --fix',
+    eslint: 'pnpm run eslint:check --fix',
     'eslint:check': 'eslint . --cache --ext .ts,.tsx',
-    'install:extension': 'npm run build',
-    lint: 'npm run prettier && npm run eslint',
-    'lint:check': 'npm run prettier:check && npm run eslint:check',
-    prettier: 'npm run prettier:base --write --list-different',
+    'install:extension': 'pnpm run build',
+    lint: 'pnpm run prettier && pnpm run eslint',
+    'lint:check': 'pnpm run prettier:check && pnpm run eslint:check',
+    prettier: 'pnpm run prettier:base --write --list-different',
     'prettier:base': 'prettier "**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}"',
-    'prettier:check': 'npm run prettier:base --check',
+    'prettier:check': 'pnpm run prettier:base --check',
     test: 'jest --coverage',
     watch: 'run-p watch:css watch:src watch:labextension',
     'watch:css': 'tailwindcss -w -i ./style/tailwind.css -o style/app.css',
     'watch:labextension': 'jupyter labextension watch .',
     'watch:src': 'tsc -w --sourceMap',
   },
-  overrides: {
-      'lib0': '0.2.111',
-      'webpack': '5.106.0',
-      'vscode-jsonrpc': '^6.0.0'
+  engines: {
+      node: ">=10",
+      pnpm: ">=3"
+  },
+  devEngines: {
+    packageManager: {
+      name: "pnpm",
+      version: ">=3",
+      onFail: "download"
+    }
   },
   // Define grouped dependencies
   local groups = [
@@ -72,6 +78,14 @@
         '@jupyterlab/notebook',
         '@jupyterlab/rendermime',
         '@jupyterlab/translation',
+        '@jupyterlab/attachments',
+        '@jupyterlab/cells',
+        '@jupyterlab/coreutils',
+        '@jupyterlab/rendermime-interfaces',
+        '@jupyterlab/services',
+        '@jupyterlab/settingregistry',
+        '@jupyterlab/ui-components',
+
       ],
     },
     {
@@ -114,12 +128,17 @@
     'myst-ext-button': '0.0.1',
     'myst-ext-card': '1.0.9',
     'myst-ext-exercise': '1.0.9',
-    'myst-ext-grid': '1.0.9',
+    'myst-ext-grid': '1.1.0',
     'myst-ext-icon': '0.0.2',
     'myst-ext-proof': '1.0.12',
-    'myst-ext-tabs': '1.0.9',
+    'myst-ext-reactive': '1.0.9',
+    'myst-ext-tabs:': '1.0.9',
     // Floating transforms
     'myst-transforms': '1.3.44',
+    // Lumino
+    '@lumino/coreutils': '^2.2.2',
+    '@lumino/signaling': '^2.1.5',
+    '@lumino/widgets': '^2.8.0'
   },
   devDependencies: {
     '@babel/core': '^7.0.0',

@@ -65,11 +65,11 @@ skip-if-exists = ["jupyterlab_myst/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
-npm = ["npm"]
+npm = ["pnpm"]
 
 [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
 build_cmd = "install:extension"
-npm = ["npm"]
+npm = ["pnpm"]
 source_dir = "src"
 build_dir = "jupyterlab_myst/labextension"
 
@@ -80,10 +80,10 @@ version_cmd = "hatch version"
 before-build-npm = [
     # Used by Jupyter Releaser
     "python -m pip install 'jupyterlab>=4.0.0,<5'",
-    "npm install",
-    "npm run build:prod"
+    "pnpm ci",
+    "pnpm run build:prod"
 ]
-before-build-python = ["npm run clean:all"]
+before-build-python = ["pnpm run clean:all"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

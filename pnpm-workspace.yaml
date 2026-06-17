@@ -1,0 +1,8 @@
+minimumReleaseAge: 30
+minimumReleaseAgeExclude:
+- '@myst-theme/*'
+- 'myst-*'
+- 'thebe*'
+allowBuilds:
+  '@fortawesome/fontawesome-free': true
+
