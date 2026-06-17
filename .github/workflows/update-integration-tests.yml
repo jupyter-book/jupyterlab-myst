@@ -39,7 +39,7 @@ jobs:
       - name: Install extension
         run: |
           set -eux
-          npm install
+          pnpm install
           python -m pip install .
 
       - uses: jupyterlab/maintainer-tools/.github/actions/update-snapshots@v1
@@ -48,4 +48,4 @@ jobs:
           # Playwright knows how to start JupyterLab server
           start_server_script: 'null'
           test_folder: ui-tests
-          npm_client: npm
+          npm_client: pnpm

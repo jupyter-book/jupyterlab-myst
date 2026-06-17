@@ -1,0 +1,11 @@
+minimumReleaseAge: 30
+minimumReleaseAgeExclude:
+  - '@myst-theme/*'
+  - 'myst-*'
+  - 'thebe*'
+allowBuilds:
+  '@fortawesome/fontawesome-free': true
+overrides:
+  'lib0': '0.2.111'
+  'webpack': '5.106.0'
+  'vscode-jsonrpc': '^6.0.0'

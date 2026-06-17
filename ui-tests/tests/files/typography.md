@@ -31,9 +31,11 @@ Well {abbr}`MyST (Markedly Structured Text)` is cool!
 Foo [^a] and Bar [^b]
 
 [^a]: A footnote
+
 [^b]: Another footnote
 
 Foo [^c] and Bar [^d]
 
 [^c]: A footnote
+
 [^d]: Another footnote

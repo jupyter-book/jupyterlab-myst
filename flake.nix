@@ -39,6 +39,7 @@
           pre-commit
           # Infra packages
           nodejs_22
+          pnpm
           playwright-driver.browsers
           go-jsonnet
         ]);

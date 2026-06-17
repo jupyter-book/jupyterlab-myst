@@ -29,13 +29,13 @@ jobs:
       - name: Lint the extension
         run: |
           set -eux
-          npm install
-          npm run lint:check
+          pnpm ci
+          pnpm run lint:check
 
       - name: Test the extension
         run: |
           set -eux
-          npm test
+          pnpm test
 
       - name: Build the extension
         run: |
@@ -125,7 +125,7 @@ jobs:
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: 0
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-        run: npm install
+        run: pnpm ci
 
       - name: Set up browser cache
         uses: actions/cache@v4
