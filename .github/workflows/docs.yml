@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: 22.x
           cache: npm
+          package-manager-cache: false
       - name: Install MyST Markdown
         run: npm install -g mystmd
       - name: Build HTML Assets
