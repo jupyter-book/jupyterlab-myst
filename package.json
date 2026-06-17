@@ -170,7 +170,7 @@
    "license": "MIT",
    "main": "lib/index.js",
    "name": "jupyterlab-myst",
-   "packageManager": "pnpm@^6.0.0",
+   "packageManager": "pnpm",
    "prettier": {
       "arrowParens": "avoid",
       "endOfLine": "auto",
