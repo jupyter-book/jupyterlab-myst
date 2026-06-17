@@ -203,19 +203,36 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  lib0: 0.2.111
+  webpack: 5.106.0
+  vscode-jsonrpc: ^6.0.0
+
 importers:
 
   .:
     dependencies:
+      '@jupyter/ydoc':
+        specifier: ^4.0.0
+        version: 4.0.0
       '@jupyterlab/application':
         specifier: ^4.0.0
         version: 4.5.8(react@18.3.1)
       '@jupyterlab/apputils':
         specifier: ^4.0.0
         version: 4.6.8
+      '@jupyterlab/attachments':
+        specifier: ^4.0.0
+        version: 4.5.8(react@18.3.1)
+      '@jupyterlab/cells':
+        specifier: ^4.0.0
+        version: 4.5.8
       '@jupyterlab/codeeditor':
         specifier: ^4.0.0
         version: 4.5.8
+      '@jupyterlab/coreutils':
+        specifier: ^4.0.0
+        version: 4.3.1(crypto@1.0.1)
       '@jupyterlab/markdownviewer':
         specifier: ^4.0.0
         version: 4.5.8(react@18.3.1)
@@ -225,9 +242,30 @@ importers:
       '@jupyterlab/rendermime':
         specifier: ^4.0.0
         version: 4.5.8(react@18.3.1)
+      '@jupyterlab/rendermime-interfaces':
+        specifier: ^3.8.0
+        version: 3.13.8
+      '@jupyterlab/services':
+        specifier: ^4.0.0
+        version: 4.2.3
+      '@jupyterlab/settingregistry':
+        specifier: ^4.0.0
+        version: 4.5.8(react@18.3.1)
       '@jupyterlab/translation':
         specifier: ^4.0.0
         version: 4.5.8(react@18.3.1)
+      '@jupyterlab/ui-components':
+        specifier: ^4.0.0
+        version: 4.5.8(react@18.3.1)
+      '@lumino/coreutils':
+        specifier: ^2.2.2
+        version: 2.2.2
+      '@lumino/signaling':
+        specifier: ^2.1.5
+        version: 2.1.5
+      '@lumino/widgets':
+        specifier: ^2.8.0
+        version: 2.8.0
       '@myst-theme/diagrams':
         specifier: 1.3.0
         version: 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -240,6 +278,9 @@ importers:
       '@myst-theme/search':
         specifier: 1.3.0
         version: 1.3.0
+      '@types/mdast':
+        specifier: ^3.0.0
+        version: 3.0.15
       katex:
         specifier: ^0.16.22
         version: 0.16.47
@@ -259,14 +300,17 @@ importers:
         specifier: 1.0.9
         version: 1.0.9
       myst-ext-grid:
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.1.0
+        version: 1.1.0
       myst-ext-icon:
         specifier: 0.0.2
         version: 0.0.2
       myst-ext-proof:
         specifier: 1.0.12
         version: 1.0.12
+      myst-ext-reactive:
+        specifier: 1.0.9
+        version: 1.0.9
       myst-ext-tabs:
         specifier: 1.0.9
         version: 1.0.9
@@ -276,6 +320,9 @@ importers:
       myst-parser:
         specifier: 1.7.3
         version: 1.7.3
+      myst-spec:
+        specifier: 0.0.5
+        version: 0.0.5
       myst-spec-ext:
         specifier: 1.10.0
         version: 1.10.0
@@ -288,6 +335,18 @@ importers:
       myst-transforms:
         specifier: 1.3.44
         version: 1.3.44
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      unified:
+        specifier: ^10.1.0
+        version: 10.1.2
+      unist-util-select:
+        specifier: ^4.0.3
+        version: 4.0.3
+      vfile:
+        specifier: ^5.0.0
+        version: 5.3.7
     devDependencies:
       '@babel/core':
         specifier: ^7.0.0
@@ -298,6 +357,9 @@ importers:
       '@jupyterlab/builder':
         specifier: ^4.0.0
         version: 4.5.8(postcss@8.5.15)
+      '@jupyterlab/core-meta':
+        specifier: ^4.6.0-beta.0
+        version: 4.6.0-rc.1
       '@jupyterlab/testutils':
         specifier: ^4.0.0
         version: 4.5.8(@jest/transform@29.7.0)(@jest/types@29.6.3)(@types/node@25.9.3)(babel-jest@29.7.0(@babel/core@7.29.7))(jest-util@29.7.0)(react@18.3.1)(typescript@5.5.4)
@@ -330,7 +392,7 @@ importers:
         version: 6.21.0(eslint@8.57.1)(typescript@5.5.4)
       css-loader:
         specifier: ^6.7.1
-        version: 6.11.0(webpack@5.107.2)
+        version: 6.11.0(webpack@5.106.0)
       eslint:
         specifier: ^8.36.0
         version: 8.57.1
@@ -339,7 +401,7 @@ importers:
         version: 8.10.2(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ^5.0.0
-        version: 5.5.6(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.8.4)
+        version: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.8.4)
       jest:
         specifier: ^29.2.0
         version: 29.7.0(@types/node@25.9.3)
@@ -357,10 +419,10 @@ importers:
         version: 5.0.10
       source-map-loader:
         specifier: ^1.0.2
-        version: 1.1.3(webpack@5.107.2)
+        version: 1.1.3(webpack@5.106.0)
       style-loader:
         specifier: ^3.3.1
-        version: 3.3.4(webpack@5.107.2)
+        version: 3.3.4(webpack@5.106.0)
       tailwindcss:
         specifier: ^3.2.4
         version: 3.4.19
@@ -1219,6 +1281,9 @@ packages:
   '@jupyter/ydoc@3.5.0':
     resolution: {integrity: sha512-kY/p4vP4tB606AxoEUZDBDKjKLVTF2q6AJE0bMHA5l2lL0SxrjufjkXCK/EEI/vUCOpHRakysNS8644tVAvhDg==}
 
+  '@jupyter/ydoc@4.0.0':
+    resolution: {integrity: sha512-T6vZHxz3rNINTQAVLHdBpHThUeJY8Tv+IKg8yjp61HuQD3BNBfVnDTcqm5GzoQddXtE9rexIKW+I2yWembenBw==}
+
   '@jupyterlab/application@4.5.8':
     resolution: {integrity: sha512-w2QoCVtO9iH0VYraijkd8MLt4p1sWKH/AasSAO6Lxlm/vru66r3AbG+V+p+EUOjvGFZOFR7px3zlSwK6DGBnew==}
 
@@ -1240,6 +1305,15 @@ packages:
 
   '@jupyterlab/codemirror@4.5.8':
     resolution: {integrity: sha512-4+S7Kfu1SoM90h5aEtFmneLvu+AhrWbWgiZgZDXZOwvSQrlV31xsJV8b6imFFjGiRI8PeH+BCYjjB7L4FWkzmg==}
+
+  '@jupyterlab/core-meta@4.6.0-rc.1':
+    resolution: {integrity: sha512-ll+doq3P8cqpWjL4xu8GAISWxTwQyj/nBrF3CyvXbQJeEspRJMVHxoNJDY4rldf/RkBbTzH3PEW8jGLKu/u4qA==}
+
+  '@jupyterlab/coreutils@3.2.0':
+    resolution: {integrity: sha512-LATiUsHuwze/h3JC2EZOBV+kGBoUKO3npqw/Pcgge4bz09xF/oTDrx4G8jl5eew3w1dCUNp9eLduNh8Orrw7xQ==}
+
+  '@jupyterlab/coreutils@4.3.1':
+    resolution: {integrity: sha512-WBwhPmK6VFAjNX7Y6a9JLUiJ2ldURZp/gbN3XsSFEGpZPSgt2UdTRWn60t6UayV1YE9bQy1TS2Pt97/fDDTudQ==}
 
   '@jupyterlab/coreutils@6.5.8':
     resolution: {integrity: sha512-BZwozwtSxi5QJn/GbKokq/xz+kQkVUkJsflg8KiTBadRyi/24uxKXROTGY80qtw/3eWfkiizwn/CgzyuhQzGfg==}
@@ -1274,6 +1348,9 @@ packages:
   '@jupyterlab/notebook@4.5.8':
     resolution: {integrity: sha512-uYLESjT2BJp0RlJpWxgOHLgZ5FFiAo+c+mLdjtYrXdUWWsvJi0gy7OIM2zcWcRjen7y7J6U/BAQZmgmhCzR+yA==}
 
+  '@jupyterlab/observables@2.4.0':
+    resolution: {integrity: sha512-M/fhAnPqd6F4Zwt4IIsvHCkJmwbSw1Tko/hUXgdUQG86lPsJiTOh98sB3qwV1gtzb9oFF+kH21XsHnQZ6Yl6Pw==}
+
   '@jupyterlab/observables@5.5.8':
     resolution: {integrity: sha512-cbbiHCxR/uLljKiVqWDWqz8PP73POKjY97QQn70nBIHY41YDn0C/VxlgzufVl5CXppkT3AG+/rzdY8Kl0CUOvw==}
 
@@ -1285,6 +1362,9 @@ packages:
 
   '@jupyterlab/rendermime@4.5.8':
     resolution: {integrity: sha512-syIAnzvqyBoP0FYFkXfJA4jVnPEctv+0wJjpgen2DvpPFiE9deD3144Smstvu2zcc2v99lXKHvXxK5z4yxTB+Q==}
+
+  '@jupyterlab/services@4.2.3':
+    resolution: {integrity: sha512-bCPq1j8+qU5pCzsaKvT39e8Aj4snFCchSAoVr12wAOlp0gQZYpUZAgaFhnYtawGo44aBfEYWhQuW5UPol/XUag==}
 
   '@jupyterlab/services@7.5.8':
     resolution: {integrity: sha512-5FDdjP6TybFqxJhdewkuu1IVK+9UTQEgCI+pkn4jxYbVZjWNfpNUwCk+ra//xgJc77wLGeo8tgJQWwmcTMcp1w==}
@@ -1365,6 +1445,9 @@ packages:
   '@lezer/xml@1.0.6':
     resolution: {integrity: sha512-CdDwirL0OEaStFue/66ZmFSeppuL6Dwjlk8qk153mSQwiSH/Dlri4GNymrNWnUmPl2Um7QfV1FO9KFUyX3Twww==}
 
+  '@lumino/algorithm@1.9.2':
+    resolution: {integrity: sha512-Z06lp/yuhz8CtIir3PNTGnuk7909eXt4ukJsCzChsGuot2l5Fbs96RJ/FOHgwCedaX74CtxPjXHXoszFbUA+4A==}
+
   '@lumino/algorithm@2.0.4':
     resolution: {integrity: sha512-gddBhESPqu25KWLeAK9Kz8tS9Ph7P45i0CNG7Ia4XMhK9PHLtTsBdJTC9jP+MqhbzC8zDT/4ekvYRV9ojRPj7Q==}
 
@@ -1377,8 +1460,16 @@ packages:
   '@lumino/commands@2.3.3':
     resolution: {integrity: sha512-7Ci0QdFzt4NKFMhULr19sJPpOLHJw/oYlq6Pb0/Kq1s05+cIoLimr5wiyjkbAlNoGO/8A8SEBGHy3uctZz6G3A==}
 
+  '@lumino/coreutils@1.12.1':
+    resolution: {integrity: sha512-JLu3nTHzJk9N8ohZ85u75YxemMrmDzJdNgZztfP7F7T7mxND3YVNCkJG35a6aJ7edu1sIgCjBxOvV+hv27iYvQ==}
+    peerDependencies:
+      crypto: 1.0.1
+
   '@lumino/coreutils@2.2.2':
     resolution: {integrity: sha512-zaKJaK7rawPATn2BGHkbMrR6oK3s9PxNe9KreLwWF2dB4ZBHDiEmNLRyHRorfJ7XqVOEXAsAAj0jFn+qJPC/4Q==}
+
+  '@lumino/disposable@1.10.4':
+    resolution: {integrity: sha512-4ZxyYcyzUS+ZeB2KAH9oAH3w0DUUceiVr+FIZHZ2TAYGWZI/85WlqJtfm0xjwEpCwLLW1TDqJrISuZu3iMmVMA==}
 
   '@lumino/disposable@2.1.5':
     resolution: {integrity: sha512-hO9AkJK0oEGzxopuxI8LaZqwzSNwXJTGCdr5K4gh6al+zxpN7rOCh6Aq3zDxkIHJU4zybxv8r02ardx9XJsG3A==}
@@ -1398,8 +1489,14 @@ packages:
   '@lumino/polling@2.1.5':
     resolution: {integrity: sha512-YhQRWTNRVSi5R5uatwh1jkxASY5JKyAGWmtnfQOZWLDUFmsIjOTsS8NaYg1BgneZjWM3fbA18dCDDT7PPs5X1g==}
 
+  '@lumino/properties@1.8.2':
+    resolution: {integrity: sha512-EkjI9Cw8R0U+xC9HxdFSu7X1tz1H1vKu20cGvJ2gU+CXlMB1DvoYJCYxCThByHZ+kURTAap4SE5x8HvKwNPbig==}
+
   '@lumino/properties@2.0.4':
     resolution: {integrity: sha512-XsL2qLZk+1FbfuTrkyjciI8PMDw3YcaBkqVQ+iv7OOJf9bUlrmTpCMY0Hu5d3hV2W3TWlRsdbvRRLEBJSKv0iA==}
+
+  '@lumino/signaling@1.11.1':
+    resolution: {integrity: sha512-YCUmgw08VoyMN5KxzqPO3KMx+cwdPv28tAN06C0K7Q/dQf+oufb1XocuhZb5selTrTmmuXeizaYxgLIQGdS1fA==}
 
   '@lumino/signaling@2.1.5':
     resolution: {integrity: sha512-Wkx6WR45ynmKBlW0GBEoh4xk9+QluKr1JHuMftqcStBHSQBCnN54UKRRDbySXHGRhhx6p4neu7sGomgQSlQK8w==}
@@ -1483,6 +1580,36 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@phosphor/algorithm@1.2.0':
+    resolution: {integrity: sha512-C9+dnjXyU2QAkWCW6QVDGExk4hhwxzAKf5/FIuYlHAI9X5vFv99PYm0EREDxX1PbMuvfFBZhPNu0PvuSDQ7sFA==}
+
+  '@phosphor/collections@1.2.0':
+    resolution: {integrity: sha512-T9/0EjSuY6+ga2LIFRZ0xupciOR3Qnyy8Q95lhGTC0FXZUFwC8fl9e8On6IcwasCszS+1n8dtZUWSIynfgdpzw==}
+
+  '@phosphor/commands@1.7.2':
+    resolution: {integrity: sha512-iSyBIWMHsus323BVEARBhuVZNnVel8USo+FIPaAxGcq+icTSSe6+NtSxVQSmZblGN6Qm4iw6I6VtiSx0e6YDgQ==}
+
+  '@phosphor/coreutils@1.3.1':
+    resolution: {integrity: sha512-9OHCn8LYRcPU/sbHm5v7viCA16Uev3gbdkwqoQqlV+EiauDHl70jmeL7XVDXdigl66Dz0LI11C99XOxp+s3zOA==}
+
+  '@phosphor/disposable@1.3.1':
+    resolution: {integrity: sha512-0NGzoTXTOizWizK/brKKd5EjJhuuEH4903tLika7q6wl/u0tgneJlTh7R+MBVeih0iNxtuJAfBa3IEY6Qmj+Sw==}
+
+  '@phosphor/domutils@1.1.4':
+    resolution: {integrity: sha512-ivwq5TWjQpKcHKXO8PrMl+/cKqbgxPClPiCKc1gwbMd+6hnW5VLwNG0WBzJTxCzXK43HxX18oH+tOZ3E04wc3w==}
+
+  '@phosphor/keyboard@1.1.3':
+    resolution: {integrity: sha512-dzxC/PyHiD6mXaESRy6PZTd9JeK+diwG1pyngkyUf127IXOEzubTIbu52VSdpGBklszu33ws05BAGDa4oBE4mQ==}
+
+  '@phosphor/messaging@1.3.0':
+    resolution: {integrity: sha512-k0JE+BTMKlkM335S2AmmJxoYYNRwOdW5jKBqLgjJdGRvUQkM0+2i60ahM45+J23atGJDv9esKUUBINiKHFhLew==}
+
+  '@phosphor/properties@1.1.3':
+    resolution: {integrity: sha512-GiglqzU77s6+tFVt6zPq9uuyu/PLQPFcqZt914ZhJ4cN/7yNI/SLyMzpYZ56IRMXvzK9TUgbRna6URE3XAwFUg==}
+
+  '@phosphor/signaling@1.3.1':
+    resolution: {integrity: sha512-Eq3wVCPQAhUd9+gUGaYygMr+ov7dhSGblSBXiDzpZlSIfa8OVD4P3cCvYXr/acDTNmZ/gHTcSFO8/n3rDkeXzg==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1907,6 +2034,12 @@ packages:
   '@types/d3@7.4.3':
     resolution: {integrity: sha512-lZXZ9ckh5R8uiFVt8ogUNf+pIrK4EsWrx2Np75WvF/eTpJ0FMHNhjXk8CKEx/+gpHbNQyJWehbFaTvqmHWB3ww==}
 
+  '@types/eslint-scope@3.7.7':
+    resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
+
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
+
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
@@ -2112,21 +2245,21 @@ packages:
     resolution: {integrity: sha512-wy0mglZpDSiSS0XHrVR+BAdId2+yxPSoJW8fsna3ZpYSlufjvxnP4YbKTCBZnNIcGN4r6ZPXV55X4mYExOfLmw==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
-      webpack: 5.x.x
+      webpack: 5.106.0
       webpack-cli: 5.x.x
 
   '@webpack-cli/info@2.0.2':
     resolution: {integrity: sha512-zLHQdI/Qs1UyT5UBdWNqsARasIA+AaF8t+4u2aS2nEpBQh2mWIVb8qAklq0eUENnC5mOItrIB4LiS9xMtph18A==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
-      webpack: 5.x.x
+      webpack: 5.106.0
       webpack-cli: 5.x.x
 
   '@webpack-cli/serve@2.0.5':
     resolution: {integrity: sha512-lqaoKnRYBdo1UgDX8uF24AfGMifWK19TxPmM5FHc2vAGxrJ/qtyUyFBWoY1tISZdelsQ5fBcOusifo5o5wSJxQ==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
-      webpack: 5.x.x
+      webpack: 5.106.0
       webpack-cli: 5.x.x
       webpack-dev-server: '*'
     peerDependenciesMeta:
@@ -2550,12 +2683,16 @@ packages:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
+  crypto@1.0.1:
+    resolution: {integrity: sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==}
+    deprecated: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
+
   css-loader@6.11.0:
     resolution: {integrity: sha512-CTJ+AEQJjq5NzLga5pE39qdiSV56F8ywCIsqNIRF0r7BDgWsN25aazToqAFg7ZrtA/U016xudB3ffgweORxX7g==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
-      webpack: ^5.0.0
+      webpack: 5.106.0
     peerDependenciesMeta:
       '@rspack/core':
         optional: true
@@ -3935,8 +4072,8 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
-  lib0@0.2.117:
-    resolution: {integrity: sha512-DeXj9X5xDCjgKLU/7RR+/HQEVzuuEUiwldwOGsHK/sfAfELGWEyTcf0x+uOvCvK3O2zPmZePXWL85vtia6GyZw==}
+  lib0@0.2.111:
+    resolution: {integrity: sha512-NZPvycjIPaSY1DV9uz88RJYFwrul6kLMtZGIw1T1zE6i1E9q17XElZJPfWVn2iVDQTLLqhJijghuVxKS/z8EHQ==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -4154,10 +4291,6 @@ packages:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
 
-  mime-db@1.54.0:
-    resolution: {integrity: sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==}
-    engines: {node: '>= 0.6'}
-
   mime-types@2.1.35:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
@@ -4170,7 +4303,7 @@ packages:
     resolution: {integrity: sha512-AOSS0IdEB95ayVkxn5oGzNQwqAi2J0Jb/kKm43t7H73s8+f5873g0yuj0PNvK4dO75mu5DHg4nlgp4k6Kga8eg==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
-      webpack: ^5.0.0
+      webpack: 5.106.0
 
   mini-svg-data-uri@1.4.4:
     resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
@@ -4199,6 +4332,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
@@ -4223,14 +4359,17 @@ packages:
   myst-ext-exercise@1.0.9:
     resolution: {integrity: sha512-9860YKmE4dxM4pFjjDZ6bduuyz/8+s7+9lw26DCrOTRMHfqGIFdekmkHfDKeLGjZl4NQtfXnwD2H+JgYp0AOxA==}
 
-  myst-ext-grid@1.0.9:
-    resolution: {integrity: sha512-GtlWFNDc9iZIasmu7gwjm41EtMa+Imr8IxWc4uLnve1HR6m9GmofNmcKoAViO2wz1ivv7ye7w1rzEf8qaatwqg==}
+  myst-ext-grid@1.1.0:
+    resolution: {integrity: sha512-IupUCM1e5H08GYEPXKUMXOcLRfL/ciOllIFf7bPi9uOUuklzt71c/oStfFJJbVw1Sfv6Om4fJf9PmsupemBqzA==}
 
   myst-ext-icon@0.0.2:
     resolution: {integrity: sha512-i76dZ0fmyg2G9mSuIp4UC6JC7k6Y4NPoYNGIwYKcMA1aMx2fgAehB+0mjDZMdpzYAnmCAMXoKFFNkXl4GLBuJQ==}
 
   myst-ext-proof@1.0.12:
     resolution: {integrity: sha512-35Q8BD05sUK8mvmWle36+jUEGe6/txUOYEVKg4XpqT5sKqezn0uaBWmscbOfMTHGOIdE/fpOxVe249cZMnGwRg==}
+
+  myst-ext-reactive@1.0.9:
+    resolution: {integrity: sha512-fxN5sBKWYSgVEk/GbXbvca+wkDJFhyOzA0rNiEVTizLjBrqjLJONHJu9u75LQCQIk/QJfzU7Dg2UXSK6HYFssw==}
 
   myst-ext-tabs@1.0.9:
     resolution: {integrity: sha512-Sm1btywckrL/cDqsPE3AP78TQ0RhgBQ6EoFNm8PzJSLc7i7Fbl8VMv6I+uq2JT5H+iSO698o88SUMEIQNDtbgA==}
@@ -4308,6 +4447,15 @@ packages:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
     deprecated: Use your platform's native DOMException instead
+
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
@@ -4455,6 +4603,9 @@ packages:
 
   path-parse@1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+
+  path-posix@1.0.0:
+    resolution: {integrity: sha512-1gJ0WpNIiYcQydgg3Ed8KzvIqTsDpNwq+cjBCssvBtuTWjEqY1AW+i+OepiEMqDCzyro9B2sLAe4RBPajMYFiA==}
 
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
@@ -4954,13 +5105,13 @@ packages:
     resolution: {integrity: sha512-oX8d6ndRjN+tVyjj6PlXSyFPhDdVAPsZA30nD3/II8g4uOv8fCz0DMn5sy8KtVbDfKQxOpGwGJnK3xIW3tauDw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
-      webpack: ^4.0.0 || ^5.0.0
+      webpack: 5.106.0
 
   source-map-loader@1.1.3:
     resolution: {integrity: sha512-6YHeF+XzDOrT/ycFJNI53cgEsp/tHTMl37hi7uVyqFAlTXW109JazaQCkbc+jjoL2637qkH1amLi+JzrIpt5lA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
-      webpack: ^4.0.0 || ^5.0.0
+      webpack: 5.106.0
 
   source-map-support@0.5.13:
     resolution: {integrity: sha512-SHSKFHadjVA5oR4PPqhtAVdcBWwRYVd6g6cAXnIbRiIwc2EhPrTuKUBdSLvlEKyIP3GCf89fltvcZiP9MMFA1w==}
@@ -5060,7 +5211,7 @@ packages:
     resolution: {integrity: sha512-0WqXzrsMTyb8yjZJHDqwmnwRJvhALK9LfRtRc6B4UTWe8AijYLZYZ9thuJTZc2VfQWINADW/j+LiJnfy2RoC1w==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
-      webpack: ^5.0.0
+      webpack: 5.106.0
 
   style-mod@4.1.3:
     resolution: {integrity: sha512-i/n8VsZydrugj3Iuzll8+x/00GH2vnYsk1eomD8QiRrSAeW6ItbCQDtfXCeJHd0iwiNagqjQkvpvREEPtW3IoQ==}
@@ -5129,7 +5280,7 @@ packages:
       lightningcss: '*'
       postcss: '*'
       uglify-js: '*'
-      webpack: ^5.1.0
+      webpack: 5.106.0
     peerDependenciesMeta:
       '@minify-html/node':
         optional: true
@@ -5193,6 +5344,9 @@ packages:
   tough-cookie@4.1.4:
     resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
     engines: {node: '>=6'}
+
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
   tr46@2.1.0:
     resolution: {integrity: sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==}
@@ -5391,6 +5545,9 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  url-parse@1.4.7:
+    resolution: {integrity: sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==}
+
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
 
@@ -5475,14 +5632,6 @@ packages:
     resolution: {integrity: sha512-wnJA4BnEjOSyFMvjZdpiOwhSq9uDoK8e/kpRJDTaMYzwlkrhG1fwDIZI94CLsLzlCK5cIbMMtFlJlfR57Lavmg==}
     engines: {node: '>=8.0.0 || >=10.0.0'}
 
-  vscode-jsonrpc@8.2.1:
-    resolution: {integrity: sha512-kdjOSJ2lLIn7r1rtrMbbNCHjyMPfRnowdKjBQ+mGq6NAW5QY2bEZC/khaC5OR8svbbjvLEaIXkOq45e2X9BIbQ==}
-    engines: {node: '>=14.0.0'}
-
-  vscode-jsonrpc@9.0.0:
-    resolution: {integrity: sha512-+VvMmQPJhtvJ+8O+zu2JKIRiLxXF8NW7krWgyMGeOHrp4Cn23T5hc0v2LknNeopDOB70wghHAds7mKtcZ0I4Sg==}
-    engines: {node: '>=14.0.0'}
-
   vscode-languageserver-protocol@3.18.0:
     resolution: {integrity: sha512-Zdz+kJ12Iz6tc11xfZyEo501bBATHXrCjmMfnaR3pMnf1CoqZBKIynba3P+/bi9VEdrMbNtAVKYpKhbODvqy+Q==}
 
@@ -5513,6 +5662,9 @@ packages:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
 
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
   webidl-conversions@6.1.0:
     resolution: {integrity: sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==}
     engines: {node: '>=10.4'}
@@ -5527,7 +5679,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@webpack-cli/generators': '*'
-      webpack: 5.x.x
+      webpack: 5.106.0
       webpack-bundle-analyzer: '*'
       webpack-dev-server: '*'
     peerDependenciesMeta:
@@ -5546,8 +5698,8 @@ packages:
     resolution: {integrity: sha512-HPuy+uuoTCaaoEoI1LQ3JN9+vrPBvEesnnX1jADHy728cHSMlq4wUc4afYqahq2B1mhQVZxCXOkNTnXltr+2vQ==}
     engines: {node: '>=10.13.0'}
 
-  webpack@5.107.2:
-    resolution: {integrity: sha512-v7RhXaJbpMlV0D7hC7lb2EbnxkoeUqf9qhKr6lozx3Q48pmFrqqNRmZFUEGmi7pSwm6fCQ2H1IjvCkHqdpVdjQ==}
+  webpack@5.106.0:
+    resolution: {integrity: sha512-Pkx5joZ9RrdgO5LBkyX1L2ZAJeK/Taz3vqZ9CbcP0wS5LEMx5QkKsEwLl29QJfihZ+DKRBFldzy1O30pJ1MDpA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -5571,6 +5723,9 @@ packages:
   whatwg-url@11.0.0:
     resolution: {integrity: sha512-RKT8HExMpoYx4igMiVMY83lN6UeITKJlBQ+vR/8ZJ8OCdSiN3RwCq+9gH0+Xzj0+5IrM6i4j/6LuvzbZIQgEcQ==}
     engines: {node: '>=12'}
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   whatwg-url@8.7.0:
     resolution: {integrity: sha512-gAojqb/m9Q8a5IV96E3fHJM70AzCkgt4uXYX2O7EmuyOnLrViCQlsEBmF9UQIu3/aeAIp2U17rtbpZWNntQqdg==}
@@ -5615,7 +5770,7 @@ packages:
     resolution: {integrity: sha512-XQyQkIFeRVC7f7uRhFdNMe/iJOdO6zxAaR3EWbDp45v3mDhrTi+++oswKNxShUNjPC/1xUp5DB29YKLhFo129g==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
-      webpack: ^4.0.0 || ^5.0.0
+      webpack: 5.106.0
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -5631,6 +5786,18 @@ packages:
   write-file-atomic@4.0.2:
     resolution: {integrity: sha512-7KxauUdBmSdWnmpaGFg+ppNjKF8uNLry8LyzjauQDOVONfFLNKrKvQOxZ/VuTIcS/gge/YNahf5RIIQWTSarlg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+
+  ws@7.5.11:
+    resolution: {integrity: sha512-zS54Oen9bITtp7kp2XM3AydrCIq1D+HwJOuH+c+e4LfpL/lotP5osijd+UoMnxwAam1GN8R4KtLAyIrIcBNpiA==}
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   ws@8.21.0:
     resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
@@ -6900,6 +7067,15 @@ snapshots:
       y-protocols: 1.0.7(yjs@13.6.31)
       yjs: 13.6.31
 
+  '@jupyter/ydoc@4.0.0':
+    dependencies:
+      '@jupyterlab/nbformat': 4.5.8
+      '@lumino/coreutils': 2.2.2
+      '@lumino/disposable': 2.1.5
+      '@lumino/signaling': 2.1.5
+      y-protocols: 1.0.7(yjs@13.6.31)
+      yjs: 13.6.31
+
   '@jupyterlab/application@4.5.8(react@18.3.1)':
     dependencies:
       '@fortawesome/fontawesome-free': 5.15.4
@@ -6983,24 +7159,24 @@ snapshots:
       '@lumino/widgets': 2.8.0
       ajv: 8.20.0
       commander: 9.5.0
-      css-loader: 6.11.0(webpack@5.107.2)
+      css-loader: 6.11.0(webpack@5.106.0)
       duplicate-package-checker-webpack-plugin: 3.0.0
       fs-extra: 10.1.0
       glob: 7.1.7
-      license-webpack-plugin: 4.0.2(webpack@5.107.2)
-      mini-css-extract-plugin: 2.10.2(webpack@5.107.2)
+      license-webpack-plugin: 4.0.2(webpack@5.106.0)
+      mini-css-extract-plugin: 2.10.2(webpack@5.106.0)
       mini-svg-data-uri: 1.4.4
       path-browserify: 1.0.1
       process: 0.11.10
-      source-map-loader: 1.0.2(webpack@5.107.2)
-      style-loader: 3.3.4(webpack@5.107.2)
+      source-map-loader: 1.0.2(webpack@5.106.0)
+      style-loader: 3.3.4(webpack@5.106.0)
       supports-color: 7.2.0
-      terser-webpack-plugin: 5.6.1(postcss@8.5.15)(webpack@5.107.2)
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack@5.107.2)
+      terser-webpack-plugin: 5.6.1(postcss@8.5.15)(webpack@5.106.0)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack@5.106.0)
       webpack-merge: 5.10.0
       webpack-sources: 3.5.0
-      worker-loader: 3.0.8(webpack@5.107.2)
+      worker-loader: 3.0.8(webpack@5.106.0)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@rspack/core'
@@ -7117,6 +7293,34 @@ snapshots:
       - bufferutil
       - react
       - utf-8-validate
+
+  '@jupyterlab/core-meta@4.6.0-rc.1': {}
+
+  '@jupyterlab/coreutils@3.2.0':
+    dependencies:
+      '@phosphor/commands': 1.7.2
+      '@phosphor/coreutils': 1.3.1
+      '@phosphor/disposable': 1.3.1
+      '@phosphor/properties': 1.1.3
+      '@phosphor/signaling': 1.3.1
+      ajv: 6.15.0
+      json5: 2.2.3
+      minimist: 1.2.8
+      moment: 2.30.1
+      path-posix: 1.0.0
+      url-parse: 1.4.7
+
+  '@jupyterlab/coreutils@4.3.1(crypto@1.0.1)':
+    dependencies:
+      '@lumino/coreutils': 1.12.1(crypto@1.0.1)
+      '@lumino/disposable': 1.10.4
+      '@lumino/signaling': 1.11.1
+      minimist: 1.2.8
+      moment: 2.30.1
+      path-posix: 1.0.0
+      url-parse: 1.4.7
+    transitivePeerDependencies:
+      - crypto
 
   '@jupyterlab/coreutils@6.5.8':
     dependencies:
@@ -7332,6 +7536,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@jupyterlab/observables@2.4.0':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
+      '@phosphor/coreutils': 1.3.1
+      '@phosphor/disposable': 1.3.1
+      '@phosphor/messaging': 1.3.0
+      '@phosphor/signaling': 1.3.1
+
   '@jupyterlab/observables@5.5.8':
     dependencies:
       '@lumino/algorithm': 2.0.4
@@ -7383,6 +7595,21 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - react
+      - utf-8-validate
+
+  '@jupyterlab/services@4.2.3':
+    dependencies:
+      '@jupyterlab/coreutils': 3.2.0
+      '@jupyterlab/observables': 2.4.0
+      '@phosphor/algorithm': 1.2.0
+      '@phosphor/coreutils': 1.3.1
+      '@phosphor/disposable': 1.3.1
+      '@phosphor/signaling': 1.3.1
+      node-fetch: 2.7.0
+      ws: 7.5.11
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
       - utf-8-validate
 
   '@jupyterlab/services@7.5.8(react@18.3.1)':
@@ -7633,6 +7860,8 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10
 
+  '@lumino/algorithm@1.9.2': {}
+
   '@lumino/algorithm@2.0.4': {}
 
   '@lumino/application@2.4.9':
@@ -7655,9 +7884,18 @@ snapshots:
       '@lumino/signaling': 2.1.5
       '@lumino/virtualdom': 2.0.4
 
+  '@lumino/coreutils@1.12.1(crypto@1.0.1)':
+    dependencies:
+      crypto: 1.0.1
+
   '@lumino/coreutils@2.2.2':
     dependencies:
       '@lumino/algorithm': 2.0.4
+
+  '@lumino/disposable@1.10.4':
+    dependencies:
+      '@lumino/algorithm': 1.9.2
+      '@lumino/signaling': 1.11.1
 
   '@lumino/disposable@2.1.5':
     dependencies:
@@ -7683,7 +7921,14 @@ snapshots:
       '@lumino/disposable': 2.1.5
       '@lumino/signaling': 2.1.5
 
+  '@lumino/properties@1.8.2': {}
+
   '@lumino/properties@2.0.4': {}
+
+  '@lumino/signaling@1.11.1':
+    dependencies:
+      '@lumino/algorithm': 1.9.2
+      '@lumino/properties': 1.8.2
 
   '@lumino/signaling@2.1.5':
     dependencies:
@@ -7801,6 +8046,43 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
+
+  '@phosphor/algorithm@1.2.0': {}
+
+  '@phosphor/collections@1.2.0':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
+
+  '@phosphor/commands@1.7.2':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
+      '@phosphor/coreutils': 1.3.1
+      '@phosphor/disposable': 1.3.1
+      '@phosphor/domutils': 1.1.4
+      '@phosphor/keyboard': 1.1.3
+      '@phosphor/signaling': 1.3.1
+
+  '@phosphor/coreutils@1.3.1': {}
+
+  '@phosphor/disposable@1.3.1':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
+      '@phosphor/signaling': 1.3.1
+
+  '@phosphor/domutils@1.1.4': {}
+
+  '@phosphor/keyboard@1.1.3': {}
+
+  '@phosphor/messaging@1.3.0':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
+      '@phosphor/collections': 1.2.0
+
+  '@phosphor/properties@1.1.3': {}
+
+  '@phosphor/signaling@1.3.1':
+    dependencies:
+      '@phosphor/algorithm': 1.2.0
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -8226,6 +8508,16 @@ snapshots:
       '@types/d3-transition': 3.0.9
       '@types/d3-zoom': 3.0.8
 
+  '@types/eslint-scope@3.7.7':
+    dependencies:
+      '@types/eslint': 9.6.1
+      '@types/estree': 1.0.9
+
+  '@types/eslint@9.6.1':
+    dependencies:
+      '@types/estree': 1.0.9
+      '@types/json-schema': 7.0.15
+
   '@types/estree@1.0.9': {}
 
   '@types/extend@3.0.4': {}
@@ -8490,20 +8782,20 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.107.2)':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.106.0)':
     dependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack@5.107.2)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack@5.106.0)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.107.2)':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.106.0)':
     dependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack@5.107.2)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack@5.106.0)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.107.2)':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.106.0)':
     dependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack@5.107.2)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack@5.106.0)
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -8946,7 +9238,9 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@6.11.0(webpack@5.107.2):
+  crypto@1.0.1: {}
+
+  css-loader@6.11.0(webpack@5.106.0):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.15)
       postcss: 8.5.15
@@ -8957,7 +9251,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.8.4
     optionalDependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
   css-selector-parser@1.4.1: {}
 
@@ -9434,13 +9728,14 @@ snapshots:
     dependencies:
       eslint: 8.57.1
 
-  eslint-plugin-prettier@5.5.6(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.8.4):
+  eslint-plugin-prettier@5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.8.4):
     dependencies:
       eslint: 8.57.1
       prettier: 3.8.4
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.13
     optionalDependencies:
+      '@types/eslint': 9.6.1
       eslint-config-prettier: 8.10.2(eslint@8.57.1)
 
   eslint-scope@5.1.1:
@@ -10712,15 +11007,15 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  lib0@0.2.117:
+  lib0@0.2.111:
     dependencies:
       isomorphic.js: 0.2.5
 
-  license-webpack-plugin@4.0.2(webpack@5.107.2):
+  license-webpack-plugin@4.0.2(webpack@5.106.0):
     dependencies:
       webpack-sources: 3.5.0
     optionalDependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
   lilconfig@3.1.3: {}
 
@@ -10937,19 +11232,17 @@ snapshots:
 
   mime-db@1.52.0: {}
 
-  mime-db@1.54.0: {}
-
   mime-types@2.1.35:
     dependencies:
       mime-db: 1.52.0
 
   mimic-fn@2.1.0: {}
 
-  mini-css-extract-plugin@2.10.2(webpack@5.107.2):
+  mini-css-extract-plugin@2.10.2(webpack@5.106.0):
     dependencies:
       schema-utils: 4.3.3
       tapable: 2.3.3
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
   mini-svg-data-uri@1.4.4: {}
 
@@ -10970,6 +11263,8 @@ snapshots:
   minipass@7.1.3: {}
 
   mkdirp@1.0.4: {}
+
+  moment@2.30.1: {}
 
   ms@2.1.3: {}
 
@@ -11022,7 +11317,7 @@ snapshots:
     dependencies:
       myst-common: 1.10.0
 
-  myst-ext-grid@1.0.9:
+  myst-ext-grid@1.1.0:
     dependencies:
       myst-common: 1.10.0
 
@@ -11034,6 +11329,10 @@ snapshots:
     dependencies:
       myst-common: 1.10.0
       myst-spec: 0.0.5
+
+  myst-ext-reactive@1.0.9:
+    dependencies:
+      myst-common: 1.10.0
 
   myst-ext-tabs@1.0.9:
     dependencies:
@@ -11211,6 +11510,10 @@ snapshots:
 
   node-domexception@1.0.0: {}
 
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
+
   node-fetch@3.3.2:
     dependencies:
       data-uri-to-buffer: 4.0.1
@@ -11362,6 +11665,8 @@ snapshots:
   path-key@3.1.1: {}
 
   path-parse@1.0.7: {}
+
+  path-posix@1.0.0: {}
 
   path-scurry@1.11.1:
     dependencies:
@@ -11882,23 +12187,23 @@ snapshots:
 
   source-map-js@1.2.1: {}
 
-  source-map-loader@1.0.2(webpack@5.107.2):
+  source-map-loader@1.0.2(webpack@5.106.0):
     dependencies:
       data-urls: 2.0.0
       iconv-lite: 0.6.3
       loader-utils: 2.0.4
       schema-utils: 2.7.1
       source-map: 0.6.1
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
-  source-map-loader@1.1.3(webpack@5.107.2):
+  source-map-loader@1.1.3(webpack@5.106.0):
     dependencies:
       abab: 2.0.6
       iconv-lite: 0.6.3
       loader-utils: 2.0.4
       schema-utils: 3.3.0
       source-map: 0.6.1
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
       whatwg-mimetype: 2.3.0
 
   source-map-support@0.5.13:
@@ -12011,9 +12316,9 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@3.3.4(webpack@5.107.2):
+  style-loader@3.3.4(webpack@5.106.0):
     dependencies:
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
   style-mod@4.1.3: {}
 
@@ -12087,13 +12392,13 @@ snapshots:
 
   tapable@2.3.3: {}
 
-  terser-webpack-plugin@5.6.1(postcss@8.5.15)(webpack@5.107.2):
+  terser-webpack-plugin@5.6.1(postcss@8.5.15)(webpack@5.106.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       terser: 5.48.0
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
     optionalDependencies:
       postcss: 8.5.15
 
@@ -12139,6 +12444,8 @@ snapshots:
       punycode: 2.3.1
       universalify: 0.2.0
       url-parse: 1.5.10
+
+  tr46@0.0.3: {}
 
   tr46@2.1.0:
     dependencies:
@@ -12347,6 +12654,11 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  url-parse@1.4.7:
+    dependencies:
+      querystringify: 2.2.0
+      requires-port: 1.0.0
+
   url-parse@1.5.10:
     dependencies:
       querystringify: 2.2.0
@@ -12437,20 +12749,16 @@ snapshots:
 
   vscode-jsonrpc@6.0.0: {}
 
-  vscode-jsonrpc@8.2.1: {}
-
-  vscode-jsonrpc@9.0.0: {}
-
   vscode-languageserver-protocol@3.18.0:
     dependencies:
-      vscode-jsonrpc: 9.0.0
+      vscode-jsonrpc: 6.0.0
       vscode-languageserver-types: 3.18.0
 
   vscode-languageserver-types@3.18.0: {}
 
   vscode-ws-jsonrpc@1.0.2:
     dependencies:
-      vscode-jsonrpc: 8.2.1
+      vscode-jsonrpc: 6.0.0
 
   w3c-keyname@2.2.8: {}
 
@@ -12470,16 +12778,18 @@ snapshots:
 
   web-streams-polyfill@3.3.3: {}
 
+  webidl-conversions@3.0.1: {}
+
   webidl-conversions@6.1.0: {}
 
   webidl-conversions@7.0.0: {}
 
-  webpack-cli@5.1.4(webpack@5.107.2):
+  webpack-cli@5.1.4(webpack@5.106.0):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.107.2)
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.107.2)
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.107.2)
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.106.0)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.106.0)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.106.0)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.6
@@ -12488,7 +12798,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
       webpack-merge: 5.10.0
 
   webpack-merge@5.10.0:
@@ -12499,8 +12809,9 @@ snapshots:
 
   webpack-sources@3.5.0: {}
 
-  webpack@5.107.2(postcss@8.5.15)(webpack-cli@5.1.4):
+  webpack@5.106.0(postcss@8.5.15)(webpack-cli@5.1.4):
     dependencies:
+      '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.9
       '@types/json-schema': 7.0.15
       '@webassemblyjs/ast': 1.14.1
@@ -12516,16 +12827,17 @@ snapshots:
       events: 3.3.0
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
       loader-runner: 4.3.2
-      mime-db: 1.54.0
+      mime-types: 2.1.35
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.3
-      terser-webpack-plugin: 5.6.1(postcss@8.5.15)(webpack@5.107.2)
+      terser-webpack-plugin: 5.6.1(postcss@8.5.15)(webpack@5.106.0)
       watchpack: 2.5.2
       webpack-sources: 3.5.0
     optionalDependencies:
-      webpack-cli: 5.1.4(webpack@5.107.2)
+      webpack-cli: 5.1.4(webpack@5.106.0)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
@@ -12552,6 +12864,11 @@ snapshots:
     dependencies:
       tr46: 3.0.0
       webidl-conversions: 7.0.0
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
 
   whatwg-url@8.7.0:
     dependencies:
@@ -12614,11 +12931,11 @@ snapshots:
 
   wordwrap@1.0.0: {}
 
-  worker-loader@3.0.8(webpack@5.107.2):
+  worker-loader@3.0.8(webpack@5.106.0):
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
+      webpack: 5.106.0(postcss@8.5.15)(webpack-cli@5.1.4)
 
   wrap-ansi@7.0.0:
     dependencies:
@@ -12639,6 +12956,8 @@ snapshots:
       imurmurhash: 0.1.4
       signal-exit: 3.0.7
 
+  ws@7.5.11: {}
+
   ws@8.21.0: {}
 
   xml-name-validator@4.0.0: {}
@@ -12651,7 +12970,7 @@ snapshots:
 
   y-protocols@1.0.7(yjs@13.6.31):
     dependencies:
-      lib0: 0.2.117
+      lib0: 0.2.111
       yjs: 13.6.31
 
   y18n@5.0.8: {}
@@ -12672,7 +12991,7 @@ snapshots:
 
   yjs@13.6.31:
     dependencies:
-      lib0: 0.2.117
+      lib0: 0.2.111
 
   yocto-queue@0.1.0: {}
 

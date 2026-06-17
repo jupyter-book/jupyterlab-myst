@@ -57,12 +57,13 @@
   },
   engines: {
       node: ">=10",
-      pnpm: ">=3"
+      pnpm: ">=6.0.0"
   },
+  packageManager: "^pnpm@6.0.0",
   devEngines: {
     packageManager: {
       name: "pnpm",
-      version: ">=3",
+      version: ">=6.0.0",
       onFail: "download"
     }
   },
@@ -81,7 +82,6 @@
         '@jupyterlab/attachments',
         '@jupyterlab/cells',
         '@jupyterlab/coreutils',
-        '@jupyterlab/rendermime-interfaces',
         '@jupyterlab/services',
         '@jupyterlab/settingregistry',
         '@jupyterlab/ui-components',
@@ -132,26 +132,43 @@
     'myst-ext-icon': '0.0.2',
     'myst-ext-proof': '1.0.12',
     'myst-ext-reactive': '1.0.9',
-    'myst-ext-tabs:': '1.0.9',
+    'myst-ext-tabs': '1.0.9',
+    'myst-spec': '0.0.5',
     // Floating transforms
     'myst-transforms': '1.3.44',
+    // Interfaces
+    '@jupyterlab/rendermime-interfaces': '^3.8.0',
     // Lumino
     '@lumino/coreutils': '^2.2.2',
     '@lumino/signaling': '^2.1.5',
-    '@lumino/widgets': '^2.8.0'
+    '@lumino/widgets': '^2.8.0',
+    // Collaboration
+    '@jupyter/ydoc': '^4.0.0',
+    // Unified
+    'unified': '^10.1.0',
+    'unist-util-select': '^4.0.3',
+    '@types/mdast': '^3.0.0',
+    vfile: '^5.0.0',
+    // React
+    react: "^18.3.1"
   },
   devDependencies: {
     '@babel/core': '^7.0.0',
     '@babel/preset-env': '^7.0.0',
+    // Lab
     '@jupyterlab/builder': '^4.0.0',
     '@jupyterlab/testutils': '^4.0.0',
+    '@jupyterlab/core-meta': '^4.6.0-beta.0',
+    //
     '@myst-theme/styles': '>=0.9.0 <1.0.0',
     '@tailwindcss/typography': '^0.5.8',
+    //
     '@types/jest': '^29.2.0',
     '@types/json-schema': '^7.0.11',
     '@types/react': '^18.0.26',
     '@types/react-addons-linked-state-mixin': '^0.14.22',
     '@types/react-dom': '^18.0.9',
+    //
     '@typescript-eslint/eslint-plugin': '^6.1.0',
     '@typescript-eslint/parser': '^6.1.0',
     'css-loader': '^6.7.1',
