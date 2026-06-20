@@ -213,7 +213,7 @@ importers:
   .:
     dependencies:
       '@jupyter/ydoc':
-        specifier: ^3.0.0
+        specifier: ^3.0.0||^4.0.0
         version: 3.5.0
       '@jupyterlab/application':
         specifier: ^4.0.0

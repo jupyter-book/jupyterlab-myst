@@ -132,7 +132,7 @@
     '@lumino/signaling': '^2.1.5',
     '@lumino/widgets': '^2.8.0',
     // Collaboration
-    '@jupyter/ydoc': '^3.0.0',
+    '@jupyter/ydoc': '^3.0.0||^4.0.0',
     // Unified
     'unified': '^10.1.0',
     'unist-util-select': '^4.0.3',
