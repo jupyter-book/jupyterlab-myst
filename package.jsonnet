@@ -12,10 +12,6 @@
     url: 'https://github.com/jupyter-book/jupyterlab-myst/issues',
   },
   license: 'MIT',
-  author: {
-    name: 'Executable Book Project',
-    email: 'executablebooks@gmail.com',
-  },
   files: [
     'lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}',
     'style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}',
@@ -31,8 +27,8 @@
   scripts: {
     build: 'pnpm run build:css && pnpm run build:lib && pnpm run build:labextension:dev',
     'build:css': 'tailwindcss -m -i ./style/tailwind.css -o style/app.css',
-    'build:labextension': 'jupyter labextension build .',
-    'build:labextension:dev': 'jupyter labextension build --development True .',
+    'build:labextension': 'jupyter-builder build .',
+    'build:labextension:dev': 'jupyter-builder build --development True .',
     'build:lib': 'tsc --sourceMap',
     'build:lib:prod': 'tsc',
     'build:prod': 'pnpm run clean && pnpm run build:css && pnpm run build:lib:prod && pnpm run build:labextension',
@@ -52,7 +48,7 @@
     test: 'jest --coverage',
     watch: 'run-p watch:css watch:src watch:labextension',
     'watch:css': 'tailwindcss -w -i ./style/tailwind.css -o style/app.css',
-    'watch:labextension': 'jupyter labextension watch .',
+    'watch:labextension': 'jupyter-builder watch .',
     'watch:src': 'tsc -w --sourceMap',
   },
   engines: {
@@ -136,7 +132,7 @@
     '@lumino/signaling': '^2.1.5',
     '@lumino/widgets': '^2.8.0',
     // Collaboration
-    '@jupyter/ydoc': '^3.0.0',
+    '@jupyter/ydoc': '^3.0.0||^4.0.0',
     // Unified
     'unified': '^10.1.0',
     'unist-util-select': '^4.0.3',
@@ -149,9 +145,9 @@
     '@babel/core': '^7.0.0',
     '@babel/preset-env': '^7.0.0',
     // Lab
-    '@jupyterlab/builder': '^4.0.0',
+    '@jupyter/builder': '^1.0.0',
     '@jupyterlab/testutils': '^4.0.0',
-    '@jupyterlab/core-meta': '^4.6.0-beta.0',
+    '@module-federation/runtime-tools': '^2.0.0',
     //
     '@myst-theme/styles': '>=0.9.0 <1.0.0',
     '@tailwindcss/typography': '^0.5.8',

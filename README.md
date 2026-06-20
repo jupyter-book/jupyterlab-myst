@@ -132,7 +132,7 @@ Note: You will need NodeJS to build the extension package.
 # Install package in development mode
 pip install -e ".[test]"
 # Link your development version of the extension with JupyterLab
-jupyter labextension develop . --overwrite
+jupyter-builder develop . --overwrite
 # Server extension must be manually installed in develop mode
 jupyter server extension enable jupyterlab_myst
 # Rebuild extension Typescript source after making changes
@@ -179,7 +179,7 @@ Install test dependencies (needed only once):
 ```sh
 pip install -e ".[test]"
 # Each time you install the Python package, you need to restore the front-end extension link
-jupyter labextension develop . --overwrite
+jupyter-builder develop . --overwrite
 ```
 
 To execute them, run:
