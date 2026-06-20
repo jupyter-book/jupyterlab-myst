@@ -12,10 +12,6 @@
     url: 'https://github.com/jupyter-book/jupyterlab-myst/issues',
   },
   license: 'MIT',
-  author: {
-    name: 'Executable Book Project',
-    email: 'executablebooks@gmail.com',
-  },
   files: [
     'lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}',
     'style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}',

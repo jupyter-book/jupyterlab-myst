@@ -1,8 +1,4 @@
 {
-   "author": {
-      "email": "executablebooks@gmail.com",
-      "name": "Executable Book Project"
-   },
    "bugs": {
       "url": "https://github.com/jupyter-book/jupyterlab-myst/issues"
    },
