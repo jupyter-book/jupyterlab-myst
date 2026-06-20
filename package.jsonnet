@@ -149,9 +149,8 @@
     '@babel/core': '^7.0.0',
     '@babel/preset-env': '^7.0.0',
     // Lab
-    '@jupyterlab/builder': '^4.0.0',
+    '@jupyter/builder': '^4.0.0',
     '@jupyterlab/testutils': '^4.0.0',
-    '@jupyterlab/core-meta': '^4.6.0-beta.0',
     //
     '@myst-theme/styles': '>=0.9.0 <1.0.0',
     '@tailwindcss/typography': '^0.5.8',
