@@ -151,6 +151,7 @@
     // Lab
     '@jupyter/builder': '^1.0.0',
     '@jupyterlab/testutils': '^4.0.0',
+    '@module-federation/runtime-tools': '^2.0.0',
     //
     '@myst-theme/styles': '>=0.9.0 <1.0.0',
     '@tailwindcss/typography': '^0.5.8',
