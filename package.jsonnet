@@ -49,7 +49,7 @@
     watch: 'run-p watch:css watch:src watch:labextension',
     'watch:css': 'tailwindcss -w -i ./style/tailwind.css -o style/app.css',
     'watch:labextension': 'jupyter-builder watch .',
-    'watch:src': 'tsc -w --sourceMap',
+    'watch:src': 'tsc -w --sourceMap'
   },
   engines: {
       node: ">=10",
