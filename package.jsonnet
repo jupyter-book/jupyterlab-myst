@@ -124,9 +124,9 @@
     // Floating transforms
     'myst-transforms': '1.3.44',
     // Interfaces
-    '@jupyterlab/rendermime-interfaces': '^3.8.0',
-    '@jupyterlab/coreutils': '^6.0.0',
-    '@jupyterlab/services': '^7.0.0',
+    '@jupyterlab/rendermime-interfaces': '^3.14.0',
+    '@jupyterlab/coreutils': '^6.6.0',
+    '@jupyterlab/services': '^7.6.0',
     // Lumino
     '@lumino/coreutils': '^2.2.2',
     '@lumino/signaling': '^2.1.5',
@@ -148,6 +148,7 @@
     '@jupyter/builder': '^1.0.0',
     '@jupyterlab/testutils': '^4.0.0',
     '@module-federation/runtime-tools': '^2.0.0',
+    '@jupyterlab/core-meta': '^4.6.0',
     //
     '@myst-theme/styles': '>=0.9.0 <1.0.0',
     '@tailwindcss/typography': '^0.5.8',
