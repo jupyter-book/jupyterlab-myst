@@ -92,8 +92,7 @@ version_cmd = "hatch version"
 [tool.jupyter-releaser.hooks]
 before-build-npm = [
     # Used by Jupyter Releaser
-    "python -m pip install 'jupyterlab>=4.0.0,<5'",
-    "npm install -g pnpm@11.5.2",
+    "python -m pip install 'jupyter-builder>=1.0.0,<2'",
     "pnpm ci",
     "pnpm run build:prod"
 ]

@@ -55,7 +55,7 @@
       node: ">=10",
       pnpm: ">=6.0.0"
   },
-  packageManager: "pnpm@11",
+  packageManager: "pnpm@11.17.0",
   // Define grouped dependencies
   local groups = [
     {
