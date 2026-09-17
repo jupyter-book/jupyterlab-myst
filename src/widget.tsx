@@ -4,9 +4,6 @@ import { FrontmatterBlock } from '@myst-theme/frontmatter';
 import { ISanitizer, VDomModel, VDomRenderer } from '@jupyterlab/apputils';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { References } from 'myst-common';
-import type { FrontmatterParts } from 'myst-common';
-import type { SiteAction, SiteExport } from 'myst-config';
-import { PageFrontmatter } from 'myst-frontmatter';
 import { SourceFileKind } from 'myst-spec-ext';
 import {
   ArticleProvider,
@@ -26,6 +23,7 @@ import {
 import { renderers } from './renderers';
 import { IUserExpressionMetadata } from './userExpressions';
 import { linkFactory } from './transforms';
+import { Frontmatter, getDisplayFrontmatter } from './frontmatter';
 
 /**
  * The MIME type for Markdown.
@@ -40,12 +38,6 @@ function getJupyterTheme(): Theme {
     ? Theme.dark
     : Theme.light;
 }
-
-type Frontmatter = Omit<PageFrontmatter, 'parts' | 'downloads'> & {
-  parts?: FrontmatterParts;
-  downloads?: SiteAction[];
-  exports?: SiteExport[];
-};
 
 // export interface IMySTFragmentContext extends ITaskItemController {
 //   requestUpdate(renderer: RenderedMySTMarkdown): Promise<IMySTDocumentState>;
@@ -168,6 +160,7 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
       return <span>MyST Renderer!</span>;
     }
     const { references, frontmatter, mdast, expressions } = this.model;
+    const displayFrontmatter = getDisplayFrontmatter(frontmatter);
 
     return (
       <TaskItemControllerProvider controller={this._taskItemController}>
@@ -189,8 +182,8 @@ export class MySTWidget extends VDomRenderer<IMySTModel> {
                   references={references}
                   frontmatter={frontmatter}
                 >
-                  {frontmatter && (
-                    <FrontmatterBlock frontmatter={frontmatter} />
+                  {displayFrontmatter && (
+                    <FrontmatterBlock frontmatter={displayFrontmatter} />
                   )}
                   <MyST ast={mdast}></MyST>
                 </ArticleProvider>
