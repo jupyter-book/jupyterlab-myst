@@ -2,6 +2,30 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 2.4.3
+
+([Full Changelog](https://github.com/jupyter-book/jupyterlab-myst/compare/v2.7.0...4b4b321907455394a9ab8ceada77fc4d6940cbca))
+
+### Bugs fixed
+
+- Fix heading duplication [#301](https://github.com/jupyter-book/jupyterlab-myst/pull/301) ([@krassowski](https://github.com/krassowski), [@agoose77](https://github.com/agoose77), [@mfisher87](https://github.com/mfisher87))
+
+### Maintenance and upkeep improvements
+
+- Use jupyter-builder 1.2.0 or newer, fix UI tests [#303](https://github.com/jupyter-book/jupyterlab-myst/pull/303) ([@krassowski](https://github.com/krassowski), [@agoose77](https://github.com/agoose77))
+- Use `jupyter-builder` for package building [#295](https://github.com/jupyter-book/jupyterlab-myst/pull/295) ([@agoose77](https://github.com/agoose77), [@krassowski](https://github.com/krassowski))
+
+### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/use/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyter-book/jupyterlab-myst/graphs/contributors?from=2026-06-17&to=2026-10-02&type=c))
+
+@agoose77 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2026-06-17..2026-10-02&type=Issues)) | @krassowski ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Akrassowski+updated%3A2026-06-17..2026-10-02&type=Issues)) | @mfisher87 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Amfisher87+updated%3A2026-06-17..2026-10-02&type=Issues))
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 2.7.0
 
 ([Full Changelog](https://github.com/jupyter-book/jupyterlab-myst/compare/v2.6.0...4217e0d255c87084d6386fd93115dc6ef897386f))
@@ -22,8 +46,6 @@ See [our definition of contributors](https://github-activity.readthedocs.io/en/l
 ([GitHub contributors page for this release](https://github.com/jupyter-book/jupyterlab-myst/graphs/contributors?from=2025-12-14&to=2026-06-17&type=c))
 
 @agoose77 ([activity](https://github.com/search?q=repo%3Ajupyter-book%2Fjupyterlab-myst+involves%3Aagoose77+updated%3A2025-12-14..2026-06-17&type=Issues))
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 2.6.0
 
