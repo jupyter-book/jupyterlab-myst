@@ -88,7 +88,7 @@ Executing the notebook will cause each cell to be considered trusted.
 To facilitate this extension of the trust model, the `jupyterlab_myst` server extension replaces the `NotebookNotary` from `nbformat` with `MySTNotebookNotary`. This can be disabled with
 
 ```bash
-jupyter server extension disable jupyterlab-myst
+jupyter server extension disable jupyterlab_myst
 ```
 
 By disabling this extension, it will not be possible to render unsafe expression results from inline expressions; the `MySTNotebookNotary` adds additional code that makes it possible to mark Markdown cells as trusted.
