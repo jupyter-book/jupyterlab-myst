@@ -267,17 +267,17 @@ importers:
         specifier: ^2.8.0
         version: 2.8.0
       '@myst-theme/diagrams':
-        specifier: 1.3.0
-        version: 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.1.0
+        version: 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@myst-theme/frontmatter':
-        specifier: 1.3.0
-        version: 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.1.0
+        version: 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@myst-theme/providers':
-        specifier: 1.3.0
-        version: 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.1.0
+        version: 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@myst-theme/search':
-        specifier: 1.3.0
-        version: 1.3.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@types/mdast':
         specifier: ^3.0.0
         version: 3.0.15
@@ -285,56 +285,56 @@ importers:
         specifier: ^0.16.22
         version: 0.16.47
       myst-common:
-        specifier: 1.10.0
-        version: 1.10.0
+        specifier: 1.11.0
+        version: 1.11.0
       myst-config:
-        specifier: 1.10.0
-        version: 1.10.0
+        specifier: 1.11.0
+        version: 1.11.0
       myst-ext-button:
-        specifier: 0.0.1
-        version: 0.0.1
+        specifier: 0.0.3
+        version: 0.0.3
       myst-ext-card:
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.11
+        version: 1.0.11
       myst-ext-exercise:
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.11
+        version: 1.0.11
       myst-ext-grid:
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.2
+        version: 1.1.2
       myst-ext-icon:
-        specifier: 0.0.2
-        version: 0.0.2
+        specifier: 0.0.4
+        version: 0.0.4
       myst-ext-proof:
-        specifier: 1.0.12
-        version: 1.0.12
+        specifier: 1.0.14
+        version: 1.0.14
       myst-ext-reactive:
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.10
+        version: 1.0.10
       myst-ext-tabs:
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.11
+        version: 1.0.11
       myst-frontmatter:
-        specifier: 1.10.0
-        version: 1.10.0
+        specifier: 1.11.0
+        version: 1.11.0
       myst-parser:
-        specifier: 1.7.3
-        version: 1.7.3
+        specifier: 1.7.5
+        version: 1.7.5
       myst-spec:
-        specifier: 0.0.5
-        version: 0.0.5
+        specifier: 0.0.6
+        version: 0.0.6
       myst-spec-ext:
-        specifier: 1.10.0
-        version: 1.10.0
+        specifier: 1.11.0
+        version: 1.11.0
       myst-to-html:
-        specifier: 1.7.3
-        version: 1.7.3
+        specifier: 1.7.5
+        version: 1.7.5
       myst-to-react:
-        specifier: 1.3.0
-        version: 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.1.0
+        version: 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       myst-transforms:
-        specifier: 1.3.44
-        version: 1.3.44
+        specifier: 1.3.53
+        version: 1.3.53
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -367,10 +367,10 @@ importers:
         specifier: ^2.0.0
         version: 2.5.1(node-fetch@3.3.2)
       '@myst-theme/styles':
-        specifier: '>=0.9.0 <1.0.0'
-        version: 0.18.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@tailwindcss/typography':
-        specifier: ^0.5.8
+        specifier: ^0.5.16
         version: 0.5.20(tailwindcss@3.4.19)
       '@types/jest':
         specifier: ^29.2.0
@@ -1542,44 +1542,44 @@ packages:
   '@module-federation/webpack-bundler-runtime@2.5.1':
     resolution: {integrity: sha512-0pUsP9aaWIUcfWUXqax/iSwozngORwf4RK0R1qTOYYC13qx+p4p1Ck28Rz6Tzj/6zpzJgcMQXR7nW4sL+ztaww==}
 
-  '@myst-theme/common@1.3.1':
-    resolution: {integrity: sha512-R9E1PWtjL3OCbLukc6w5ruQt7HyHSS24SAF5NHd6Lr0oHPXHgbroftpUAsWHE7Jim8FRP8YCBXvDH4ualon7gA==}
+  '@myst-theme/common@2.1.0':
+    resolution: {integrity: sha512-J7iHPMEsdWw5Ybq3BQwGm7ZoTtr6c5YzTyMGTRyVg3D8fLWSvWizGoCTZek0+kgiBuHxULwyOk4H9/nItEqtgg==}
 
-  '@myst-theme/diagrams@1.3.0':
-    resolution: {integrity: sha512-Z5PCSw4noe3DorEORPYC9u5gIDB+VIo+5MN6X5+c7NhqxyS5Amx3tn1glFEKt2gOZzEWtL9fk/qP+fkcCoNSQA==}
+  '@myst-theme/diagrams@2.1.0':
+    resolution: {integrity: sha512-X/1VDU0LHbT9NMBFrVmAuYGckvmOZaLfK3O1mmUjGmxeQbMMkS9l4A6p+X3IkZUFEhQ7AYrPOgsiOxdiIPZHHQ==}
     engines: {node: '>=20'}
     peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
+      '@types/react': ^18.0 || ^19.0
+      '@types/react-dom': ^18.0 || ^19.0
+      react: ^18.0 || ^19.0
+      react-dom: ^18.0 || ^19.0
 
-  '@myst-theme/frontmatter@1.3.0':
-    resolution: {integrity: sha512-0ypg2jcPQpoSvmpIRE51uTrCCE0+lNoF+ijf+nKjEn+cWru7X8bhFFHYkCk4XwRiLb+vjCLMMO3RUpMtFk3TDw==}
+  '@myst-theme/frontmatter@2.1.0':
+    resolution: {integrity: sha512-QCZ+D6Fp+zOayIdNAUkn3Ob27gjwi+DUSrJ8ydgeOBDIT+LSh9hyR7hjNhYedB51ULYQlKdKv9Jiv9tMTG+Fng==}
     engines: {node: '>=20'}
     peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
+      '@types/react': ^18.0 || ^19.0
+      '@types/react-dom': ^18.0 || ^19.0
+      react: ^18.0 || ^19.0
+      react-dom: ^18.0 || ^19.0
 
-  '@myst-theme/providers@1.3.0':
-    resolution: {integrity: sha512-SHn4cZpxpdLGItCoXbuvCqutWjkg09R6g/Oh+pmPhKLKf0eHk31zo6D5nWqsbbiFum9KmjW9vmDyD5NURUibDQ==}
+  '@myst-theme/providers@2.1.0':
+    resolution: {integrity: sha512-MQTL5mWB4di0ELq/2Yx54rKoPbOF62OtCWlZAgiTuOxw8pXQi8+c7hLxTC16Mt+Tp/wUwZnIWncmjjmaHi92pw==}
     engines: {node: '>=20'}
     peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      myst-common: ^1.8.1
-      myst-config: ^1.8.1
-      myst-frontmatter: ^1.8.1
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
+      '@types/react': ^18.0 || ^19.0
+      '@types/react-dom': ^18.0 || ^19.0
+      myst-common: ^1.11.0
+      myst-config: ^1.11.0
+      myst-frontmatter: ^1.11.0
+      react: ^18.0 || ^19.0
+      react-dom: ^18.0 || ^19.0
 
-  '@myst-theme/search@1.3.0':
-    resolution: {integrity: sha512-nSozQijEQCARoYUpIb9jVlfAqpNpmBVmd0trRdPL+WCR9zao565c7qTA7m4GIbot99aX1JxCAshuVgDFZ6Dg4g==}
+  '@myst-theme/search@2.1.0':
+    resolution: {integrity: sha512-G8Oj2ekR/EQ/obQ0wZUM6yOLUETzrmmiqy5833o/vSCeQs9MldKIkoRX5dG3Y03cv0leLoNVY7t7XEecKbMiGA==}
 
-  '@myst-theme/styles@0.18.0':
-    resolution: {integrity: sha512-lbx1L9+xIfSa4EY+LkBGDN5Xm09MUDBkYnh+JvVQZCjqTB0ENbHI9ZF/42JDvrRyt5w9fhRL34FjiOzMSAc9OA==}
+  '@myst-theme/styles@2.1.0':
+    resolution: {integrity: sha512-IH7L/CZRMpAk4Pbdna89lIhrjiCu/8iREmiRBIaiYL5ate/hjc5+oYSscqxIi9HLjow01AfV+4z9voSH0AERQw==}
 
   '@napi-rs/wasm-runtime@1.1.6':
     resolution: {integrity: sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg==}
@@ -4238,14 +4238,8 @@ packages:
   markdown-it-front-matter@0.2.4:
     resolution: {integrity: sha512-25GUs0yjS2hLl8zAemVndeEzThB1p42yxuDEKbd4JlL3jiz+jsm6e56Ya8B0VREOkNxLYB4TTwaoPJ3ElMmW+w==}
 
-  markdown-it-myst-extras@0.3.0:
-    resolution: {integrity: sha512-678qviK97MEzSM9Hr0jlX5nBPzMcKZo6Ixgh4nEf/WYpii8LXQ72FametoXkzyDy77qNKDE3vlqYhqfbbCGHrw==}
-    engines: {node: '>=16', npm: '>=6'}
-    peerDependencies:
-      markdown-it: ^12 || ^13
-
-  markdown-it-myst@1.0.17:
-    resolution: {integrity: sha512-szZyN1AY+zop7HUXW9eUIASGa/M0vLQQF4r6fWj827BgqjG2mx5x0F8OSiluN2I3aZN71TUtHIIAHC9ZW+bynA==}
+  markdown-it-myst@1.0.19:
+    resolution: {integrity: sha512-fJ6gbArnbvATXfJ6jltpZhbfkuPYiHvvow9/bcWpxazxXbc6NIKq0+8EJ6rXRRfy0F3c2cbMmE5WLafE9Z+NCw==}
     peerDependencies:
       '@types/markdown-it': ^13.0.1
       markdown-it: ^13.0.1
@@ -4394,77 +4388,77 @@ packages:
   myst-cli-utils@1.0.0:
     resolution: {integrity: sha512-6pHTGOgY63WyfYWY0tz7HhdBBOISrZ08QaAbCuk7tKHNrQnIsEhgXZwy0+gVEH8eVXehOyrEC/BmeNkhufblTA==}
 
-  myst-common@1.10.0:
-    resolution: {integrity: sha512-P1XbcfUtICxVWosi58+8rNwKGTeXjma/eF3WgJqqnunCiAky3J0Tz34Lk/HFwppnzpODVgK3padceIDTJqeqGg==}
+  myst-common@1.11.0:
+    resolution: {integrity: sha512-gaDb5Op/9wLtkC8IKvqmCmY/WzUPxlcUYemzbwi8UgMUumYy1klPo16+kFUixrl+ETgq7jPVd9gLDYc4JjxIeQ==}
 
-  myst-config@1.10.0:
-    resolution: {integrity: sha512-1mYjv496mzrc46tmCLyAXRV2gjxU7xPpdDkDQlT0SKnIy06ifdrG6yM++P2B8K3OBdZlSzOALe1JdERXNR9JzQ==}
+  myst-config@1.11.0:
+    resolution: {integrity: sha512-K1JSgxX2QJQfIfXssk7ZyUtZapNnt/TFmUv0xF5r3r0vS8Jtno/U7KtmnRJhaXWsj/mY0z6xmw5fTRm/5V6kiA==}
 
-  myst-directives@1.7.3:
-    resolution: {integrity: sha512-/Xsj7JfVUyBLYmMLH2Bov3KAy/2sxibw+hgN1SFORxAX7TNHwQJVVTb6lJtn5OFQ7L7fgHG/kj3EJshkdIQAhQ==}
+  myst-directives@1.7.5:
+    resolution: {integrity: sha512-//slKtBCm462ajssQDtY3XBdLDKEACkydCydNu485qe0e+UoZOZZrHzHWlTFDgtsj31RJLRX9qIZUcbQM9mTeg==}
 
-  myst-ext-button@0.0.1:
-    resolution: {integrity: sha512-OMFI8oS47ctq9cg9/zCQEprQ5s4Rk4KpkJqExU9+cIHJzsn6o+0s5QA3voliqNs93MuZTH9B8HqPgg6TR31M+g==}
+  myst-ext-button@0.0.3:
+    resolution: {integrity: sha512-lf1M9dCFTxi1kSS2Tlswyd6bg6wso8itRMU5GU4wjChX21pB5+OZspAWvPCLf0l4eRQZaQ1HnDx8IDyBcM0N2Q==}
 
-  myst-ext-card@1.0.9:
-    resolution: {integrity: sha512-liqGqwt5zdl0rNBjCUFr8iFnjWBCkm0a19e8Ojw8ti6v7OPCBmWccw9/ut0W8WqUbtvSHL0MQW+RreEeqpsmMg==}
+  myst-ext-card@1.0.11:
+    resolution: {integrity: sha512-Ku8vfeOmE/MQVfLBZCL90Yji371FsJQrvrTB8sIkhtvsNlr73O7mw0g7Ze0xFND23nFFbPBZRCfucMzDpeR+KA==}
 
-  myst-ext-exercise@1.0.9:
-    resolution: {integrity: sha512-9860YKmE4dxM4pFjjDZ6bduuyz/8+s7+9lw26DCrOTRMHfqGIFdekmkHfDKeLGjZl4NQtfXnwD2H+JgYp0AOxA==}
+  myst-ext-exercise@1.0.11:
+    resolution: {integrity: sha512-2XwDXntq8NznPhBS21ojsrmCcRv7Jpkx91E+WrDxmXAb7Blnn04MoROwCK2mC5vslykSETbn5QynRX6O4XZfEw==}
 
-  myst-ext-grid@1.1.0:
-    resolution: {integrity: sha512-IupUCM1e5H08GYEPXKUMXOcLRfL/ciOllIFf7bPi9uOUuklzt71c/oStfFJJbVw1Sfv6Om4fJf9PmsupemBqzA==}
+  myst-ext-grid@1.1.2:
+    resolution: {integrity: sha512-4XQ7uWDF1mMLD5eALwd0//+tWh//uf1tMgZCByE2YkSXHHXa4yP9tfYqzQE8uba/wY6C78K13m+jn8idl8qx0A==}
 
-  myst-ext-icon@0.0.2:
-    resolution: {integrity: sha512-i76dZ0fmyg2G9mSuIp4UC6JC7k6Y4NPoYNGIwYKcMA1aMx2fgAehB+0mjDZMdpzYAnmCAMXoKFFNkXl4GLBuJQ==}
+  myst-ext-icon@0.0.4:
+    resolution: {integrity: sha512-rU6nqtlvpyIsxcJBvnmnKamQyW+xgHXcOCBxWussH1wSkx8IEifu5Rc/JlJgkSK9fRea6HVU7BynW3FoyrLrIA==}
 
-  myst-ext-proof@1.0.12:
-    resolution: {integrity: sha512-35Q8BD05sUK8mvmWle36+jUEGe6/txUOYEVKg4XpqT5sKqezn0uaBWmscbOfMTHGOIdE/fpOxVe249cZMnGwRg==}
+  myst-ext-proof@1.0.14:
+    resolution: {integrity: sha512-RqXEOlOj+OpZlxf3e8na2Ulx3AUAjw3/XzuSXGNmesmgYOPOvQtE5qhaHLyaQzxsi0OmvNmUOFmaWtth1QT+yg==}
 
-  myst-ext-reactive@1.0.9:
-    resolution: {integrity: sha512-fxN5sBKWYSgVEk/GbXbvca+wkDJFhyOzA0rNiEVTizLjBrqjLJONHJu9u75LQCQIk/QJfzU7Dg2UXSK6HYFssw==}
+  myst-ext-reactive@1.0.10:
+    resolution: {integrity: sha512-BkmHce7VnPeRfQS4rFzIGzbslOZONMBgHZttT3Y5Vx3yEAwuiYQo8YSYesN37GO5l7qyU561VJphzGC+hL2mIw==}
 
-  myst-ext-tabs@1.0.9:
-    resolution: {integrity: sha512-Sm1btywckrL/cDqsPE3AP78TQ0RhgBQ6EoFNm8PzJSLc7i7Fbl8VMv6I+uq2JT5H+iSO698o88SUMEIQNDtbgA==}
+  myst-ext-tabs@1.0.11:
+    resolution: {integrity: sha512-v9slH4JVkeUENel72/EQ9WtkRT68B8kl3FPp4HbnwPfHEAcLLfgiohkQOj8m32z/kinjl3+05V8NyrAvB2XCxg==}
 
-  myst-frontmatter@1.10.0:
-    resolution: {integrity: sha512-jou3ufUHUtDT//oryDtq+cq1dYlT0e/OxrDLECU9fWgR2pkDUal7tcZk9r1hCUnBeRxSlSmDlivnx/Aoxzuw4w==}
+  myst-frontmatter@1.11.0:
+    resolution: {integrity: sha512-Ar/dgalKv+RJz7nJNrYxukChWs3U5MPG/N8OdPpZzfiv4gdC0yCVuDG9LbeMGeyUgr8H3xG0Nl4Y4Y2TaqP55g==}
 
   myst-migrate@1.10.1:
     resolution: {integrity: sha512-haZCKAgvtlincW3ZiQX/XdrQM0eW2e6aiH12wbq4PEs+9DQA6HIdLPyZ0PWfGy0YVBa4ErNOvOLxDRxc1jyFCA==}
 
-  myst-parser@1.7.3:
-    resolution: {integrity: sha512-ocF7n+JO8VES1y2YDh9doGoOHidZGO9AYz9LyPtg+NxoxCQfEPXfjWZIFkqFuHqFZFcB4tfjX5PSJLZyDYsGHw==}
+  myst-parser@1.7.5:
+    resolution: {integrity: sha512-Q1HCxTiPlgfaqw9hxSB/BOmyTlFod0uScObFbaLEInDyGrFuttjN0REqzb95fEomB970hQyjvI2veH1v0FMLhA==}
 
-  myst-roles@1.7.3:
-    resolution: {integrity: sha512-wCbdJwaoucojVdvoP5iTWfCt2NtNxU+un50hBjuodr9uU6W+xV/OcDNd0rHb2Le2MqHwI3k/L9o4NoQp+yZPfA==}
+  myst-roles@1.7.5:
+    resolution: {integrity: sha512-YbPCPIaVvOhK5hbKrPNdzjd+PJNrloPCWRhfq8Q6QnvrLa26U+QthQyvJGnEfmJmYifibxBgTYfxDCNVmZB3NQ==}
 
-  myst-spec-ext@1.10.0:
-    resolution: {integrity: sha512-mJ7t9yHw7/VPj2ZQGvP7ZGJYCoq9gLub/1BH1HLQW8Eo8TcVt6B7hcLh5jkTyxpVsOzeAuWEsURFbPP+bF9myQ==}
+  myst-spec-ext@1.11.0:
+    resolution: {integrity: sha512-mGyeBe5TjPxBWoXnPKTvypZagGH5wtJOgYMdXUai5qhAIIcfSUO4pW0yiP7gLUuJHi3/Iw+79fF2PW8uqu/bbA==}
 
   myst-spec@0.0.5:
     resolution: {integrity: sha512-L/4TV1l5ZbWUOgSnXqiYrx192SV4I+HqjX7TBQ4k02/heeNFckpkUIyLulraap5heTyLcJs8UYBxu+Kv5JiiRw==}
 
-  myst-to-html@1.6.3:
-    resolution: {integrity: sha512-ezEGBLgSp/kUZiC9gLfmM1rupuBZM1GOMUa9sVKSHUuy74QefvbnCeuWFj6yJwcPUrDiHjJ8d4RwYLc/L/jMUA==}
+  myst-spec@0.0.6:
+    resolution: {integrity: sha512-x9+KfB/mZ5MPyssXE2lVfOBKCdRc1LAibZ3YbgK1jJiX7eWf8eC76/53XGbXUOYjba4LLFHEyLsBazVT/4VTWA==}
 
-  myst-to-html@1.7.3:
-    resolution: {integrity: sha512-Lrfza0/jEM/Am8YH4655lcr+0zNuNewMHfemxl1Ref6l1sJAkcPVlIiPhd4vungmBrLePfAzACOrxm3w67auLA==}
+  myst-to-html@1.7.5:
+    resolution: {integrity: sha512-p8NN1owlJFsqp9KExacOxAcsLoaFm70EddVOjrMzuRn0ccrYYztuAMRfNVvUBPjIiyd1sc+e6N0eZDZngzb3ZQ==}
 
-  myst-to-react@1.3.0:
-    resolution: {integrity: sha512-VxQlmx5JRF6xOhTjLLxvSeJlqY2PTMJfaFFZFgHcvMvXvnIh1E5wNsihI1ZH6TpLVzNM2q1+Y/NiEdYSV7c6og==}
+  myst-to-react@2.1.0:
+    resolution: {integrity: sha512-az71MQqH5EuOqyBZoam2bMDfKLcz6BniG4ZVg+skmg9A5lNiIIz7h8URRp56HOdMCU/C7qcOA5YviDBT1bqV0g==}
     engines: {node: '>=20'}
     peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
+      '@types/react': ^18.0 || ^19.0
+      '@types/react-dom': ^18.0 || ^19.0
+      react: ^18.0 || ^19.0
+      react-dom: ^18.0 || ^19.0
 
-  myst-toc@0.1.4:
-    resolution: {integrity: sha512-/SVB4GDv3A+pdkliYEdJv6cUj5RnDX+Qb7zuzNs3COUhGUaUK/T8bX/tDFqOquxFBX/RVoOstQVHOkVu6ui6nQ==}
+  myst-toc@0.2.0:
+    resolution: {integrity: sha512-OIntQD49AQqfJD9or9xoiZo3kbxd+d7ArSBpN5c/Ek85bVcOIOp/6A318TXkhjTs8nSX5HcqNJdc49l1kXY5Ng==}
 
-  myst-transforms@1.3.44:
-    resolution: {integrity: sha512-V1C8A3ve95Ymqddt8Fp19TKtx9WKTkgxRgXAwgz1gRAajODC7Mr0ic7fVNar6wfFEs2TFiBJ+6eWID/90QuK/Q==}
+  myst-transforms@1.3.53:
+    resolution: {integrity: sha512-mQJBO02XMK38PH5pb0xLQehexSYQoU28Z12roW0l10yqvHiZKeoWsZxI7zUSzEHOEeqb2bmWTLRvuyssMWtmyg==}
 
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
@@ -5121,8 +5115,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  simple-validators@1.2.0:
-    resolution: {integrity: sha512-YzlgCBDukw6OeKN5QjliD/3jERQBH0zGr5WPUrEPD8pteOcg+QGJFP++T7XOwjhKKLZBPLWEmDv+pwjKPzHLVg==}
+  simple-validators@1.2.1:
+    resolution: {integrity: sha512-Sue4RTV2kQO1DKFRwG+l1IMOGSm51KQ24jx75h5LR0t0F2V9yPZhRdbSya+1dB29gMVg0Bsthjb3vA9lJ65k0A==}
 
   simulate-event@1.4.0:
     resolution: {integrity: sha512-2X/DaXEB9V4BQzavZ8bl15/D42Mtd2WBxRYJNGyQTIhE2uVFZqOCkF/FbY+oWiDNXh7hpFfpQ5gxwz6xYq0UAQ==}
@@ -7937,17 +7931,16 @@ snapshots:
     transitivePeerDependencies:
       - node-fetch
 
-  '@myst-theme/common@1.3.1':
+  '@myst-theme/common@2.1.0':
     dependencies:
-      myst-common: 1.10.0
-      myst-config: 1.10.0
-      myst-spec-ext: 1.10.0
+      myst-common: 1.11.0
+      myst-config: 1.11.0
       nbtx: 0.2.3
       unist-util-select: 4.0.3
 
-  '@myst-theme/diagrams@1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@myst-theme/diagrams@2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@myst-theme/providers': 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@myst-theme/providers': 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
       classnames: 2.5.1
@@ -7959,7 +7952,7 @@ snapshots:
       - myst-config
       - myst-frontmatter
 
-  '@myst-theme/frontmatter@1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@myst-theme/frontmatter@2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@headlessui/react': 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@heroicons/react': 2.2.0(react@18.3.1)
@@ -7970,27 +7963,36 @@ snapshots:
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
       classnames: 2.5.1
-      myst-common: 1.10.0
-      myst-frontmatter: 1.10.0
+      myst-common: 1.11.0
+      myst-config: 1.11.0
+      myst-frontmatter: 1.11.0
+      myst-spec-ext: 1.11.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@myst-theme/providers@1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@myst-theme/providers@2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@myst-theme/common': 1.3.1
-      '@myst-theme/search': 1.3.0
+      '@myst-theme/common': 2.1.0
+      '@myst-theme/search': 2.1.0
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
-      myst-common: 1.10.0
-      myst-config: 1.10.0
-      myst-frontmatter: 1.10.0
+      myst-common: 1.11.0
+      myst-config: 1.11.0
+      myst-frontmatter: 1.11.0
+      myst-spec-ext: 1.11.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       regexp.escape: 2.0.1
 
-  '@myst-theme/search@1.3.0': {}
+  '@myst-theme/search@2.1.0':
+    dependencies:
+      myst-common: 1.11.0
+      myst-config: 1.11.0
+      myst-frontmatter: 1.11.0
+      myst-spec: 0.0.5
+      myst-spec-ext: 1.11.0
 
-  '@myst-theme/styles@0.18.0': {}
+  '@myst-theme/styles@2.1.0': {}
 
   '@napi-rs/wasm-runtime@1.1.6(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)':
     dependencies:
@@ -11093,16 +11095,13 @@ snapshots:
 
   markdown-it-front-matter@0.2.4: {}
 
-  markdown-it-myst-extras@0.3.0(markdown-it@13.0.2):
-    dependencies:
-      markdown-it: 13.0.2
-
-  markdown-it-myst@1.0.17(@types/markdown-it@13.0.9)(markdown-it@13.0.2):
+  markdown-it-myst@1.0.19(@types/markdown-it@13.0.9)(markdown-it@13.0.2):
     dependencies:
       '@types/markdown-it': 13.0.9
       js-yaml: 4.2.0
       markdown-it: 13.0.2
       vfile: 5.3.7
+      vfile-message: 3.1.4
 
   markdown-it-task-lists@2.1.1: {}
 
@@ -11261,11 +11260,11 @@ snapshots:
       chalk: 4.1.2
       pretty-hrtime: 1.0.3
 
-  myst-common@1.10.0:
+  myst-common@1.11.0:
     dependencies:
       mdast: 3.0.0
-      myst-frontmatter: 1.10.0
-      myst-spec: 0.0.5
+      myst-frontmatter: 1.11.0
+      myst-spec: 0.0.6
       nanoid: 5.1.11
       unified: 10.1.2
       unist-util-remove: 3.1.1
@@ -11274,65 +11273,71 @@ snapshots:
       vfile: 5.3.7
       vfile-message: 3.1.4
 
-  myst-config@1.10.0:
+  myst-config@1.11.0:
     dependencies:
-      myst-common: 1.10.0
-      myst-frontmatter: 1.10.0
-      simple-validators: 1.2.0
+      myst-common: 1.11.0
+      myst-frontmatter: 1.11.0
+      simple-validators: 1.2.1
 
-  myst-directives@1.7.3:
+  myst-directives@1.7.5:
     dependencies:
       classnames: 2.5.1
       csv-parse: 5.6.0
       js-yaml: 4.2.0
       json5: 1.0.2
-      myst-common: 1.10.0
-      myst-spec-ext: 1.10.0
+      myst-common: 1.11.0
+      myst-spec: 0.0.6
+      myst-spec-ext: 1.11.0
       nanoid: 5.1.11
       unist-util-select: 4.0.3
       vfile: 5.3.7
 
-  myst-ext-button@0.0.1:
+  myst-ext-button@0.0.3:
     dependencies:
-      myst-common: 1.10.0
-      myst-spec-ext: 1.10.0
+      myst-common: 1.11.0
+      myst-spec-ext: 1.11.0
 
-  myst-ext-card@1.0.9:
+  myst-ext-card@1.0.11:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
 
-  myst-ext-exercise@1.0.9:
+  myst-ext-exercise@1.0.11:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
 
-  myst-ext-grid@1.1.0:
+  myst-ext-grid@1.1.2:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
 
-  myst-ext-icon@0.0.2:
+  myst-ext-icon@0.0.4:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
 
-  myst-ext-proof@1.0.12:
+  myst-ext-proof@1.0.14:
     dependencies:
-      myst-common: 1.10.0
-      myst-spec: 0.0.5
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
+      myst-spec: 0.0.6
 
-  myst-ext-reactive@1.0.9:
+  myst-ext-reactive@1.0.10:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
 
-  myst-ext-tabs@1.0.9:
+  myst-ext-tabs@1.0.11:
     dependencies:
-      myst-common: 1.10.0
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
 
-  myst-frontmatter@1.10.0:
+  myst-frontmatter@1.11.0:
     dependencies:
       credit-roles: 2.1.0
       doi-utils: 2.0.6
-      myst-toc: 0.1.4
+      myst-toc: 0.2.0
       orcid: 1.0.0
-      simple-validators: 1.2.0
+      simple-validators: 1.2.1
       spdx-correct: 3.2.0
 
   myst-migrate@1.10.1:
@@ -11342,7 +11347,7 @@ snapshots:
       vfile: 5.3.7
       vfile-message: 3.1.4
 
-  myst-parser@1.7.3:
+  myst-parser@1.7.5:
     dependencies:
       '@types/markdown-it': 13.0.9
       he: 1.2.0
@@ -11352,13 +11357,12 @@ snapshots:
       markdown-it-dollarmath: 0.5.0(markdown-it@13.0.2)
       markdown-it-footnote: 4.0.0
       markdown-it-front-matter: 0.2.4
-      markdown-it-myst: 1.0.17(@types/markdown-it@13.0.9)(markdown-it@13.0.2)
-      markdown-it-myst-extras: 0.3.0(markdown-it@13.0.2)
+      markdown-it-myst: 1.0.19(@types/markdown-it@13.0.9)(markdown-it@13.0.2)
       markdown-it-task-lists: 2.1.1
-      myst-common: 1.10.0
-      myst-directives: 1.7.3
-      myst-roles: 1.7.3
-      myst-spec: 0.0.5
+      myst-common: 1.11.0
+      myst-directives: 1.7.5
+      myst-roles: 1.7.5
+      myst-spec: 0.0.6
       unified: 10.1.2
       unist-builder: 3.0.1
       unist-util-remove: 3.1.1
@@ -11366,18 +11370,20 @@ snapshots:
       unist-util-visit: 4.1.2
       vfile: 5.3.7
 
-  myst-roles@1.7.3:
+  myst-roles@1.7.5:
     dependencies:
-      myst-common: 1.10.0
-      myst-spec-ext: 1.10.0
+      myst-common: 1.11.0
+      myst-spec-ext: 1.11.0
 
-  myst-spec-ext@1.10.0:
+  myst-spec-ext@1.11.0:
     dependencies:
-      myst-spec: 0.0.5
+      myst-spec: 0.0.6
 
   myst-spec@0.0.5: {}
 
-  myst-to-html@1.6.3:
+  myst-spec@0.0.6: {}
+
+  myst-to-html@1.7.5:
     dependencies:
       '@types/markdown-it': 13.0.9
       classnames: 2.5.1
@@ -11387,7 +11393,8 @@ snapshots:
       mdast: 3.0.0
       mdast-util-find-and-replace: 2.2.2
       mdast-util-to-hast: 12.3.0
-      myst-common: 1.10.0
+      myst-common: 1.11.0
+      myst-spec: 0.0.6
       rehype-format: 4.0.1
       rehype-parse: 8.0.5
       rehype-remark: 9.1.2
@@ -11399,40 +11406,20 @@ snapshots:
       unist-util-select: 4.0.3
       unist-util-visit: 4.1.2
 
-  myst-to-html@1.7.3:
-    dependencies:
-      '@types/markdown-it': 13.0.9
-      classnames: 2.5.1
-      hast: 1.0.0
-      hast-util-to-mdast: 8.4.1
-      markdown-it: 13.0.2
-      mdast: 3.0.0
-      mdast-util-find-and-replace: 2.2.2
-      mdast-util-to-hast: 12.3.0
-      myst-common: 1.10.0
-      rehype-format: 4.0.1
-      rehype-parse: 8.0.5
-      rehype-remark: 9.1.2
-      rehype-stringify: 9.0.4
-      unified: 10.1.2
-      unist-builder: 3.0.1
-      unist-util-find-after: 4.0.1
-      unist-util-remove: 3.1.1
-      unist-util-select: 4.0.3
-      unist-util-visit: 4.1.2
-
-  myst-to-react@1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  myst-to-react@2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@heroicons/react': 2.2.0(react@18.3.1)
-      '@myst-theme/providers': 1.3.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.10.0)(myst-config@1.10.0)(myst-frontmatter@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@myst-theme/common': 2.1.0
+      '@myst-theme/providers': 2.1.0(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(myst-common@1.11.0)(myst-config@1.11.0)(myst-frontmatter@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-hover-card': 1.1.17(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@scienceicons/react': 0.0.13(react@18.3.1)
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
       buffer: 6.0.3
       classnames: 2.5.1
-      myst-common: 1.10.0
-      myst-config: 1.10.0
+      doi-utils: 2.0.6
+      myst-common: 1.11.0
+      myst-config: 1.11.0
       myst-migrate: 1.10.1
       myst-spec: 0.0.5
       nanoid: 4.0.2
@@ -11445,11 +11432,11 @@ snapshots:
     transitivePeerDependencies:
       - myst-frontmatter
 
-  myst-toc@0.1.4:
+  myst-toc@0.2.0:
     dependencies:
-      simple-validators: 1.2.0
+      simple-validators: 1.2.1
 
-  myst-transforms@1.3.44:
+  myst-transforms@1.3.53:
     dependencies:
       doi-utils: 2.0.6
       hast-util-from-html: 2.0.3
@@ -11458,11 +11445,12 @@ snapshots:
       js-yaml: 4.2.0
       katex: 0.15.6
       mdast-util-find-and-replace: 2.2.2
-      myst-common: 1.10.0
-      myst-frontmatter: 1.10.0
-      myst-spec: 0.0.5
-      myst-spec-ext: 1.10.0
-      myst-to-html: 1.6.3
+      myst-common: 1.11.0
+      myst-frontmatter: 1.11.0
+      myst-spec: 0.0.6
+      myst-spec-ext: 1.11.0
+      myst-to-html: 1.7.5
+      rehype-format: 4.0.1
       rehype-parse: 8.0.5
       rehype-remark: 9.1.2
       unified: 10.1.2
@@ -12152,7 +12140,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  simple-validators@1.2.0: {}
+  simple-validators@1.2.1: {}
 
   simulate-event@1.4.0:
     dependencies:

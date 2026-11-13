@@ -76,7 +76,7 @@
       ],
     },
     {
-      version: '1.3.0',
+      version: '2.1.0',
       dependencies: [
         '@myst-theme/diagrams',
         '@myst-theme/frontmatter',
@@ -88,7 +88,7 @@
       ],
     },
     {
-      version: '1.10.0',
+      version: '1.11.0',
       dependencies: [
 
         'myst-common',
@@ -98,7 +98,7 @@
       ],
     },
     {
-      version: '1.7.3',
+      version: '1.7.5',
       dependencies: [
         'myst-parser',
         'myst-to-html',
@@ -111,18 +111,17 @@
     for n in g.dependencies
   } + {
     katex: '^0.16.22',
-    // Individually versioned extensions
-    'myst-ext-button': '0.0.1',
-    'myst-ext-card': '1.0.9',
-    'myst-ext-exercise': '1.0.9',
-    'myst-ext-grid': '1.1.0',
-    'myst-ext-icon': '0.0.2',
-    'myst-ext-proof': '1.0.12',
-    'myst-ext-reactive': '1.0.9',
-    'myst-ext-tabs': '1.0.9',
-    'myst-spec': '0.0.5',
-    // Floating transforms
-    'myst-transforms': '1.3.44',
+    // Individually versioned packages
+    'myst-ext-button': '0.0.3',
+    'myst-ext-card': '1.0.11',
+    'myst-ext-exercise': '1.0.11',
+    'myst-ext-grid': '1.1.2',
+    'myst-ext-icon': '0.0.4',
+    'myst-ext-proof': '1.0.14',
+    'myst-ext-reactive': '1.0.10',
+    'myst-ext-tabs': '1.0.11',
+    'myst-spec': '0.0.6',
+    'myst-transforms': '1.3.53',
     // Interfaces
     '@jupyterlab/rendermime-interfaces': '^3.14.0',
     '@jupyterlab/coreutils': '^6.6.0',
@@ -149,9 +148,9 @@
     '@jupyterlab/testutils': '^4.0.0',
     '@module-federation/runtime-tools': '^2.0.0',
     '@jupyterlab/core-meta': '^4.6.0',
-    //
-    '@myst-theme/styles': '>=0.9.0 <1.0.0',
-    '@tailwindcss/typography': '^0.5.8',
+    // MyST
+    '@myst-theme/styles': '2.1.0',
+    '@tailwindcss/typography': '^0.5.16',
     //
     '@types/jest': '^29.2.0',
     '@types/json-schema': '^7.0.11',

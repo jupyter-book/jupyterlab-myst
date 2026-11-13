@@ -30,7 +30,8 @@ dynamic = ["version", "description", "authors", "urls", "keywords"]
 [project.optional-dependencies]
 dev = [
     "jupyterlab>=4",
-    "jupyter-builder>=1.2.0"
+    "jupyter-builder>=1.2.0",
+    "jupyterlab-myst[test]"
 ]
 test = [
     "coverage",
