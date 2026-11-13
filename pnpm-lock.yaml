@@ -367,10 +367,10 @@ importers:
         specifier: ^2.0.0
         version: 2.5.1(node-fetch@3.3.2)
       '@myst-theme/styles':
-        specifier: '>=0.9.0 <1.0.0'
-        version: 0.18.0
+        specifier: 2.1.0
+        version: 2.1.0
       '@tailwindcss/typography':
-        specifier: ^0.5.8
+        specifier: ^0.5.16
         version: 0.5.20(tailwindcss@3.4.19)
       '@types/jest':
         specifier: ^29.2.0
@@ -1578,8 +1578,8 @@ packages:
   '@myst-theme/search@2.1.0':
     resolution: {integrity: sha512-G8Oj2ekR/EQ/obQ0wZUM6yOLUETzrmmiqy5833o/vSCeQs9MldKIkoRX5dG3Y03cv0leLoNVY7t7XEecKbMiGA==}
 
-  '@myst-theme/styles@0.18.0':
-    resolution: {integrity: sha512-lbx1L9+xIfSa4EY+LkBGDN5Xm09MUDBkYnh+JvVQZCjqTB0ENbHI9ZF/42JDvrRyt5w9fhRL34FjiOzMSAc9OA==}
+  '@myst-theme/styles@2.1.0':
+    resolution: {integrity: sha512-IH7L/CZRMpAk4Pbdna89lIhrjiCu/8iREmiRBIaiYL5ate/hjc5+oYSscqxIi9HLjow01AfV+4z9voSH0AERQw==}
 
   '@napi-rs/wasm-runtime@1.1.6':
     resolution: {integrity: sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg==}
@@ -7992,7 +7992,7 @@ snapshots:
       myst-spec: 0.0.5
       myst-spec-ext: 1.11.0
 
-  '@myst-theme/styles@0.18.0': {}
+  '@myst-theme/styles@2.1.0': {}
 
   '@napi-rs/wasm-runtime@1.1.6(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)':
     dependencies:

@@ -148,9 +148,9 @@
     '@jupyterlab/testutils': '^4.0.0',
     '@module-federation/runtime-tools': '^2.0.0',
     '@jupyterlab/core-meta': '^4.6.0',
-    //
-    '@myst-theme/styles': '>=0.9.0 <1.0.0',
-    '@tailwindcss/typography': '^0.5.8',
+    // MyST
+    '@myst-theme/styles': '2.1.0',
+    '@tailwindcss/typography': '^0.5.16',
     //
     '@types/jest': '^29.2.0',
     '@types/json-schema': '^7.0.11',
