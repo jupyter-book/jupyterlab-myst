@@ -130,7 +130,7 @@ Note: You will need NodeJS to build the extension package.
 # Clone the repo to your local environment
 # Change directory to the jupyterlab_myst directory
 # Install package in development mode
-pip install -e ".[test]"
+pip install -e ".[dev]"
 # Link your development version of the extension with JupyterLab
 jupyter-builder develop . --overwrite
 # Server extension must be manually installed in develop mode
